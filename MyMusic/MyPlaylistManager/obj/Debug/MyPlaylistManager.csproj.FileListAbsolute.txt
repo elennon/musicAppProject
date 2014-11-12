@@ -1,0 +1,72 @@
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pri
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmdobj
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.compile.pdb
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\priconfig.xml
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\priconfig.xml.intermediate
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\layout.resfiles
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\layout.resfiles.intermediate
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\resources.resfiles
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\resources.resfiles.intermediate
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\pri.resfiles
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\pri.resfiles.intermediate
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\qualifiers.txt
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
+D:\Windows Phone\Windows Phone 8.1 samples\Background Audio for Windows Phone 8.1 Sample\C#\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+D:\temp\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmdobj
+D:\temp\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.compile.pdb
+D:\temp\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+D:\temp\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+D:\temp\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+D:\temp\C#\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pri
+D:\temp\C#\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+D:\temp\C#\MyPlaylistManager\obj\Debug\priconfig.xml
+D:\temp\C#\MyPlaylistManager\obj\Debug\priconfig.xml.intermediate
+D:\temp\C#\MyPlaylistManager\obj\Debug\layout.resfiles
+D:\temp\C#\MyPlaylistManager\obj\Debug\layout.resfiles.intermediate
+D:\temp\C#\MyPlaylistManager\obj\Debug\resources.resfiles
+D:\temp\C#\MyPlaylistManager\obj\Debug\resources.resfiles.intermediate
+D:\temp\C#\MyPlaylistManager\obj\Debug\pri.resfiles
+D:\temp\C#\MyPlaylistManager\obj\Debug\pri.resfiles.intermediate
+D:\temp\C#\MyPlaylistManager\obj\Debug\qualifiers.txt
+D:\temp\C#\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
+D:\temp\C#\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pri
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmdobj
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.compile.pdb
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\priconfig.xml
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\priconfig.xml.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\layout.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\layout.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\resources.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\resources.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\pri.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\pri.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\qualifiers.txt
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SampleBackgroundAudio.MyPlaylistManager.pri
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmd
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.winmdobj
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\SampleBackgroundAudio.MyPlaylistManager.compile.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\priconfig.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\priconfig.xml.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\layout.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\layout.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\resources.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\resources.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\pri.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\pri.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\qualifiers.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt

@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="MyMusic.Views.NowPlaying"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMusic.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot">
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
+                <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
+                <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid x:Name="Playing" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <Image Name="imgPlayingTrack" ></Image>
+                <TextBlock Name="tbkSongName" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" ></TextBlock>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="1" VerticalAlignment="Center"  Text="Collection" Margin="0,0,0,0" />
+                               
+                    <Image Grid.Column="2" Source="/Assets/next.png"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                             Margin="0,0,0,0"  />
+
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                
+                <AppBarButton Icon="Back" Click="prevButton_Click"  Label="Back"/>
+                <AppBarButton Icon="Pause"  Label="Pause"/>
+                <AppBarButton Icon="Next" Click="nextButton_Click" Label="Next"/>
+            </CommandBar.PrimaryCommands>
+            <!--<CommandBar.SecondaryCommands>
+                <AppBarButton Label="Test01"/>
+                <AppBarButton Label="Test02"/>
+            </CommandBar.SecondaryCommands>-->
+        </CommandBar>
+    </Page.BottomAppBar>
+
+</Page>

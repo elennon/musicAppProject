@@ -1,0 +1,3 @@
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyMusic.csproj;neutral
+D:\temp\C#\MyPlaylistManager\MyPlaylistManager.csproj;neutral
+D:\temp\C#\SampleBackgroundAudioTask\SampleBackgroundAudioTask.csproj;neutral
