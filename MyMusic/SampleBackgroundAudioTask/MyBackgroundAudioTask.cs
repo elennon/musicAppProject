@@ -31,7 +31,8 @@ namespace SampleBackgroundAudioTask
         private AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
         private bool backgroundtaskrunning = false;
         private List<int> trks = new List<int>();
-        private string[] trksToPlay;// = "";//new string[1];
+        private string[] trksToPlay;
+        private string radioUrl = "";
         
         private MyPlaylist Playlist
         {
@@ -47,10 +48,7 @@ namespace SampleBackgroundAudioTask
         #endregion
 
         #region IBackgroundTask and IBackgroundTaskInstance Interface Members and handlers
-        /// <summary>
-        /// The Run method is the entry point of a background task. 
-        /// </summary>
-        /// <param name="taskInstance"></param>
+        
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             Debug.WriteLine("Background Audio Task " + taskInstance.Task.Name + " starting...");
@@ -98,22 +96,13 @@ namespace SampleBackgroundAudioTask
             ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskRunning);
             deferral = taskInstance.GetDeferral();           
         }
-
-        /// <summary>
-        /// Indicate that the background task is completed.
-        /// </summary>       
+      
         void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
         {
             Debug.WriteLine("MyBackgroundAudioTask " + sender.TaskId + " Completed...");
             deferral.Complete();
         }
 
-        /// <summary>
-        /// Handles background task cancellation. Task cancellation happens due to :
-        /// 1. Another Media app comes into foreground and starts playing music 
-        /// 2. Resource pressure. Your task is consuming more CPU and memory than allowed.
-        /// In either case, save state so that if foreground app resumes it can know where to start.
-        /// </summary>
         private void OnCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
             // You get some time here to save your state before process and resources are reclaimed
@@ -259,6 +248,11 @@ namespace SampleBackgroundAudioTask
             }
         }
         
+        private void playRadio(string rdoUrl)
+        {
+            Playlist.PlayRadio(rdoUrl);
+        }
+
         void playList_TrackChanged(MyPlaylist sender, object args)
         {
             UpdateUVCOnNewTrack();
@@ -309,11 +303,10 @@ namespace SampleBackgroundAudioTask
                 if (item.GetType() == typeof(string[]))
                 {
                     trksToPlay = (string[])item;
-                }
+                }               
             }
             foreach (string key in e.Data.Keys)
-            {
-                
+            {                
                 switch (key.ToLower())
                 {
                     case Constants.AppSuspended:
@@ -336,6 +329,9 @@ namespace SampleBackgroundAudioTask
                     case Constants.SkipPrevious: // User has chosen to skip track from app context.
                         Debug.WriteLine("Skipping to previous");
                         SkipToPrevious();
+                        break;
+                    case Constants.PlayRadio:
+                        playRadio(trksToPlay[0]);
                         break;
                 }
             }

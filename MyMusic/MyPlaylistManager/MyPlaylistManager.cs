@@ -12,9 +12,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace SampleBackgroundAudio.MyPlaylistManager
 {
-    /// <summary>
-    /// Manage playlist information. For simplicity of this sample, we allow only one playlist
-    /// </summary>
+   
     public sealed class MyPlaylistManager
     {
         #region Private members
@@ -176,23 +174,25 @@ namespace SampleBackgroundAudio.MyPlaylistManager
         #endregion
 
         #region Playlist command handlers
-        /// <summary>
-        /// Starts track at given position in the track list
-        /// </summary>
+        
         private void StartTrackAt(int id)
         {          
             CurrentTrackId = id;
             mediaPlayer.AutoPlay = false;
-            mediaPlayer.SetFileSource(tracks[id]);
-            //try
-            //{
-            //    mediaPlayer.SetUriSource(new Uri("http://traffic.libsyn.com/wpradio/WPRadio_29.mp3", UriKind.RelativeOrAbsolute));
-               
-            //}
-            //catch (Exception ex) { string t = ex.Message; }
+            mediaPlayer.SetFileSource(tracks[id]);           
         }
 
-        /// Starts a given track by finding its name
+        public void PlayRadio(string rdoUrl)
+        {
+            mediaPlayer.AutoPlay = false;
+            try
+            {
+                mediaPlayer.SetUriSource(new Uri("http://www.myopusradio.com:8000/myopusradio", UriKind.RelativeOrAbsolute));
+                //mediaPlayer.SetUriSource(new Uri("http://198.105.214.140:7369/Live", UriKind.RelativeOrAbsolute));
+            }
+            catch (Exception ex) { string t = ex.Message; }
+        }
+        
         public async void StartTrackAt(string TrackName, [ReadOnlyArray()]string[] trks)
         {
             if (tracks.Count == 0) { tracks = await getFTracks(trks); }
@@ -206,7 +206,6 @@ namespace SampleBackgroundAudio.MyPlaylistManager
                 }
             }
             //mediaPlayer.SetUriSource(new Uri("http://traffic.libsyn.com/wpradio/WPRadio_29.mp3", UriKind.Absolute));
-            //mediaPlayer.SetUriSource(new Uri("http://www.7digital.com/artist/the-cure/?partner=8509 ", UriKind.Absolute));
         }
 
         /// Starts a given track by finding its name and at desired position
@@ -233,8 +232,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
         /// Play all tracks in the list starting with 0 
         /// </summary>
         public async void PlayAllTracks([ReadOnlyArray()]string[] trks)
-        {
-            
+        {            
             tracks = await getFTracks(trks);
             StartTrackAt(0);
         }

@@ -39,8 +39,12 @@ namespace MyMusic.Views
 
         private void lstRadio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var url = ((ListBox)sender).SelectedValue;
+            string url = ((ListBox)sender).SelectedValue.ToString();
+
+
+
             this.Frame.Navigate(typeof(NowPlaying), url);
+            //this.Frame.Navigate(typeof(NowPlaying), "shuffle");
         }
     }
 }

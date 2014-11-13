@@ -49,7 +49,6 @@ namespace MyMusic.Views
 
         private TracksViewModel trkView = new TracksViewModel();       
         private string[] orders;
-        private string radioUrl = "";
         private bool isPlayRadio = false;
         private AutoResetEvent SererInitialized;
         private bool isMyBackgroundTaskRunning = false;
@@ -107,13 +106,15 @@ namespace MyMusic.Views
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
 
             string arg = e.Parameter.ToString();
+
             if(arg == "shuffle")
             {
                 orders = shuffleAll();
             }
             else
             {
-                radioUrl = arg;
+                orders = new string[1];
+                orders[0] = arg;
                 isPlayRadio = true;
             }
 
@@ -144,6 +145,13 @@ namespace MyMusic.Views
             {
                 StartBackgroundAudioTask();
             }
+        }
+
+        private string[] radio()
+        {            
+            string[] trkks = new string[1];
+            
+            return trkks;
         }
 
         private string[] shuffleAll()
@@ -387,7 +395,7 @@ namespace MyMusic.Views
                     else
                     {
                         var message = new ValueSet();
-                        message.Add(Constants.StartPlayback, orders);
+                        message.Add(Constants.PlayRadio, orders);
                         BackgroundMediaPlayer.SendMessageToBackground(message);
                     }
                 }
