@@ -163,6 +163,46 @@ namespace MyMusic.ViewModels
         //    return _radioStreams;
         //}
 
+
+        public async Task<List<RadioStreamGenre>> LastFm()
+        {
+            filter = new HttpBaseProtocolFilter();
+            httpClient = new HttpClient(filter);
+            cts = new CancellationTokenSource();
+            List<RadioStreamGenre> geners = new List<RadioStreamGenre>();
+
+            Uri resourceUri;
+            string queryString = string.Format("http://streamfinder.com/api/index.php?api_codekey={0}&return_data_format=xml&do=get_genre_list", key);
+
+            if (!Helpers.TryGetUri(queryString, out resourceUri))
+            {
+                return null;
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+                //var response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+                var xmlString = response.Content.ReadAsStringAsync().GetResults();
+
+                XDocument doc = XDocument.Parse(xmlString);
+
+                List<XElement> genList = (from a in doc.Descendants("genre")
+                                          select a).ToList();
+                if (genList != null)
+                {
+                    foreach (XElement item in genList)
+                    {
+                        var gid = item.Element("gid").Value;
+                        var _name = item.Element("genre_name").Value;
+                        geners.Add(new RadioStreamGenre { RadioGenreName = _name.ToString(), RadioGenreKey = gid.ToString() });
+                    }
+                }
+            }
+            catch (Exception exx) { string error = exx.Message; }
+
+            return geners;
+        }
+
         public async Task<List<RadioStreamGenre>> Getgenres()
         {
             filter = new HttpBaseProtocolFilter();

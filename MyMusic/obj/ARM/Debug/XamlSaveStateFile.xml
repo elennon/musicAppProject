@@ -1,7 +1,11 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\obj\arm\debug\intermediatexaml\mymusic.exe" HashGuid="d9bd3e5f-bccb-041d-9e32-602f19e85539" />
+    <LocalAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\obj\arm\debug\intermediatexaml\mymusic.exe" HashGuid="cee1d18c-263e-2dbf-a45b-23269ac977f3" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mytoolkit.2.3.16.0\lib\portable-net45+wp8+win8+wpa81\mytoolkit.dll" HashGuid="b56e963d-7b70-c7e1-56cb-b4dbea699e94" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mytoolkit.extended.2.3.16.0\lib\portable-wpa81+win8\mytoolkit.extended.dll" HashGuid="bd210868-652d-3240-b535-026ec606acad" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\newtonsoft.json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\newtonsoft.json.dll" HashGuid="9e796421-3b84-3ec5-6e39-cb6d41d020b7" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\nokiamusic.3.4.0\lib\wpa81\nokia.music.wp81.dll" HashGuid="d2353b85-b7b1-344f-0e00-b1a5d828399e" />
     <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\samplebackgroundaudiotask\bin\debug\samplebackgroundaudiotask.winmd" HashGuid="950e7d11-b795-e922-3a0f-375268a912cc" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

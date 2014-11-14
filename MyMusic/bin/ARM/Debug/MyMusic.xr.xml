@@ -41,6 +41,7 @@
       <RootProperty Name="Background" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Items" />
+      <RootProperty Name="Margin" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding" />
@@ -99,5 +100,9 @@
       <RootProperty Name="BorderBrush" />
     </RootType>
     <RootType FullName="MyMusic.Views.Streaming" />
+    <RootType FullName="Windows.UI.Xaml.Controls.MediaElement">
+      <RootProperty Name="AutoPlay" />
+    </RootType>
+    <RootType FullName="MyMusic.Views.YouTube" />
   </Roots.RootTypes>
 </Roots>

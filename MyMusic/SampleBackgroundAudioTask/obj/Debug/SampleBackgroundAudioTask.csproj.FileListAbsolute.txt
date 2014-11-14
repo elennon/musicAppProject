@@ -86,3 +86,10 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Sample
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\obj\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\obj\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.Extended.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.Extended.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.Extended.pri

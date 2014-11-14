@@ -37,8 +37,8 @@
 
                     <TextBlock Grid.Column="1" VerticalAlignment="Center"  Text="Collection" Margin="0,0,0,0" />
                                
-                    <Image Grid.Column="2" Source="/Assets/next.png"  HorizontalAlignment="Right" VerticalAlignment="Center" 
-                             Margin="0,0,0,0"  />
+                    <Image Grid.Column="2" Source="/Assets/next.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                             Margin="10,10,10,10"  />
 
                 </Grid>
             </StackPanel>

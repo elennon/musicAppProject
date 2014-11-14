@@ -23,8 +23,8 @@
                 <TextBlock Text="MY MUSIC" FontSize="25" Margin="12,0"/>
             </StackPanel>
 
-            <Button Name="btnClearDB" Click="btnClearDB_Click" Margin="8,0,12,12" Content="Clear out DB"></Button>
-            <Button Name="btnPoops" Click="btnPoops_Click" Margin="8,0,12,12" Content="Fill it up"></Button>
+            <!--<Button Name="btnClearDB" Click="btnClearDB_Click" Margin="8,0,12,12" Content="Clear out DB"></Button>-->
+            <Button Name="btnPoops" Click="btnPoops_Click" Margin="8,0,12,12" Content="Fill up db"></Button>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

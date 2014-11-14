@@ -70,3 +70,11 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\MyPlaylistManager.csprojResolveAssemblyReference.cache
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyToolkit.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyToolkit.Extended.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyToolkit.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyToolkit.Extended.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyToolkit.Extended.pri

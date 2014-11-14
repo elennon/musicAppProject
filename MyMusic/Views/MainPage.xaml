@@ -11,7 +11,10 @@
     FontSize="{StaticResource TextStyleLargeFontSize}"
     Foreground="{StaticResource PhoneForegroundBrush}">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent" >
+    <Grid x:Name="LayoutRoot"  >
+        <!--<Grid.Background>
+            <ImageBrush Opacity="1" ImageSource="/Assets/672.png"/>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -30,11 +33,11 @@
 
             <StackPanel>
                 <ListBox Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"  SelectionChanged="lstOptions_SelectionChanged"  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
-                    <ListBoxItem Content="Music Streaming" Tag="Stream" Margin="8,0,12,12" />
+                    <ListBoxItem Content="You Tubes" Tag="Stream" Margin="8,0,12,12" />
                     <ListBoxItem Content="Collection" Tag="Collection" Margin="8,0,12,12" />
                     <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
                 </ListBox>
-                
+                <ListBox Name="lstGenColl" Margin="0,87,0,10"></ListBox>
             </StackPanel>
 
         </Grid>

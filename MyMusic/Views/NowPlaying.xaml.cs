@@ -107,25 +107,25 @@ namespace MyMusic.Views
 
             string arg = e.Parameter.ToString();
 
-            if(arg == "shuffle")
-            {
-                orders = shuffleAll();
-            }
-            else
-            {
-                orders = new string[1];
-                orders[0] = arg;
-                isPlayRadio = true;
-            }
-
-
-            //switch (arg)
+            //if(arg == "shuffle")
             //{
-            //    case "shuffle":
-            //        orders = shuffleAll();
-            //        break;
+            //    orders = shuffleAll();
             //}
-            //StartBackgroundAudioTask();
+            //else
+            //{
+            //    orders = new string[1];
+            //    orders[0] = arg;
+            //    isPlayRadio = true;
+            //}
+
+
+            switch (arg)
+            {
+                case "shuffle":
+                    orders = shuffleAll();
+                    break;
+            }
+            StartBackgroundAudioTask();
             if (IsMyBackgroundTaskRunning)
             {
                 if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
@@ -386,18 +386,9 @@ namespace MyMusic.Views
                 //Send message to initiate playback
                 if (result == true)
                 {
-                    if (isPlayRadio == false)
-                    {
-                        var message = new ValueSet();
-                        message.Add(Constants.StartPlayback, orders);
-                        BackgroundMediaPlayer.SendMessageToBackground(message);
-                    }
-                    else
-                    {
-                        var message = new ValueSet();
-                        message.Add(Constants.PlayRadio, orders);
-                        BackgroundMediaPlayer.SendMessageToBackground(message);
-                    }
+                    var message = new ValueSet();
+                    message.Add(Constants.StartPlayback, orders);
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
                 }
                 else
                 {

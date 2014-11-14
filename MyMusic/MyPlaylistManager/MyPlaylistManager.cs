@@ -204,8 +204,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
                     mediaPlayer.AutoPlay = false;
                     mediaPlayer.SetFileSource(tracks[i]);                 
                 }
-            }
-            //mediaPlayer.SetUriSource(new Uri("http://traffic.libsyn.com/wpradio/WPRadio_29.mp3", UriKind.Absolute));
+            }            
         }
 
         /// Starts a given track by finding its name and at desired position

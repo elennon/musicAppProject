@@ -26,22 +26,28 @@
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,0,18" >                
-                <TextBlock Text="Artist:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
-                <TextBox Name="txtArtist" BorderBrush="Beige" Width="250" FontSize="18" />
-            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,0,10,0"  >
+                
+                <StackPanel  Orientation="Horizontal" Margin="10,0,10,0" >                
+                    <TextBlock Text="Artist:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+                    <TextBox Name="txtArtist" BorderBrush="Beige" Width="250" FontSize="18" />
+                </StackPanel>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,10,0,18" >               
-                <TextBlock Text="Song:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
-                <TextBox Name="txtSong" Width="250" FontSize="18"  BorderBrush="Beige" />
-            </StackPanel>
+                <StackPanel  Orientation="Horizontal" Margin="10,0,10,0"  >               
+                    <TextBlock Text="Song:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+                    <TextBox Name="txtSong" Width="250" FontSize="18"  BorderBrush="Beige" />
+                </StackPanel>
 
-            <Button x:ConnectionId='1' Name="btnPlay" Grid.Row="2"                       Content="Play"></Button>
+                <Button x:ConnectionId='2' Name="btnPlay" Grid.Row="2"                       Content="Play"></Button>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="10,0,10,0"  >
+                <ListBox x:ConnectionId='1' Name="lstVideos" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25"                                               DisplayMemberPath="Title" SelectedValuePath="VideoLink" ></ListBox>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

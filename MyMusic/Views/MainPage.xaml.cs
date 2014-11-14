@@ -35,7 +35,7 @@ namespace MyMusic.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            lstOptions.SelectedIndex = -1;
+            lstOptions.SelectedIndex = -1;            
         }
 
         private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -59,8 +59,6 @@ namespace MyMusic.Views
                 }
             }
         }
-
-
 
         #region INotifyPropertyChanged Members
 
