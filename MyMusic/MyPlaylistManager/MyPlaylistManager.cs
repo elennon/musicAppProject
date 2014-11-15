@@ -187,7 +187,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
             mediaPlayer.AutoPlay = false;
             try
             {
-                mediaPlayer.SetUriSource(new Uri("http://www.myopusradio.com:8000/myopusradio", UriKind.RelativeOrAbsolute));
+                mediaPlayer.SetUriSource(new Uri(rdoUrl, UriKind.RelativeOrAbsolute));
                 //mediaPlayer.SetUriSource(new Uri("http://198.105.214.140:7369/Live", UriKind.RelativeOrAbsolute));
             }
             catch (Exception ex) { string t = ex.Message; }

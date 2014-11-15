@@ -666,3 +666,16 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+

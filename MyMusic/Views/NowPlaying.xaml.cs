@@ -107,24 +107,24 @@ namespace MyMusic.Views
 
             string arg = e.Parameter.ToString();
 
-            //if(arg == "shuffle")
-            //{
-            //    orders = shuffleAll();
-            //}
-            //else
-            //{
-            //    orders = new string[1];
-            //    orders[0] = arg;
-            //    isPlayRadio = true;
-            //}
-
-
-            switch (arg)
+            if (arg == "shuffle")
             {
-                case "shuffle":
-                    orders = shuffleAll();
-                    break;
+                orders = shuffleAll();
             }
+            else
+            {
+                orders = new string[1];
+                orders[0] = arg;
+                isPlayRadio = true;
+            }
+
+
+            //switch (arg)
+            //{
+            //    case "shuffle":
+            //        orders = shuffleAll();
+            //        break;
+            //}
             StartBackgroundAudioTask();
             if (IsMyBackgroundTaskRunning)
             {
@@ -242,9 +242,17 @@ namespace MyMusic.Views
             string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');
             if (currentTrack[0] != string.Empty)
             {
-                artist = currentTrack[1];
-                title = currentTrack[2];
+                if (currentTrack.Length > 1)
+                {
+                    artist = currentTrack[1];
+                    title = currentTrack[2];
+                }
+                else
+                {
+                    artist = currentTrack[0];
+                }
             }
+
             foreach (string key in e.Data.Keys)
             {               
                 switch (key)
@@ -281,14 +289,21 @@ namespace MyMusic.Views
                 HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
                 var xmlString = response.Content.ReadAsStringAsync().GetResults();
                 XDocument doc = XDocument.Parse(xmlString);
-                
-                string picc = (from el in doc.Descendants("image")
-                            where (string)el.Attribute("size") == "large"
-                            select el).First().Value;
-                if (!string.IsNullOrEmpty(picc))
-                { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
+
+                if (doc.Root.FirstAttribute.Value == "failed")
+                {
+                    //imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri("Assets/PicPlaceholder.png", UriKind.Relative));
+                    imgPlayingTrack.Source = new BitmapImage(new Uri("ms-appx:///Assets/radio672.png", UriKind.Absolute));
+                }
                 else
-                { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri("Assets/PicPlaceholder.png", UriKind.Relative)); }
+                {
+                    string picc = (from el in doc.Descendants("image")
+                                   where (string)el.Attribute("size") == "large"
+                                   select el).First().Value;
+                    if (!string.IsNullOrEmpty(picc))
+                    { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
+
+                }
                 
             }
             catch (Exception exx) { string error = exx.Message; }
@@ -386,9 +401,19 @@ namespace MyMusic.Views
                 //Send message to initiate playback
                 if (result == true)
                 {
-                    var message = new ValueSet();
-                    message.Add(Constants.StartPlayback, orders);
-                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                    if (isPlayRadio == true)
+                    {
+
+                        var message = new ValueSet();
+                        message.Add(Constants.PlayRadio, orders);
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                    }
+                    else
+                    {
+                        var message = new ValueSet();
+                        message.Add(Constants.StartPlayback, orders);
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                    }
                 }
                 else
                 {

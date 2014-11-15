@@ -212,34 +212,41 @@ namespace SampleBackgroundAudioTask
         {
             try
             {
-                if (Playlist.CurrentTrackName == string.Empty)
+                if (Playlist.CurrentTrackName.Contains("http"))
                 {
-                    //If the task was cancelled we would have saved the current track and its position. We will try playback from there
-                    var currenttrackname = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                    var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
-                    if (currenttrackname != null)
+                    Playlist.PlayAllTracks(trks);
+                }
+                else
+                {
+                    if (Playlist.CurrentTrackName == string.Empty)
                     {
-
-                        if (currenttrackposition == null)
+                        //If the task was cancelled we would have saved the current track and its position. We will try playback from there
+                        var currenttrackname = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                        var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
+                        if (currenttrackname != null)
                         {
-                            // play from start if we dont have position
-                            Playlist.StartTrackAt((string)currenttrackname, trks);
+
+                            if (currenttrackposition == null)
+                            {
+                                // play from start if we dont have position
+                                Playlist.StartTrackAt((string)currenttrackname, trks);
+                            }
+                            else
+                            {
+                                // play from exact position otherwise
+                                Playlist.StartTrackAt((string)currenttrackname, TimeSpan.Parse((string)currenttrackposition), trks);
+                            }
                         }
                         else
                         {
-                            // play from exact position otherwise
-                            Playlist.StartTrackAt((string)currenttrackname, TimeSpan.Parse((string)currenttrackposition), trks);
+                            //If we dont have anything, play from beginning of playlist.
+                            Playlist.PlayAllTracks(trks); //start playback
                         }
                     }
                     else
                     {
-                        //If we dont have anything, play from beginning of playlist.
-                        Playlist.PlayAllTracks(trks); //start playback
+                        BackgroundMediaPlayer.Current.Play();
                     }
-                }
-                else
-                {
-                    BackgroundMediaPlayer.Current.Play();
                 }
             }
             catch (Exception ex)
