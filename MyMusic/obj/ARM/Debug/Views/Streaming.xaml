@@ -36,12 +36,7 @@
                 <StackPanel  Orientation="Horizontal" Margin="10,0,10,0" >                
                     <TextBlock Text="Artist:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
                     <TextBox Name="txtArtist" BorderBrush="Beige" Width="250" FontSize="18" />
-                </StackPanel>
-
-                <StackPanel  Orientation="Horizontal" Margin="10,0,10,0"  >               
-                    <TextBlock Text="Song:" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
-                    <TextBox Name="txtSong" Width="250" FontSize="18"  BorderBrush="Beige" />
-                </StackPanel>
+                </StackPanel>               
 
                 <Button x:ConnectionId='2' Name="btnPlay" Grid.Row="2"                       Content="Play"></Button>
             </StackPanel>

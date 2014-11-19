@@ -80,3 +80,13 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\MyToolkit.Extended.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\MyToolkit.Extended.pri.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Assets\672.png
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\TopPlayed.xbf
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\TopPlayed.g.i.cs
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\TopPlayed.g.cs
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\TopPlayed.xaml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\TopPlayed.xbf
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ShowAllTracks.xbf
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\ShowAllTracks.g.i.cs
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\ShowAllTracks.g.cs
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\ShowAllTracks.xaml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\ShowAllTracks.xbf

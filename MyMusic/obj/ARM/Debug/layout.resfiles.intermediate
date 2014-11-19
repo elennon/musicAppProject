@@ -47,5 +47,7 @@ Views\Collection.xbf
 Views\MainPage.xbf
 Views\NowPlaying.xbf
 Views\RadioStreams.xbf
+Views\ShowAllTracks.xbf
 Views\Streaming.xbf
+Views\TopPlayed.xbf
 Views\YouTube.xbf

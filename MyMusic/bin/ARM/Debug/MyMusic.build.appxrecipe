@@ -190,6 +190,12 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ShowAllTracks.xbf">
+      <PackagePath>Views\ShowAllTracks.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\TopPlayed.xbf">
+      <PackagePath>Views\TopPlayed.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ChooseRadio.xbf">
       <PackagePath>Views\ChooseRadio.xbf</PackagePath>
     </AppxPackagedFile>

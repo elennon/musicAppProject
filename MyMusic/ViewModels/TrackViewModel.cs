@@ -70,6 +70,57 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private int _plays;
+        public int Plays
+        {
+            get
+            {
+                return _plays;
+            }
+            set
+            {
+                if (_plays != value)
+                {
+                    _plays = value;
+                    NotifyPropertyChanged("Plays");
+                }
+            }
+        }
+
+        private int _rndPlays;
+        public int RandomPlays
+        {
+            get
+            {
+                return _rndPlays;
+            }
+            set
+            {
+                if (_rndPlays != value)
+                {
+                    _rndPlays = value;
+                    NotifyPropertyChanged("RandomPlays");
+                }
+            }
+        }
+
+        private int _skips;
+        public int Skips
+        {
+            get
+            {
+                return _skips;
+            }
+            set
+            {
+                if (_skips != value)
+                {
+                    _skips = value;
+                    NotifyPropertyChanged("Skips");
+                }
+            }
+        }
+
         //private BitmapImage _pic;
         //public BitmapImage Image
         //{
@@ -93,6 +144,10 @@ namespace MyMusic.ViewModels
 
         #endregion
 
+        public override string ToString()
+        {
+            return string.Format("({0}) {1}", Plays, Name);
+        }
    
         #region INotifyPropertyChanged Members
 
@@ -124,6 +179,96 @@ namespace MyMusic.ViewModels
                 _tracks = value;
                 RaisePropertyChanged("tracks");
             }
+        }
+
+        public TrackViewModel ShowStats(string id)
+        {
+            TrackViewModel trk = new TrackViewModel();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == Convert.ToInt32(id)).FirstOrDefault();
+                trk = new TrackViewModel()
+                {
+                    TrackId = tr.TrackId,
+                    Name = tr.Name,
+                    Skips = tr.Skips,
+                    Plays = tr.Plays
+                };
+            }
+            return trk;
+        }
+
+        public void AddRandomPlay(string artist, string track)
+        {
+            TrackViewModel trk = new TrackViewModel();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                tr.RandomPlays ++;
+                db.Update(tr);
+            }
+        }
+
+        public void AddPlay(string artist, string track)
+        {
+            TrackViewModel trk = new TrackViewModel();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                tr.Plays++;
+                db.Update(tr);               
+            }
+        }
+
+        public void AddSkip(string artist, string track)
+        {
+            TrackViewModel trk = new TrackViewModel();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                //tr.Plays--;
+                tr.Skips++;
+                db.Update(tr); 
+            }
+        }
+
+        public ObservableCollection<TrackViewModel> GetTopTracks()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var query = db.Table<Track>().OrderByDescending(c => c.Plays).Take(10);
+                foreach (var tr in query)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        Plays = tr.Plays,
+                        Skips = tr.Skips
+                    };
+                    _tracks.Add(trk);
+                }
+            }
+            return _tracks;
+        }
+
+        public TrackViewModel GetThisTrack(string id)
+        {
+            TrackViewModel trk = new TrackViewModel();
+            int ID = Convert.ToInt32(id);
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == ID).FirstOrDefault();
+                trk = new TrackViewModel()
+                {
+                    TrackId = tr.TrackId,
+                    Name = tr.Name,
+                    Artist = tr.Artist
+                };
+            }
+            return trk;
         }
 
         public ObservableCollection<TrackViewModel> GetTracks()
@@ -212,7 +357,7 @@ namespace MyMusic.ViewModels
                                                  
                         }
                         else
-                        { tr = new Track { Name = song.Title, Artist = song.Artist }; }
+                        { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0 }; }
 
                         Artist ar = new Artist { Name = song.Artist };
                         Album al = new Album { Name = song.Album };
@@ -245,35 +390,19 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public void emptyDB()
+        public void addaColumn()
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 int cnt = db.Table<Track>().Count();
 
                 var trks = db.Table<Track>();
-                foreach (Track project in trks)
+                foreach (Track tr in trks)
                 {
-                    db.Delete(project);
+                    
                 }
 
-                var arts = db.Table<Artist>();
-                foreach (Artist project in arts)
-                {
-                    db.Delete(project);
-                }
-
-                var alb = db.Table<Album>();
-                foreach (Album a in alb)
-                {
-                    db.Delete(a);
-                }
-
-                var genres = db.Table<Genre>();
-                foreach (Genre project in genres)
-                {
-                    db.Delete(project);
-                }
+                
                 cnt = db.Table<Track>().Count();
             }
         }

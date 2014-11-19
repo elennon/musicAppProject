@@ -148,27 +148,31 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[9];
-            _typeNameTable[0] = "MyMusic.Views.ChooseRadio";
+            _typeNameTable = new string[11];
+            _typeNameTable[0] = "MyMusic.Views.ShowAllTracks";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "MyMusic.Views.Collection";
-            _typeNameTable[4] = "MyMusic.Views.MainPage";
-            _typeNameTable[5] = "MyMusic.Views.NowPlaying";
-            _typeNameTable[6] = "MyMusic.Views.RadioStreams";
-            _typeNameTable[7] = "MyMusic.Views.Streaming";
-            _typeNameTable[8] = "MyMusic.Views.YouTube";
+            _typeNameTable[3] = "MyMusic.ViewModels.TopPlayed";
+            _typeNameTable[4] = "MyMusic.Views.ChooseRadio";
+            _typeNameTable[5] = "MyMusic.Views.Collection";
+            _typeNameTable[6] = "MyMusic.Views.MainPage";
+            _typeNameTable[7] = "MyMusic.Views.NowPlaying";
+            _typeNameTable[8] = "MyMusic.Views.RadioStreams";
+            _typeNameTable[9] = "MyMusic.Views.Streaming";
+            _typeNameTable[10] = "MyMusic.Views.YouTube";
 
-            _typeTable = new global::System.Type[9];
-            _typeTable[0] = typeof(global::MyMusic.Views.ChooseRadio);
+            _typeTable = new global::System.Type[11];
+            _typeTable[0] = typeof(global::MyMusic.Views.ShowAllTracks);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::MyMusic.Views.Collection);
-            _typeTable[4] = typeof(global::MyMusic.Views.MainPage);
-            _typeTable[5] = typeof(global::MyMusic.Views.NowPlaying);
-            _typeTable[6] = typeof(global::MyMusic.Views.RadioStreams);
-            _typeTable[7] = typeof(global::MyMusic.Views.Streaming);
-            _typeTable[8] = typeof(global::MyMusic.Views.YouTube);
+            _typeTable[3] = typeof(global::MyMusic.ViewModels.TopPlayed);
+            _typeTable[4] = typeof(global::MyMusic.Views.ChooseRadio);
+            _typeTable[5] = typeof(global::MyMusic.Views.Collection);
+            _typeTable[6] = typeof(global::MyMusic.Views.MainPage);
+            _typeTable[7] = typeof(global::MyMusic.Views.NowPlaying);
+            _typeTable[8] = typeof(global::MyMusic.Views.RadioStreams);
+            _typeTable[9] = typeof(global::MyMusic.Views.Streaming);
+            _typeTable[10] = typeof(global::MyMusic.Views.YouTube);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -203,13 +207,15 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_ChooseRadio() { return new global::MyMusic.Views.ChooseRadio(); }
-        private object Activate_3_Collection() { return new global::MyMusic.Views.Collection(); }
-        private object Activate_4_MainPage() { return new global::MyMusic.Views.MainPage(); }
-        private object Activate_5_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
-        private object Activate_6_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
-        private object Activate_7_Streaming() { return new global::MyMusic.Views.Streaming(); }
-        private object Activate_8_YouTube() { return new global::MyMusic.Views.YouTube(); }
+        private object Activate_0_ShowAllTracks() { return new global::MyMusic.Views.ShowAllTracks(); }
+        private object Activate_3_TopPlayed() { return new global::MyMusic.ViewModels.TopPlayed(); }
+        private object Activate_4_ChooseRadio() { return new global::MyMusic.Views.ChooseRadio(); }
+        private object Activate_5_Collection() { return new global::MyMusic.Views.Collection(); }
+        private object Activate_6_MainPage() { return new global::MyMusic.Views.MainPage(); }
+        private object Activate_7_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
+        private object Activate_8_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
+        private object Activate_9_Streaming() { return new global::MyMusic.Views.Streaming(); }
+        private object Activate_10_YouTube() { return new global::MyMusic.Views.YouTube(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -221,9 +227,9 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  MyMusic.Views.ChooseRadio
+            case 0:   //  MyMusic.Views.ShowAllTracks
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_ChooseRadio;
+                userType.Activator = Activate_0_ShowAllTracks;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -236,44 +242,58 @@ namespace MyMusic.MyMusic_XamlTypeInfo
                 xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  MyMusic.Views.Collection
+            case 3:   //  MyMusic.ViewModels.TopPlayed
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_3_Collection;
+                userType.Activator = Activate_3_TopPlayed;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 4:   //  MyMusic.Views.MainPage
+            case 4:   //  MyMusic.Views.ChooseRadio
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_4_MainPage;
+                userType.Activator = Activate_4_ChooseRadio;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 5:   //  MyMusic.Views.NowPlaying
+            case 5:   //  MyMusic.Views.Collection
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_NowPlaying;
+                userType.Activator = Activate_5_Collection;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 6:   //  MyMusic.Views.RadioStreams
+            case 6:   //  MyMusic.Views.MainPage
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_6_RadioStreams;
+                userType.Activator = Activate_6_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 7:   //  MyMusic.Views.Streaming
+            case 7:   //  MyMusic.Views.NowPlaying
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_7_Streaming;
+                userType.Activator = Activate_7_NowPlaying;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  MyMusic.Views.YouTube
+            case 8:   //  MyMusic.Views.RadioStreams
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_YouTube;
+                userType.Activator = Activate_8_RadioStreams;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 9:   //  MyMusic.Views.Streaming
+                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_9_Streaming;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 10:   //  MyMusic.Views.YouTube
+                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_10_YouTube;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -664,15 +684,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         }
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 

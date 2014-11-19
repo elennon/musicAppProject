@@ -46,9 +46,10 @@ namespace MyMusic.Views
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)      //  /2.0/?method=radio.search&name=radiohead&api_key=6101eb7c600c8a81166ec8c5c3249dd4
         {
-            string song = txtSong.Text;
-            string artist = txtArtist.Text;
-            GetFlux(string.Format("https://www.googleapis.com/youtube/v3/search?part=snippet,id&q={0}&type=video&key=AIzaSyAqE2BkqebAZx90sP0Sa8iFGURKe18lm7Q",artist));           
+            string artist = txtArtist.Text;     //  fields=entry[link/@rel='http://gdata.youtube.com/schemas/2007%23mobile']
+            GetFlux(string.Format("https://www.googleapis.com/youtube/v3/search?part=snippet,id&q={0}&type=video&key=AIzaSyAqE2BkqebAZx90sP0Sa8iFGURKe18lm7Q",artist));
+
+            GetFlux(string.Format("https://www.googleapis.com/youtube/v3/search?format=5&part=snippet,id&q={0}&type=video&key=AIzaSyAqE2BkqebAZx90sP0Sa8iFGURKe18lm7Q", artist));           
         }
 
         private async void GetFlux(string url)
@@ -63,7 +64,6 @@ namespace MyMusic.Views
         {
             try
             {
-
                 var result = JsonConvert.DeserializeObject<RootObject>(json);
 
                 List<YoutubeVideo> videosList = new List<YoutubeVideo>();
@@ -72,7 +72,7 @@ namespace MyMusic.Views
                 {
                     video = new YoutubeVideo();
 
-                    video.YoutubeLink = new Uri("http://www.youtube.com/watch?v=" + item.id.videoId);// + "&feature=youtube_gdata");  
+                    video.YoutubeLink = new Uri("http://www.youtube.com/watch?v=" + item.id.videoId +"&feature=youtube_gdata");// + "&feature=youtube_gdata");  
                     string a = video.YoutubeLink.ToString().Remove(0, 31);
                     video.Id = a.Substring(0, 11);  
                     video.Title = item.snippet.title;

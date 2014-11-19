@@ -15,6 +15,9 @@ namespace MyMusic.Models
         public int TrackId { get; set; }
         public string Name { get; set; }
         public string Artist { get; set; }
+        public int Plays { get; set; }
+        public int Skips { get; set; }
+        public int RandomPlays { get; set; }
 
         //public Artist Composer { get; set; }
         //public Album Album { get; set; }

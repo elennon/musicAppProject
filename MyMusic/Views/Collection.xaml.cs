@@ -2,6 +2,7 @@
 using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -50,7 +51,10 @@ namespace MyMusic.Views
                 switch (title)
                 {
                     case "All Tracks":
-                        this.Frame.Navigate(typeof(Collection));
+                        this.Frame.Navigate(typeof(ShowAllTracks));
+                        break;
+                    case "Top Tracks":
+                        this.Frame.Navigate(typeof(TopPlayed));
                         break;
                     //case "Album":
                     //    NavigationService.Navigate(new Uri("/Pages/Albums.xaml?title=" + title, UriKind.Relative));
@@ -65,20 +69,28 @@ namespace MyMusic.Views
             }
         }
 
-        private void btnPoops_Click(object sender, RoutedEventArgs e)
+        private void btnFillDB_Click(object sender, RoutedEventArgs e)
         {
             trkView.fillDB();
         }
 
-        private void btnClearDB_Click(object sender, RoutedEventArgs e)
-        {
-            trkView.emptyDB();
-        }
-
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NowPlaying), "shuffle" );
+            string[] shuffled = shuffleAll();
+            this.Frame.Navigate(typeof(NowPlaying), shuffled );
         }
 
+        private string[] shuffleAll()
+        {
+            List<int> trks = new List<int>();
+            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
+            shuffled = trkView.GetShuffleTracks();
+            string[] trkks = new string[shuffled.Count];
+            for (int i = 0; i < shuffled.Count; i++)
+            {
+                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
+            }
+            return trkks;
+        }
     }
 }

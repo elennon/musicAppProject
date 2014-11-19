@@ -112,6 +112,12 @@
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\RadioStreamViewModel.cs" />
+    <Compile Include="Views\ShowAllTracks.xaml.cs">
+      <DependentUpon>ShowAllTracks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TopPlayed.xaml.cs">
+      <DependentUpon>TopPlayed.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\TrackViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\ChooseRadio.xaml.cs">
@@ -194,6 +200,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ShowAllTracks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TopPlayed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ChooseRadio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

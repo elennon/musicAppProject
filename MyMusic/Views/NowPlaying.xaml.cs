@@ -86,6 +86,10 @@ namespace MyMusic.Views
                     return String.Empty;
             }
         }
+
+        private static string SkippedTrackName { get; set; }
+        
+
         #endregion
         
         public NowPlaying()
@@ -97,6 +101,7 @@ namespace MyMusic.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //testApi();
             filter = new HttpBaseProtocolFilter();
             httpClient = new HttpClient(filter);
             cts = new CancellationTokenSource();
@@ -105,38 +110,35 @@ namespace MyMusic.Views
             App.Current.Resuming += ForegroundApp_Resuming;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
 
-            string arg = e.Parameter.ToString();
+            var arg = e.Parameter;
 
-            if (arg == "shuffle")
+            if (arg.GetType() == typeof(string[]))
             {
-                orders = shuffleAll();
-            }
-            else
+                orders = (string[])arg;
+            }     
+            else if (arg.GetType() == typeof(RadioStream))
             {
                 orders = new string[1];
-                orders[0] = arg;
+                orders[0] = ((RadioStream)arg).RadioUrl;
                 isPlayRadio = true;
-            }
+            }     
 
-
-            //switch (arg)
-            //{
-            //    case "shuffle":
-            //        orders = shuffleAll();
-            //        break;
-            //}
-            StartBackgroundAudioTask();
             if (IsMyBackgroundTaskRunning)
             {
+                //StartBackgroundAudioTask();
                 if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
                 {
                     BackgroundMediaPlayer.Current.Pause();
                 }
                 else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
                 {
-                    BackgroundMediaPlayer.Current.Play();
+                    //BackgroundMediaPlayer.Current.Play();
+                    var message = new ValueSet();
+                    message.Add(Constants.StartPlayback, orders);
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+
                 }
-                else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+                if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
                 {
                     StartBackgroundAudioTask();
                 }
@@ -146,28 +148,6 @@ namespace MyMusic.Views
                 StartBackgroundAudioTask();
             }
         }
-
-        private string[] radio()
-        {            
-            string[] trkks = new string[1];
-            
-            return trkks;
-        }
-
-        private string[] shuffleAll()
-        {
-            List<int> trks = new List<int>();
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            shuffled = trkView.GetShuffleTracks();
-            string[] trkks = new string[shuffled.Count];
-            for (int i = 0; i < shuffled.Count; i++)
-            {
-                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name;
-            }           
-            return trkks;
-        }
-
-        
 
         #region Foreground App Lifecycle Handlers
 
@@ -242,28 +222,40 @@ namespace MyMusic.Views
             string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');
             if (currentTrack[0] != string.Empty)
             {
-                if (currentTrack.Length > 1)
+                if (currentTrack.Length > 1)   
                 {
                     artist = currentTrack[1];
                     title = currentTrack[2];
+                    if (currentTrack[3].Contains("shuffle")) //  if its a track from random shuffle
+                    {
+                        trkView.AddRandomPlay(artist, title);
+                    }
+                    else
+                    {
+                        trkView.AddPlay(artist, title); // if it was chosen specifically
+                    }
+                    if(currentTrack.Count() > 4) //  if its got the extra word, its a skipped track
+                    {
+                        AddSkipped();
+                    }
                 }
                 else
                 {
-                    artist = currentTrack[0];
+                    artist = currentTrack[0];   // this is a radio station
                 }
             }
-
             foreach (string key in e.Data.Keys)
             {               
                 switch (key)
                 {
                     case Constants.Trackchanged:
-                        //When foreground app is active change track based on background message
                         await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
                             //imgPlayingTrack.Source = await Task.Run(() => getPic(trkName));
                             showPic(artist, title);
                             tbkSongName.Text = artist + "-" + title;
+                            SkippedTrackName = artist + "-" + title;
+                            
                         }
                         );
                         break;
@@ -274,6 +266,47 @@ namespace MyMusic.Views
             }
             
         }
+
+        private void AddSkipped()
+        {  
+            string[] songToSkip = SkippedTrackName.Split('-');  // should get the name of the previously playing track that was skipped
+            trkView.AddSkip(songToSkip[0], songToSkip[1]);
+        }
+
+        private async void testApi()
+        {
+            Uri resourceUri;
+            string secHalf = "http://localhost:59436/api/connection";
+            if (!Helpers.TryGetUri(secHalf, out resourceUri))
+            {
+                //rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
+                return;
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+                var xmlString = response.Content.ReadAsStringAsync().GetResults();
+                XDocument doc = XDocument.Parse(xmlString);
+
+                if (doc.Root.FirstAttribute.Value == "failed")
+                {
+                    //imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri("Assets/PicPlaceholder.png", UriKind.Relative));
+                    imgPlayingTrack.Source = new BitmapImage(new Uri("ms-appx:///Assets/radio672.png", UriKind.Absolute));
+                }
+                else
+                {
+                    string picc = (from el in doc.Descendants("image")
+                                   where (string)el.Attribute("size") == "large"
+                                   select el).First().Value;
+                    if (!string.IsNullOrEmpty(picc))
+                    { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
+
+                }
+
+            }
+            catch (Exception exx) { string error = exx.Message; }
+            //imgPlayingTrack.Source = await getPic(trkName);
+        }        
 
         private async void showPic(string artist, string title)
         {
@@ -309,6 +342,7 @@ namespace MyMusic.Views
             catch (Exception exx) { string error = exx.Message; }
             //imgPlayingTrack.Source = await getPic(trkName);
         }        
+
         public async Task<BitmapImage> getPic(string trkName)
         {
 
@@ -398,12 +432,10 @@ namespace MyMusic.Views
             var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 bool result = SererInitialized.WaitOne(2000);
-                //Send message to initiate playback
                 if (result == true)
                 {
                     if (isPlayRadio == true)
                     {
-
                         var message = new ValueSet();
                         message.Add(Constants.PlayRadio, orders);
                         BackgroundMediaPlayer.SendMessageToBackground(message);

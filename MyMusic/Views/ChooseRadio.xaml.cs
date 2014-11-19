@@ -1,4 +1,5 @@
-﻿using MyMusic.ViewModels;
+﻿using MyMusic.Models;
+using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,8 +45,8 @@ namespace MyMusic.Views
         {
             string url = ((ListBox)sender).SelectedValue.ToString();
             string UriResult = await ReadBytes(url);
-            this.Frame.Navigate(typeof(NowPlaying), UriResult);
-            //this.Frame.Navigate(typeof(NowPlaying), "shuffle");
+            RadioStream rs = new RadioStream { RadioUrl = UriResult };           
+            this.Frame.Navigate(typeof(NowPlaying), rs);
         }
 
         public async Task<string> ReadBytes(string File)

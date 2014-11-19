@@ -22,9 +22,8 @@
                 <Image Width="50" Height="50" Name="imgNote" Source="Assets/Picture1.png" Stretch="Fill"></Image>
                 <TextBlock Text="MY MUSIC" FontSize="25" Margin="12,0"/>
             </StackPanel>
-
-            <!--<Button Name="btnClearDB" Click="btnClearDB_Click" Margin="8,0,12,12" Content="Clear out DB"></Button>-->
-            <Button Name="btnPoops" Click="btnPoops_Click" Margin="8,0,12,12" Content="Fill up db"></Button>
+            
+            <Button Name="btnFillDB" Click="btnFillDB_Click" Margin="8,0,12,12" Content="Fill up db"></Button>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -33,6 +32,7 @@
             <StackPanel>
                 <ListBox Name="lstOptions" SelectionChanged="lstOptions_SelectionChanged"  Foreground="AliceBlue" Background="Black" FontSize="30"  >
                     <ListBoxItem Content="All Tracks" Tag="All Tracks" Margin="8,0,12,12" />
+                    <ListBoxItem Content="Top Tracks" Tag="Top Tracks" Margin="8,0,12,12" />
                     <ListBoxItem Content="Artist" Tag="Artist" Margin="8,0,12,12" />
                     <ListBoxItem Content="Album" Tag="Album" Margin="8,0,12,12" />
                     <ListBoxItem Content="Genre" Tag="Genre" Margin="8,0,12,12" />
@@ -40,27 +40,7 @@
             </StackPanel>
 
         </Grid>
-        <Grid x:Name="Playing" Visibility="Collapsed" Grid.Row="1" Margin="12,0,12,0">
-
-            <StackPanel>
-                <Image Name="imgPlayingTrack" Width="300" Height="300" ></Image>
-                <TextBlock Name="tbkSongName" HorizontalAlignment="Center" ></TextBlock>
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center"  Text="Collection" Margin="0,0,0,0" 
-                               />
-                    <Image Grid.Column="2" Source="/Assets/next.png"  HorizontalAlignment="Right" VerticalAlignment="Center" 
-                             Margin="0,0,0,0"  />
-
-                </Grid>
-            </StackPanel>
-
-        </Grid>
+        
 
     </Grid>
     <Page.BottomAppBar>
