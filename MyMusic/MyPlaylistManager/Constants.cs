@@ -1,15 +1,10 @@
-/*
- * (c) Copyright Microsoft Corporation.
-This source is subject to the Microsoft Public License (Ms-PL).
-All other rights reserved.
-*/
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BackgroundAudioPlayerCS
+namespace MyMusic
 {
     /// <summary>
     /// Collection of string constants used in the entire solution. This file is shared for all projects
@@ -19,6 +14,7 @@ namespace BackgroundAudioPlayerCS
         public const string PlayRadio = "playRadio";
         public const string TrackPlayOrder = "playOrder";
         public const string CurrentTrack = "trackname";
+        public const string CurrentTrackImg = "trackImg";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
         public const string BackgroundTaskRunning = "BackgroundTaskRunning";
         public const string BackgroundTaskCancelled = "BackgroundTaskCancelled";

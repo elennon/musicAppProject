@@ -9,6 +9,7 @@ using BackgroundAudioPlayerCS;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using System.Collections.Generic;
+using MyMusic;
 
 namespace SampleBackgroundAudioTask
 {
@@ -201,9 +202,7 @@ namespace SampleBackgroundAudioTask
                     break;
             }
         }
-
-        
-
+       
         #endregion
 
         #region Playlist management functions and handlers
@@ -218,14 +217,7 @@ namespace SampleBackgroundAudioTask
                 }
                 else
                 {
-                    if (Playlist.CurrentTrackName == string.Empty)
-                    {
-                        Playlist.PlayAllTracks(trks); //start playback                        
-                    }
-                    else
-                    {
-                        BackgroundMediaPlayer.Current.Play();
-                    }
+                    Playlist.PlayAllTracks(trks); //start playback                      
                 }
             }
             catch (Exception ex)
@@ -241,7 +233,6 @@ namespace SampleBackgroundAudioTask
 
         void playList_TrackChanged(MyPlaylist sender, object args)
         {
-            //int g = trksToPlay.Length -  sender.CurrentTrackNumber;
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
             string currentTrack = "";
@@ -276,6 +267,7 @@ namespace SampleBackgroundAudioTask
         #endregion
 
         #region Background Media Player Handlers
+
         void Current_CurrentStateChanged(MediaPlayer sender, object args)
         {
             if (sender.CurrentState == MediaPlayerState.Playing)

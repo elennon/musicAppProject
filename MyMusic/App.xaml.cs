@@ -52,13 +52,12 @@ namespace MyMusic
             }
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
-
-            SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-
+           
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

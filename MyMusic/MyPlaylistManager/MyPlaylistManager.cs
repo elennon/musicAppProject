@@ -129,9 +129,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
         #endregion
 
         #region MediaPlayer Handlers
-        /// <summary>
-        /// Handler for state changed event of Media Player
-        /// </summary>
+        
         void mediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
         {
             if (sender.CurrentState == MediaPlayerState.Playing && startPosition != TimeSpan.FromSeconds(0))

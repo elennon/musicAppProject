@@ -14,6 +14,7 @@ namespace MyMusic
         public const string PlayRadio = "playRadio";
         public const string TrackPlayOrder = "playOrder";
         public const string CurrentTrack = "trackname";
+        public const string CurrentTrackImg = "trackImg";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
         public const string BackgroundTaskRunning = "BackgroundTaskRunning";
         public const string BackgroundTaskCancelled = "BackgroundTaskCancelled";

@@ -46,6 +46,7 @@ namespace MyMusic.Views
         private HttpBaseProtocolFilter filter;
         private HttpClient httpClient;
         private CancellationTokenSource cts;
+        private readonly NavigationHelper navigationHelper;
 
         private TracksViewModel trkView = new TracksViewModel();       
         private string[] orders;
@@ -87,16 +88,38 @@ namespace MyMusic.Views
             }
         }
 
+        private string CurrentTrackImg
+        {
+            get
+            {
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrackImg);
+                if (value != null)
+                {
+                    return (String)value;
+                }
+                else
+                    return String.Empty;
+            }
+        }
+
         private static string SkippedTrackName { get; set; }
         
 
         #endregion
-        
+
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
         public NowPlaying()
         {
             this.InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -109,6 +132,7 @@ namespace MyMusic.Views
             App.Current.Suspending += ForegroundApp_Suspending;
             App.Current.Resuming += ForegroundApp_Resuming;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+            this.navigationHelper.OnNavigatedTo(e);
 
             var arg = e.Parameter;
             if (arg != null)
@@ -129,14 +153,17 @@ namespace MyMusic.Views
                 //StartBackgroundAudioTask();
                 if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
                 {
-                    BackgroundMediaPlayer.Current.Pause();
-                }
-                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    //BackgroundMediaPlayer.Current.Play();
                     var message = new ValueSet();
                     message.Add(Constants.StartPlayback, orders);
                     BackgroundMediaPlayer.SendMessageToBackground(message);
+                    //BackgroundMediaPlayer.Current.Pause();
+                }
+                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
+                {
+                    BackgroundMediaPlayer.Current.Play();
+                    //var message = new ValueSet();
+                    //message.Add(Constants.StartPlayback, orders);
+                    //BackgroundMediaPlayer.SendMessageToBackground(message);
 
                 }
                 if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
@@ -168,7 +195,7 @@ namespace MyMusic.Views
                 BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
 
                 tbkSongName.Text = CurrentTrack;
-
+                imgPlayingTrack.Source = new BitmapImage(new Uri(CurrentTrackImg));
             }
             else
             {
@@ -324,24 +351,24 @@ namespace MyMusic.Views
                 var xmlString = response.Content.ReadAsStringAsync().GetResults();
                 XDocument doc = XDocument.Parse(xmlString);
 
+                string picc = "";
+
                 if (doc.Root.FirstAttribute.Value == "failed")
                 {
-                    //imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri("Assets/PicPlaceholder.png", UriKind.Relative));
-                    imgPlayingTrack.Source = new BitmapImage(new Uri("ms-appx:///Assets/radio672.png", UriKind.Absolute));
+                    picc = "ms-appx:///Assets/radio672.png";
+                    imgPlayingTrack.Source = new BitmapImage(new Uri(picc, UriKind.Absolute));                    
                 }
                 else
                 {
-                    string picc = (from el in doc.Descendants("image")
+                    picc = (from el in doc.Descendants("image")
                                    where (string)el.Attribute("size") == "large"
                                    select el).First().Value;
                     if (!string.IsNullOrEmpty(picc))
                     { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
-
                 }
-                
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, picc);
             }
             catch (Exception exx) { string error = exx.Message; }
-            //imgPlayingTrack.Source = await getPic(trkName);
         }        
 
         public async Task<BitmapImage> getPic(string trkName)
@@ -471,6 +498,23 @@ namespace MyMusic.Views
         }
         #endregion
 
-       
+        #region NavigationHelper registration
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+            
+        }
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            
+        }      
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
     }
 }

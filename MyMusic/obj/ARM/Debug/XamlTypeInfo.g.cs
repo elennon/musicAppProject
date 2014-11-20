@@ -148,7 +148,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[11];
+            _typeNameTable = new string[13];
             _typeNameTable[0] = "MyMusic.Views.ShowAllTracks";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -157,11 +157,13 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             _typeNameTable[5] = "MyMusic.Views.Collection";
             _typeNameTable[6] = "MyMusic.Views.MainPage";
             _typeNameTable[7] = "MyMusic.Views.NowPlaying";
-            _typeNameTable[8] = "MyMusic.Views.RadioStreams";
-            _typeNameTable[9] = "MyMusic.Views.Streaming";
-            _typeNameTable[10] = "MyMusic.Views.YouTube";
+            _typeNameTable[8] = "MyMusic.Common.NavigationHelper";
+            _typeNameTable[9] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[10] = "MyMusic.Views.RadioStreams";
+            _typeNameTable[11] = "MyMusic.Views.Streaming";
+            _typeNameTable[12] = "MyMusic.Views.YouTube";
 
-            _typeTable = new global::System.Type[11];
+            _typeTable = new global::System.Type[13];
             _typeTable[0] = typeof(global::MyMusic.Views.ShowAllTracks);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -170,9 +172,11 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             _typeTable[5] = typeof(global::MyMusic.Views.Collection);
             _typeTable[6] = typeof(global::MyMusic.Views.MainPage);
             _typeTable[7] = typeof(global::MyMusic.Views.NowPlaying);
-            _typeTable[8] = typeof(global::MyMusic.Views.RadioStreams);
-            _typeTable[9] = typeof(global::MyMusic.Views.Streaming);
-            _typeTable[10] = typeof(global::MyMusic.Views.YouTube);
+            _typeTable[8] = typeof(global::MyMusic.Common.NavigationHelper);
+            _typeTable[9] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[10] = typeof(global::MyMusic.Views.RadioStreams);
+            _typeTable[11] = typeof(global::MyMusic.Views.Streaming);
+            _typeTable[12] = typeof(global::MyMusic.Views.YouTube);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -213,9 +217,9 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         private object Activate_5_Collection() { return new global::MyMusic.Views.Collection(); }
         private object Activate_6_MainPage() { return new global::MyMusic.Views.MainPage(); }
         private object Activate_7_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
-        private object Activate_8_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
-        private object Activate_9_Streaming() { return new global::MyMusic.Views.Streaming(); }
-        private object Activate_10_YouTube() { return new global::MyMusic.Views.YouTube(); }
+        private object Activate_10_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
+        private object Activate_11_Streaming() { return new global::MyMusic.Views.Streaming(); }
+        private object Activate_12_YouTube() { return new global::MyMusic.Views.YouTube(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -273,27 +277,39 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 7:   //  MyMusic.Views.NowPlaying
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_7_NowPlaying;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  MyMusic.Views.RadioStreams
-                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_RadioStreams;
+            case 8:   //  MyMusic.Common.NavigationHelper
+                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
+                userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 9:   //  MyMusic.Views.Streaming
+            case 9:   //  Windows.UI.Xaml.DependencyObject
+                xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 10:   //  MyMusic.Views.RadioStreams
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_Streaming;
+                userType.Activator = Activate_10_RadioStreams;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  MyMusic.Views.YouTube
+            case 11:   //  MyMusic.Views.Streaming
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_10_YouTube;
+                userType.Activator = Activate_11_Streaming;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 12:   //  MyMusic.Views.YouTube
+                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_12_YouTube;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -355,11 +371,26 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             return foundXamlType;
         }
 
+        private object get_0_NowPlaying_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.NowPlaying)instance;
+            return that.NavigationHelper;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::MyMusic.MyMusic_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "MyMusic.Views.NowPlaying.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.NowPlaying");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_0_NowPlaying_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            }
             return xamlMember;
         }
     }
@@ -684,5 +715,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         }
     }
 }
+
+
 
 
