@@ -22,7 +22,7 @@
                 <Image Width="50" Height="50" Name="imgNote" Source="Assets/Picture1.png" Stretch="Fill"></Image>
                 <TextBlock Text="MY MUSIC" FontSize="25" Margin="12,0"/>
             </StackPanel>
-            
+            <Button Name="btnUpdate" Click="btnUpdate_Click"  Margin="8,0,12,12" Content="Update db"></Button>
             <Button Name="btnFillDB" Click="btnFillDB_Click" Margin="8,0,12,12" Content="Fill up db"></Button>
         </StackPanel>
 

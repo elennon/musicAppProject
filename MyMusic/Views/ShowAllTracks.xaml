@@ -27,7 +27,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
             <ListBox   Name="lstAllTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
-                         SelectionChanged="lstAllTracks_SelectionChanged"  DisplayMemberPath="Name" SelectedValuePath="TrackId" ></ListBox>
+                         SelectionChanged="lstAllTracks_SelectionChanged"  DisplayMemberPath="Name" SelectedValuePath="OrderNo" ></ListBox>
 
         </Grid>
 

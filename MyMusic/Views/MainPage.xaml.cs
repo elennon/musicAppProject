@@ -28,13 +28,40 @@ namespace MyMusic.Views
     
     public sealed partial class MainPage : Page
     {
+        private bool isMyBackgroundTaskRunning = false;
+        private bool IsMyBackgroundTaskRunning
+        {
+            get
+            {
+                if (isMyBackgroundTaskRunning)
+                    return true;
+
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.BackgroundTaskState);
+                if (value == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    isMyBackgroundTaskRunning = ((String)value).Equals(Constants.BackgroundTaskRunning);
+                    return isMyBackgroundTaskRunning;
+                }
+            }
+        }
+
         public MainPage()
         {
             InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+                  
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
             lstOptions.SelectedIndex = -1;            
         }
 
@@ -74,6 +101,7 @@ namespace MyMusic.Views
         }
         #endregion
 
+        
         
     }
 }

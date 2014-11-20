@@ -220,29 +220,7 @@ namespace SampleBackgroundAudioTask
                 {
                     if (Playlist.CurrentTrackName == string.Empty)
                     {
-                        Playlist.PlayAllTracks(trks); //start playback
-                        //If the task was cancelled we would have saved the current track and its position. We will try playback from there
-                        //var currenttrackname = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                        //var currenttrackposition = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.Position);
-                        //if (currenttrackname != null)
-                        //{
-
-                        //    if (currenttrackposition == null)
-                        //    {
-                        //        // play from start if we dont have position
-                        //        Playlist.StartTrackAt((string)currenttrackname, trks);
-                        //    }
-                        //    else
-                        //    {
-                        //        // play from exact position otherwise
-                        //        Playlist.StartTrackAt((string)currenttrackname, TimeSpan.Parse((string)currenttrackposition), trks);
-                        //    }
-                        //}
-                        //else
-                        //{
-                            //If we dont have anything, play from beginning of playlist.
-                            //Playlist.PlayAllTracks(trks); //start playback
-                       // }
+                        Playlist.PlayAllTracks(trks); //start playback                        
                     }
                     else
                     {
@@ -263,7 +241,7 @@ namespace SampleBackgroundAudioTask
 
         void playList_TrackChanged(MyPlaylist sender, object args)
         {
-            int g = trksToPlay.Length -  sender.CurrentTrackNumber;
+            //int g = trksToPlay.Length -  sender.CurrentTrackNumber;
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
             string currentTrack = "";

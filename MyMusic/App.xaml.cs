@@ -1,4 +1,5 @@
-﻿using MyMusic.Models;
+﻿using MyMusic.Common;
+using MyMusic.Models;
 using MyMusic.Views;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -41,7 +43,7 @@ namespace MyMusic
 
         public event EventHandler<BackPressedEventArgs> BackPressed;
         
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -51,6 +53,8 @@ namespace MyMusic
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
+            SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
@@ -58,7 +62,16 @@ namespace MyMusic
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    // Restore the saved session state only when appropriate.
+                    try
+                    {
+                        await SuspensionManager.RestoreAsync();
+                    }
+                    catch (SuspensionManagerException)
+                    {
+                        // Something went wrong restoring state.
+                        // Assume there is no state and continue.
+                    }                        
                 }
 
                 // Get a reference to the SQLite database

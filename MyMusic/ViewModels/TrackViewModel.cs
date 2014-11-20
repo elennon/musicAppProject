@@ -36,6 +36,23 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private int _orderNo;
+        public int OrderNo
+        {
+            get
+            {
+                return _orderNo;
+            }
+            set
+            {
+                if (_orderNo != value)
+                {
+                    _orderNo = value;
+                    NotifyPropertyChanged("OrderNo");
+                }
+            }
+        }
+
         private string _Name;
         public string Name
         {
@@ -146,7 +163,7 @@ namespace MyMusic.ViewModels
 
         public override string ToString()
         {
-            return string.Format("({0}) {1}", Plays, Name);
+            return string.Format("({0}) {1}", Plays + RandomPlays, Name);
         }
    
         #region INotifyPropertyChanged Members
@@ -204,8 +221,11 @@ namespace MyMusic.ViewModels
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
-                tr.RandomPlays ++;
-                db.Update(tr);
+                if(tr != null)
+                {
+                    tr.RandomPlays++;
+                    db.Update(tr);
+                }                
             }
         }
 
@@ -215,8 +235,11 @@ namespace MyMusic.ViewModels
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
-                tr.Plays++;
-                db.Update(tr);               
+                if (tr != null)
+                {
+                    tr.Plays++;
+                    db.Update(tr);
+                }
             }
         }
 
@@ -227,8 +250,11 @@ namespace MyMusic.ViewModels
             {
                 var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
                 //tr.Plays--;
-                tr.Skips++;
-                db.Update(tr); 
+                if (tr != null)
+                {
+                    tr.Skips++;
+                    db.Update(tr);
+                }
             }
         }
 
@@ -245,6 +271,8 @@ namespace MyMusic.ViewModels
                         TrackId = tr.TrackId,
                         Name = tr.Name,
                         Artist = tr.Artist,
+                        RandomPlays = tr.RandomPlays,
+                        OrderNo =tr.OrderNo,
                         Plays = tr.Plays,
                         Skips = tr.Skips
                     };
@@ -282,7 +310,9 @@ namespace MyMusic.ViewModels
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
-                        Name = tr.Name                        
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        OrderNo = tr.OrderNo
                     };
                     _tracks.Add(trk);
                 }
@@ -396,12 +426,13 @@ namespace MyMusic.ViewModels
             {
                 int cnt = db.Table<Track>().Count();
 
-                var trks = db.Table<Track>();
-                foreach (Track tr in trks)
+                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                for (int i = 0; i < trks.Count(); i++)
                 {
-                    
+                    trks[i].OrderNo = i;
+                    db.Update(trks[i]);
                 }
-
+                
                 
                 cnt = db.Table<Track>().Count();
             }

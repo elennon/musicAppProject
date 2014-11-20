@@ -18,6 +18,7 @@ namespace MyMusic.Models
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
+        public int OrderNo { get; set; }
 
         //public Artist Composer { get; set; }
         //public Album Album { get; set; }

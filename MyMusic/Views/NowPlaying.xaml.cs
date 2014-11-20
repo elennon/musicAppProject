@@ -51,8 +51,8 @@ namespace MyMusic.Views
         private string[] orders;
         private bool isPlayRadio = false;
         private AutoResetEvent SererInitialized;
-        private bool isMyBackgroundTaskRunning = false;
-        
+
+        private bool isMyBackgroundTaskRunning = false;     
         private bool IsMyBackgroundTaskRunning
         {
             get
@@ -111,18 +111,19 @@ namespace MyMusic.Views
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
 
             var arg = e.Parameter;
-
-            if (arg.GetType() == typeof(string[]))
+            if (arg != null)
             {
-                orders = (string[])arg;
-            }     
-            else if (arg.GetType() == typeof(RadioStream))
-            {
-                orders = new string[1];
-                orders[0] = ((RadioStream)arg).RadioUrl;
-                isPlayRadio = true;
-            }     
-
+                if (arg.GetType() == typeof(string[]))
+                {
+                    orders = (string[])arg;
+                }
+                else if (arg.GetType() == typeof(RadioStream))
+                {
+                    orders = new string[1];
+                    orders[0] = ((RadioStream)arg).RadioUrl;
+                    isPlayRadio = true;
+                }
+            }
             if (IsMyBackgroundTaskRunning)
             {
                 //StartBackgroundAudioTask();

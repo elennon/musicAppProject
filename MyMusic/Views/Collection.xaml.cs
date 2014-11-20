@@ -92,5 +92,10 @@ namespace MyMusic.Views
             }
             return trkks;
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            trkView.addaColumn();
+        }
     }
 }

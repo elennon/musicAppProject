@@ -1,6 +1,7 @@
 ﻿using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,11 +37,23 @@ namespace MyMusic.Views
 
         private void lstAllTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string id = ((ListBox)sender).SelectedValue.ToString();
-            var tk = trkView.GetThisTrack(id);
-            var track = new string[1];
-            track[0] = tk.TrackId + "," + tk.Artist + "," + tk.Name + ",play";
-            this.Frame.Navigate(typeof(NowPlaying), track);
+            string orderNo = ((ListBox)sender).SelectedValue.ToString();
+
+            this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(orderNo)));
         }
+
+        private string[] GetListToPlay(int orderNo)
+        {
+            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
+            var trks = (trkView.GetTracks()).Where(a => a.OrderNo >= orderNo).ToList(); // get all tracks listed after selected one
+            string[] trkArray = new string[trks.Count];
+
+            for (int i = 0; i < trks.Count; i++)
+            {
+                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].Artist + "," + trks[i].Name + ",shuffle";
+            }
+            return trkArray;
+        }
+        
     }
 }
