@@ -25,8 +25,17 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListBox x:ConnectionId='1' Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenreName" SelectedValuePath="RadioGenreKey" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"                                              FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+            <!--<ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenreName" 
+                     SelectedValuePath="RadioGenreKey" RequestedTheme="Dark" Foreground="AliceBlue" 
+                     Background="Black" SelectionChanged="lstGenre_SelectionChanged" 
+                     FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
                 
+            </ListBox>-->
+            <ListBox x:ConnectionId='1' Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenre" 
+                     SelectedValuePath="RadioGenre" RequestedTheme="Dark" Foreground="AliceBlue" 
+                     Background="Black"                                              
+                     FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+
             </ListBox>
 
         </Grid>

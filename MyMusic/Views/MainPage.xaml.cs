@@ -1,4 +1,5 @@
 ﻿using MyMusic.Common;
+using MyMusic.Models;
 using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,8 @@ namespace MyMusic.Views
                         this.Frame.Navigate(typeof(Collection));
                         break;
                     case "Radio":
+                        //RadioStream rs = new RadioStream { RadioUrl = "apples" };     
+                        //this.Frame.Navigate(typeof(NowPlaying), rs);
                         this.Frame.Navigate(typeof(RadioStreams));
                         break;
                 }
@@ -100,6 +103,11 @@ namespace MyMusic.Views
             }
         }
         #endregion
+
+        private void btnNowPlaying_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(NowPlaying));
+        }
 
         
         

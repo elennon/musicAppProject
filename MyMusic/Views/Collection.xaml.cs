@@ -29,6 +29,7 @@ namespace MyMusic.Views
     public sealed partial class Collection : Page
     {
         private TracksViewModel trkView = new TracksViewModel();
+        private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
 
         public Collection()
         {
@@ -56,12 +57,12 @@ namespace MyMusic.Views
                     case "Top Tracks":
                         this.Frame.Navigate(typeof(TopPlayed));
                         break;
-                    //case "Album":
-                    //    NavigationService.Navigate(new Uri("/Pages/Albums.xaml?title=" + title, UriKind.Relative));
-                    //    break;
-                    //case "All Tracks":
-                    //    NavigationService.Navigate(new Uri("/Pages/AllTracks.xaml?title=" + title, UriKind.Relative));
-                    //    break;
+                    case "Artist":
+                        this.Frame.Navigate(typeof(ShowByArtist));
+                        break;
+                    case "Album":
+                        this.Frame.Navigate(typeof(Albums));
+                        break;
                     //case "Genre":
                     //    NavigationService.Navigate(new Uri("/Pages/Genres.xaml?title=" + title, UriKind.Relative));
                     //    break;
@@ -95,7 +96,8 @@ namespace MyMusic.Views
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            trkView.addaColumn();
+            //trkView.addaColumn();
+            rdoView.AddRadios();
         }
     }
 }

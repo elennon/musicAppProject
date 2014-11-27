@@ -93,3 +93,5 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Sample
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.Extended.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\MyToolkit.Extended.pri
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\SQLite.Net.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SampleBackgroundAudioTask\bin\Debug\SQLiteNetExtensions.dll

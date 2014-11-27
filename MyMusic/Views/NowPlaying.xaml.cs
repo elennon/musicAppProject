@@ -30,15 +30,11 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
-//using Microsoft.Xna.Framework;
 
-// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace MyMusic.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class NowPlaying : Page
     {
         #region Private Fields and Properties
@@ -104,7 +100,6 @@ namespace MyMusic.Views
 
         private static string SkippedTrackName { get; set; }
         
-
         #endregion
 
         public NavigationHelper NavigationHelper
@@ -116,6 +111,7 @@ namespace MyMusic.Views
         {
             this.InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
+
             this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -129,9 +125,8 @@ namespace MyMusic.Views
             httpClient = new HttpClient(filter);
             cts = new CancellationTokenSource();
 
-            App.Current.Suspending += ForegroundApp_Suspending;
-            App.Current.Resuming += ForegroundApp_Resuming;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+
             this.navigationHelper.OnNavigatedTo(e);
 
             var arg = e.Parameter;
@@ -150,7 +145,6 @@ namespace MyMusic.Views
             }
             if (IsMyBackgroundTaskRunning)
             {
-                //StartBackgroundAudioTask();
                 if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
                 {
                     var message = new ValueSet();
@@ -160,10 +154,10 @@ namespace MyMusic.Views
                 }
                 else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
                 {
-                    BackgroundMediaPlayer.Current.Play();
-                    //var message = new ValueSet();
-                    //message.Add(Constants.StartPlayback, orders);
-                    //BackgroundMediaPlayer.SendMessageToBackground(message);
+                    //BackgroundMediaPlayer.Current.Play();
+                    var message = new ValueSet();
+                    message.Add(Constants.StartPlayback, orders);
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
 
                 }
                 if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
@@ -177,72 +171,7 @@ namespace MyMusic.Views
             }
         }
 
-        #region Foreground App Lifecycle Handlers
-
-        void ForegroundApp_Resuming(object sender, object e)
-        {
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
-
-            // Verify if the task was running before
-            if (IsMyBackgroundTaskRunning)
-            {
-                //if yes, reconnect to media play handlers
-                AddMediaPlayerEventHandlers();
-
-                //send message to background task that app is resumed, so it can start sending notifications
-                ValueSet messageDictionary = new ValueSet();
-                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
-                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-
-                tbkSongName.Text = CurrentTrack;
-                imgPlayingTrack.Source = new BitmapImage(new Uri(CurrentTrackImg));
-            }
-            else
-            {
-                tbkSongName.Text = "";
-            }
-
-        }
-
-        void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            ValueSet messageDictionary = new ValueSet();
-            messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
-            BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-            RemoveMediaPlayerEventHandlers();
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
-            deferral.Complete();
-        }
-
-        #endregion
-
-        #region Background MediaPlayer Event handlers
-
-        async void MediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
-        {
-            switch (sender.CurrentState)
-            {
-                case MediaPlayerState.Playing:
-                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        //playButton.Content = "| |";     // Change to pause button
-                        //prevButton.IsEnabled = true;
-                        //nextButton.IsEnabled = true;
-                    }
-                        );
-
-                    break;
-                case MediaPlayerState.Paused:
-                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        //playButton.Content = ">";     // Change to play button
-                    }
-                    );
-
-                    break;
-            }
-        }
+        #region Background MediaPlayer messages
 
         async void BackgroundMediaPlayer_MessageReceivedFromBackground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
@@ -283,7 +212,6 @@ namespace MyMusic.Views
                             showPic(artist, title);
                             tbkSongName.Text = artist + "-" + title;
                             SkippedTrackName = artist + "-" + title;
-                            
                         }
                         );
                         break;
@@ -342,7 +270,6 @@ namespace MyMusic.Views
             string secHalf =string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
             if (!Helpers.TryGetUri(secHalf, out resourceUri))
             {
-                //rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
                 return;
             }
             try
@@ -366,7 +293,13 @@ namespace MyMusic.Views
                     if (!string.IsNullOrEmpty(picc))
                     { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
                 }
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, picc);
+                
+                var message = new ValueSet();
+                message.Add(Constants.CurrentTrackImg, picc);
+                BackgroundMediaPlayer.SendMessageToBackground(message);
+
+                //Windows.Storage.ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;                
+                //roamingSettings.Values["CurrentImg"] = picc;
             }
             catch (Exception exx) { string error = exx.Message; }
         }        
@@ -395,7 +328,7 @@ namespace MyMusic.Views
 
         #endregion
 
-        #region Button Click Event Handlers
+        #region Button Click Events
         
         private void prevButton_Click(object sender, RoutedEventArgs e)
         {
@@ -444,13 +377,13 @@ namespace MyMusic.Views
        
         private void RemoveMediaPlayerEventHandlers()
         {
-            BackgroundMediaPlayer.Current.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
+            //BackgroundMediaPlayer.Current.CurrentStateChanged -= this.MediaPlayer_CurrentStateChanged;
             BackgroundMediaPlayer.MessageReceivedFromBackground -= this.BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
 
         private void AddMediaPlayerEventHandlers()
         {
-            BackgroundMediaPlayer.Current.CurrentStateChanged += this.MediaPlayer_CurrentStateChanged;
+            //BackgroundMediaPlayer.Current.CurrentStateChanged += this.MediaPlayer_CurrentStateChanged;
             BackgroundMediaPlayer.MessageReceivedFromBackground += this.BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
 
@@ -478,8 +411,7 @@ namespace MyMusic.Views
                 else
                 {
                     throw new Exception("Background Audio Task didn't start in expected time");
-                }
-                
+                }                
             }
             );
             backgroundtaskinitializationresult.Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);
@@ -498,7 +430,7 @@ namespace MyMusic.Views
         }
         #endregion
 
-        #region NavigationHelper registration
+        #region NavigationHelper 
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
@@ -507,7 +439,18 @@ namespace MyMusic.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            
+            object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+            if (value != null)
+            {
+                tbkSongName.Text = (string)value;              
+            }
+
+            object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrackImg);
+            if (value2 != null)
+            {
+                string pic = (string)value2;
+                imgPlayingTrack.Source = new BitmapImage(new Uri(pic)); 
+            }           
         }      
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -518,3 +461,52 @@ namespace MyMusic.Views
         #endregion
     }
 }
+
+
+
+
+
+
+
+
+
+//#region Foreground App Lifecycle Handlers
+
+//void ForegroundApp_Resuming(object sender, object e)
+//{
+//    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+
+//    // Verify if the task was running before
+//    if (IsMyBackgroundTaskRunning)
+//    {
+//        //if yes, reconnect to media play handlers
+//        AddMediaPlayerEventHandlers();
+
+//        //send message to background task that app is resumed, so it can start sending notifications
+//        ValueSet messageDictionary = new ValueSet();
+//        messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+//        BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+//        tbkSongName.Text = CurrentTrack;
+//        imgPlayingTrack.Source = new BitmapImage(new Uri(CurrentTrackImg));
+//    }
+//    else
+//    {
+//        tbkSongName.Text = "";
+//    }
+
+//}
+
+//void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+//{
+//    var deferral = e.SuspendingOperation.GetDeferral();
+//    ValueSet messageDictionary = new ValueSet();
+//    messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
+//    BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+//    RemoveMediaPlayerEventHandlers();
+//    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
+//    deferral.Complete();
+//}
+
+//#endregion
+

@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +16,21 @@ namespace MyMusic.Models
         public int TrackId { get; set; }
         public string Name { get; set; }
         public string Artist { get; set; }
+
+        [ForeignKey(typeof(Artist))]
+        public int ArtistId { get; set; }
+        [ForeignKey(typeof(Album))]
+        public int AlbumId { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
         public int OrderNo { get; set; }
 
-        //public Artist Composer { get; set; }
+        //[ForeignKey(typeof(Track))]     // Specify the foreign key
+        //public int ArtistId { get; set; }
+
+        //[ManyToOne]
+        //public Artist Artists { get; set; }
         //public Album Album { get; set; }
         //public Genre Genre { get; set; }
     }   

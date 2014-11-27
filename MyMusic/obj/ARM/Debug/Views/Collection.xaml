@@ -33,7 +33,7 @@
                 <ListBox x:ConnectionId='1' Name="lstOptions"                                                 Foreground="AliceBlue" Background="Black" FontSize="30"  >
                     <ListBoxItem Content="All Tracks" Tag="All Tracks" Margin="8,0,12,12" />
                     <ListBoxItem Content="Top Tracks" Tag="Top Tracks" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Artist" Tag="Artist" Margin="8,0,12,12" />
+                    <ListBoxItem Content="Artists" Tag="Artist" Margin="8,0,12,12" />
                     <ListBoxItem Content="Album" Tag="Album" Margin="8,0,12,12" />
                     <ListBoxItem Content="Genre" Tag="Genre" Margin="8,0,12,12" />
                 </ListBox>

@@ -36,16 +36,22 @@ namespace MyMusic.Views
             this.InitializeComponent();
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            lstRadio.ItemsSource = await rsvm.GetRadioStations(e.Parameter.ToString());            
+            //lstRadio.ItemsSource = await rsvm.GetRadioStations(e.Parameter.ToString());            
+
+            lstRadio.ItemsSource = rsvm.GetRadioStationsXml(e.Parameter.ToString()).Where(a => a.RadioName != ""); 
         }
 
-        private async void lstRadio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstRadio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //string url = ((ListBox)sender).SelectedValue.ToString();
+            //string UriResult = await ReadBytes(url);
+            //RadioStream rs = new RadioStream { RadioUrl = UriResult };           
             string url = ((ListBox)sender).SelectedValue.ToString();
-            string UriResult = await ReadBytes(url);
-            RadioStream rs = new RadioStream { RadioUrl = UriResult };           
+           
+           
+            RadioStream rs = new RadioStream { RadioUrl = url };     
             this.Frame.Navigate(typeof(NowPlaying), rs);
         }
 

@@ -24,7 +24,8 @@ namespace SampleBackgroundAudioTask
     public sealed class MyBackgroundAudioTask : IBackgroundTask
     {
 
-        #region Private fields, properties
+        #region Private 
+
         private SystemMediaTransportControls systemmediatransportcontrol;
         private MyPlaylistManager playlistManager;
         private BackgroundTaskDeferral deferral; // Used to keep task alive
@@ -33,7 +34,7 @@ namespace SampleBackgroundAudioTask
         private bool backgroundtaskrunning = false, Skipped = false;
         private List<int> trks = new List<int>();
         private string[] trksToPlay;
-        private string radioUrl = "";
+        //private string radioUrl = "";
         
         private MyPlaylist Playlist
         {
@@ -46,19 +47,15 @@ namespace SampleBackgroundAudioTask
                 return playlistManager.Current;
             }
         }
+
         #endregion
 
-        #region IBackgroundTask and IBackgroundTaskInstance Interface Members and handlers
+        #region IBackgroundTask 
         
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            Debug.WriteLine("Background Audio Task " + taskInstance.Task.Name + " starting...");
-            // Initialize SMTC object to talk with UVC. 
-            //Note that, this is intended to run after app is paused and 
-            //hence all the logic must be written to run in background process
             systemmediatransportcontrol = SystemMediaTransportControls.GetForCurrentView();
             systemmediatransportcontrol.ButtonPressed += systemmediatransportcontrol_ButtonPressed;
-            systemmediatransportcontrol.PropertyChanged += systemmediatransportcontrol_PropertyChanged;
             systemmediatransportcontrol.IsEnabled = true;
             systemmediatransportcontrol.IsPauseEnabled = true;
             systemmediatransportcontrol.IsPlayEnabled = true;
@@ -74,9 +71,6 @@ namespace SampleBackgroundAudioTask
                 foregroundAppState = ForegroundAppStatus.Unknown;
             else
                 foregroundAppState = (ForegroundAppStatus)Enum.Parse(typeof(ForegroundAppStatus), value.ToString());
-
-            //Add handlers for MediaPlayer
-            BackgroundMediaPlayer.Current.CurrentStateChanged += Current_CurrentStateChanged;
 
             //Add handlers for playlist trackchanged
             Playlist.TrackChanged += playList_TrackChanged;
@@ -117,8 +111,7 @@ namespace SampleBackgroundAudioTask
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
                 //unsubscribe event handlers
-                systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;
-                systemmediatransportcontrol.PropertyChanged -= systemmediatransportcontrol_PropertyChanged;
+                systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;                
                 Playlist.TrackChanged -= playList_TrackChanged;
                 
                 //clear objects task cancellation can happen uninterrupted
@@ -135,10 +128,8 @@ namespace SampleBackgroundAudioTask
         }
         #endregion
 
-        #region SysteMediaTransportControls related functions and handlers
-        /// <summary>
-        /// Update UVC using SystemMediaTransPortControl apis
-        /// </summary>
+        #region UVC functions 
+        
         private void UpdateUVCOnNewTrack()
         {
             systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
@@ -146,33 +137,12 @@ namespace SampleBackgroundAudioTask
             systemmediatransportcontrol.DisplayUpdater.MusicProperties.Title = Playlist.CurrentTrackName;
             systemmediatransportcontrol.DisplayUpdater.Update();
         }
-
-        /// <summary>
-        /// Fires when any SystemMediaTransportControl property is changed by system or user
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        void systemmediatransportcontrol_PropertyChanged(SystemMediaTransportControls sender, SystemMediaTransportControlsPropertyChangedEventArgs args)
-        {
-            //TODO: If soundlevel turns to muted, app can choose to pause the music
-        }
-
-        /// <summary>
-        /// This function controls the button events from UVC.
-        /// This code if not run in background process, will not be able to handle button pressed events when app is suspended.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
+       
         private void systemmediatransportcontrol_ButtonPressed(SystemMediaTransportControls sender, SystemMediaTransportControlsButtonPressedEventArgs args)
         {           
             switch (args.Button)
             {
-                case SystemMediaTransportControlsButton.Play: 
-                    Debug.WriteLine("UVC play button pressed");
-                    // If music is in paused state, for a period of more than 5 minutes, 
-                    //app will get task cancellation and it cannot run code. 
-                    //However, user can still play music by pressing play via UVC unless a new app comes in clears UVC.
-                    //When this happens, the task gets re-initialized and that is asynchronous and hence the wait
+                case SystemMediaTransportControlsButton.Play:                     
                     if (!backgroundtaskrunning)
                     {
                         bool result = BackgroundTaskStarted.WaitOne(2000);
@@ -193,11 +163,9 @@ namespace SampleBackgroundAudioTask
                     }
                     break;
                 case SystemMediaTransportControlsButton.Next: 
-                    Debug.WriteLine("UVC next button pressed");
                     SkipToNext();
                     break;
-                case SystemMediaTransportControlsButton.Previous: 
-                    Debug.WriteLine("UVC previous button pressed");
+                case SystemMediaTransportControlsButton.Previous:                    
                     SkipToPrevious();
                     break;
             }
@@ -205,7 +173,7 @@ namespace SampleBackgroundAudioTask
        
         #endregion
 
-        #region Playlist management functions and handlers
+        #region Playlist management 
         
         private void StartPlayback(string[] trks)
         {
@@ -266,28 +234,19 @@ namespace SampleBackgroundAudioTask
 
         #endregion
 
-        #region Background Media Player Handlers
-
-        void Current_CurrentStateChanged(MediaPlayer sender, object args)
-        {
-            if (sender.CurrentState == MediaPlayerState.Playing)
-            {
-                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
-            }
-            else if (sender.CurrentState == MediaPlayerState.Paused)
-            {
-                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Paused;
-            }
-        }
-
         void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender, MediaPlayerDataReceivedEventArgs e)
-        {            
+        {
+            string currentImge = "";
             foreach (var item in e.Data.Values)
             {
                 if (item.GetType() == typeof(string[]))
                 {
                     trksToPlay = (string[])item;
-                }               
+                }
+                else if (item.GetType() == typeof(string))
+                {
+                    currentImge = (string)item;
+                }
             }
             foreach (string key in e.Data.Keys)
             {                
@@ -317,10 +276,16 @@ namespace SampleBackgroundAudioTask
                     case Constants.PlayRadio:
                         playRadio(trksToPlay[0]);
                         break;
+                    case Constants.CurrentTrackImg:
+                        SaveCurrentImage(currentImge);
+                        break;
                 }
             }
         }
-        #endregion
-
+       
+        private void SaveCurrentImage(string picc)
+        {
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, picc);
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MyMusic.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -44,7 +46,6 @@ namespace MyMusic.ViewModels
         }
 
         //private List<Track> _tracks;
-        //[Column]
         //public List<Track> Tracks
         //{
         //    get
@@ -54,8 +55,7 @@ namespace MyMusic.ViewModels
         //    set
         //    {
         //        if (_tracks != value)
-        //        {
-        //            NotifyPropertyChanging("Tracks");
+        //        {                   
         //            _tracks = value;
         //            NotifyPropertyChanged("Tracks");
         //        }
@@ -77,5 +77,44 @@ namespace MyMusic.ViewModels
         }
 
         #endregion
+    }
+
+    public class ArtistsViewModel : ViewModelBase
+    {
+        private ObservableCollection<ArtistViewModel> _artists;
+        public ObservableCollection<ArtistViewModel> Artists
+        {
+            get
+            {
+                return _artists;
+            }
+
+            set
+            {
+                _artists = value;
+                RaisePropertyChanged("Artists");
+            }
+        }
+
+        public ObservableCollection<ArtistViewModel> GetArtists()
+        {
+            _artists = new ObservableCollection<ArtistViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var query = db.Table<Artist>().OrderBy(c => c.Name);
+                foreach (var ar in query)
+                {
+                    var art = new ArtistViewModel()
+                    {                        
+                        Name = ar.Name,
+                        ArtistId = ar.ArtistId
+                    };
+                    _artists.Add(art);
+                }
+            }
+            return _artists;
+        }
+
+        
     }
 }

@@ -57,7 +57,7 @@ namespace MyMusic
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -144,11 +144,10 @@ namespace MyMusic
             }
         }
 
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
-            //await SuspensionManager.SaveAsync();
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }

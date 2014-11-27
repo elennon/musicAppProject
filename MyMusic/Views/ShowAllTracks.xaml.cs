@@ -32,7 +32,13 @@ namespace MyMusic.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             lstAllTracks.SelectedIndex = -1;
-            lstAllTracks.DataContext = trkView.GetTracks();
+            var para = e.Parameter;
+            if (para != null)
+            {
+                lstAllTracks.DataContext = trkView.GetTracksByAlbum(para.ToString());
+            }
+            else { lstAllTracks.DataContext = trkView.GetTracks(); }
+            
         }
 
         private void lstAllTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)

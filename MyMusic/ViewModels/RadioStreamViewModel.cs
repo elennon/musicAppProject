@@ -3,14 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using Windows.Storage;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace MyMusic.ViewModels
 {
@@ -66,23 +70,6 @@ namespace MyMusic.ViewModels
                 }
             }
         }
-
-        //private string _genreId;
-        //public string RadioGenreId
-        //{
-        //    get
-        //    {
-        //        return _genreId;
-        //    }
-        //    set
-        //    {
-        //        if (_genreId != value)
-        //        {
-        //            _genreId = value;
-        //            NotifyPropertyChanged("RadioGenreId");
-        //        }
-        //    }
-        //}
 
         private string _Url;
         public string RadioUrl
@@ -163,6 +150,46 @@ namespace MyMusic.ViewModels
         //    return _radioStreams;
         //}
 
+
+        public ObservableCollection<RadioStreamViewModel> GetXmlGenres()
+        {
+            _radioStreams = new ObservableCollection<RadioStreamViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var rdos = db.Table<RadioStream>().ToList();
+                foreach (var tr in rdos)
+                {
+                    var rdo = new RadioStreamViewModel()
+                    {
+                        RadioName=tr.RadioName,
+                        RadioGenre = tr.RadioGenreId,
+                        RadioUrl = tr.RadioUrl
+                    };
+                    _radioStreams.Add(rdo);
+                }
+            }
+            return _radioStreams;
+        }
+
+        public ObservableCollection<RadioStreamViewModel> GetRadioStationsXml(string genre)
+        {
+            _radioStreams = new ObservableCollection<RadioStreamViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var rdos = db.Table<RadioStream>().Where(a => a.RadioGenreId == genre).ToList();
+                foreach (var tr in rdos)
+                {
+                    var rdo = new RadioStreamViewModel()
+                    {
+                        RadioName = tr.RadioName,
+                        RadioGenre = tr.RadioGenreId,
+                        RadioUrl = tr.RadioUrl
+                    };
+                    _radioStreams.Add(rdo);
+                }
+            }
+            return _radioStreams;
+        }
 
         public async Task<List<RadioStreamGenre>> LastFm()
         {
@@ -286,6 +313,41 @@ namespace MyMusic.ViewModels
         public async void refreshStreams()
         {           
             List<RadioStreamGenre> gns = await Getgenres();            
+        }
+
+        public async void AddRadios()
+        {
+            //await readXMLAsync();
+            Stations sts = new Stations();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))    //Data/Stations.xml
+            {
+                int cnt = db.Table<RadioStream>().Count();
+                try
+                {
+                    XmlSerializer xs = new XmlSerializer(typeof(Stations), new Type[] { typeof(radioStation) });
+                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Data/Stations.xml"));
+                    using (var fileStream = await file.OpenStreamForReadAsync())
+                    {
+                        sts = (Stations)xs.Deserialize(fileStream);
+                    }
+
+                    foreach (radioStation item in sts.stations.ToList())
+                    {
+                        RadioStream rds = new RadioStream
+                        {
+                            RadioName = item.Name,
+                            RadioGenreId = item.Genre,
+                            RadioUrl = item.Urls.FirstOrDefault().urlName
+                        };
+                        db.Insert(rds);
+                    }                  
+                }
+                catch (Exception ex)
+                {
+                    string g = ex.InnerException.Message;
+                }
+                cnt = db.Table<RadioStream>().Count();                
+            }
         }
     }
 }

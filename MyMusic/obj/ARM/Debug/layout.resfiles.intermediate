@@ -1,3 +1,4 @@
+Assets\_play3.png
 Assets\672.png
 Assets\AlignmentGrid.png
 Assets\ApplicationIcon.png
@@ -16,6 +17,7 @@ Assets\PicPlaceholder.png
 Assets\Picture1.png
 Assets\radio672.png
 Assets\Shuffle.76.png
+Assets\small.png
 Assets\SmallLogo.scale-100.png
 Assets\SmallLogo.scale-140.png
 Assets\SmallLogo.scale-240.png
@@ -42,12 +44,15 @@ Assets\WideLogo.scale-140.png
 Assets\WideLogo.scale-240.png
 App.xbf
 MyMusic.xr.xml
+Views\Albums.xbf
 Views\ChooseRadio.xbf
 Views\Collection.xbf
 Views\MainPage.xbf
 Views\NowPlaying.xbf
 Views\RadioStreams.xbf
 Views\ShowAllTracks.xbf
+Views\ShowByArtist.xbf
 Views\Streaming.xbf
 Views\TopPlayed.xbf
 Views\YouTube.xbf
+Data\Stations.xml

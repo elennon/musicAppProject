@@ -70,6 +70,40 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private int _ArtistId;
+        public int ArtistId
+        {
+            get
+            {
+                return _ArtistId;
+            }
+            set
+            {
+                if (_ArtistId != value)
+                {
+                    _ArtistId = value;
+                    NotifyPropertyChanged("ArtistId");
+                }
+            }
+        }
+
+        private int _AlbumId;
+        public int AlbumId
+        {
+            get
+            {
+                return _AlbumId;
+            }
+            set
+            {
+                if (_AlbumId != value)
+                {
+                    _AlbumId = value;
+                    NotifyPropertyChanged("AlbumId");
+                }
+            }
+        }
+
         private string _Artist;
         public string Artist
         {
@@ -310,6 +344,8 @@ namespace MyMusic.ViewModels
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
+                        ArtistId = tr.ArtistId,
+                        AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
                         OrderNo = tr.OrderNo
@@ -351,6 +387,55 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
+        public ObservableCollection<TrackViewModel> GetTracksByArtist(string artId)
+        {
+            int id = Convert.ToInt32(artId);
+
+            _tracks = new ObservableCollection<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tracks = db.Table<Track>().Where(c => c.ArtistId == id).ToList();
+                foreach (var tr in tracks)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        ArtistId = tr.ArtistId,
+                        AlbumId = tr.AlbumId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        OrderNo = tr.OrderNo
+                    };
+                    _tracks.Add(trk);
+                }
+            }
+            return _tracks;
+        }
+
+        public ObservableCollection<TrackViewModel> GetTracksByAlbum(string albId)
+        {
+            int id = Convert.ToInt32(albId);
+            _tracks = new ObservableCollection<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tracks = db.Table<Track>().Where(c => c.AlbumId == id).ToList();                
+                foreach (var tr in tracks)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        ArtistId = tr.ArtistId,
+                        AlbumId = tr.AlbumId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        OrderNo = tr.OrderNo
+                    };
+                    _tracks.Add(trk);
+                }
+            }
+            return _tracks;
+        }
+
         public async void fillDB()
         {
             _tracks = new ObservableCollection<TrackViewModel>();
@@ -359,7 +444,6 @@ namespace MyMusic.ViewModels
                 int cnt = db.Table<Track>().Count();
                 try
                 {
-
                     List<StorageFile> sf = new List<StorageFile>();
                     StorageFolder folder = KnownFolders.MusicLibrary;
                     IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
@@ -410,13 +494,30 @@ namespace MyMusic.ViewModels
                                           where a.Name == gr.Name
                                           select a).ToList();
                         if (checkGenre.Count < 1) { db.Insert(gr); }
+
+                        var arty = db.Table<Artist>().Where(a => a.Name == song.Artist).FirstOrDefault();
+                        tr.ArtistId = arty.ArtistId;
+                        db.Update(tr);
+
+                        var album = db.Table<Album>().Where(a => a.Name == song.Album).FirstOrDefault();
+                        tr.AlbumId = album.AlbumId;
+                        al.ArtistId = arty.ArtistId;
+                        db.Update(tr);
+                        db.Update(al);
                     }
+                    
                 }
                 catch (Exception ex)
                 {
                     string g = ex.InnerException.Message;
                 }
                 cnt = db.Table<Track>().Count();
+                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                for (int i = 0; i < trks.Count(); i++)
+                {
+                    trks[i].OrderNo = i;
+                    db.Update(trks[i]);
+                }
             }
         }
 
@@ -427,11 +528,18 @@ namespace MyMusic.ViewModels
                 int cnt = db.Table<Track>().Count();
 
                 var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                for (int i = 0; i < trks.Count(); i++)
-                {
-                    trks[i].OrderNo = i;
-                    db.Update(trks[i]);
-                }
+                var atrs = db.Table<Artist>();
+
+                //foreach (var item in atrs)
+                //{
+                //    item.TrackId = trks.Where(a => a.Artist == item.Name).Select(n => n.TrackId).FirstOrDefault();
+                //}
+
+                //for (int i = 0; i < trks.Count(); i++)
+                //{
+                //    trks[i].OrderNo = i;
+                //    db.Update(trks[i]);
+                //}
                 
                 
                 cnt = db.Table<Track>().Count();
