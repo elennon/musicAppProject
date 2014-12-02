@@ -42,6 +42,7 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
+                <AppBarButton  Icon="Shuffle" Label="Shuffle" Click="ShuffleButton_Click" />
                 
             </CommandBar.PrimaryCommands>
             <!--<CommandBar.SecondaryCommands>

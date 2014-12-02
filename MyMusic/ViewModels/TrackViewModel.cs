@@ -12,6 +12,11 @@ using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Graphics.Imaging;
+using Windows.Web.Http;
+using Windows.Web.Http.Filters;
+using System.Threading;
+using System.Xml.Linq;
+
 
 namespace MyMusic.ViewModels
 {
@@ -172,6 +177,23 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private string _imageUri;
+        public string ImageUri
+        {
+            get
+            {
+                return _imageUri;
+            }
+            set
+            {
+                if (_imageUri != value)
+                {
+                    _imageUri = value;
+                    NotifyPropertyChanged("ImageUri");
+                }
+            }
+        }
+
         //private BitmapImage _pic;
         //public BitmapImage Image
         //{
@@ -232,6 +254,10 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private static HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+        private HttpClient httpClient = new HttpClient(filter);
+        private CancellationTokenSource cts = new CancellationTokenSource();
+        
         public TrackViewModel ShowStats(string id)
         {
             TrackViewModel trk = new TrackViewModel();
@@ -348,7 +374,8 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        OrderNo = tr.OrderNo
+                        OrderNo = tr.OrderNo,
+                        ImageUri = tr.ImageUri
                     };
                     _tracks.Add(trk);
                 }
@@ -472,7 +499,7 @@ namespace MyMusic.ViewModels
                         }
                         else
                         { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0 }; }
-
+                        tr.ImageUri = await getPic(song.Artist, song.Title);
                         Artist ar = new Artist { Name = song.Artist };
                         Album al = new Album { Name = song.Album };
                         Genre gr = new Genre { Name = song.Genre.FirstOrDefault() };
@@ -520,6 +547,38 @@ namespace MyMusic.ViewModels
                 }
             }
         }
+
+        private async Task<string> getPic(string artist, string title)
+        {
+            Uri resourceUri;
+
+            string picc = "";
+            string secHalf = string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+            if (!Helpers.TryGetUri(secHalf, out resourceUri))
+            {
+                return null;
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+                var xmlString = response.Content.ReadAsStringAsync().GetResults();
+                XDocument doc = XDocument.Parse(xmlString);
+
+                if (doc.Root.FirstAttribute.Value == "failed")
+                {
+                    picc = "ms-appx:///Assets/radio672.png";
+                }
+                else
+                {
+                    picc = (from el in doc.Descendants("image")
+                            where (string)el.Attribute("size") == "large"
+                            select el).First().Value;                   
+                }
+            }
+            catch (Exception exx) { string error = exx.Message; }
+            return picc;
+        }        
+
 
         public void addaColumn()
         {

@@ -32,10 +32,10 @@ namespace MyMusic.Views
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //lstGenre.ItemsSource = await rsvm.Getgenres();    
-            lstGenre.ItemsSource = rsvm.GetXmlGenres().GroupBy(p => p.RadioGenre).Select(g => g.First());
+            lstGenre.ItemsSource = await rsvm.Getgenres();    
+            //lstGenre.ItemsSource = rsvm.GetXmlGenres().GroupBy(p => p.RadioGenre).Select(g => g.First());
         }
 
         private void lstGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)

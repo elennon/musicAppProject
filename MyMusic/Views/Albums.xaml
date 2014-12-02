@@ -29,7 +29,7 @@
             </StackPanel>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
+        
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <!--<ListBox   Name="lstArtistTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
              SelectionChanged="lstArtistTracks_SelectionChanged"  DisplayMemberPath="Name" SelectedValuePath="OrderNo" ></ListBox>-->

@@ -3,11 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MyMusic.Views"
+    xmlns:q="using:QKit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid x:Name="LayoutRoot"  >
         
         <Grid.RowDefinitions>
@@ -20,17 +23,111 @@
                 <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
                 <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
             </StackPanel>
-
         </StackPanel>
-                    
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
 
-            <ListBox x:ConnectionId='1'   Name="lstAllTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
+            <SemanticZoom x:Name="semanticZoom" IsZoomOutButtonEnabled="True" CanChangeViews="True">
+
+                <SemanticZoom.ZoomedInView>
+                    <ListView x:ConnectionId='2' x:Name="lstViewDetail" IsSwipeEnabled="True" IsTapEnabled="True" SelectedValuePath="OrderNo"                                
+                                                           
+                              SelectionMode="Single" 
+                              IsZoomedInView="True" 
+                              ShowsScrollingPlaceholders="False" 
+                                                                                              >
+                        <ListView.ItemTemplate >
+                            <DataTemplate >
+                                <Border >
+                                <Grid Height="60" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image x:Name="imgSongPic" Grid.Column="0" Source="{Binding Path=ImageUri}"></Image>
+                                    <!--<Border Background="SlateGray" Grid.Column="0"/>-->
+                                    <StackPanel x:Name="stkSongDetails" Grid.Column="1" Orientation="Vertical" >
+                                        <TextBlock x:Name="txtName"  Text="{Binding Name}" FontSize="27" Margin="10,0,0,0"/>
+                                        <TextBlock x:Name="txtArtist" Text="{Binding Artist}" FontSize="16" Margin="10,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Border x:ConnectionId='3' Background="SlateGray"  Height="50" Width="100" HorizontalAlignment="Left" 
+                                                Margin="0,20,0,20"                       >
+                                            <TextBlock Text="{Binding Title}" FontSize="30"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                                <GroupStyle.Panel>
+                                    <ItemsPanelTemplate>
+                                        <VariableSizedWrapGrid Orientation="Vertical" Margin="0 0 0 20" ItemHeight="75"/>
+                                    </ItemsPanelTemplate>
+                                </GroupStyle.Panel>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical" ></ItemsStackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+
+                <!--<SemanticZoom.ZoomedOutView>
+                    <GridView ItemsSource="{Binding Collection.View.CollectionGroups}"
+                              Style="{StaticResource AlphaJumpListPickerStyle}" />
+                </SemanticZoom.ZoomedOutView>-->
+                
+                
+                <SemanticZoom.ZoomedOutView>
+                    <ListView x:ConnectionId='4' x:Name="lstViewSummary" Background="Black" IsZoomedInView="False" 
+                                                                                              >
+                        <ListView.ItemTemplate>
+                            <DataTemplate> 
+                                <Border Height="70" Width="200" Background="SlateGray" Margin="10,10,10,10">
+                                    <TextBlock Text="{Binding Group.Title}" FontSize="30"/>
+                                </Border>                             
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"></ItemsStackPanel>                                
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </SemanticZoom.ZoomedOutView>
+                
+            </SemanticZoom>
+
+            <ListBox x:ConnectionId='1'   Name="lstAllTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" Visibility="Collapsed"
                                                                            DisplayMemberPath="Name" SelectedValuePath="OrderNo" ></ListBox>
-
         </Grid>
-
+       
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:ConnectionId='5'  Icon="Shuffle" Label="Shuffle"                             />                
+            </CommandBar.PrimaryCommands>
+            <!--<CommandBar.SecondaryCommands>
+                <AppBarButton Label="Test01"/>
+                <AppBarButton Label="Test02"/>
+            </CommandBar.SecondaryCommands>-->
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
+
+<!--ContentPanel - place additional content here--><!--
+<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+    <ListBox   Name="lstAllTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
+                         SelectionChanged="lstAllTracks_SelectionChanged"  DisplayMemberPath="Name" 
+    SelectedValuePath="OrderNo" ></ListBox>
+
+</Grid>-->
 

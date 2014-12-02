@@ -29,6 +29,8 @@ namespace MyMusic.Views
     
     public sealed partial class MainPage : Page
     {
+        private TracksViewModel trkView = new TracksViewModel();
+        private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
         private bool isMyBackgroundTaskRunning = false;
         private bool IsMyBackgroundTaskRunning
         {
@@ -61,8 +63,7 @@ namespace MyMusic.Views
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
+        {            
             lstOptions.SelectedIndex = -1;            
         }
 
@@ -109,7 +110,19 @@ namespace MyMusic.Views
             this.Frame.Navigate(typeof(NowPlaying));
         }
 
-        
-        
+        private void FillDbButton_Click(object sender, RoutedEventArgs e)
+        {
+            trkView.fillDB();
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            rdoView.AddRadios();
+        }
+
+        private void ShortCutButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage1));
+        }       
     }
 }

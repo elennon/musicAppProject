@@ -25,19 +25,33 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <!--<ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenreName" 
+            <ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenreName" 
                      SelectedValuePath="RadioGenreKey" RequestedTheme="Dark" Foreground="AliceBlue" 
                      Background="Black" SelectionChanged="lstGenre_SelectionChanged" 
                      FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
                 
-            </ListBox>-->
-            <ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenre" 
+            </ListBox>
+            
+            <!--<ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenre" 
                      SelectedValuePath="RadioGenre" RequestedTheme="Dark" Foreground="AliceBlue" 
                      Background="Black" SelectionChanged="lstGenre_SelectionChanged" 
                      FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
 
-            </ListBox>
+            </ListBox>-->
 
         </Grid>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                
+                <AppBarToggleButton Label="Shoutcast stations" ></AppBarToggleButton>
+               <!-- <AppBarButton Icon="Next"  Label="Next"/>-->
+            </CommandBar.PrimaryCommands>
+            <!--<CommandBar.SecondaryCommands>
+                <AppBarButton Label="Test01"/>
+                <AppBarButton Label="Test02"/>
+            </CommandBar.SecondaryCommands>-->
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

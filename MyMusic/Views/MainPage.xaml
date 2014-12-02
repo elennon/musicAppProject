@@ -39,11 +39,20 @@
                     <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
                 </ListBox>
                 <ListBox Name="lstGenColl" Margin="0,87,0,10"></ListBox>
-            </StackPanel>
-            <Button Name="btnNowPlaying" Click="btnNowPlaying_Click" Content="xxxxxx"></Button>
-            
+            </StackPanel>           
         </Grid>
-
+        
     </Grid>
-
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Now Playing" Icon="Audio" Click="btnNowPlaying_Click"/>
+                <AppBarButton Label="Short Cut" Icon="Directions"  Click="ShortCutButton_Click"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Fill DataBase" Icon="Admin" Click="FillDbButton_Click"  />
+                <AppBarButton Label="Update DataBase" Icon="Add" Click="UpdateButton_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

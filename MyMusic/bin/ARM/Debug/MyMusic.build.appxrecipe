@@ -19,6 +19,12 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\MyMusic.exe">
       <PackagePath>MyMusic.exe</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\BehaviorsXamlSDKManaged\12.0\References\CommonConfiguration\Neutral\Microsoft.Xaml.Interactions.dll">
+      <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\BehaviorsXamlSDKManaged\12.0\References\CommonConfiguration\Neutral\Microsoft.Xaml.Interactivity.dll">
+      <PackagePath>Microsoft.Xaml.Interactivity.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\MyToolkit.2.3.16.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll">
       <PackagePath>MyToolkit.dll</PackagePath>
     </AppxPackagedFile>
@@ -30,6 +36,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\NokiaMusic.3.4.0\lib\wpa81\Nokia.Music.Wp81.dll">
       <PackagePath>Nokia.Music.Wp81.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\QKit.0.4.1\lib\wpa81\QKit.dll">
+      <PackagePath>QKit.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\SQLite.Net-PCL.2.4.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll">
       <PackagePath>SQLite.Net.dll</PackagePath>
@@ -205,8 +214,14 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Assets\JumpList.xbf">
+      <PackagePath>Assets\JumpList.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Albums.xbf">
       <PackagePath>Views\Albums.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\BlankPage1.xbf">
+      <PackagePath>Views\BlankPage1.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ShowAllTracks.xbf">
       <PackagePath>Views\ShowAllTracks.xbf</PackagePath>
@@ -255,6 +270,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\MyToolkit.Extended.2.3.16.0\lib\portable-wpa81+win8\MyToolkit.Extended\UI\Popups\ListPickerBox.xbf">
       <PackagePath>MyToolkit.Extended\UI\Popups\ListPickerBox.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\QKit.0.4.1\lib\wpa81\QKit\QKit.xr.xml">
+      <PackagePath>QKit\QKit.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\QKit.0.4.1\lib\wpa81\QKit\Themes\Generic.xbf">
+      <PackagePath>QKit\Themes\Generic.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>

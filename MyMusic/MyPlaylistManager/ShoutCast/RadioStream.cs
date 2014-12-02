@@ -40,6 +40,9 @@ namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
         private long currentFrameStartPosition;
         private int totalRead = 0;
         private Stream r = null;
+        private HttpWebRequest request;
+        private HttpWebResponse response1;
+        private IInputStream response;
 
         public bool ContinueStreaming { get; set; }
         public short BitRate { get; set; }
@@ -62,18 +65,18 @@ namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
 
         private void StartWebRequest(string url)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request = (HttpWebRequest)WebRequest.Create(url);
             request.BeginGetResponse(new AsyncCallback(FinishWebRequest2), request);
             ContinueStreaming = true;
         }
         private async void FinishWebRequest2(IAsyncResult result)
         {
-            HttpWebResponse response1 = (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
+            response1 = (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
             r = response1.GetResponseStream();
 
             httpClient = new HttpClient();
             var url = new Uri(ri.Uri);
-            var response = await httpClient.GetInputStreamAsync(url);
+            response = await httpClient.GetInputStreamAsync(url);
 
             InitializeShoutcastHeader(r);
             var mp3HeaderData = await GetMp3Header(r);
@@ -86,6 +89,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
             _wfx.BlockAlign = 1;
             _wfx.BitsPerSample = 0;
             _wfx.Size = 12;
+
             ri.agvBytes = (uint)_wfx.AvgBytesPerSec;
             ri.channels = (uint)_wfx.Channels;
             ri.samplePerSec = (uint)_wfx.SamplesPerSec;
@@ -274,6 +278,14 @@ namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
         }
 
         #endregion 
+
+        protected void CloseMedia()
+        {
+            request.Abort();
+            response1.Dispose();
+            response.Dispose();
+            bufferStream.Dispose();
+        }
     }
 }
 

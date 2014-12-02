@@ -70,11 +70,7 @@ namespace MyMusic.Views
             }
         }
 
-        private void btnFillDB_Click(object sender, RoutedEventArgs e)
-        {
-            trkView.fillDB();
-        }
-
+        
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)
         {
             string[] shuffled = shuffleAll();
@@ -94,10 +90,5 @@ namespace MyMusic.Views
             return trkks;
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            //trkView.addaColumn();
-            rdoView.AddRadios();
-        }
     }
 }

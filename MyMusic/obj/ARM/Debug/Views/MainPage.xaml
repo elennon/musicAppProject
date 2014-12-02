@@ -33,18 +33,27 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
             <StackPanel>
-                <ListBox x:ConnectionId='3' Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"                                                  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+                <ListBox x:ConnectionId='2' Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"                                                  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
                     <ListBoxItem Content="You Tubes" Tag="Stream" Margin="8,0,12,12" />
                     <ListBoxItem Content="Collection" Tag="Collection" Margin="8,0,12,12" />
                     <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
                 </ListBox>
                 <ListBox Name="lstGenColl" Margin="0,87,0,10"></ListBox>
-            </StackPanel>
-            <Button x:ConnectionId='2' Name="btnNowPlaying"                             Content="xxxxxx"></Button>
-            
+            </StackPanel>           
         </Grid>
-
+        
     </Grid>
-
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:ConnectionId='3' Label="Now Playing" Icon="Audio"                            />
+                <AppBarButton x:ConnectionId='4' Label="Short Cut" Icon="Directions"                              />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:ConnectionId='5' Label="Fill DataBase" Icon="Admin"                             />
+                <AppBarButton x:ConnectionId='6' Label="Update DataBase" Icon="Add"                            />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
 

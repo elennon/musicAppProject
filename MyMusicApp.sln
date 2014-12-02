@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMusic", "MyMusic\MyMusic.csproj", "{12D8BE58-4ACB-412B-9275-A45C57B2A53F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleBackgroundAudioTask", "MyMusic\SampleBackgroundAudioTask\SampleBackgroundAudioTask.csproj", "{8B214C2E-8BC3-48EA-BCBC-05B352531676}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundAudioTask", "MyMusic\SampleBackgroundAudioTask\BackgroundAudioTask.csproj", "{8B214C2E-8BC3-48EA-BCBC-05B352531676}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPlaylistManager", "MyMusic\MyPlaylistManager\MyPlaylistManager.csproj", "{31497544-A66C-4E8B-BD04-B1B030C59453}"
 EndProject

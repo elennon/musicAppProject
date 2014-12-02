@@ -43,8 +43,10 @@ Assets\WideLogo.scale-100.png
 Assets\WideLogo.scale-140.png
 Assets\WideLogo.scale-240.png
 App.xbf
+Assets\JumpList.xbf
 MyMusic.xr.xml
 Views\Albums.xbf
+Views\BlankPage1.xbf
 Views\ChooseRadio.xbf
 Views\Collection.xbf
 Views\MainPage.xbf
