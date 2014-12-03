@@ -40,7 +40,7 @@ namespace MyMusic.Views
             if (para != null)                       // if user clicked on an album on album page, just show tracks from that album
             {
                 lstAllTracks.ItemsSource = trkView.GetTracksByAlbum(para.ToString());
-                semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                //semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 lstAllTracks.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
@@ -50,7 +50,11 @@ namespace MyMusic.Views
                 listViewSource.Source = GetContactGroups(trkView.GetTracks());
                 listViewSource.ItemsPath = new PropertyPath("Tracks");
                 lstViewDetail.ItemsSource = listViewSource.View;
-                lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;                
+                lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
+
+                //cvs2.Source = GetContactGroups(trkView.GetTracks());
+                //// sets the items source for the zoomed out view to the group data as well
+                //(semanticZoom.ZoomedOutView as ListViewBase).ItemsSource = cvs2.View.CollectionGroups;
             }  
          
         }
@@ -59,6 +63,8 @@ namespace MyMusic.Views
 
         private void ItemListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)                                
         {
+            var o = semanticZoom.IsZoomedInViewActive;
+            if (o == false) { return; }
             args.Handled = true;
 
             if (args.Phase != 0)
@@ -66,7 +72,7 @@ namespace MyMusic.Views
                 throw new Exception("Not in phase 0.");
             }
 
-            Border templateRoot = (Border)args.ItemContainer.ContentTemplateRoot;              
+            Grid templateRoot = (Grid)args.ItemContainer.ContentTemplateRoot;              
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
             Image songPic = (Image)templateRoot.FindName("imgSongPic");
@@ -87,10 +93,11 @@ namespace MyMusic.Views
 
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Border templateRoot = (Border)itemContainer.ContentTemplateRoot;               
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;               
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
                 
             nameTextBlock.Text = track.Name;    // adds song name 
+            nameTextBlock.Tag = track.OrderNo;
             nameTextBlock.Opacity = 1;
 
             args.RegisterUpdateCallback(ShowArtist);  // show artist next
@@ -104,7 +111,7 @@ namespace MyMusic.Views
             }
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Border templateRoot = (Border)itemContainer.ContentTemplateRoot;                
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
                 
             artistTextBlock.Text = track.Artist;
@@ -122,7 +129,7 @@ namespace MyMusic.Views
  
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Border templateRoot = (Border)itemContainer.ContentTemplateRoot;                
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
             Rectangle placeholderRectangle = (Rectangle)templateRoot.FindName("placeholderRectangle");                
             Image _imgSongPic = (Image)templateRoot.FindName("imgSongPic");
 
@@ -225,9 +232,18 @@ namespace MyMusic.Views
             return trackGroups;
         }
 
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Grid grd = (Grid)sender;
+            TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
+            string hh = nameTextBlock.Tag.ToString();
+            this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
+        }
+
         private void Border_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            semanticZoom.IsZoomedInViewActive = false;
+            semanticZoom.ToggleActiveView();
+            //semanticZoom.IsZoomedInViewActive = false;
         }
 
         private void lstViewDetail_Tapped(object sender, TappedRoutedEventArgs e)
@@ -236,5 +252,6 @@ namespace MyMusic.Views
             string hh = lstView.SelectedValue.ToString();
             this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
         }
+        
     }
 }

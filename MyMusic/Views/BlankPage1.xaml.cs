@@ -44,14 +44,6 @@ namespace MyMusic.Views
             lstViewDetail.ItemsSource = listViewSource.View;
             lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
 
-            //foreach (var m in lstViewSummary.Items)
-           // {
-                //foreach (ListViewItem item in lstViewDetail.Items)
-                //{
-                //    if (item.TabIndex > 5) { item.Visibility = Visibility.Collapsed; }
-                //}
-           // }
-            
         }
 
         private List<ContactGroup> GetContactGroups()
@@ -100,6 +92,27 @@ namespace MyMusic.Views
 
             return trackGroups;
         }
+
+        private void SemanticZoom_ViewChangeStarted(object sender, SemanticZoomViewChangedEventArgs e)
+        {
+            if (e.IsSourceZoomedInView == false)
+            {
+                e.DestinationItem.Item = e.SourceItem.Item;
+            }
+        }
+
+
+        private void lstViewDetail_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ListView lstView = (ListView)sender;
+            string hh = lstView.SelectedValue.ToString();
+            // this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
+        }
+        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
 
         private void Border_Tapped(object sender, TappedRoutedEventArgs e)
         {

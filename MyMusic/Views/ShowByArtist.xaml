@@ -9,21 +9,67 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <!--<Style x:Key="ListBoxItemStyle1" TargetType="ListBoxItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
+
+        <DataTemplate x:Key="ListViewItemTemplate">
+                <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="imgPlay"
+                                    Margin="2"
+                                    VerticalAlignment="Center"                               
+                                    Tapped="Image_Tapped"
+                                    Width="62"
+                                    Height="62" 
+                                    Tag="{Binding ArtistId}"
+                                    />
+                    </StackPanel>
+
+                    <StackPanel >
+                    <Border Tapped="Border_Tapped" Tag="{Binding ArtistId}" >
+                            <TextBlock  x:Name="txtName"
+                                    Margin="10,0,0,0"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"  
+                                    FontSize="25"
+                                    Text="{Binding ArtistId}" 
+                                   
+                                        />
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+       
+
+        <DataTemplate x:Key="GroupHeaderTemplate">
+            <Border Background="Transparent" Padding="5">
+                <Border Background="SlateGray" 
+                        BorderBrush="Black" BorderThickness="2"	
+                                               Width="70" Height="62" Margin="6,0,0,12"  				 
+                                                HorizontalAlignment="Stretch">
+                    <TextBlock Text="{Binding Title}" 
+                            Foreground="{StaticResource PhoneForegroundBrush}" 
+                            FontSize="42"
+                            Padding="6"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GroupsTemplate">
+
+            <Border Padding="5">
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Height="62" Width="70" Background="SlateGray" Margin="8,8,8,18">
+
+                    <TextBlock Text="{Binding Group.Title}"                        
+                        FontSize="48"
+                        Padding="6"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+        
     </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
@@ -48,41 +94,74 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <!--<ListBox   Name="lstArtistTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
-             SelectionChanged="lstArtistTracks_SelectionChanged"  DisplayMemberPath="Name" SelectedValuePath="OrderNo" ></ListBox>-->
-            <ListBox x:Name="lstArtistTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25"
+            
+            <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" Grid.Row="1"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <SemanticZoom.ZoomedInView>
+                    <ListView Name="lstViewDetail"  
+                                    HorizontalContentAlignment="Stretch" 
+                                    IsSwipeEnabled="False"
+                                    ScrollViewer.HorizontalScrollMode="Disabled" 
+                                    ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalRailEnabled="True"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource ListViewItemTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ContainerContentChanging="ItemListView_ContainerContentChanging"
+                                  >
+                        <ListView.GroupStyle>
+                            <GroupStyle
+                                                HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}"
+                                            />
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                                          />
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+
+            <!--<ListBox x:Name="lstArtistTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25"
                      >                    
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
-                            
-                                <StackPanel Orientation="Horizontal">
-                                
-                                    <Image Margin="2"
-                                            VerticalAlignment="Center"
-                                            Source="/Assets/_play3.png"
-                                            Tapped="Image_Tapped"
-                                            Width="40"
-                                            Height="40" 
-                                           Tag="{Binding Path=ArtistId}"
-                                           />
-                                
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="imgPlay"
+                                    Margin="2"
+                                    VerticalAlignment="Center"
+                                    Source="/Assets/_play3.png"
+                                    Tapped="Image_Tapped"
+                                    Width="40"
+                                    Height="40" 
+                                    Tag="{Binding Path=ArtistId}"
+                                    />                               
                             </StackPanel>
                                    
                             <StackPanel >
                                 <Border Tapped="Border_Tapped" Tag="{Binding Path=ArtistId}">
-                                <TextBlock Margin="10,0,0,0"
-                                          TextWrapping="Wrap"
-                                          VerticalAlignment="Center"
-                                          HorizontalAlignment="Left"
-                                           
-                                          Text="{Binding Path=Name}" />
+                                <TextBlock  x:Name="txtName"
+                                    Margin="10,0,0,0"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"                                         
+                                    Text="{Binding Path=Name}" />
                                 </Border>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
         </Grid>
     </Grid>
 </Page>
