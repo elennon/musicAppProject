@@ -1,4 +1,5 @@
-﻿using MyMusic.Models;
+﻿using MyMusic.Common;
+using MyMusic.Models;
 using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,23 +25,25 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MyMusic.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class ChooseRadio : Page
     {
+        private NavigationHelper navigationHelper;
         public RadioStreamsViewModel rsvm = new RadioStreamsViewModel();
         
         public ChooseRadio()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.navigationHelper.OnNavigatedTo(e);
             lstRadio.ItemsSource = await rsvm.GetRadioStations(e.Parameter.ToString());            
-
-            //lstRadio.ItemsSource = rsvm.GetRadioStationsXml(e.Parameter.ToString()).Where(a => a.RadioName != ""); 
         }
 
         private async void lstRadio_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -82,5 +85,22 @@ namespace MyMusic.Views
             }
             return result;
         }
+
+        #region NavigationHelper registration
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        #endregion
     }
 }

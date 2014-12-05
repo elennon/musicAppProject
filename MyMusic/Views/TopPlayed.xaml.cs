@@ -1,4 +1,5 @@
-﻿using MyMusic.Views;
+﻿using MyMusic.Common;
+using MyMusic.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,17 +23,27 @@ namespace MyMusic.ViewModels
    
     public sealed partial class TopPlayed : Page
     {
+        private NavigationHelper navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
         private TracksViewModel trkView = new TracksViewModel();
 
         public TopPlayed()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            lstTopPlays.SelectedIndex = -1;
-            lstTopPlays.DataContext = trkView.GetTopTracks();
+            this.navigationHelper.OnNavigatedTo(e);
+            lstViewDetail.ItemsSource = trkView.GetTopTracks();
         }
 
         private void lstTopPlays_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,7 +60,7 @@ namespace MyMusic.ViewModels
         private string[] shuffleTopPlayed()
         {
             List<int> trks = new List<int>();
-            ObservableCollection<TrackViewModel> shuffled = shuffleTop(trkView.GetTopTracks());  // get top tracks and send them to be shuffled                
+            ObservableCollection<TrackViewModel> shuffled = shuffleTop((ObservableCollection<TrackViewModel>)trkView.GetTopTracks());  // get top tracks and send them to be shuffled                
             string[] trkks = new string[shuffled.Count];
             for (int i = 0; i < shuffled.Count; i++)
             {
@@ -72,5 +83,22 @@ namespace MyMusic.ViewModels
             }
             return trks4shuffle;
         }
+
+        #region NavigationHelper registration
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        #endregion
     }
 }

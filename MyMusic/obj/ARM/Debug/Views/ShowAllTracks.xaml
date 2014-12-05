@@ -9,35 +9,32 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        
-        
-        <DataTemplate x:Key="ListViewItemTemplate">       
-            <Grid x:ConnectionId='1' Margin="4,4" VerticalAlignment="Top"                      >    
-               
-                <!--setting width here is important-->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
                 
-                <Image Source="{Binding ImageUri}" Grid.Row="0" Width="62" Height="62"
+        <DataTemplate x:Key="ListViewItemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                <Image Source="{Binding ImageUri}" Grid.Row="0" Width="62" Height="70"
                        x:Name="imgSongPic"
                        Grid.Column="0" 
                        Stretch="Uniform" 
                        VerticalAlignment="Top"/>
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding Name}" 
-                            x:Name="txtName" 
-                            Style="{StaticResource ListViewItemTextBlockStyle}" 
-                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <StackPanel x:ConnectionId='1' Grid.Row="0" Grid.Column="1" Margin="12,0,0,0"                      VerticalAlignment="Top">
+                    <TextBlock x:Name="txtName" 
+                                    Text="{Binding Name}"                                
+                                    Style="{StaticResource ListViewItemTextBlockStyle}" 
+                                    VerticalAlignment="Top" 
+                                    Tag="{Binding OrderNo}"
+                                    HorizontalAlignment="Left"/>
+
                     <TextBlock Text="{Binding Artist}" 
-                            x:Name="txtArtist" 
-                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
-                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                    Grid.Column="0"
+                                    x:Name="txtArtist" 
+                                    Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                                    VerticalAlignment="Top" 
+                                    HorizontalAlignment="Left"/>
                 </StackPanel>
-                
-            </Grid>
+            </StackPanel>
         </DataTemplate>
+                
 
         <DataTemplate x:Key="GroupHeaderTemplate">
             <Border Background="Transparent" Padding="5">
@@ -71,7 +68,13 @@
         
     </Page.Resources>
     <Grid x:Name="LayoutRoot"  >
-        
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

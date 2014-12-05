@@ -10,9 +10,16 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource TextStyleLargeFontSize}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Loaded="Page_Loaded">
+    >
 
     <Grid x:Name="LayoutRoot"  >
+        
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        
         <!--<Grid.Background>
             <ImageBrush Opacity="1" ImageSource="/Assets/672.png"/>
         </Grid.Background>-->

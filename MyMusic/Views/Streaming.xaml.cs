@@ -33,15 +33,24 @@ namespace MyMusic.Views
     /// </summary>
     public sealed partial class Streaming : Page
     {
+        private NavigationHelper navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
         
         public Streaming()
         {
-            this.InitializeComponent();          
+            this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+            this.navigationHelper.OnNavigatedTo(e);
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)      //  /2.0/?method=radio.search&name=radiohead&api_key=6101eb7c600c8a81166ec8c5c3249dd4
@@ -124,5 +133,22 @@ namespace MyMusic.Views
         //    }
         //    catch (Exception exx) { string error = exx.Message; }
         //}
+
+        #region NavigationHelper registration
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        #endregion
     }
 }

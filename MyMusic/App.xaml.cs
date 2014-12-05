@@ -38,10 +38,10 @@ namespace MyMusic
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            HardwareButtons.BackPressed += this.HardwareButtons_BackPressed;
+            //HardwareButtons.BackPressed += this.HardwareButtons_BackPressed;
         }
 
-        public event EventHandler<BackPressedEventArgs> BackPressed;
+        //public event EventHandler<BackPressedEventArgs> BackPressed;
         
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
@@ -57,7 +57,7 @@ namespace MyMusic
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-                //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -123,26 +123,26 @@ namespace MyMusic
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        {
-            Frame frame = Window.Current.Content as Frame;
-            if (frame == null)
-            {
-                return;
-            }
+        //private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        //{
+        //    Frame frame = Window.Current.Content as Frame;
+        //    if (frame == null)
+        //    {
+        //        return;
+        //    }
 
-            var handler = this.BackPressed;
-            if (handler != null)
-            {
-                handler(sender, e);
-            }
+        //    var handler = this.BackPressed;
+        //    if (handler != null)
+        //    {
+        //        handler(sender, e);
+        //    }
 
-            if (frame.CanGoBack && !e.Handled)
-            {
-                frame.GoBack();
-                e.Handled = true;
-            }
-        }
+        //    if (frame.CanGoBack && !e.Handled)
+        //    {
+        //        frame.GoBack();
+        //        e.Handled = true;
+        //    }
+        //}
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {

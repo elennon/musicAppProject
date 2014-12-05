@@ -7,8 +7,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
 
+        <DataTemplate x:Key="ListViewItemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">              
+                    <Image Source="{Binding ImageUri}" Grid.Row="0" Width="82" Height="82"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Left"
+                           x:Name="imgSongPic"
+                           Grid.Column="0" 
+                           Stretch="Uniform" 
+                           />
+               
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Name}" 
+                            x:Name="txtName" 
+                            Style="{StaticResource ListViewItemTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Artist}" 
+                            x:Name="txtArtist" 
+                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding}" 
+                            x:Name="txtPlayCount" 
+                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+
+        </DataTemplate>
+
+    </Page.Resources>
     <Grid x:Name="LayoutRoot" Background="Transparent" >
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -23,19 +60,26 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,0,10,0"  >
-
-                <StackPanel  Orientation="Horizontal" Margin="10,0,10,0" >
-                    <TextBlock Text="Top Track " Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
-                    <TextBox Name="txtTopTrack" BorderBrush="Beige" Width="250" FontSize="18" />
-                </StackPanel>
-
-                
-            </StackPanel>
-            <StackPanel Grid.Row="1" Margin="10,0,10,0"  >
-                <ListBox Name="lstTopPlays" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
-                         SelectionChanged="lstTopPlays_SelectionChanged" SelectedValuePath="TrackId" ></ListBox>
-            </StackPanel>
+            
+            <ListView Name="lstViewDetail"  
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource ListViewItemTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                
+                                >                
+            </ListView>
+            
+            <!--<ListView Name="lstTopPlays" Grid.Row="1" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" 
+                         SelectionChanged="lstTopPlays_SelectionChanged" SelectedValuePath="TrackId" ></ListView>-->
+          
         </Grid>
        
     </Grid>

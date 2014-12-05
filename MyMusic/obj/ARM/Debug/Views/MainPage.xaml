@@ -1,4 +1,4 @@
-﻿<Page x:ConnectionId='1'
+﻿<Page
     x:Class="MyMusic.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -10,9 +10,16 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource TextStyleLargeFontSize}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-                        >
+    >
 
     <Grid x:Name="LayoutRoot"  >
+        
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        
         <!--<Grid.Background>
             <ImageBrush Opacity="1" ImageSource="/Assets/672.png"/>
         </Grid.Background>-->
@@ -33,7 +40,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
             <StackPanel>
-                <ListBox x:ConnectionId='2' Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"                                                  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+                <ListBox x:ConnectionId='1' Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"                                                  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
                     <ListBoxItem Content="You Tubes" Tag="Stream" Margin="8,0,12,12" />
                     <ListBoxItem Content="Collection" Tag="Collection" Margin="8,0,12,12" />
                     <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
@@ -46,12 +53,12 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:ConnectionId='3' Label="Now Playing" Icon="Audio"                            />
-                <AppBarButton x:ConnectionId='4' Label="Short Cut" Icon="Directions"                              />
+                <AppBarButton x:ConnectionId='2' Label="Now Playing" Icon="Audio"                            />
+                <AppBarButton x:ConnectionId='3' Label="Short Cut" Icon="Directions"                              />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:ConnectionId='5' Label="Fill DataBase" Icon="Admin"                             />
-                <AppBarButton x:ConnectionId='6' Label="Update DataBase" Icon="Add"                            />
+                <AppBarButton x:ConnectionId='4' Label="Fill DataBase" Icon="Admin"                             />
+                <AppBarButton x:ConnectionId='5' Label="Update DataBase" Icon="Add"                            />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

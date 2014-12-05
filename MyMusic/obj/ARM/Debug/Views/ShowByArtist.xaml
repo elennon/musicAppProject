@@ -12,34 +12,30 @@
 
         <DataTemplate x:Key="ListViewItemTemplate">
                 <StackPanel Orientation="Horizontal" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image x:ConnectionId='2' x:Name="imgPlay"
-                                    Margin="2"
-                                    VerticalAlignment="Center"                               
-                                                         
-                                    Width="62"
-                                    Height="62" 
-                                    Tag="{Binding ArtistId}"
-                                    />
-                    </StackPanel>
-
-                    <StackPanel >
-                    <Border x:ConnectionId='1'                        Tag="{Binding ArtistId}" >
-                            <TextBlock  x:Name="txtName"
-                                    Margin="10,0,0,0"
-                                    TextWrapping="Wrap"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left"  
-                                    FontSize="25"
-                                    Text="{Binding ArtistId}" 
-                                   
-                                        />
-                        </Border>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:ConnectionId='2' x:Name="imgPlay"
+                                Margin="2"
+                                VerticalAlignment="Center"                               
+                                                     
+                                Width="62"
+                                Height="62"                                     
+                                />
+                </StackPanel>
+                <StackPanel >
+                    <Border x:ConnectionId='1'                         >
+                        <TextBlock  x:Name="txtName"
+                                Margin="10,0,0,0"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"  
+                                FontSize="25"
+                                Text="{Binding Name}"                                     
+                                />
+                    </Border>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
-       
-
+     
         <DataTemplate x:Key="GroupHeaderTemplate">
             <Border Background="Transparent" Padding="5">
                 <Border Background="SlateGray" 

@@ -7,6 +7,7 @@ Assets\BadgeLogo.scale-100.png
 Assets\BadgeLogo.scale-140.png
 Assets\BadgeLogo.scale-240.png
 Assets\bus-hi.png
+Assets\delete.png
 Assets\Logo.scale-100.png
 Assets\Logo.scale-140.png
 Assets\Logo.scale-240.png
@@ -43,7 +44,6 @@ Assets\WideLogo.scale-100.png
 Assets\WideLogo.scale-140.png
 Assets\WideLogo.scale-240.png
 App.xbf
-Assets\JumpList.xbf
 MyMusic.xr.xml
 Views\Albums.xbf
 Views\BlankPage1.xbf

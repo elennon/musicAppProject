@@ -277,6 +277,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 6:   //  MyMusic.Views.ShowAllTracks
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_6_ShowAllTracks;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -292,6 +293,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 8:   //  MyMusic.ViewModels.TopPlayed
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_8_TopPlayed;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -306,6 +308,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 10:   //  MyMusic.Views.Collection
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_10_Collection;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -313,6 +316,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 11:   //  MyMusic.Views.MainPage
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_11_MainPage;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -328,6 +332,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 13:   //  MyMusic.Views.RadioStreams
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_13_RadioStreams;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -335,6 +340,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 14:   //  MyMusic.Views.Streaming
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_14_Streaming;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -342,6 +348,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 15:   //  MyMusic.Views.YouTube
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_15_YouTube;
+                userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -410,14 +417,49 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             var that = (global::MyMusic.Views.Albums)instance;
             return that.NavigationHelper;
         }
-        private object get_1_ShowByArtist_NavigationHelper(object instance)
+        private object get_1_ShowAllTracks_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.ShowAllTracks)instance;
+            return that.NavigationHelper;
+        }
+        private object get_2_ShowByArtist_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.ShowByArtist)instance;
             return that.NavigationHelper;
         }
-        private object get_2_NowPlaying_NavigationHelper(object instance)
+        private object get_3_TopPlayed_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.ViewModels.TopPlayed)instance;
+            return that.NavigationHelper;
+        }
+        private object get_4_Collection_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.Collection)instance;
+            return that.NavigationHelper;
+        }
+        private object get_5_MainPage_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.MainPage)instance;
+            return that.NavigationHelper;
+        }
+        private object get_6_NowPlaying_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.NowPlaying)instance;
+            return that.NavigationHelper;
+        }
+        private object get_7_RadioStreams_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.RadioStreams)instance;
+            return that.NavigationHelper;
+        }
+        private object get_8_Streaming_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.Streaming)instance;
+            return that.NavigationHelper;
+        }
+        private object get_9_YouTube_NavigationHelper(object instance)
+        {
+            var that = (global::MyMusic.Views.YouTube)instance;
             return that.NavigationHelper;
         }
 
@@ -434,16 +476,58 @@ namespace MyMusic.MyMusic_XamlTypeInfo
                 xamlMember.Getter = get_0_Albums_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "MyMusic.Views.ShowAllTracks.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.ShowAllTracks");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_1_ShowAllTracks_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
             case "MyMusic.Views.ShowByArtist.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.ShowByArtist");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_1_ShowByArtist_NavigationHelper;
+                xamlMember.Getter = get_2_ShowByArtist_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.ViewModels.TopPlayed.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.ViewModels.TopPlayed");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_3_TopPlayed_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.Views.Collection.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Collection");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_4_Collection_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.Views.MainPage.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.MainPage");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_5_MainPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.NowPlaying.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.NowPlaying");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_2_NowPlaying_NavigationHelper;
+                xamlMember.Getter = get_6_NowPlaying_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.Views.RadioStreams.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.RadioStreams");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_7_RadioStreams_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.Views.Streaming.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Streaming");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_8_Streaming_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "MyMusic.Views.YouTube.NavigationHelper":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.YouTube");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
+                xamlMember.Getter = get_9_YouTube_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             }

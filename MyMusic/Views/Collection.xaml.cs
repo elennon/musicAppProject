@@ -31,14 +31,28 @@ namespace MyMusic.Views
         private TracksViewModel trkView = new TracksViewModel();
         private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
 
+        private AutoResetEvent SererInitialized;
+        private readonly NavigationHelper navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
         public Collection()
         {
-            this.InitializeComponent();           
+            this.InitializeComponent();
+            SererInitialized = new AutoResetEvent(false);
+
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            lstOptions.SelectedIndex = -1;           
+            this.navigationHelper.OnNavigatedTo(e);
+            lstOptions.SelectedIndex = -1;            
         }
 
 
@@ -90,5 +104,24 @@ namespace MyMusic.Views
             return trkks;
         }
 
+
+        #region NavigationHelper
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+
+        }
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
     }
 }

@@ -124,8 +124,9 @@ namespace MyMusic.Views
             filter = new HttpBaseProtocolFilter();
             httpClient = new HttpClient(filter);
             cts = new CancellationTokenSource();
-
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+            App.Current.Suspending += ForegroundApp_Suspending;
+            App.Current.Resuming += ForegroundApp_Resuming;
+            
 
             this.navigationHelper.OnNavigatedTo(e);
 
@@ -150,15 +151,12 @@ namespace MyMusic.Views
                     var message = new ValueSet();
                     message.Add(Constants.StartPlayback, orders);
                     BackgroundMediaPlayer.SendMessageToBackground(message);
-                    //BackgroundMediaPlayer.Current.Pause();
                 }
                 else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
                 {
-                    //BackgroundMediaPlayer.Current.Play();
                     var message = new ValueSet();
                     message.Add(Constants.StartPlayback, orders);
                     BackgroundMediaPlayer.SendMessageToBackground(message);
-
                 }
                 if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
                 {
@@ -175,12 +173,13 @@ namespace MyMusic.Views
 
         async void BackgroundMediaPlayer_MessageReceivedFromBackground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
-            string artist = "", title = "";
-            string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');
+            string artist = "", title = "", trackId = "";
+            string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');     // current track will be a comma seperated string with name, artist...
             if (currentTrack[0] != string.Empty)
             {
                 if (currentTrack.Length > 1)   
                 {
+                    trackId = currentTrack[0];
                     artist = currentTrack[1];
                     title = currentTrack[2];
                     if (currentTrack[3].Contains("shuffle")) //  if its a track from random shuffle
@@ -209,9 +208,16 @@ namespace MyMusic.Views
                         await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
                             //imgPlayingTrack.Source = await Task.Run(() => getPic(trkName));
-                            showPic(artist, title);
+                            //showPic(artist, title);
+                            string pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                            if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                            imgPlayingTrack.Source = new BitmapImage(new Uri(pic));    // get the image for this song
                             tbkSongName.Text = artist + "-" + title;
                             SkippedTrackName = artist + "-" + title;
+
+                            var message = new ValueSet();
+                            message.Add(Constants.CurrentTrackImg, pic);
+                            BackgroundMediaPlayer.SendMessageToBackground(message);
                         }
                         );
                         break;
@@ -267,8 +273,8 @@ namespace MyMusic.Views
         private async void showPic(string artist, string title)
         {
             Uri resourceUri;
-            string secHalf =string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
-            if (!Helpers.TryGetUri(secHalf, out resourceUri))
+            string address =string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+            if (!Helpers.TryGetUri(address, out resourceUri))
             {
                 return;
             }
@@ -387,7 +393,7 @@ namespace MyMusic.Views
             BackgroundMediaPlayer.MessageReceivedFromBackground += this.BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
 
-        private void StartBackgroundAudioTask()
+        private void StartBackgroundAudioTask()             // starts background---sends mesaage (tracks to play) from here
         {
             AddMediaPlayerEventHandlers();
             var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -430,6 +436,46 @@ namespace MyMusic.Views
         }
         #endregion
 
+        #region Foreground App Lifecycle Handlers
+
+        void ForegroundApp_Resuming(object sender, object e)
+        {
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+
+            // Verify if the task was running before
+            if (IsMyBackgroundTaskRunning)
+            {
+                //if yes, reconnect to media play handlers
+                AddMediaPlayerEventHandlers();
+
+                //send message to background task that app is resumed, so it can start sending notifications
+                ValueSet messageDictionary = new ValueSet();
+                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+                tbkSongName.Text = CurrentTrack;
+                imgPlayingTrack.Source = new BitmapImage(new Uri(CurrentTrackImg));
+            }
+            else
+            {
+                tbkSongName.Text = "";
+            }
+
+        }
+
+        void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            ValueSet messageDictionary = new ValueSet();
+            messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
+            BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+            RemoveMediaPlayerEventHandlers();
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
+            deferral.Complete();
+        }
+
+        #endregion
+
         #region NavigationHelper 
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -470,43 +516,5 @@ namespace MyMusic.Views
 
 
 
-//#region Foreground App Lifecycle Handlers
 
-//void ForegroundApp_Resuming(object sender, object e)
-//{
-//    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
-
-//    // Verify if the task was running before
-//    if (IsMyBackgroundTaskRunning)
-//    {
-//        //if yes, reconnect to media play handlers
-//        AddMediaPlayerEventHandlers();
-
-//        //send message to background task that app is resumed, so it can start sending notifications
-//        ValueSet messageDictionary = new ValueSet();
-//        messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
-//        BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-
-//        tbkSongName.Text = CurrentTrack;
-//        imgPlayingTrack.Source = new BitmapImage(new Uri(CurrentTrackImg));
-//    }
-//    else
-//    {
-//        tbkSongName.Text = "";
-//    }
-
-//}
-
-//void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-//{
-//    var deferral = e.SuspendingOperation.GetDeferral();
-//    ValueSet messageDictionary = new ValueSet();
-//    messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
-//    BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-//    RemoveMediaPlayerEventHandlers();
-//    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
-//    deferral.Complete();
-//}
-
-//#endregion
 

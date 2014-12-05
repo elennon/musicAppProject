@@ -37,7 +37,7 @@ namespace MyMusic.Views
         public ShowByArtist()
         {
             this.InitializeComponent();
-
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -176,6 +176,7 @@ namespace MyMusic.Views
             string hh = lstView.SelectedValue.ToString();
             // this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
         }
+
         private void playerListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //PlayerDetails.DataContext = e.ClickedItem as Player;

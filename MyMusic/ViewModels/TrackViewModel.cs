@@ -219,7 +219,7 @@ namespace MyMusic.ViewModels
 
         public override string ToString()
         {
-            return string.Format("({0}) {1}", Plays + RandomPlays, Name);
+            return string.Format(" Play count:  {0} ", Plays + RandomPlays);
         }
    
         #region INotifyPropertyChanged Members
@@ -280,12 +280,13 @@ namespace MyMusic.ViewModels
             TrackViewModel trk = new TrackViewModel();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                Track tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
                 if(tr != null)
                 {
-                    tr.RandomPlays++;
+                    tr.RandomPlays = tr.RandomPlays + 1;
                     db.Update(tr);
-                }                
+                }
+                Track trr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
             }
         }
 
@@ -318,13 +319,15 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public ObservableCollection<TrackViewModel> GetTopTracks()
+        public IEnumerable<TrackViewModel> GetTopTracks()
         {
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var query = db.Table<Track>().OrderByDescending(c => c.Plays).Take(10);
-                foreach (var tr in query)
+                var topPlays = db.Table<Track>().Where(a => a.Plays > 0).OrderByDescending(c => c.Plays).ToList();
+                var topPplays = db.Table<Track>().Where(a => a.Plays > 0).ToList();
+                var topShufflePlays = db.Table<Track>().Where(a => a.RandomPlays > 0).OrderByDescending(c => c.RandomPlays).ToList();              
+                foreach (var tr in topPlays)
                 {
                     var trk = new TrackViewModel()
                     {
@@ -334,12 +337,28 @@ namespace MyMusic.ViewModels
                         RandomPlays = tr.RandomPlays,
                         OrderNo =tr.OrderNo,
                         Plays = tr.Plays,
-                        Skips = tr.Skips
+                        Skips = tr.Skips,
+                        ImageUri = tr.ImageUri
+                    };
+                    _tracks.Add(trk);
+                }
+                foreach (var tr in topShufflePlays)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        RandomPlays = tr.RandomPlays,
+                        OrderNo = tr.OrderNo,
+                        Plays = tr.Plays,
+                        Skips = tr.Skips,
+                        ImageUri = tr.ImageUri
                     };
                     _tracks.Add(trk);
                 }
             }
-            return _tracks;
+            return _tracks.Take(30);
         }
 
         public TrackViewModel GetThisTrack(string id)
@@ -353,7 +372,8 @@ namespace MyMusic.ViewModels
                 {
                     TrackId = tr.TrackId,
                     Name = tr.Name,
-                    Artist = tr.Artist
+                    Artist = tr.Artist,
+                    ImageUri = tr.ImageUri
                 };
             }
             return trk;

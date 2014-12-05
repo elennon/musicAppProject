@@ -1,4 +1,5 @@
-﻿using MyMusic.ViewModels;
+﻿using MyMusic.Common;
+using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,20 +28,31 @@ namespace MyMusic.Views
 
     public sealed partial class ShowAllTracks : Page
     {
+        private NavigationHelper navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+
         private TracksViewModel trkView = new TracksViewModel();
 
         public ShowAllTracks()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
        
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
+        {
+            this.navigationHelper.OnNavigatedTo(e);
             var para = e.Parameter;
             if (para != null)                       // if user clicked on an album on album page, just show tracks from that album
             {
                 lstAllTracks.ItemsSource = trkView.GetTracksByAlbum(para.ToString());
-                //semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 lstAllTracks.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
@@ -51,10 +63,6 @@ namespace MyMusic.Views
                 listViewSource.ItemsPath = new PropertyPath("Tracks");
                 lstViewDetail.ItemsSource = listViewSource.View;
                 lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
-
-                //cvs2.Source = GetContactGroups(trkView.GetTracks());
-                //// sets the items source for the zoomed out view to the group data as well
-                //(semanticZoom.ZoomedOutView as ListViewBase).ItemsSource = cvs2.View.CollectionGroups;
             }  
          
         }
@@ -63,8 +71,6 @@ namespace MyMusic.Views
 
         private void ItemListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)                                
         {
-            var o = semanticZoom.IsZoomedInViewActive;
-            if (o == false) { return; }
             args.Handled = true;
 
             if (args.Phase != 0)
@@ -72,7 +78,7 @@ namespace MyMusic.Views
                 throw new Exception("Not in phase 0.");
             }
 
-            Grid templateRoot = (Grid)args.ItemContainer.ContentTemplateRoot;              
+            StackPanel templateRoot = (StackPanel)args.ItemContainer.ContentTemplateRoot;              
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
             Image songPic = (Image)templateRoot.FindName("imgSongPic");
@@ -93,7 +99,7 @@ namespace MyMusic.Views
 
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;               
+            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;               
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
                 
             nameTextBlock.Text = track.Name;    // adds song name 
@@ -111,7 +117,7 @@ namespace MyMusic.Views
             }
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
+            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
                 
             artistTextBlock.Text = track.Artist;
@@ -129,8 +135,7 @@ namespace MyMusic.Views
  
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
-            Rectangle placeholderRectangle = (Rectangle)templateRoot.FindName("placeholderRectangle");                
+            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;                              
             Image _imgSongPic = (Image)templateRoot.FindName("imgSongPic");
 
             if (string.IsNullOrEmpty(track.ImageUri) == false)      //  if there is no pic, show default
@@ -142,9 +147,6 @@ namespace MyMusic.Views
                 _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/radio672.png")); 
             }
             _imgSongPic.Opacity = 1;
-
-            // Make the placeholder rectangle invisible.    
-            //placeholderRectangle.Opacity = 0;
         }
 
         #endregion
@@ -232,9 +234,9 @@ namespace MyMusic.Views
             return trackGroups;
         }
 
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Song_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Grid grd = (Grid)sender;
+            StackPanel grd = (StackPanel)sender;
             TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
             string hh = nameTextBlock.Tag.ToString();
             this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
@@ -252,6 +254,23 @@ namespace MyMusic.Views
             string hh = lstView.SelectedValue.ToString();
             this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
         }
-        
+
+
+        #region NavigationHelper registration
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+        }
+
+        #endregion
     }
 }

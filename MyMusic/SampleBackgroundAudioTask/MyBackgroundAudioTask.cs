@@ -203,6 +203,7 @@ namespace SampleBackgroundAudioTask
         {
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
+            //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, pic);
             string currentTrack = "";
             if (Skipped)
             {

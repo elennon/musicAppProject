@@ -93,6 +93,20 @@ namespace MyMusic.Views
             return trackGroups;
         }
 
+        private void Song_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            StackPanel grd = (StackPanel)sender;
+            TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
+            string hh = nameTextBlock.Tag.ToString();
+            //this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
+        }
+
+        private void Border_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            semanticZoom.ToggleActiveView();
+            //semanticZoom.IsZoomedInViewActive = false;
+        }
+
         private void SemanticZoom_ViewChangeStarted(object sender, SemanticZoomViewChangedEventArgs e)
         {
             if (e.IsSourceZoomedInView == false)
@@ -114,9 +128,6 @@ namespace MyMusic.Views
         }
 
 
-        private void Border_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            semanticZoom.IsZoomedInViewActive = false;
-        }
+        
     }
 }

@@ -23,9 +23,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MyMusic.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    public class AlbumContactGroup
+    {
+        public string Title { get; set; }
+        public List<AlbumViewModel> Albums { get; set; }
+    }
     public sealed partial class Albums : Page
     {
         private NavigationHelper navigationHelper;
@@ -35,7 +37,7 @@ namespace MyMusic.Views
         public Albums()
         {
             this.InitializeComponent();
-
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -45,12 +47,147 @@ namespace MyMusic.Views
         {
             this.navigationHelper.OnNavigatedTo(e);
             var para = e.Parameter;
-            if(para != null)
+            if (para != null)
             {
                 lstAlbums.DataContext = albView.GetAlbumsByArtist(para.ToString());
+                semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                lstAlbums.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
-            else { lstAlbums.DataContext = albView.GetAlbums(); }
-           
+            else
+            {
+                CollectionViewSource listViewSource = new CollectionViewSource();
+                listViewSource.IsSourceGrouped = true;
+                listViewSource.Source = GetContactGroups(albView.GetAlbums());
+                listViewSource.ItemsPath = new PropertyPath("Albums");
+                lstViewDetail.ItemsSource = listViewSource.View;
+                lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
+            }
+        }
+
+
+        #region fill listview incrementally
+
+        private void ItemListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            args.Handled = true;
+
+            if (args.Phase != 0)
+            {
+                throw new Exception("Not in phase 0.");
+            }
+
+            StackPanel templateRoot = (StackPanel)args.ItemContainer.ContentTemplateRoot;
+            TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
+            Image playPic = (Image)templateRoot.FindName("imgPlay");
+
+            nameTextBlock.Opacity = 0;
+            playPic.Opacity = 0;
+
+            args.RegisterUpdateCallback(ShowAlbumName);  //  show song titles first
+        }
+
+        private void ShowAlbumName(ListViewBase sender, ContainerContentChangingEventArgs args)    // phase 1 shows title                            
+        {
+            if (args.Phase != 1)
+            {
+                throw new Exception("Not in phase 1.");
+            }
+
+            AlbumViewModel album = (AlbumViewModel)args.Item;
+            SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
+            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;
+            TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
+
+            nameTextBlock.Text = album.Name;    // adds song name
+            nameTextBlock.Tag = album.AlbumId;
+            nameTextBlock.Opacity = 1;
+
+            args.RegisterUpdateCallback(ShowPics);  // show artist next
+        }
+
+        private void ShowPics(ListViewBase sender, ContainerContentChangingEventArgs args)     // phase 3 shows image                            
+        {
+            if (args.Phase != 2)
+            {
+                throw new Exception("Not in phase 2.");
+            }
+
+            AlbumViewModel album = (AlbumViewModel)args.Item;
+            SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
+            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;
+            Image _imgSongPic = (Image)templateRoot.FindName("imgPlay");
+
+            _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/_play3.png"));
+            _imgSongPic.Tag = album.AlbumId;
+            _imgSongPic.Opacity = 1;
+        }
+
+        #endregion
+
+        private List<AlbumContactGroup> GetContactGroups(ObservableCollection<AlbumViewModel> collection)    // method to group all tracks alphabetically
+        {
+            List<AlbumContactGroup> albumGroups = new List<AlbumContactGroup>();
+            List<AlbumContactGroup> tempGroups = new List<AlbumContactGroup>();
+            ObservableCollection<AlbumViewModel> allAlbums = collection;     // trkView.GetTracks();
+            ObservableCollection<AlbumViewModel> songsNotNumbers = new ObservableCollection<AlbumViewModel>();  // to hold songs with numbers at the start
+            List<char> firstLetters = new List<char>();
+            var t = allAlbums.GroupBy(a => a.Name.Substring(0, 1)).Select(g => g.FirstOrDefault().Name);     // get a list of alphabetical letters that songs in collection begin with
+            foreach (string item in t)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (Char.IsLetter(item[i]))
+                    {
+                        firstLetters.Add(Char.ToUpper(item[i]));
+                        break;
+                    }
+                }
+            }
+            AlbumContactGroup tGroup = new AlbumContactGroup();
+            foreach (Char item in firstLetters.OrderBy(a => a.ToString()).Distinct())
+            {
+                var tracksWithLetter = allAlbums.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList();
+                tGroup = new AlbumContactGroup() { Title = item.ToString(), Albums = allAlbums.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
+                tempGroups.Add(tGroup);
+                foreach (var tr in tracksWithLetter)    // collect all tracks that start with a letter
+                {
+                    songsNotNumbers.Add(tr);
+                }
+            }
+            ObservableCollection<AlbumViewModel> numberSongs = new ObservableCollection<AlbumViewModel>();  // for all artists that start with numbers
+            foreach (var item in allAlbums)
+            {
+                if (songsNotNumbers.Contains(item) == false)
+                { numberSongs.Add(item); }
+            }
+            AlbumContactGroup numbersGroup = new AlbumContactGroup() { Title = "#", Albums = numberSongs.ToList() };
+            albumGroups.Add(numbersGroup);
+            foreach (var item in tempGroups)
+            {
+                albumGroups.Add(item);
+            }
+
+            return albumGroups;
+        }
+
+
+        private void lstViewDetail_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ListView lstView = (ListView)sender;
+            string hh = lstView.SelectedValue.ToString();
+            // this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
+        }
+
+        private void playerListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //PlayerDetails.DataContext = e.ClickedItem as Player;
+        }
+
+        private void Album_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Border br = (Border)sender;
+            string id = ((TextBlock)br.Child).Tag.ToString();
+            this.Frame.Navigate(typeof(Albums), id);
         }
 
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
@@ -101,11 +238,6 @@ namespace MyMusic.Views
 
         #endregion
 
-        private void Border_Tapped_1(object sender, TappedRoutedEventArgs e)
-        {
-            Border br = (Border)sender;
-            var id = br.Tag;
-            this.Frame.Navigate(typeof(ShowAllTracks), id);
-        }
+        
     }
 }

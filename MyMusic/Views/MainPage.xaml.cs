@@ -51,19 +51,82 @@ namespace MyMusic.Views
                 }
             }
         }
+        
+        private readonly NavigationHelper navigationHelper;
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
 
         public MainPage()
         {
             InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-                  
-        }
+        //#region Foreground App Lifecycle Handlers
+        ///// <summary>
+        ///// Sends message to background informing app has resumed
+        ///// Subscribe to MediaPlayer events
+        ///// </summary>
+        //void ForegroundApp_Resuming(object sender, object e)
+        //{
+        //    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+
+        //    // Verify if the task was running before
+        //    if (IsMyBackgroundTaskRunning)
+        //    {
+        //        //if yes, reconnect to media play handlers
+        //        AddMediaPlayerEventHandlers();
+
+        //        //send message to background task that app is resumed, so it can start sending notifications
+        //        ValueSet messageDictionary = new ValueSet();
+        //        messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+        //        BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+        //        if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
+        //        {
+        //            playButton.Content = "| |";     // Change to pause button
+        //        }
+        //        else
+        //        {
+        //            playButton.Content = ">";     // Change to play button
+        //        }
+        //        txtCurrentTrack.Text = CurrentTrack;
+        //    }
+        //    else
+        //    {
+        //        playButton.Content = ">";     // Change to play button
+        //        txtCurrentTrack.Text = "";
+        //    }
+
+        //}
+
+        ///// <summary>
+        ///// Send message to Background process that app is to be suspended
+        ///// Stop clock and slider when suspending
+        ///// Unsubscribe handlers for MediaPlayer events
+        ///// </summary>
+        //void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        //{
+        //    var deferral = e.SuspendingOperation.GetDeferral();
+        //    ValueSet messageDictionary = new ValueSet();
+        //    messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
+        //    BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+        //    RemoveMediaPlayerEventHandlers();
+        //    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
+        //    deferral.Complete();
+        //}
+        //#endregion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
+        {
+            this.navigationHelper.OnNavigatedTo(e);
             lstOptions.SelectedIndex = -1;            
         }
 
@@ -91,19 +154,7 @@ namespace MyMusic.Views
             }
         }
 
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify the app that a property has changed.
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
+       
 
         private void btnNowPlaying_Click(object sender, RoutedEventArgs e)
         {
@@ -123,6 +174,39 @@ namespace MyMusic.Views
         private void ShortCutButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(BlankPage1));
-        }       
+        }
+
+        #region NavigationHelper
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+
+        }
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the app that a property has changed.
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }
