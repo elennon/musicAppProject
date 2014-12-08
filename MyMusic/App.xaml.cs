@@ -3,6 +3,7 @@ using MyMusic.Models;
 using MyMusic.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -12,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,18 +33,42 @@ namespace MyMusic
     sealed partial class App : Application
     {
         public static string DBPath = string.Empty;
-        public static int CurrentCustomerId { get; set; }
         private TransitionCollection transitions;
+        private bool _isResuming = false;
+        public bool isResumingFromTermination
+        {
+            get
+            {
+                return _isResuming;
+            }
+            set
+            {
+                _isResuming = value;
+            }
+        }
+    
+        
+        private string CurrentTrackNo
+        {
+            get
+            {
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackOrderNo);
+                if (value != null)
+                {
+                    return value.ToString();
+                }
+                else
+                    return String.Empty;
+            }
+            set { }
+        }
 
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            //HardwareButtons.BackPressed += this.HardwareButtons_BackPressed;
-        }
+            this.Suspending += OnSuspending;  
+        }        
 
-        //public event EventHandler<BackPressedEventArgs> BackPressed;
-        
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
 #if DEBUG
@@ -58,18 +84,31 @@ namespace MyMusic
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);     // set to active to let background task know to send messages
+
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    // Restore the saved session state only when appropriate.
+                    Debug.WriteLine("app class after termination");
+                    isResumingFromTermination = true;
+                    DBPath = Path.Combine(
+                    Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+                    using (var db = new SQLite.SQLiteConnection(DBPath))
+                    {
+                        db.CreateTable<Track>();
+                        db.CreateTable<Album>();
+                        db.CreateTable<Artist>();
+                        db.CreateTable<Genre>();
+                        db.CreateTable<RadioStream>();
+                    }
+                   
                     try
                     {
                         await SuspensionManager.RestoreAsync();
                     }
-                    catch (SuspensionManagerException)
+                    catch (SuspensionManagerException ex)
                     {
-                        // Something went wrong restoring state.
-                        // Assume there is no state and continue.
+                        string error = ex.Message;
                     }                        
                 }
 
@@ -123,31 +162,14 @@ namespace MyMusic
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 
-        //private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        //{
-        //    Frame frame = Window.Current.Content as Frame;
-        //    if (frame == null)
-        //    {
-        //        return;
-        //    }
-
-        //    var handler = this.BackPressed;
-        //    if (handler != null)
-        //    {
-        //        handler(sender, e);
-        //    }
-
-        //    if (frame.CanGoBack && !e.Handled)
-        //    {
-        //        frame.GoBack();
-        //        e.Handled = true;
-        //    }
-        //}
-
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
+            ValueSet messageDictionary = new ValueSet();
+            messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
+            BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
             deferral.Complete();
         }
     }

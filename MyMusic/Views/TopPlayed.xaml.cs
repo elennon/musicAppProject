@@ -34,7 +34,7 @@ namespace MyMusic.ViewModels
         public TopPlayed()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -53,8 +53,8 @@ namespace MyMusic.ViewModels
 
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)
         {
-            string[] shuffled = shuffleTopPlayed();
-            this.Frame.Navigate(typeof(NowPlaying), shuffled);
+            //string[] shuffled = shuffleTopPlayed();
+            //this.Frame.Navigate(typeof(NowPlaying), shuffled);
         }
 
         private string[] shuffleTopPlayed()

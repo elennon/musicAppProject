@@ -31,26 +31,6 @@ namespace MyMusic.Views
     {
         private TracksViewModel trkView = new TracksViewModel();
         private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
-        private bool isMyBackgroundTaskRunning = false;
-        private bool IsMyBackgroundTaskRunning
-        {
-            get
-            {
-                if (isMyBackgroundTaskRunning)
-                    return true;
-
-                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.BackgroundTaskState);
-                if (value == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    isMyBackgroundTaskRunning = ((String)value).Equals(Constants.BackgroundTaskRunning);
-                    return isMyBackgroundTaskRunning;
-                }
-            }
-        }
         
         private readonly NavigationHelper navigationHelper;
         public NavigationHelper NavigationHelper
@@ -62,67 +42,12 @@ namespace MyMusic.Views
         {
             InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
         }
-
-        //#region Foreground App Lifecycle Handlers
-        ///// <summary>
-        ///// Sends message to background informing app has resumed
-        ///// Subscribe to MediaPlayer events
-        ///// </summary>
-        //void ForegroundApp_Resuming(object sender, object e)
-        //{
-        //    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
-
-        //    // Verify if the task was running before
-        //    if (IsMyBackgroundTaskRunning)
-        //    {
-        //        //if yes, reconnect to media play handlers
-        //        AddMediaPlayerEventHandlers();
-
-        //        //send message to background task that app is resumed, so it can start sending notifications
-        //        ValueSet messageDictionary = new ValueSet();
-        //        messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
-        //        BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-
-        //        if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
-        //        {
-        //            playButton.Content = "| |";     // Change to pause button
-        //        }
-        //        else
-        //        {
-        //            playButton.Content = ">";     // Change to play button
-        //        }
-        //        txtCurrentTrack.Text = CurrentTrack;
-        //    }
-        //    else
-        //    {
-        //        playButton.Content = ">";     // Change to play button
-        //        txtCurrentTrack.Text = "";
-        //    }
-
-        //}
-
-        ///// <summary>
-        ///// Send message to Background process that app is to be suspended
-        ///// Stop clock and slider when suspending
-        ///// Unsubscribe handlers for MediaPlayer events
-        ///// </summary>
-        //void ForegroundApp_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-        //{
-        //    var deferral = e.SuspendingOperation.GetDeferral();
-        //    ValueSet messageDictionary = new ValueSet();
-        //    messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
-        //    BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-        //    RemoveMediaPlayerEventHandlers();
-        //    ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppSuspended);
-        //    deferral.Complete();
-        //}
-        //#endregion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -173,7 +98,7 @@ namespace MyMusic.Views
 
         private void ShortCutButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1));
+            //this.Frame.Navigate(typeof(BasicPage1));
         }
 
         #region NavigationHelper
@@ -208,5 +133,10 @@ namespace MyMusic.Views
             }
         }
         #endregion
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("cleaning windows");
+        }
     }
 }

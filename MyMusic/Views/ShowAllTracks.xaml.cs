@@ -35,11 +35,12 @@ namespace MyMusic.Views
         }
 
         private TracksViewModel trkView = new TracksViewModel();
+        private string albumId = "";
 
         public ShowAllTracks()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -51,9 +52,10 @@ namespace MyMusic.Views
             var para = e.Parameter;
             if (para != null)                       // if user clicked on an album on album page, just show tracks from that album
             {
-                lstAllTracks.ItemsSource = trkView.GetTracksByAlbum(para.ToString());
+                albumId = para.ToString();
+                lstTracksInAlbum.ItemsSource = trkView.GetTracksByAlbum(para.ToString());
                 semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                lstAllTracks.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                lstTracksInAlbum.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
             {
@@ -151,41 +153,15 @@ namespace MyMusic.Views
 
         #endregion
 
-        private void lstAllTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstAlbumTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)    // pass album id from list of track in given album
         {
-            string orderNo = ((ListBox)sender).SelectedValue.ToString();
-            this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(orderNo)));   // get the string[] of songs to pass tp background
+            string albId = "albTracksFromThisOn," + ((ListBox)sender).SelectedIndex.ToString() + "," + albumId;
+            this.Frame.Navigate(typeof(NowPlaying), albId);   
         }
 
-        private string[] GetListToPlay(int orderNo) // orders all songs that come after selected song (+ selected) into a string[]
+        private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
         {
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            var trks = (trkView.GetTracks()).Where(a => a.OrderNo >= orderNo).ToList(); // get all tracks listed after selected one
-            string[] trkArray = new string[trks.Count];
-
-            for (int i = 0; i < trks.Count; i++)
-            {
-                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].Artist + "," + trks[i].Name + ",shuffle";
-            }
-            return trkArray;
-        }
-
-        private void ShuffleButton_Click(object sender, RoutedEventArgs e)
-        {
-            string[] shuffled = shuffleAll();
-            this.Frame.Navigate(typeof(NowPlaying), shuffled);  // pass a string[] of all songs shuffled up to background 
-        }
-
-        private string[] shuffleAll()   // shuffles all songs then adds each as a comma seperated string (name, artist...) in a string[]
-        {
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            shuffled = trkView.GetShuffleTracks();
-            string[] trkks = new string[shuffled.Count];
-            for (int i = 0; i < shuffled.Count; i++)
-            {
-                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
-            }
-            return trkks;
+            this.Frame.Navigate(typeof(NowPlaying), "shuffle");  
         }
 
         private List<ContactGroup> GetContactGroups(ObservableCollection<TrackViewModel> collection)    // method to group all tracks alphabetically
@@ -234,12 +210,12 @@ namespace MyMusic.Views
             return trackGroups;
         }
 
-        private void Song_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Song_Tapped(object sender, TappedRoutedEventArgs e)    // fires when all tracks diplayed, sends tracks order # to play it and all after it
         {
             StackPanel grd = (StackPanel)sender;
             TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
-            string hh = nameTextBlock.Tag.ToString();
-            this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
+            string tNumber = "allTracks," + nameTextBlock.Tag.ToString() ;
+            this.Frame.Navigate(typeof(NowPlaying), tNumber ); //GetListToPlay(Convert.ToInt32(hh)
         }
 
         private void Border_Tapped(object sender, TappedRoutedEventArgs e)
@@ -247,14 +223,6 @@ namespace MyMusic.Views
             semanticZoom.ToggleActiveView();
             //semanticZoom.IsZoomedInViewActive = false;
         }
-
-        private void lstViewDetail_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            ListView lstView = (ListView)sender;
-            string hh = lstView.SelectedValue.ToString();
-            this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
-        }
-
 
         #region NavigationHelper registration
 
@@ -274,3 +242,17 @@ namespace MyMusic.Views
         #endregion
     }
 }
+
+
+        //private string[] GetListToPlay(int orderNo) // orders all songs that come after selected song (+ selected) into a string[]
+        //{
+        //    ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
+        //    var trks = (trkView.GetTracks()).Where(a => a.OrderNo >= orderNo).ToList(); // get all tracks listed after selected one
+        //    string[] trkArray = new string[trks.Count];
+
+        //    for (int i = 0; i < trks.Count; i++)
+        //    {
+        //        trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].Artist + "," + trks[i].Name + ",shuffle";
+        //    }
+        //    return trkArray;
+        //}

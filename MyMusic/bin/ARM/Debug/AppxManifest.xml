@@ -53,12 +53,12 @@
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
         <Path>CLRHost.dll</Path>
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.MyPlaylistManager" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="SampleBackgroundAudioTask.MyBackgroundAudioTask" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.MyPlaylistManager" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
       </InProcessServer>
     </Extension>
   </Extensions>

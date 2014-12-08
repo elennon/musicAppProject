@@ -35,7 +35,6 @@
             </StackPanel>
         </DataTemplate>
                 
-
         <DataTemplate x:Key="GroupHeaderTemplate">
             <Border Background="Transparent" Padding="5">
                 <Border Background="SlateGray" 
@@ -124,8 +123,8 @@
                 </SemanticZoom.ZoomedOutView>
             </SemanticZoom>
 
-            <ListBox   Name="lstAllTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" Visibility="Collapsed"
-                         SelectionChanged="lstAllTracks_SelectionChanged"  DisplayMemberPath="Name" SelectedValuePath="OrderNo" ></ListBox>
+            <ListBox   Name="lstTracksInAlbum" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25" Visibility="Collapsed"
+                         SelectionChanged="lstAlbumTracks_SelectionChanged"  DisplayMemberPath="Name"  ></ListBox>
         </Grid>
        
     </Grid>

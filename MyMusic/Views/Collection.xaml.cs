@@ -43,7 +43,7 @@ namespace MyMusic.Views
             this.InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -88,7 +88,7 @@ namespace MyMusic.Views
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)
         {
             string[] shuffled = shuffleAll();
-            this.Frame.Navigate(typeof(NowPlaying), shuffled );
+            this.Frame.Navigate(typeof(NowPlaying), "shuffle" );
         }
 
         private string[] shuffleAll()

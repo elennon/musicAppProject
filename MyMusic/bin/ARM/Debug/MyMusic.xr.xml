@@ -3,8 +3,8 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Group" />
     <RootPropertyPathName Name="Title" />
-    <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="AlbumId" />
+    <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Artist" />
     <RootPropertyPathName Name="OrderNo" />
     <RootPropertyPathName Name="ImageUri" />
@@ -47,8 +47,8 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="Margin" />
       <RootProperty Name="TextWrapping" />
-      <RootProperty Name="Style" />
       <RootProperty Name="Tag" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Name" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -67,8 +67,8 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
-      <RootProperty Name="Source" />
       <RootProperty Name="Tag" />
+      <RootProperty Name="Source" />
       <RootProperty Name="Name" />
       <RootProperty Name="Stretch" />
       <RootProperty Name="HorizontalAlignment" />
@@ -79,9 +79,8 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Background" />
+      <RootProperty Name="ColumnDefinitions" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumn" />
@@ -149,10 +148,6 @@
       <RootProperty Name="ItemsSource" />
     </RootType>
     <RootType FullName="MyMusic.Views.Albums" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
-    <RootType FullName="MyMusic.Views.BlankPage1" />
     <RootType FullName="Windows.UI.Xaml.Controls.CommandBar">
       <RootProperty Name="IsSticky" />
       <RootProperty Name="PrimaryCommands" />
@@ -174,6 +169,9 @@
     </RootType>
     <RootType FullName="MyMusic.Views.Collection" />
     <RootType FullName="MyMusic.Views.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="MyMusic.Views.NowPlaying" />
     <RootType FullName="Windows.UI.Xaml.Controls.AppBarToggleButton">
       <RootProperty Name="Label" />

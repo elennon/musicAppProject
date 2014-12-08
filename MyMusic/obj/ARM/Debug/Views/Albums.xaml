@@ -18,6 +18,7 @@
                                                  
                             Width="62"
                             Height="62" 
+                            Tag="{Binding AlbumId}"
                             />
                 </StackPanel>
 
@@ -29,6 +30,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"  
                             FontSize="25"
+                            Tag="{Binding AlbumId}"
                             Text="{Binding Name}"                                    
                             />
                     </Border>
@@ -153,7 +155,7 @@
                             </StackPanel>
 
                             <StackPanel >
-                                <Border x:ConnectionId='3'                         Tag="{Binding Path=AlbumId}">
+                                <Border x:ConnectionId='3'                                    Tag="{Binding Path=AlbumId}">
                                     <TextBlock Margin="10,0,0,0"
                                           TextWrapping="Wrap"
                                           VerticalAlignment="Center"

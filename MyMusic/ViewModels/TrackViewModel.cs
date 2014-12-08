@@ -304,12 +304,12 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public void AddSkip(string artist, string track)
+        public void AddSkip(string trackId)//(string artist, string track)
         {
-            TrackViewModel trk = new TrackViewModel();
+            int ID = Convert.ToInt32(trackId);
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var tr = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                var tr = db.Table<Track>().Where(a => a.TrackId == ID).FirstOrDefault();
                 //tr.Plays--;
                 if (tr != null)
                 {
@@ -434,10 +434,8 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
-        public ObservableCollection<TrackViewModel> GetTracksByArtist(string artId)
+        public ObservableCollection<TrackViewModel> GetTracksByArtist(int id)
         {
-            int id = Convert.ToInt32(artId);
-
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {

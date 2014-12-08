@@ -34,7 +34,7 @@ namespace MyMusic.Views
         public ChooseRadio()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -54,8 +54,8 @@ namespace MyMusic.Views
             //string url = ((ListBox)sender).SelectedValue.ToString();
 
 
-            RadioStream rs = new RadioStream { RadioUrl = UriResult };     
-            this.Frame.Navigate(typeof(NowPlaying), rs);
+            //RadioStream rs = new RadioStream { RadioUrl = UriResult };     
+            //this.Frame.Navigate(typeof(NowPlaying), rs);
         }
 
         public async Task<string> ReadBytes(string File)

@@ -220,9 +220,6 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Albums.xbf">
       <PackagePath>Views\Albums.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\BlankPage1.xbf">
-      <PackagePath>Views\BlankPage1.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ShowAllTracks.xbf">
       <PackagePath>Views\ShowAllTracks.xbf</PackagePath>
     </AppxPackagedFile>

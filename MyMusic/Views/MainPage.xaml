@@ -55,6 +55,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Now Playing" Icon="Audio" Click="btnNowPlaying_Click"/>
                 <AppBarButton Label="Short Cut" Icon="Directions"  Click="ShortCutButton_Click"/>
+                <AppBarButton Label="tester" Icon="AddFriend"  Click="AppBarButton_Click"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Fill DataBase" Icon="Admin" Click="FillDbButton_Click"  />

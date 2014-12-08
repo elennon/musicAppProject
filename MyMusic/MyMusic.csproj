@@ -119,9 +119,6 @@
     <Compile Include="Views\Albums.xaml.cs">
       <DependentUpon>Albums.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BlankPage1.xaml.cs">
-      <DependentUpon>BlankPage1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ShowAllTracks.xaml.cs">
       <DependentUpon>ShowAllTracks.xaml</DependentUpon>
     </Compile>
@@ -221,10 +218,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\Albums.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\BlankPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

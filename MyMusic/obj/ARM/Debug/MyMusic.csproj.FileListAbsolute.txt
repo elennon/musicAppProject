@@ -103,11 +103,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\Albums.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\Albums.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Data\Stations.xml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\BlankPage1.g.i.cs
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\BlankPage1.g.cs
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\BlankPage1.xaml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\Views\BlankPage1.xbf
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\BlankPage1.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Microsoft.Xaml.Interactions.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Microsoft.Xaml.Interactivity.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\QKit.dll

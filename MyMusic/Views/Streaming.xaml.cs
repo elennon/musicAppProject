@@ -105,7 +105,8 @@ namespace MyMusic.Views
             {
                 // Get the SyndicationItem that was tapped.
                 YoutubeVideo video = (YoutubeVideo)listBox.SelectedItem;
-                this.Frame.Navigate(typeof(YouTube), video.Id);
+                string id = video.Id;
+                this.Frame.Navigate(typeof(YouTube), id);
             }
         }
 

@@ -12,9 +12,10 @@ namespace MyMusic
     class Constants
     {
         public const string PlayRadio = "playradio";
-        public const string TrackPlayOrder = "playOrder";
+        public const string TrackOrderNo = "trackorderno";
         public const string CurrentTrack = "trackname";
         public const string CurrentTrackImg = "currenttrackimg";
+
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
         public const string BackgroundTaskRunning = "BackgroundTaskRunning";
         public const string BackgroundTaskCancelled = "BackgroundTaskCancelled";

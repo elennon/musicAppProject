@@ -55,10 +55,11 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:ConnectionId='2' Label="Now Playing" Icon="Audio"                            />
                 <AppBarButton x:ConnectionId='3' Label="Short Cut" Icon="Directions"                              />
+                <AppBarButton x:ConnectionId='4' Label="tester" Icon="AddFriend"                            />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:ConnectionId='4' Label="Fill DataBase" Icon="Admin"                             />
-                <AppBarButton x:ConnectionId='5' Label="Update DataBase" Icon="Add"                            />
+                <AppBarButton x:ConnectionId='5' Label="Fill DataBase" Icon="Admin"                             />
+                <AppBarButton x:ConnectionId='6' Label="Update DataBase" Icon="Add"                            />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

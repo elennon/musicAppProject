@@ -10,6 +10,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using System.Collections.Generic;
 using MyMusic;
+using Windows.UI.Popups;
 
 namespace SampleBackgroundAudioTask
 {
@@ -50,7 +51,7 @@ namespace SampleBackgroundAudioTask
 
         #endregion
 
-        #region IBackgroundTask 
+        #region main task methods 
         
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -106,15 +107,13 @@ namespace SampleBackgroundAudioTask
             {
                 //save state
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.Position, BackgroundMediaPlayer.Current.Position.ToString());
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0]);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskCancelled);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
-                //unsubscribe event handlers
                 systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;                
                 Playlist.TrackChanged -= playList_TrackChanged;
-                
-                //clear objects task cancellation can happen uninterrupted
+  
                 playlistManager.ClearPlaylist();
                 playlistManager = null;
                 BackgroundMediaPlayer.Shutdown(); // shutdown media pipeline
@@ -173,7 +172,7 @@ namespace SampleBackgroundAudioTask
        
         #endregion
 
-        #region Playlist management 
+        #region Playlists 
         
         private void StartPlayback(string[] trks)
         {
@@ -201,18 +200,23 @@ namespace SampleBackgroundAudioTask
 
         void playList_TrackChanged(MyPlaylist sender, object args)
         {
+            Debug.WriteLine("track changed ");
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
-            //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, pic);
+
+            string trkId = trksToPlay[sender.CurrentTrackNumber].Split(',')[0]; // pull out the track id from comma seperated string
+
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, trkId ); // save no. for app to get image
             string currentTrack = "";
             if (Skipped)
             {
                 currentTrack = trksToPlay[sender.CurrentTrackNumber] + ",skipped"; // skipped true so add skipped so the foreground knows
             }
             else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
-
+            Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
+                Debug.WriteLine("foregroundApp is active still ");
                 ValueSet message = new ValueSet();
                 message.Add(Constants.Trackchanged, currentTrack);
                 BackgroundMediaPlayer.SendMessageToForeground(message);
@@ -254,39 +258,33 @@ namespace SampleBackgroundAudioTask
                 switch (key.ToLower())
                 {
                     case Constants.AppSuspended:
-                        Debug.WriteLine("App suspending"); // App is suspended, you can save your task state at this point
+                        Debug.WriteLine("App suspending"); // App is suspended
                         foregroundAppState = ForegroundAppStatus.Suspended;
-                        ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
+                        //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
+                        //ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, Playlist.CurrentTrackNumber);
                         break;
                     case Constants.AppResumed:
-                        Debug.WriteLine("App resuming"); // App is resumed, now subscribe to message channel
+                        Debug.WriteLine("App resuming");        // App is back on
                         foregroundAppState = ForegroundAppStatus.Active;
                         break;
-                    case Constants.StartPlayback: //Foreground App process has signalled that it is ready for playback
+                    case Constants.StartPlayback:            //start playlist
                         Debug.WriteLine("Starting Playback");
                         StartPlayback(trksToPlay);
                         break;
-                    case Constants.SkipNext: // User has chosen to skip track from app context.
+                    case Constants.SkipNext:            // User has pressed next
                         Debug.WriteLine("Skipping to next");
                         SkipToNext();
                         break;
-                    case Constants.SkipPrevious: // User has chosen to skip track from app context.
+                    case Constants.SkipPrevious:         // User has pressed back
                         Debug.WriteLine("Skipping to previous");
                         SkipToPrevious();
                         break;
-                    case Constants.PlayRadio:
+                    case Constants.PlayRadio:       // radio selected
                         playRadio(trksToPlay[0]);
-                        break;
-                    case Constants.CurrentTrackImg:
-                        SaveCurrentImage(currentImge);
-                        break;
+                        break;                   
                 }
             }
         }
        
-        private void SaveCurrentImage(string picc)
-        {
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrackImg, picc);
-        }
     }
 }

@@ -26,14 +26,14 @@ namespace BackgroundAudioPlayerCS
             Debug.WriteLine(key);
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                Debug.WriteLine("null returned");
+                Debug.WriteLine("BK  null returned");
                 return null;
             }
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[key];
                 ApplicationData.Current.LocalSettings.Values.Remove(key);
-                Debug.WriteLine("value found " + value.ToString());
+                Debug.WriteLine("BK  value found " + value.ToString());
                 return value;
             }
         }

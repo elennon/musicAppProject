@@ -21,14 +21,14 @@ namespace MyMusic
             Debug.WriteLine(key);
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                Debug.WriteLine("null returned");
+                Debug.WriteLine("FG  null returned");
                 return null;
             }
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[key];
                 ApplicationData.Current.LocalSettings.Values.Remove(key);
-                Debug.WriteLine("value found " + value.ToString());
+                Debug.WriteLine("FG  value found " + value.ToString());
                 return value;
             }
         }
@@ -38,7 +38,7 @@ namespace MyMusic
         /// </summary>
         public static void SaveSettingsValue(string key, object value)
         {
-            Debug.WriteLine(key + ":" + value.ToString());
+            Debug.WriteLine("FG " + key + ":" + value.ToString());
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
                 ApplicationData.Current.LocalSettings.Values.Add(key, value);

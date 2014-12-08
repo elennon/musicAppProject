@@ -36,7 +36,7 @@ namespace MyMusic.Views
         public RadioStreams()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -51,7 +51,7 @@ namespace MyMusic.Views
 
         private void lstGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var gid = ((ListBox)sender).SelectedValue;
+            string gid = ((ListBox)sender).SelectedValue.ToString();
             this.Frame.Navigate(typeof(ChooseRadio), gid);
         }
 

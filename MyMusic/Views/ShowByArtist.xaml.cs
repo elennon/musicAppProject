@@ -37,15 +37,14 @@ namespace MyMusic.Views
         public ShowByArtist()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
             //lstArtistTracks.SelectedIndex = -1;
             //lstArtistTracks.DataContext = artView.GetArtists();
 
@@ -170,23 +169,10 @@ namespace MyMusic.Views
             //semanticZoom.IsZoomedInViewActive = false;
         }
 
-        private void lstViewDetail_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            ListView lstView = (ListView)sender;
-            string hh = lstView.SelectedValue.ToString();
-            // this.Frame.Navigate(typeof(NowPlaying), GetListToPlay(Convert.ToInt32(hh)));
-        }
-
-        private void playerListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            //PlayerDetails.DataContext = e.ClickedItem as Player;
-        }
-
         private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Image id = (Image)sender;
-            string oo = id.Tag.ToString();
-            string[] playThese = sortTracks(id.Tag.ToString());
+            string playThese = "artistTracks," +  id.Tag.ToString();
             this.Frame.Navigate(typeof(NowPlaying), playThese);
         }
 
@@ -196,33 +182,21 @@ namespace MyMusic.Views
             string id = ((TextBlock)br.Child).Tag.ToString();           
             this.Frame.Navigate(typeof(Albums), id);
         }
-
-        private string[] sortTracks(string id)
-        {
-            ObservableCollection<TrackViewModel> tracks = trkView.GetTracksByArtist(id);
-            string[] trks = new string[tracks.Count];
-            for (int i = 0; i < tracks.Count; i++)
-            {
-                trks[i] = tracks[i].TrackId.ToString() + "," + tracks[i].Artist + "," + tracks[i].Name + ",notshuffle";
-            }
-            return trks;
-        }
-
-
+       
         #region NavigationHelper
-
 
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
         }
-
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+       
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
         }
 
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.navigationHelper.OnNavigatedTo(e);            
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
