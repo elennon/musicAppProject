@@ -27,7 +27,7 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="SampleBackgroundAudioTask.MyBackgroundAudioTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackGroundMusicTask">
           <BackgroundTasks>
             <Task Type="audio" />
           </BackgroundTasks>

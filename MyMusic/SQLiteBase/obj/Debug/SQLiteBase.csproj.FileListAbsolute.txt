@@ -1,0 +1,16 @@
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\bin\Debug\SQLiteBase.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\bin\Debug\SQLiteBase.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\bin\Debug\SQLiteBase.pri
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\SQLiteBase.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\SQLiteBase.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\priconfig.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\priconfig.xml.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\layout.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\layout.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\resources.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\resources.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\pri.resfiles
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\pri.resfiles.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\qualifiers.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\qualifiers.txt.intermediate
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\SQLiteBase\obj\Debug\MultipleQualifiersPerDimensionFound.txt

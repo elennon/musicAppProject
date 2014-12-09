@@ -1,4 +1,10 @@
-using SampleBackgroundAudio.MyPlaylistManager.ShoutCast;
+
+
+using MyPlaylistManager.Models;
+using MyPlaylistManager.ShoutCast;
+using SQLiteBase;
+//using SQLiteBase;
+//using SQLiteWinRT;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,10 +22,10 @@ using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace SampleBackgroundAudio.MyPlaylistManager
+namespace MyPlaylistManager
 {
    
-    public sealed class MyPlaylistManager
+    public sealed class MyPlaylistMgr
     {
         #region Private members
         private static MyPlaylist instance; 
@@ -49,7 +55,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
     {
         #region Private members
 
-        private RadioStream rdStream;
+        private MyPlaylistManager.ShoutCast.RadioStream rdStream;
         private IRandomAccessStream mssStream;
         private Windows.Media.Core.MediaStreamSource MSS = null;
 
@@ -66,6 +72,7 @@ namespace SampleBackgroundAudio.MyPlaylistManager
         int CurrentTrackId = -1;
         private MediaPlayer mediaPlayer;
         private TimeSpan startPosition = TimeSpan.FromSeconds(0);
+        private static string DBPath = string.Empty;
 
         internal MyPlaylist()
         {                      
@@ -73,6 +80,28 @@ namespace SampleBackgroundAudio.MyPlaylistManager
             mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
+            DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");         
+        }
+        private static readonly string _dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.sqlite");
+
+        
+        void lookHere()
+        {
+            string dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+            string nme = "";
+            using (var db = new SQLiteConnection(dbPath))
+            {
+                db.RunInTransaction(() =>
+                {
+                    var tr = db.Table<Track>().FirstOrDefault();
+                    nme = tr.Name;
+                });
+            }
+            //using (var db = new SQLiteBase.SQLiteConnection(DBPath))
+            //{
+                
+            //}
+           
         }
 
         private IAsyncOperation<List<StorageFile>> getFTracks(string[] trks)
@@ -178,7 +207,8 @@ namespace SampleBackgroundAudio.MyPlaylistManager
         #region Playlist command handlers
         
         private void StartTrackAt(int id)
-        {          
+        {
+            lookHere();
             CurrentTrackId = id;            
             mediaPlayer.AutoPlay = false;
             mediaPlayer.SetFileSource(tracks[id]);
@@ -197,8 +227,8 @@ namespace SampleBackgroundAudio.MyPlaylistManager
                     sampleSize = sampleSize,
                     Uri = rdoUrl
                 };
-                rdStream = new RadioStream(_ri);
-                
+                rdStream = new MyPlaylistManager.ShoutCast.RadioStream(_ri);
+             
                 rdStream.setUpped += async (obj, e) =>
                 {
                     ri = (radioItems)obj;
@@ -213,11 +243,8 @@ namespace SampleBackgroundAudio.MyPlaylistManager
 
         public void InitializeMediaStreamSource()
         {
-            // initialize Parsing Variables
             byteOffset = 0;
             timeOffset = new TimeSpan(0);
-
-            // get the encoding properties of the input MP3 file
 
             List<string> encodingPropertiesToRetrieve = new List<string>();
 
@@ -258,15 +285,9 @@ namespace SampleBackgroundAudio.MyPlaylistManager
                 mssStream = rdStream.bufferStream;
                 inputStream = mssStream.GetInputStreamAt(byteOffset);
 
-                //inputStream = (bufferStream.AsRandomAccessStream()).GetInputStreamAt(byteOffset);
-                // create the MediaStreamSample and assign to the request object. 
-                // You could also create the MediaStreamSample using createFromBuffer(...)
-
                 MediaStreamSample sample = await MediaStreamSample.CreateFromStreamAsync(inputStream, ri.sampleSize, timeOffset);
                 sample.Duration = sampleDuration;
                 sample.KeyFrame = true;
-
-                // increment the time and byte offset
 
                 byteOffset += ri.sampleSize;    // sampleSize;
                 timeOffset = timeOffset.Add(sampleDuration);

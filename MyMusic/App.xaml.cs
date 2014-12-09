@@ -27,9 +27,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MyMusic
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
         public static string DBPath = string.Empty;
@@ -113,8 +110,8 @@ namespace MyMusic
                 }
 
                 // Get a reference to the SQLite database
-                DBPath = Path.Combine(
-                    Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+                DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+                    
                 // Initialize the database if necessary
                 using (var db = new SQLite.SQLiteConnection(DBPath))
                 {

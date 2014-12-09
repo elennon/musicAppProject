@@ -34,7 +34,7 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="SampleBackgroundAudioTask.MyBackgroundAudioTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackGroundMusicTask">
           <BackgroundTasks>
             <Task Type="audio" />
           </BackgroundTasks>
@@ -53,12 +53,13 @@
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
         <Path>CLRHost.dll</Path>
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudioTask.MyBackgroundAudioTask" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.MyPlaylistManager" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="SampleBackgroundAudio.MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="BackgroundTask.BackGroundMusicTask" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.Models.Track" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
       </InProcessServer>
     </Extension>
   </Extensions>

@@ -304,12 +304,12 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public void AddSkip(string trackId)//(string artist, string track)
+        public void AddSkip(int trackId)//(string artist, string track)
         {
-            int ID = Convert.ToInt32(trackId);
+            //int ID = Convert.ToInt32(trackId);
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var tr = db.Table<Track>().Where(a => a.TrackId == ID).FirstOrDefault();
+                var tr = db.Table<Track>().Where(a => a.TrackId == trackId).FirstOrDefault();
                 //tr.Plays--;
                 if (tr != null)
                 {
@@ -361,20 +361,23 @@ namespace MyMusic.ViewModels
             return _tracks.Take(30);
         }
 
-        public TrackViewModel GetThisTrack(string id)
+        public TrackViewModel GetThisTrack(int id)
         {
             TrackViewModel trk = new TrackViewModel();
-            int ID = Convert.ToInt32(id);
+            //int ID = Convert.ToInt32(id);
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var tr = db.Table<Track>().Where(a => a.TrackId == ID).FirstOrDefault();
-                trk = new TrackViewModel()
+                var tr = db.Table<Track>().Where(a => a.TrackId == id).FirstOrDefault();
+                if (tr != null)
                 {
-                    TrackId = tr.TrackId,
-                    Name = tr.Name,
-                    Artist = tr.Artist,
-                    ImageUri = tr.ImageUri
-                };
+                    trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        ImageUri = tr.ImageUri
+                    };
+                }
             }
             return trk;
         }

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
+namespace MyPlaylistManager.ShoutCast
 {
     public sealed class WaveFormatEx
     {

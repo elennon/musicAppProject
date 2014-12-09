@@ -16,7 +16,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.Web.Http;
 
-namespace SampleBackgroundAudio.MyPlaylistManager.ShoutCast
+namespace MyPlaylistManager.ShoutCast
 {
     public sealed class radioItems
     {

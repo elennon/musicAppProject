@@ -52,7 +52,8 @@ namespace MyMusic.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            lstOptions.SelectedIndex = -1;            
+            lstOptions.SelectedIndex = -1; 
+            
         }
 
         private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

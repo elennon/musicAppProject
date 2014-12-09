@@ -49,7 +49,7 @@ namespace MyMusic.Views
         private string[] orders;
         private bool isPlayRadio = false;
         private AutoResetEvent SererInitialized;
-        private bool backGroundIsRunning = false;
+        //private bool backGroundIsRunning = false;
 
         private string CurrentTrack
         {
@@ -112,6 +112,12 @@ namespace MyMusic.Views
                 messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
                 BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
 
+                //while (ApplicationData.Current.LocalSettings.Values[Constants.CurrentTrack] == null) //holds things up if not enoughh buffer
+                //{
+                //    await Task.Delay(TimeSpan.FromMilliseconds(500));
+                //    Debug.WriteLine("waiting on BK to reset tracks");
+                //}
+
                 string pic = "";
                 object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
                 if (value1 == null) { tbkSongName.Text = "current Track null"; }
@@ -124,7 +130,7 @@ namespace MyMusic.Views
                 if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
                 else
                 {
-                    string trackId = (string)value2;
+                    int trackId = (int)value2;
                     pic = (trkView.GetThisTrack(trackId)).ImageUri;
                     if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
                     imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
@@ -134,74 +140,7 @@ namespace MyMusic.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            //MessageDialog msgbox = new MessageDialog("this is nav ");
-            //await msgbox.ShowAsync();
             Debug.WriteLine("load state");
-            
-            var arg = e.NavigationParameter;
-            if (arg != null)// && ((App)Application.Current).isResumingFromTermination == false)
-            {
-                if (arg.ToString().Contains("shuffle")) { orders = shuffleAll(); }
-
-                else if (arg.ToString().Contains("allTracks"))
-                {
-                    int trackNumber = Convert.ToInt32((arg.ToString().Split(','))[1]);
-                    orders = GetListToPlay(trackNumber);
-                }
-                else if (arg.ToString().Contains("albumTracks"))
-                {
-                    int albumId = Convert.ToInt32((arg.ToString().Split(','))[1]);
-                    orders = GetSongsAllInAlbum(albumId);
-                }
-                else if (arg.ToString().Contains("albTracksFromThisOn"))
-                {
-                    int trackIndex = Convert.ToInt32((arg.ToString().Split(','))[1]);
-                    int albumId = Convert.ToInt32((arg.ToString().Split(','))[2]);
-                    orders = GetSongsInAlbumFromThis(trackIndex, albumId);
-                }
-                else if (arg.ToString().Contains("artistTracks"))
-                {
-                    int artistId = Convert.ToInt32((arg.ToString().Split(','))[1]);
-                    orders = GetSongsByThisArtist(artistId);
-                }
-                else if (arg.ToString().Contains("radio"))
-                {
-                    orders = new string[1];
-                    orders[0] = (arg.ToString().Split(','))[1];
-                    isPlayRadio = true;
-                }
-                //if (((App)Application.Current).IsMyBackgroundTaskRunning)
-                //{
-                    if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
-                    {
-                        StartBackgroundAudioTask();
-                    }
-                //}
-                else
-                {
-                    StartBackgroundAudioTask();
-                }
-            }
-            else //if (backGroundIsRunning) 
-            {
-                string pic = "";
-                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                if (value1 == null) { tbkSongName.Text = "current Track null"; }
-                if (value1 != null)
-                {
-                    tbkSongName.Text = (string)value1 + "  not restore";
-                }
-
-                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackOrderNo);
-                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
-                else
-                {
-                    string trackId = (string)value2;
-                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
-                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
-                    imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
-                }
-            }                       
         }
        
         #region playlist managing
@@ -280,13 +219,14 @@ namespace MyMusic.Views
         async void BackgroundMediaPlayer_MessageReceivedFromBackground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
             Debug.WriteLine("message recieved loud and clear");
-            string artist = "", title = "", trackId = "";
+            string artist = "", title = "";
+            int trackId = 0;
             string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');     // current track will be a comma seperated string with name, artist...
             if (currentTrack[0] != string.Empty)
             {
                 if (currentTrack.Length > 1)
                 {
-                    trackId = currentTrack[0];
+                    trackId = Convert.ToInt32(currentTrack[0]);
                     artist = currentTrack[1];
                     title = currentTrack[2];
                     if (currentTrack[3].Contains("shuffle")) //  if its a track from random shuffle
@@ -432,8 +372,8 @@ namespace MyMusic.Views
             AddMediaPlayerEventHandlers();
             var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                bool result = SererInitialized.WaitOne(2000);
-                //bool result = true;
+                //bool result = SererInitialized.WaitOne(Timeout.Infinite -1);
+                bool result = true;
                 if (result == true)
                 {
                     if (isPlayRadio == true)
@@ -481,7 +421,75 @@ namespace MyMusic.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+           
+            //MessageDialog msgbox = new MessageDialog("this is nav ");
+            //await msgbox.ShowAsync();
             Debug.WriteLine("nav to");
+
+            var arg = e.Parameter;
+            if (arg != null)// && ((App)Application.Current).isResumingFromTermination == false)
+            {
+                if (arg.ToString().Contains("shuffle")) { orders = shuffleAll(); }
+
+                else if (arg.ToString().Contains("allTracks"))
+                {
+                    int trackNumber = Convert.ToInt32((arg.ToString().Split(','))[1]);
+                    orders = GetListToPlay(trackNumber);
+                }
+                else if (arg.ToString().Contains("albumTracks"))
+                {
+                    int albumId = Convert.ToInt32((arg.ToString().Split(','))[1]);
+                    orders = GetSongsAllInAlbum(albumId);
+                }
+                else if (arg.ToString().Contains("albTracksFromThisOn"))
+                {
+                    int trackIndex = Convert.ToInt32((arg.ToString().Split(','))[1]);
+                    int albumId = Convert.ToInt32((arg.ToString().Split(','))[2]);
+                    orders = GetSongsInAlbumFromThis(trackIndex, albumId);
+                }
+                else if (arg.ToString().Contains("artistTracks"))
+                {
+                    int artistId = Convert.ToInt32((arg.ToString().Split(','))[1]);
+                    orders = GetSongsByThisArtist(artistId);
+                }
+                else if (arg.ToString().Contains("radio"))
+                {
+                    orders = new string[1];
+                    orders[0] = (arg.ToString().Split(','))[1];
+                    isPlayRadio = true;
+                }
+                //if (((App)Application.Current).IsMyBackgroundTaskRunning)
+                //{
+                if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+                {
+                    StartBackgroundAudioTask();
+                }
+                //}
+                else
+                {
+                    StartBackgroundAudioTask();
+                }
+            }
+            else //if (backGroundIsRunning) 
+            {
+                string pic = "";
+                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                if (value1 == null) { tbkSongName.Text = "current Track null"; }
+                if (value1 != null)
+                {
+                    tbkSongName.Text = (string)value1 + "  not restore";
+                }
+
+                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackOrderNo);
+                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                else
+                {
+                    int trackId = (int)value2;
+                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                    imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
+                }
+            }                
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
