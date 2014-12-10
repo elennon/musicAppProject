@@ -113,3 +113,4 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\SQLiteBase.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\SQLiteBase.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Debug\SQLiteBase.pri.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Data\debugFile.txt

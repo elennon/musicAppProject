@@ -11,6 +11,7 @@ using Windows.ApplicationModel.Background;
 using Windows.Foundation.Collections;
 using Windows.Media;
 using Windows.Media.Playback;
+using Windows.Storage;
 
 namespace BackgroundTask
 {
@@ -87,26 +88,28 @@ namespace BackgroundTask
             BackgroundTaskStarted.Set();
             backgroundtaskrunning = true;
 
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskRunning);
-            deferral = taskInstance.GetDeferral();           
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, "BKRunning");
+            deferral = taskInstance.GetDeferral();
+            Debug.WriteLine("BK-- run completed");
         }
       
         void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
         {
             Debug.WriteLine("MyBackgroundAudioTask " + sender.TaskId + " Completed...");
+            //Log("BK-- in task completed");
             deferral.Complete();
         }
 
         private void OnCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
-            // You get some time here to save your state before process and resources are reclaimed
             Debug.WriteLine("BackgroundMusicTask " + sender.Task.TaskId + " Cancel Requested...");
+            //Log("BK-- in task cancelled");
             try
             {
                 //save state
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0]));
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, Constants.BackgroundTaskCancelled);
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0])); //[0] is the track id
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, "BKCancelled");
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
                 systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;                
@@ -175,15 +178,8 @@ namespace BackgroundTask
         private void StartPlayback(string[] trks)
         {
             try
-            {
-                if (Playlist.CurrentTrackName.Contains("http"))
-                {
-                    Playlist.PlayAllTracks(trks);
-                }
-                else
-                {
-                    Playlist.PlayAllTracks(trks); //start playback                      
-                }
+            {              
+                Playlist.PlayAllTracks(trks); //start playing                                    
             }
             catch (Exception ex)
             {
@@ -202,8 +198,8 @@ namespace BackgroundTask
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
 
-            int trkId = Convert.ToInt32(trksToPlay[sender.CurrentTrackNumber].Split(',')[0]); // pull out the track id from comma seperated string
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, trkId ); // save no. for app to get image
+            int trkId = Convert.ToInt32(trksToPlay[sender.CurrentTrackNumber].Split(',')[0]);   // pull out the track id from comma seperated string
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
 
             string currentTrack = "";
             if (Skipped)
@@ -211,10 +207,13 @@ namespace BackgroundTask
                 currentTrack = trksToPlay[sender.CurrentTrackNumber] + ",skipped"; // skipped true so add skipped so the foreground knows
             }
             else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
+
             Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);
+            
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
                 Debug.WriteLine("foregroundApp is active still ");
+                //Log("BK-- message sent");
                 ValueSet message = new ValueSet();
                 message.Add(Constants.Trackchanged, currentTrack);
                 BackgroundMediaPlayer.SendMessageToForeground(message);
@@ -258,15 +257,15 @@ namespace BackgroundTask
                     case Constants.AppSuspended:
                         Debug.WriteLine("bk App suspending"); // App is suspended
                         foregroundAppState = ForegroundAppStatus.Suspended;
-                        //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
-                        //ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, Playlist.CurrentTrackNumber);
+                        
                         break;
                     case Constants.AppResumed:
                         Debug.WriteLine("bk App resuming");        // App is back on
                         foregroundAppState = ForegroundAppStatus.Active;
                         ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
                         int trkId = Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0]); // pull out the track id from comma seperated string
-                        ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackOrderNo, trkId ); // save no. for app to get image
+                        ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId ); // save no. for app to get image
+                        
                         break;
                     case Constants.StartPlayback:            //start playlist
                         Debug.WriteLine("Starting Playback");
@@ -286,6 +285,7 @@ namespace BackgroundTask
                 }
             }
         }
-       
+
+        
     }
 }

@@ -207,6 +207,9 @@
     <Content Include="Assets\WideLogo.scale-140.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\_play3.png" />
+    <Content Include="Data\debugFile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Stations.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

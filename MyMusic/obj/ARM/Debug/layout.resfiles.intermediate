@@ -56,4 +56,5 @@ Views\ShowByArtist.xbf
 Views\Streaming.xbf
 Views\TopPlayed.xbf
 Views\YouTube.xbf
+Data\debugFile.txt
 Data\Stations.xml

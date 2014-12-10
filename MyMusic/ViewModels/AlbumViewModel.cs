@@ -101,7 +101,7 @@ namespace MyMusic.ViewModels
             _albums = new ObservableCollection<AlbumViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var albs = db.Table<Album>();                
+                var albs = db.Table<Album>().ToList();                
                 foreach (var item in albs)
                 {
                     AlbumViewModel al = new AlbumViewModel

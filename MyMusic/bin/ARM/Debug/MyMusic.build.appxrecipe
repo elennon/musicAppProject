@@ -214,6 +214,9 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\vintageBikes.jpg">
       <PackagePath>Assets\vintageBikes.jpg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Data\debugFile.txt">
+      <PackagePath>Data\debugFile.txt</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Data\Stations.xml">
       <PackagePath>Data\Stations.xml</PackagePath>
     </AppxPackagedFile>

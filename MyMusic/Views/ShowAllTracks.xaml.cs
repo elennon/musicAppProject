@@ -105,7 +105,7 @@ namespace MyMusic.Views
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
                 
             nameTextBlock.Text = track.Name;    // adds song name 
-            nameTextBlock.Tag = track.OrderNo;
+            nameTextBlock.Tag = track.TrackId;
             nameTextBlock.Opacity = 1;
 
             args.RegisterUpdateCallback(ShowArtist);  // show artist next

@@ -13,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -44,22 +45,6 @@ namespace MyMusic
             }
         }
     
-        
-        private string CurrentTrackNo
-        {
-            get
-            {
-                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackOrderNo);
-                if (value != null)
-                {
-                    return value.ToString();
-                }
-                else
-                    return String.Empty;
-            }
-            set { }
-        }
-
         public App()
         {
             this.InitializeComponent();
@@ -74,11 +59,11 @@ namespace MyMusic
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            
             Frame rootFrame = Window.Current.Content as Frame;
            
             if (rootFrame == null)
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);     // set to active to let background task know to send messages
@@ -109,13 +94,10 @@ namespace MyMusic
                     }                        
                 }
 
-                // Get a reference to the SQLite database
                 DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
-                    
-                // Initialize the database if necessary
+                              
                 using (var db = new SQLite.SQLiteConnection(DBPath))
                 {
-                    // Create the tables if they don't exist
                     db.CreateTable<Track>();
                     db.CreateTable<Album>();
                     db.CreateTable<Artist>();
@@ -151,7 +133,7 @@ namespace MyMusic
             // Ensure the current window is active
             Window.Current.Activate();
         }
-
+        
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;

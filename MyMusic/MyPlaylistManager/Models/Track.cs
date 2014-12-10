@@ -25,6 +25,7 @@ namespace MyPlaylistManager.Models
         public int RandomPlays { get; set; }
         public int OrderNo { get; set; }
         public string ImageUri { get; set; }
+        public string FileName { get; set; }
 
         //[ForeignKey(typeof(Track))]     // Specify the foreign key
         //public int ArtistId { get; set; }

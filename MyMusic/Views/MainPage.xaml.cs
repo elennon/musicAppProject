@@ -10,10 +10,12 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Media.Playback;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -47,13 +49,19 @@ namespace MyMusic.Views
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            lstOptions.SelectedIndex = -1; 
-            
+            lstOptions.SelectedIndex = -1;
+            //await trkView.SyncDB();
+            Task.Run(async delegate()
+            {
+                await trkView.SyncDB();
+            });
         }
 
         private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -99,7 +107,7 @@ namespace MyMusic.Views
 
         private void ShortCutButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(typeof(BasicPage1));
+            var tester = trkView.GetThisArtist("132");
         }
 
         #region NavigationHelper
@@ -135,9 +143,10 @@ namespace MyMusic.Views
         }
         #endregion
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private void LogButton_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("cleaning windows");
+            //readLog();
         }
+
     }
 }

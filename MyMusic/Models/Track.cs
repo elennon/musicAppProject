@@ -24,8 +24,9 @@ namespace MyMusic.Models
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
-        public int OrderNo { get; set; }
+        //public int OrderNo { get; set; }
         public string ImageUri { get; set; }
+        public string FileName { get; set; }
 
         //[ForeignKey(typeof(Track))]     // Specify the foreign key
         //public int ArtistId { get; set; }

@@ -24,9 +24,9 @@
                 <StackPanel >
                     <Border Tapped="Border_Tapped"  >
                         <TextBlock  x:Name="txtName"
-                                Margin="10,0,0,0"
+                                Margin="10,15,0,0"
                                 TextWrapping="Wrap"
-                                VerticalAlignment="Center"
+                                VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left"  
                                 FontSize="25"
                                 Text="{Binding Name}"                                     

@@ -68,7 +68,8 @@ namespace MyPlaylistManager
         private uint samplePerSec = 0, channels = 0, agvBytes = 0, sampleSize = 0;
         private radioItems ri = new radioItems();
 
-        private List<StorageFile> tracks = new List<StorageFile>();        
+        private List<StorageFile> tracks = new List<StorageFile>();
+        private string[] playTracks;
         int CurrentTrackId = -1;
         private MediaPlayer mediaPlayer;
         private TimeSpan startPosition = TimeSpan.FromSeconds(0);
@@ -96,12 +97,7 @@ namespace MyPlaylistManager
                     var tr = db.Table<Track>().FirstOrDefault();
                     nme = tr.Name;
                 });
-            }
-            //using (var db = new SQLiteBase.SQLiteConnection(DBPath))
-            //{
-                
-            //}
-           
+            }       
         }
 
         private IAsyncOperation<List<StorageFile>> getFTracks(string[] trks)
@@ -116,11 +112,11 @@ namespace MyPlaylistManager
             {               
                 StorageFolder folder = KnownFolders.MusicLibrary;
                 IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
-                // List<int> trks = new List<int>();
-
+                
                 for (int i = 0; i < str.Length; i++)
                 {
                     int num = Convert.ToInt32((str[i].Split(','))[0])-1;    // pulls out the track number to use as an index # for music library
+                  
                     sf.Add(lf[num]);
                 }
             }
@@ -143,16 +139,34 @@ namespace MyPlaylistManager
                 {
                     return String.Empty;
                 }
-                if (CurrentTrackId < tracks.Count)
+                if (CurrentTrackId < playTracks.Length)
                 {
-                    string fullUrl = tracks[CurrentTrackId].DisplayName;
-                    
+                    string fullUrl = playTracks[CurrentTrackId].Split(',')[2];
+
                     return fullUrl;
                 }
                 else
                     throw new ArgumentOutOfRangeException("Track Id is higher than total number of tracks");
             }
         }
+        //public string CurrentSongId
+        //{
+        //    get
+        //    {
+        //        if (CurrentTrackId == -1)
+        //        {
+        //            return String.Empty;
+        //        }
+        //        if (CurrentTrackId < playTracks.Length)
+        //        {
+        //            string trackId = playTracks[CurrentTrackId].Split(',')[0];
+                    
+        //            return trackId;
+        //        }
+        //        else
+        //            throw new ArgumentOutOfRangeException("Track Id is higher than total number of tracks");
+        //    }
+        //}
 
         public int CurrentTrackNumber
         {
@@ -162,7 +176,7 @@ namespace MyPlaylistManager
                 {
                     return 0;
                 }
-                if (CurrentTrackId < tracks.Count)
+                if (CurrentTrackId < playTracks.Length)
                 {
                     return CurrentTrackId;
                 }
@@ -185,7 +199,7 @@ namespace MyPlaylistManager
         
         private void MediaPlayer_MediaEnded(MediaPlayer sender, object args)
         {
-            if (CurrentTrackId >= tracks.Count -1)
+            if (CurrentTrackId >= playTracks.Length -1)
             {
                 //tracks.Clear();
                 CurrentTrackId = -1;
@@ -206,12 +220,16 @@ namespace MyPlaylistManager
 
         #region Playlist command handlers
         
-        private void StartTrackAt(int id)
+        private async void StartTrackAt(int id)
         {
-            lookHere();
+            //lookHere();
+            StorageFolder folder = KnownFolders.MusicLibrary;
+            string jj = playTracks[id].Split(',')[1];
+            StorageFile lf = await folder.GetFileAsync(jj);   // pass filename to get file
             CurrentTrackId = id;            
             mediaPlayer.AutoPlay = false;
-            mediaPlayer.SetFileSource(tracks[id]);
+            //mediaPlayer.SetFileSource(tracks[id]);
+            mediaPlayer.SetFileSource(lf);
         }
 
         public void PlayRadio(string rdoUrl)
@@ -353,15 +371,16 @@ namespace MyPlaylistManager
 
         #endregion
                
-        public async void PlayAllTracks([ReadOnlyArray()]string[] trks)
+        public void PlayAllTracks([ReadOnlyArray()]string[] trks)
         {            
-            tracks = await getFTracks(trks);
+            //tracks = await getFTracks(trks);
+            playTracks = trks;
             StartTrackAt(0);
         }
 
         public void SkipToNext()
         {
-            if(CurrentTrackId < tracks.Count -1)    
+            if (CurrentTrackId < playTracks.Length - 1)    
             {
                 StartTrackAt((CurrentTrackId + 1));
             }   
