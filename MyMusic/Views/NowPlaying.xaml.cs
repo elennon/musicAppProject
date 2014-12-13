@@ -132,8 +132,7 @@ namespace MyMusic.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            //MessageDialog msgbox = new MessageDialog("this is nav ");
-            //await msgbox.ShowAsync();
+            
             Debug.WriteLine("nav to");
         
             var arg = e.Parameter;
@@ -232,13 +231,12 @@ namespace MyMusic.Views
 
         private string[] GetListToPlay(int id) // orders all songs that come after selected song (+ selected) into a string[]
         {
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
             var trks = (trkView.GetTracks()).Where(a => a.TrackId >= id).ToList(); // get all tracks listed after selected one
             string[] trkArray = new string[trks.Count];
 
             for (int i = 0; i < trks.Count; i++)
             {
-                trkArray[i] = trks[i].TrackId.ToString() + "," + shuffled[i].FileName + "," + shuffled[i].Artist + ",shuffle";
+                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
             }
             return trkArray;
         }

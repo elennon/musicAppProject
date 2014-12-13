@@ -92,6 +92,23 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private int _orderNo;
+        public int OrderNo
+        {
+            get
+            {
+                return _orderNo;
+            }
+            set
+            {
+                if (_orderNo != value)
+                {
+                    _orderNo = value;
+                    NotifyPropertyChanged("OrderNo");
+                }
+            }
+        }
+
         private string _Artist;
         public string Artist
         {
@@ -109,22 +126,22 @@ namespace MyMusic.ViewModels
             }
         }
 
-        //private int _orderNo;
-        //public int OrderNo
-        //{
-        //    get
-        //    {
-        //        return _orderNo;
-        //    }
-        //    set
-        //    {
-        //        if (_orderNo != value)
-        //        {
-        //            _orderNo = value;
-        //            NotifyPropertyChanged("OrderNo");
-        //        }
-        //    }
-        //}
+        private bool _inTheBin = false;
+        public bool InTheBin
+        {
+            get
+            {
+                return _inTheBin;
+            }
+            set
+            {
+                if (_inTheBin != value)
+                {
+                    _inTheBin = value;
+                    NotifyPropertyChanged("InTheBin");
+                }
+            }
+        }
 
         private int _plays;
         public int Plays
@@ -311,6 +328,32 @@ namespace MyMusic.ViewModels
             }
         }
 
+        public void BinThis(int trackId)
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == trackId).FirstOrDefault();
+                if (tr != null)
+                {
+                    tr.InTheBin = true;
+                    db.Update(tr);
+                }
+            }
+        }
+
+        public void BackIn(int trackId)
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == trackId).FirstOrDefault();
+                if (tr != null)
+                {
+                    tr.InTheBin = false;
+                    db.Update(tr);
+                }
+            }
+        }
+
         public IEnumerable<TrackViewModel> GetTopTracks()
         {
             _tracks = new ObservableCollection<TrackViewModel>();
@@ -378,7 +421,7 @@ namespace MyMusic.ViewModels
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var query = db.Table<Track>().OrderBy(c => c.Name);
+                var query = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
                     var trk = new TrackViewModel()
@@ -389,7 +432,33 @@ namespace MyMusic.ViewModels
                         Name = tr.Name,
                         Artist = tr.Artist,                      
                         ImageUri = tr.ImageUri,
-                        FileName = tr.FileName
+                        FileName = tr.FileName,
+                        InTheBin = tr.InTheBin
+                    };
+                    _tracks.Add(trk);
+                }
+            }
+            return _tracks;
+        }
+
+        public ObservableCollection<TrackViewModel> GetBinnedTracks()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var query = db.Table<Track>().Where(a => a.InTheBin == true).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
+                foreach (var tr in query)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        ArtistId = tr.ArtistId,
+                        AlbumId = tr.AlbumId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        ImageUri = tr.ImageUri,
+                        FileName = tr.FileName,
+                        InTheBin = tr.InTheBin
                     };
                     _tracks.Add(trk);
                 }
@@ -503,10 +572,11 @@ namespace MyMusic.ViewModels
 
         public async void fillDB()
         {
+            DropDB();
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                int cnt = db.Table<Track>().Count();
+                var cnt = db.Table<Track>().ToList();
                 try
                 {
                     List<StorageFile> sf = new List<StorageFile>();
@@ -532,6 +602,7 @@ namespace MyMusic.ViewModels
                         { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0 }; }
                         tr.ImageUri = await getPic(song.Artist, song.Title);
                         tr.FileName = item.Name;
+                        tr.InTheBin = false;
                         Artist ar = new Artist { Name = song.Artist };
                         Album al = new Album { Name = song.Album };
                         Genre gr = new Genre { Name = song.Genre.FirstOrDefault() };
@@ -569,13 +640,26 @@ namespace MyMusic.ViewModels
                 {
                     string g = ex.InnerException.Message;
                 }
-                cnt = db.Table<Track>().Count();
-                //var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                //for (int i = 0; i < trks.Count(); i++)
-                //{
-                //    trks[i].OrderNo = i;
-                //    db.Update(trks[i]);
-                //}
+                var tcnt = db.Table<Track>().Count();
+                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                for (int i = 0; i < trks.Count(); i++)
+                {
+                    trks[i].OrderNo = i;
+                    db.Update(trks[i]);
+                }
+            }
+        }
+
+        private void DropDB()
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                db.DeleteAll<Track>();
+                //db.CreateTable<Track>();
+                db.DeleteAll<Album>();
+                db.DeleteAll<Artist>();
+                db.DeleteAll<Genre>();
+                db.DeleteAll<RadioStream>();
             }
         }
 

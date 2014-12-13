@@ -28,7 +28,27 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MyMusic.Views
 {
-    
+    public class DataGroup
+    {
+        public DataGroup(String UniqueId, String title, String description, String imagePath)
+        {
+            this.UniqueId = UniqueId;
+            this.Title = title;
+            this.Description = description;
+            this.ImagePath = imagePath;
+        }
+
+        public string UniqueId { get; set; }
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
+
+        public override string ToString()
+        {
+            return this.Title;
+        }
+    }
     public sealed partial class MainPage : Page
     {
         private TracksViewModel trkView = new TracksViewModel();
@@ -39,6 +59,8 @@ namespace MyMusic.Views
         {
             get { return this.navigationHelper; }
         }
+
+        
 
         public MainPage()
         {
@@ -56,12 +78,41 @@ namespace MyMusic.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            lstOptions.SelectedIndex = -1;
+            //lstOptions.SelectedIndex = -1;
+            List<DataGroup> groups = new List<DataGroup>();
+            DataGroup sg = new DataGroup("Stream", "Streaming", "music streaming", "ms-appx:///Assets/music.jpg" );
+            groups.Add(sg);
+            DataGroup sg1 = new DataGroup("Collection", "Collection", "music collection", "ms-appx:///Assets/music3.jpg");
+            groups.Add(sg1);
+            DataGroup sg2 = new DataGroup("Radio", "Online Radio", "online radio streaming", "ms-appx:///Assets/radio.jpg");
+            groups.Add(sg2);
+            Hub.DataContext = groups;
             //await trkView.SyncDB();
             Task.Run(async delegate()
             {
                 await trkView.SyncDB();
             });
+        }
+
+        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            // Navigate to the appropriate destination page, configuring the new page
+            // by passing required information as a navigation parameter
+            var itemId = ((DataGroup)e.ClickedItem).UniqueId;
+            switch (itemId)
+            {
+                case "Stream":
+                    this.Frame.Navigate(typeof(Streaming));
+                    break;
+                case "Collection":
+                    this.Frame.Navigate(typeof(Collection));
+                    break;
+                case "Radio":
+                    //RadioStream rs = new RadioStream { RadioUrl = "apples" };     
+                    //this.Frame.Navigate(typeof(NowPlaying), rs);
+                    this.Frame.Navigate(typeof(RadioStreams));
+                    break;
+            }
         }
 
         private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -102,7 +153,8 @@ namespace MyMusic.Views
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            rdoView.AddRadios();
+            //rdoView.AddRadios();
+            //trkView.DropDB();
         }
 
         private void ShortCutButton_Click(object sender, RoutedEventArgs e)

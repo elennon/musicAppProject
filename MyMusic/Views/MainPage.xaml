@@ -11,7 +11,19 @@
     FontSize="{StaticResource TextStyleLargeFontSize}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     >
-
+    
+    <Page.Resources>
+        <DataTemplate x:Key="HubSectionHeaderTemplate">
+            <TextBlock Margin="0,0,0,-9.5" Text="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="TilesTemplate">
+            <Grid Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
+                <Image Source="{Binding ImagePath}" Opacity="0.6" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="160"/>
+                <TextBlock Text="{Binding Title}" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid x:Name="LayoutRoot"  >
         
         <Grid.ChildrenTransitions>
@@ -39,14 +51,37 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-            <StackPanel>
-                <ListBox Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"  SelectionChanged="lstOptions_SelectionChanged"  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
-                    <ListBoxItem Content="You Tubes" Tag="Stream" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Collection" Tag="Collection" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
-                </ListBox>
-                <ListBox Name="lstGenColl" Margin="0,87,0,10"></ListBox>
-            </StackPanel>           
+            <Hub x:Name="Hub" x:Uid="Hub" >
+                
+                <HubSection x:Uid="groups"  Width="Auto"
+                          >
+                    <DataTemplate>
+                        <GridView
+                        Margin="0,9.5,0,0"
+                        ItemsSource="{Binding}"
+                        AutomationProperties.AutomationId="ItemGridView"
+                        AutomationProperties.Name="Items In Group"
+                        ItemTemplate="{StaticResource TilesTemplate}"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemClick="ItemView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </DataTemplate>
+                </HubSection>
+
+                
+            </Hub>
+
+
+
+            
+            
         </Grid>
         
     </Grid>
@@ -65,3 +100,13 @@
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
+
+
+<!--<StackPanel>
+    <ListBox Name="lstOptions" RequestedTheme="Dark" Foreground="AliceBlue" Background="Black"  SelectionChanged="lstOptions_SelectionChanged"  FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+        <ListBoxItem Content="You Tubes" Tag="Stream" Margin="8,0,12,12" />
+        <ListBoxItem Content="Collection" Tag="Collection" Margin="8,0,12,12" />
+        <ListBoxItem Content="Radio Stream" Tag="Radio" Margin="8,0,12,12" />
+    </ListBox>
+    <ListBox Name="lstGenColl" Margin="0,87,0,10"></ListBox>
+</StackPanel>-->           

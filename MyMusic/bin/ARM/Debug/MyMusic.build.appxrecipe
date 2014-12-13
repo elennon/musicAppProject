@@ -82,11 +82,17 @@
       <PackagePath>Assets\BadgeLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\bin.png">
+      <PackagePath>Assets\bin.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\bus-hi.png">
       <PackagePath>Assets\bus-hi.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\delete.png">
       <PackagePath>Assets\delete.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\edit2.png">
+      <PackagePath>Assets\edit2.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
@@ -117,6 +123,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\radio672.png">
       <PackagePath>Assets\radio672.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\settings.png">
+      <PackagePath>Assets\settings.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\Shuffle.76.png">
       <PackagePath>Assets\Shuffle.76.png</PackagePath>
@@ -196,6 +205,9 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\transport.play.png">
       <PackagePath>Assets\transport.play.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\undo3.png">
+      <PackagePath>Assets\undo3.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\WideLogo.scale-100.png">
       <PackagePath>Assets\WideLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -210,6 +222,18 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\_play3.png">
       <PackagePath>Assets\_play3.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\music.jpg">
+      <PackagePath>Assets\music.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\music2.jpg">
+      <PackagePath>Assets\music2.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\music3.jpg">
+      <PackagePath>Assets\music3.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\radio.jpg">
+      <PackagePath>Assets\radio.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\vintageBikes.jpg">
       <PackagePath>Assets\vintageBikes.jpg</PackagePath>

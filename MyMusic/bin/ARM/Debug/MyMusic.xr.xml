@@ -8,6 +8,7 @@
     <RootPropertyPathName Name="Artist" />
     <RootPropertyPathName Name="OrderNo" />
     <RootPropertyPathName Name="ImageUri" />
+    <RootPropertyPathName Name="ImagePath" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -60,7 +61,6 @@
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
-      <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Margin" />
@@ -71,7 +71,9 @@
       <RootProperty Name="Source" />
       <RootProperty Name="Name" />
       <RootProperty Name="Stretch" />
+      <RootProperty Name="Visibility" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Opacity" />
       <RootEvent Name="Tapped" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
@@ -79,10 +81,13 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="Background" />
+      <RootProperty Name="Width" />
       <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Background" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
+      <RootMethod Name="GetRowSpan" />
+      <RootMethod Name="SetRowSpan" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
     </RootType>
@@ -121,7 +126,6 @@
       <RootProperty Name="SelectedValuePath" />
       <RootProperty Name="RequestedTheme" />
       <RootProperty Name="Items" />
-      <RootProperty Name="Margin" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
@@ -146,8 +150,15 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="HorizontalContentAlignment" />
       <RootProperty Name="ItemsSource" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsItemClickEnabled" />
+      <RootProperty Name="ItemsPanel" />
+      <RootEvent Name="ItemClick" />
     </RootType>
     <RootType FullName="MyMusic.Views.Albums" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.CommandBar">
       <RootProperty Name="IsSticky" />
       <RootProperty Name="PrimaryCommands" />
@@ -168,10 +179,28 @@
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="MyMusic.Views.Collection" />
-    <RootType FullName="MyMusic.Views.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
+    <RootType FullName="Windows.UI.Xaml.Automation.AutomationProperties">
+      <RootMethod Name="GetName" />
+      <RootMethod Name="SetName" />
+      <RootMethod Name="GetAutomationId" />
+      <RootMethod Name="SetAutomationId" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Hub">
+      <RootProperty Name="Sections" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.HubSection">
+      <RootProperty Name="Width" />
+      <RootProperty Name="ContentTemplate" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.ContinuumNavigationTransitionInfo">
+      <RootMethod Name="GetExitElementContainer" />
+      <RootMethod Name="SetExitElementContainer" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ItemsWrapGrid" />
+    <RootType FullName="MyMusic.Views.MainPage" />
     <RootType FullName="MyMusic.Views.NowPlaying" />
     <RootType FullName="Windows.UI.Xaml.Controls.AppBarToggleButton">
       <RootProperty Name="Label" />

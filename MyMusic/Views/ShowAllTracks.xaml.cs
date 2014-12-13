@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -36,6 +37,7 @@ namespace MyMusic.Views
 
         private TracksViewModel trkView = new TracksViewModel();
         private string albumId = "";
+        private bool editMode = false, InBinList = false;
 
         public ShowAllTracks()
         {
@@ -59,14 +61,29 @@ namespace MyMusic.Views
             }
             else
             {
-                CollectionViewSource listViewSource = new CollectionViewSource();
-                listViewSource.IsSourceGrouped = true;
-                listViewSource.Source = GetContactGroups(trkView.GetTracks());
-                listViewSource.ItemsPath = new PropertyPath("Tracks");
-                lstViewDetail.ItemsSource = listViewSource.View;
-                lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
+                LoadList();
             }  
          
+        }
+
+        private void LoadList()
+        {
+            CollectionViewSource listViewSource = new CollectionViewSource();
+            listViewSource.IsSourceGrouped = true;
+            listViewSource.Source = GetContactGroups(trkView.GetTracks());
+            listViewSource.ItemsPath = new PropertyPath("Tracks");
+            lstViewDetail.ItemsSource = listViewSource.View;
+            lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
+        }
+
+        private void LoadBinList()
+        {
+            CollectionViewSource listViewSource = new CollectionViewSource();
+            listViewSource.IsSourceGrouped = true;
+            listViewSource.Source = GetContactGroups(trkView.GetBinnedTracks());
+            listViewSource.ItemsPath = new PropertyPath("Tracks");
+            lstViewDetail.ItemsSource = listViewSource.View;
+            lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
         }
 
         #region fill listview incrementally
@@ -80,7 +97,7 @@ namespace MyMusic.Views
                 throw new Exception("Not in phase 0.");
             }
 
-            StackPanel templateRoot = (StackPanel)args.ItemContainer.ContentTemplateRoot;              
+            Grid templateRoot = (Grid)args.ItemContainer.ContentTemplateRoot;              
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
             Image songPic = (Image)templateRoot.FindName("imgSongPic");
@@ -101,7 +118,7 @@ namespace MyMusic.Views
 
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;               
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;               
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
                 
             nameTextBlock.Text = track.Name;    // adds song name 
@@ -119,7 +136,7 @@ namespace MyMusic.Views
             }
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;                
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
             TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
                 
             artistTextBlock.Text = track.Artist;
@@ -137,8 +154,11 @@ namespace MyMusic.Views
  
             TrackViewModel track = (TrackViewModel)args.Item;
             SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;                              
+            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                              
             Image _imgSongPic = (Image)templateRoot.FindName("imgSongPic");
+            Image _deleteIcon = (Image)templateRoot.FindName("deleteIcon");
+
+
 
             if (string.IsNullOrEmpty(track.ImageUri) == false)      //  if there is no pic, show default
             {
@@ -149,20 +169,22 @@ namespace MyMusic.Views
                 _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/radio672.png")); 
             }
             _imgSongPic.Opacity = 1;
+            if (editMode)
+            {
+                string tag = track.Name + "," + track.TrackId.ToString() + ",out";
+                _deleteIcon.Tag = tag;
+                _deleteIcon.Visibility = Visibility.Visible;
+            }
+            else if (InBinList)
+            {
+                string tag = track.Name + "," + track.TrackId.ToString() + ",in";
+                _deleteIcon.Tag = tag;
+                _deleteIcon.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/undo3.png")); 
+                _deleteIcon.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion
-
-        private void lstAlbumTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)    // pass album id from list of track in given album
-        {
-            string albId = "albTracksFromThisOn," + ((ListBox)sender).SelectedIndex.ToString() + "," + albumId;
-            this.Frame.Navigate(typeof(NowPlaying), albId);   
-        }
-
-        private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
-        {
-            this.Frame.Navigate(typeof(NowPlaying), "shuffle");  
-        }
 
         private List<ContactGroup> GetContactGroups(ObservableCollection<TrackViewModel> collection)    // method to group all tracks alphabetically
         {
@@ -174,7 +196,7 @@ namespace MyMusic.Views
             var t = allSongs.GroupBy(a => a.Name.Substring(0, 1)).Select(g => g.FirstOrDefault().Name);     // get a list of alphabetical letters that songs in collection begin with
             foreach (string item in t)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     if (Char.IsLetter(item[i]))
                     {
@@ -210,18 +232,30 @@ namespace MyMusic.Views
             return trackGroups;
         }
 
+        private void lstAlbumTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)    // pass album id from list of track in given album
+        {
+            string albId = "albTracksFromThisOn," + ((ListBox)sender).SelectedIndex.ToString() + "," + albumId;
+            this.Frame.Navigate(typeof(NowPlaying), albId);   
+        }
+
+        private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
+        {
+            this.Frame.Navigate(typeof(NowPlaying), "shuffle");  
+        }
+
         private void Song_Tapped(object sender, TappedRoutedEventArgs e)    // fires when all tracks diplayed, sends tracks order # to play it and all after it
         {
-            StackPanel grd = (StackPanel)sender;
+            Border grd = (Border)sender;
             TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
             string tNumber = "allTracks," + nameTextBlock.Tag.ToString() ;
             this.Frame.Navigate(typeof(NowPlaying), tNumber ); //GetListToPlay(Convert.ToInt32(hh)
         }
 
-        private void Border_Tapped(object sender, TappedRoutedEventArgs e)
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            semanticZoom.ToggleActiveView();
-            //semanticZoom.IsZoomedInViewActive = false;
+            editMode = true;
+            InBinList = false;
+            LoadList();
         }
 
         #region NavigationHelper registration
@@ -240,6 +274,54 @@ namespace MyMusic.Views
         }
 
         #endregion
+
+        private async void deleteIcon_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Image del = (Image)sender;
+            string inOrOut = del.Tag.ToString().Split(',')[2];
+            if (inOrOut == "out")
+            {
+                string trkName = (del.Tag.ToString()).Split(',')[0];    // track name is 1st part of the tag
+                MessageDialog msgbox = new MessageDialog("Are you sure you want " + trkName + " out??");
+
+                msgbox.Commands.Clear();
+                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
+                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
+                var res = await msgbox.ShowAsync();
+
+                if ((int)res.Id == 0)
+                {
+                    int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
+                    trkView.BinThis(id);
+                    LoadList();
+                }
+                if ((int)res.Id == 1)
+                {
+                    return;
+                }
+            }
+            else if (inOrOut == "in")
+            {
+                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
+                trkView.BackIn(id);
+                LoadBinList();
+            }
+
+        }
+
+        private void ShowBinnedButton_Click(object sender, RoutedEventArgs e)
+        {
+            editMode = false;
+            InBinList = true;
+            LoadBinList();
+        }
+
+        private void AllTracksButton_Click(object sender, RoutedEventArgs e)
+        {
+            editMode = false;
+            InBinList = false;
+            LoadList();
+        }
     }
 }
 

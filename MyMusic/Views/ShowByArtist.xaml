@@ -126,38 +126,30 @@
                                           />
                 </SemanticZoom.ZoomedOutView>
             </SemanticZoom>
-
-            <!--<ListBox x:Name="lstArtistTracks" ItemsSource="{Binding}" Foreground="AliceBlue" Background="Black" FontSize="25"
-                     >                    
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" >
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="imgPlay"
-                                    Margin="2"
-                                    VerticalAlignment="Center"
-                                    Source="/Assets/_play3.png"
-                                    Tapped="Image_Tapped"
-                                    Width="40"
-                                    Height="40" 
-                                    Tag="{Binding Path=ArtistId}"
-                                    />                               
-                            </StackPanel>
-                                   
-                            <StackPanel >
-                                <Border Tapped="Border_Tapped" Tag="{Binding Path=ArtistId}">
-                                <TextBlock  x:Name="txtName"
-                                    Margin="10,0,0,0"
-                                    TextWrapping="Wrap"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left"                                         
-                                    Text="{Binding Path=Name}" />
-                                </Border>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>-->
+           
         </Grid>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+
+                <!--<AppBarButton Icon="Edit" Click="EditButton_Click"  Label="Edit"/>-->
+               
+            </CommandBar.PrimaryCommands>
+            <!--<CommandBar.SecondaryCommands>
+                <AppBarButton Label="Test01"/>
+                <AppBarButton Label="Test02"/>
+            </CommandBar.SecondaryCommands>-->
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
+
+    
+    
+    
+    
+    
+    
+    
+    

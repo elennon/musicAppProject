@@ -21,19 +21,22 @@ namespace MyMusic.Models
         public int ArtistId { get; set; }
         [ForeignKey(typeof(Album))]
         public int AlbumId { get; set; }
+
+        public int OrderNo { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
-        //public int OrderNo { get; set; }
+        
         public string ImageUri { get; set; }
         public string FileName { get; set; }
 
-        //[ForeignKey(typeof(Track))]     // Specify the foreign key
-        //public int ArtistId { get; set; }
-
-        //[ManyToOne]
-        //public Artist Artists { get; set; }
-        //public Album Album { get; set; }
-        //public Genre Genre { get; set; }
+        private bool inTheBin = false;
+        public bool InTheBin
+        {
+            get { return inTheBin; }
+            set { inTheBin = value; }
+        }
+        
+        
     }   
 }
