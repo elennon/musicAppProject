@@ -26,18 +26,10 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyToolkit.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyToolkit.Extended.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\Newtonsoft.Json.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLite.Net.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SqLiteClass.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteNetExtensions.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteWinRT.winmd
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SqLiteClass.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SqLiteClass.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyToolkit.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyToolkit.Extended.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyToolkit.Extended.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\Newtonsoft.Json.xml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteWinRT.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteWinRT.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\MyPlaylistManager.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\priconfig.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\priconfig.xml.intermediate
@@ -50,3 +42,7 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\MyPlaylistManager.winmd.config
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteBase.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteBase.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\x86\Debug\SQLiteBase.pri

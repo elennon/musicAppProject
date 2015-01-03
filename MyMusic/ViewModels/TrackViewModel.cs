@@ -16,6 +16,11 @@ using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using System.Threading;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using MyMusic.HelperClasses;
+using System.Xml;
+using SQLite;
 
 
 namespace MyMusic.ViewModels
@@ -126,6 +131,23 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private string _album;
+        public string Album
+        {
+            get
+            {
+                return _album;
+            }
+            set
+            {
+                if (_album != value)
+                {
+                    _album = value;
+                    NotifyPropertyChanged("Album");
+                }
+            }
+        }
+
         private bool _inTheBin = false;
         public bool InTheBin
         {
@@ -224,6 +246,23 @@ namespace MyMusic.ViewModels
                 {
                     _fileName = value;
                     NotifyPropertyChanged("FileName");
+                }
+            }
+        }
+
+        private int _genreId;
+        public int GenreId
+        {
+            get
+            {
+                return _genreId;
+            }
+            set
+            {
+                if (_genreId != value)
+                {
+                    _genreId = value;
+                    NotifyPropertyChanged("GenreId");
                 }
             }
         }
@@ -433,7 +472,8 @@ namespace MyMusic.ViewModels
                         Artist = tr.Artist,                      
                         ImageUri = tr.ImageUri,
                         FileName = tr.FileName,
-                        InTheBin = tr.InTheBin
+                        InTheBin = tr.InTheBin,
+                        OrderNo = tr.OrderNo
                     };
                     _tracks.Add(trk);
                 }
@@ -498,6 +538,42 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
+        public string[] ShuffleAlbum(string id)
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();           
+            _tracks = GetTracksByAlbum(id);
+
+            Random rng = new Random();
+            int n = _tracks.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                TrackViewModel value = _tracks[k];
+                _tracks[k] = _tracks[n];
+                _tracks[n] = value;
+            }
+            return shuffleThese(_tracks);
+        }
+
+        public string[] ShuffleGenre(string id)
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            _tracks = GetTracksByGenre(id);
+
+            Random rng = new Random();
+            int n = _tracks.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                TrackViewModel value = _tracks[k];
+                _tracks[k] = _tracks[n];
+                _tracks[n] = value;
+            }
+            return shuffleThese(_tracks);
+        }
+
         public ObservableCollection<TrackViewModel> GetTracksByArtist(int id)
         {
             _tracks = new ObservableCollection<TrackViewModel>();
@@ -513,7 +589,8 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        FileName = tr.FileName
+                        FileName = tr.FileName,
+                        ImageUri = tr.ImageUri
                     };
                     _tracks.Add(trk);
                 }
@@ -527,7 +604,8 @@ namespace MyMusic.ViewModels
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var tracks = db.Table<Track>().Where(c => c.AlbumId == id).ToList();                
+                var tracks = db.Table<Track>().Where(c => c.AlbumId == id).ToList();
+                var album = db.Table<Album>().Where(c => c.AlbumId == id).FirstOrDefault();
                 foreach (var tr in tracks)
                 {
                     var trk = new TrackViewModel()
@@ -537,7 +615,37 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        FileName = tr.FileName
+                        FileName = tr.FileName,
+                        ImageUri = tr.ImageUri,
+                        Album = album.Name
+                    };
+                    _tracks.Add(trk);
+                }
+            }
+            return _tracks;
+        }
+
+        public ObservableCollection<TrackViewModel> GetTracksByGenre(string genId)
+        {
+            int id = Convert.ToInt32(genId);
+            _tracks = new ObservableCollection<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tracks = db.Table<Track>().Where(c => c.GenreId == id).ToList();
+                var albums = db.Table<Album>();
+                foreach (var tr in tracks)
+                {
+                    var trk = new TrackViewModel()
+                    {
+                        TrackId = tr.TrackId,
+                        ArtistId = tr.ArtistId,
+                        AlbumId = tr.AlbumId,
+                        Name = tr.Name,
+                        Artist = tr.Artist,
+                        FileName = tr.FileName,
+                        GenreId = tr.GenreId,
+                        ImageUri = tr.ImageUri,
+                        Album = albums.Where(a => a.AlbumId == tr.AlbumId).FirstOrDefault().Name
                     };
                     _tracks.Add(trk);
                 }
@@ -570,12 +678,40 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
+        public string[] GetListToPlay(int startPos) // orders all songs that come after selected song (+ selected) into a string[]
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                string[] trkArray = new string[trks.Count - (startPos )];
+                int counter = 0;
+                for (int i = startPos; i < trks.Count(); i++)
+                {
+                    trkArray[counter] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
+                    counter++;
+                }
+                return trkArray;
+            }           
+        }
+
+        private string[] shuffleThese(ObservableCollection<TrackViewModel> shfThese)
+        {
+            string[] trkks = new string[shfThese.Count];
+            for (int i = 0; i < shfThese.Count; i++)
+            {
+                //trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
+                trkks[i] = shfThese[i].TrackId.ToString() + "," + shfThese[i].FileName + "," + shfThese[i].Artist + ",shuffle";
+            }
+            return trkks;
+        }
+
         public async void fillDB()
         {
             DropDB();
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
+
                 var cnt = db.Table<Track>().ToList();
                 try
                 {
@@ -595,19 +731,16 @@ namespace MyMusic.ViewModels
                                 string[] splitter = song.Title.Split('-');
                                 tr.Name = splitter[splitter.Count() - 1];
                                 tr.Artist = splitter[0];  
-                            }
-                                                 
+                            }                                                 
                         }
                         else
                         { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0 }; }
-                        tr.ImageUri = await getPic(song.Artist, song.Title);
+
                         tr.FileName = item.Name;
                         tr.InTheBin = false;
                         Artist ar = new Artist { Name = song.Artist };
                         Album al = new Album { Name = song.Album };
-                        Genre gr = new Genre { Name = song.Genre.FirstOrDefault() };
                         
-
                         db.Insert(tr);
 
                         var checkArtist = (from a in db.Table<Artist>()
@@ -619,11 +752,6 @@ namespace MyMusic.ViewModels
                                         where a.Name == al.Name
                                         select a).ToList();
                         if (checkAlb.Count < 1) { db.Insert(al); }
-
-                        var checkGenre = (from a in db.Table<Genre>()
-                                          where a.Name == gr.Name
-                                          select a).ToList();
-                        if (checkGenre.Count < 1) { db.Insert(gr); }
 
                         var arty = db.Table<Artist>().Where(a => a.Name == song.Artist).FirstOrDefault();
                         tr.ArtistId = arty.ArtistId;
@@ -640,60 +768,114 @@ namespace MyMusic.ViewModels
                 {
                     string g = ex.InnerException.Message;
                 }
-                var tcnt = db.Table<Track>().Count();
+                var tcnt = db.Table<Track>().ToList();
                 var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
                 for (int i = 0; i < trks.Count(); i++)
                 {
                     trks[i].OrderNo = i;
                     db.Update(trks[i]);
                 }
+                AddRadios();
+            }
+        }
+
+        public async void AddRadios()
+        {
+            //await readXMLAsync();
+            Stations sts = new Stations();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))    //Data/Stations.xml
+            {
+                int cnt = db.Table<RadioStream>().Count();
+                int count = db.Table<RadioGenre>().Count();
+                db.DeleteAll<RadioStream>();
+                db.DeleteAll<RadioGenre>();
+                cnt = db.Table<RadioStream>().Count();
+                count = db.Table<RadioGenre>().Count();
+                try
+                {
+                    XmlSerializer xs = new XmlSerializer(typeof(Stations), new Type[] { typeof(radioStation) });
+                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Data/Stations.xml"));
+                    using (var fileStream = await file.OpenStreamForReadAsync())
+                    {
+                        sts = (Stations)xs.Deserialize(fileStream);
+                    }
+
+                    foreach (radioStation item in sts.stations.ToList())
+                    {
+                        RadioStream rds = new RadioStream
+                        {
+                            RadioName = item.Name,
+                            RadioUrl = item.Urls.FirstOrDefault().urlName
+                        };
+                        db.Insert(rds);
+                    }
+
+                    IEnumerable<string> strs = sts.stations.Select(a => a.Genre).Distinct();
+
+                    foreach (var item in strs)
+                    {
+                        RadioGenre rds = new RadioGenre
+                        {
+                            RadioGenreName = item,
+                            RadioImage = "ms-appx:///Assets/music3.jpg"
+                        };
+                        db.Insert(rds);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string g = ex.InnerException.Message;
+                }
+                cnt = db.Table<RadioStream>().Count();
+                count = db.Table<RadioGenre>().Count();
             }
         }
 
         private void DropDB()
         {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                db.DeleteAll<Track>();
-                //db.CreateTable<Track>();
-                db.DeleteAll<Album>();
-                db.DeleteAll<Artist>();
-                db.DeleteAll<Genre>();
-                db.DeleteAll<RadioStream>();
-            }
-        }
-
-        private async Task<string> getPic(string artist, string title)
-        {
-            Uri resourceUri;
-
-            string picc = "";
-            string secHalf = string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
-            if (!Helpers.TryGetUri(secHalf, out resourceUri))
-            {
-                return null;
-            }
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
-                var xmlString = response.Content.ReadAsStringAsync().GetResults();
-                XDocument doc = XDocument.Parse(xmlString);
+                //StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                //StorageFile dbFile = await folder.GetFileAsync("tracks.s3db");
 
-                if (doc.Root.FirstAttribute.Value == "failed")
+               
+               // SQLiteConnection connection = new SQLite.SQLiteConnection(App.DBPath);
+              //  connection.Dispose();
+              //  connection.Close();
+                //        SQLiteCommand.Dispose();
+                //GC.Collect();
+                //GC.WaitForPendingFinalizers();
+
+                //await dbFile.DeleteAsync();
+
+                //using (var db = new SQLite.SQLiteConnection(App.DBPath))
+                //{
+                //    db.CreateTable<Track>();
+                //    db.CreateTable<Album>();
+                //    db.CreateTable<Artist>();
+                //    db.CreateTable<Genre>();
+                //    db.CreateTable<RadioStream>();
+                //    db.CreateTable<RadioGenre>();
+                //}
+                //File.Delete(filename);
+
+                using (var db = new SQLite.SQLiteConnection(App.DBPath))
                 {
-                    picc = "ms-appx:///Assets/radio672.png";
-                }
-                else
-                {
-                    picc = (from el in doc.Descendants("image")
-                            where (string)el.Attribute("size") == "large"
-                            select el).First().Value;                   
+                    db.DeleteAll<Track>();
+                    //db.CreateTable<Track>();
+                    db.DeleteAll<Album>();
+                    db.DeleteAll<Artist>();
+                    db.DeleteAll<Genre>();
+                    db.DeleteAll<RadioStream>();
+                    db.DeleteAll<RadioGenre>();                    
                 }
             }
-            catch (Exception exx) { string error = exx.Message; }
-            return picc;
-        }        
-
+            catch (Exception ex)
+            {
+                string g = ex.InnerException.Message;
+            }
+        }
+      
         public void addaColumn()
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -778,7 +960,10 @@ namespace MyMusic.ViewModels
                     }
                     else
                     { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0, FileName = item.Name }; }
-                    tr.ImageUri = await getPic(song.Artist, song.Title);
+
+         //           MyMusic.HelperClasses.Track getPicAndGenre = await getPic(song.Artist, song.Title);
+        //            tr.ImageUri = getPicAndGenre.ImageUri;
+                   
                     Artist ar = new Artist { Name = song.Artist };
                     Album al = new Album { Name = song.Album };
                     Genre gr = new Genre { Name = song.Genre.FirstOrDefault() };
@@ -816,5 +1001,143 @@ namespace MyMusic.ViewModels
                 catch (Exception ex) { }
             }
         }
+
+        public async void lookIn()
+        {
+            List<StorageFile> sf = new List<StorageFile>();
+            StorageFolder folder = KnownFolders.MusicLibrary;
+            IReadOnlyList<StorageFile> musicLib = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+            foreach (var item in musicLib)
+            {
+                var song = await item.Properties.GetMusicPropertiesAsync();
+                var gen = song.Genre.FirstOrDefault();
+                IList<string> ggnr = song.Genre;
+                foreach (var g in ggnr)
+                {
+                    string ggg = g;
+                }
+                var tr = item;
+            }
+        }
+
+        public void sortOrderNum()
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tcnt = db.Table<Track>().ToList();
+                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                for (int i = 0; i < trks.Count(); i++)
+                {
+                    trks[i].OrderNo = i;
+                    db.Update(trks[i]);
+                }
+                var tccnt = db.Table<Track>().ToList();
+            }
+        }
+
+        public async Task<string> getPic(string artist, string title)
+        {
+            Uri resourceUri;
+
+            string picc = "";
+            string secHalf = string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+            if (!Helpers.TryGetUri(secHalf, out resourceUri))
+            {
+                return null;
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+                var xmlString = response.Content.ReadAsStringAsync().GetResults();
+                XDocument doc = XDocument.Parse(xmlString);
+
+                if (doc.Root.FirstAttribute.Value == "failed")
+                {
+                    picc = "ms-appx:///Assets/radio672.png";
+                }
+                else
+                {
+                    picc = (from el in doc.Descendants("image")
+                            where (string)el.Attribute("size") == "large"
+                            select el).First().Value;                                                      
+                }
+            }
+            catch (Exception exx) 
+            {
+                return null;
+            }
+            return picc;
+        }
+
+        public async Task<lfm> getGenre(string artist, string title)
+        {
+            Uri resourceUri;
+            lfm tr = new lfm();
+            string secHalf = string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+            if (!Helpers.TryGetUri(secHalf, out resourceUri))
+            {
+                return null;
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
+
+                string xml = await response.Content.ReadAsStringAsync();
+                if (xml != null)
+                    tr = xml.ParseXML<lfm>();
+            }
+            catch (Exception exx)
+            {
+                return null;
+            }
+            return tr;
+        }        
+
+        public async void loadUpImagesAndGenre()
+        {
+            string genre = "";
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var ggr = db.Table<Genre>().ToList();
+                db.BeginTransaction();         
+                var query = db.Table<Track>();     //  .Where(a => a.InTheBin == false)
+                foreach (var tr in query)
+                {
+                    try
+                    {
+                        lfm tt = await getGenre(tr.Artist, tr.Name);
+                        if (tt != null)
+                        {                            
+                            if (tt.track.toptags.FirstOrDefault() != null)
+                            {
+                                genre = tt.track.toptags.FirstOrDefault().name;
+                            }
+                            else { genre = "Unknown"; }
+
+                            var gr = db.Table<Genre>().Where(a => a.Name == genre).FirstOrDefault();
+                            if (gr != null)
+                            {
+                                tr.GenreId = gr.GenreId;
+                            }
+                            else
+                            {
+                                Genre grn = new Genre { Name = genre };
+                                db.Insert(grn);
+                                var grr = db.Table<Genre>().Where(a => a.Name == genre).FirstOrDefault();
+                                tr.GenreId = grr.GenreId;
+                            }
+                        }
+                        tr.ImageUri = await getPic(tr.Artist, tr.Name);
+                        db.Update(tr);
+                    }
+                    catch (Exception exx)
+                    {
+                        db.Rollback();
+                        string error = exx.Message;
+                    }
+                }
+                db.Commit();
+            }            
+        }        
     }
 }

@@ -8,56 +8,105 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="LayoutRoot">
+    <Page.Resources>
+        <DataTemplate x:Key="HubSectionHeaderTemplate">
+            <TextBlock Margin="0,0,0,-9.5" FontSize="34" Text="{Binding}"/>
+        </DataTemplate>
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Title Panel -->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
-                <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
-                <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
-            </StackPanel>
-        </StackPanel>
-
-        <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenreName" 
-                     SelectedValuePath="RadioGenreKey" RequestedTheme="Dark" Foreground="AliceBlue" 
-                     Background="Black" SelectionChanged="lstGenre_SelectionChanged" 
-                     FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
-                
-            </ListBox>
+        <DataTemplate x:Key="StandardDoubleLineItemTemplate">
             
-            <!--<ListBox Name="lstGenre" ItemsSource="{Binding}" DisplayMemberPath="RadioGenre" 
-                     SelectedValuePath="RadioGenre" RequestedTheme="Dark" Foreground="AliceBlue" 
-                     Background="Black" SelectionChanged="lstGenre_SelectionChanged" 
-                     FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"  >
+                <StackPanel Grid.Column="1" Margin="14.5,10,0,0">
+                    <TextBlock Text="{Binding RadioName}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>                    
+                </StackPanel>
+          
+        </DataTemplate>
+        
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Hub x:Name="RadioHub" x:Uid="Hub" Header="music central" >
 
-            </ListBox>-->
+            <HubSection x:Name="RockSection" Header="Rock"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView 
+                        AutomationProperties.AutomationId="ItemListViewSection5"
+                        AutomationProperties.Name="Items In Group"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding}"
+                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemClick="ListView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
 
-        </Grid>
+            <HubSection x:Name="AlternativeSection" Header="Alternative"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView 
+                        AutomationProperties.AutomationId="ItemListViewSection5"
+                        AutomationProperties.Name="Items In Group"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding}"
+                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemClick="ListView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="JazzSection" Header="Jazz"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView 
+                        AutomationProperties.AutomationId="ItemListViewSection5"
+                        AutomationProperties.Name="Items In Group"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding}"
+                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemClick="ListView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="CountrySection" Header="Country"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView 
+                        AutomationProperties.AutomationId="ItemListViewSection5"
+                        AutomationProperties.Name="Items In Group"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding}"
+                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemClick="ListView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="DanceSection" Header="Dance"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView 
+                        AutomationProperties.AutomationId="ItemListViewSection5"
+                        AutomationProperties.Name="Items In Group"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemsSource="{Binding}"
+                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemClick="ListView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+        </Hub>
     </Grid>
-    <Page.BottomAppBar>
-        <CommandBar IsSticky="True" x:Name="appBar">
-            <CommandBar.PrimaryCommands>
-                
-                <AppBarToggleButton Label="Shoutcast stations" ></AppBarToggleButton>
-               <!-- <AppBarButton Icon="Next"  Label="Next"/>-->
-            </CommandBar.PrimaryCommands>
-            <!--<CommandBar.SecondaryCommands>
-                <AppBarButton Label="Test01"/>
-                <AppBarButton Label="Test02"/>
-            </CommandBar.SecondaryCommands>-->
-        </CommandBar>
-    </Page.BottomAppBar>
+    
 </Page>

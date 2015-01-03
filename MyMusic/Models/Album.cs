@@ -2,6 +2,7 @@
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,7 @@ namespace MyMusic.Models
         public string Name { get; set; }
 
         [ForeignKey(typeof(Artist))]
-        public int ArtistId { get; set; }
-        
+        public int ArtistId { get; set; }      
     }
 }
 

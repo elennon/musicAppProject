@@ -24,7 +24,7 @@ namespace BackgroundTask
 
     public sealed class BackGroundMusicTask : IBackgroundTask
     {
-        #region Private 
+        #region Private properties
 
         private SystemMediaTransportControls systemmediatransportcontrol;
         private MyPlaylistMgr playlistManager;
@@ -189,7 +189,19 @@ namespace BackgroundTask
         
         private void playRadio(string rdoUrl)
         {
-            Playlist.PlayRadio(rdoUrl);
+            try
+            {
+                Playlist.PlayRadio(rdoUrl);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
+
+        private void playGSTrack(string Url)
+        {
+            Playlist.PlayGSTrack(Url);
         }
 
         void playList_TrackChanged(MyPlaylist sender, object args)
@@ -281,7 +293,10 @@ namespace BackgroundTask
                         break;
                     case Constants.PlayRadio:       // radio selected
                         playRadio(trksToPlay[0]);
-                        break;                   
+                        break;
+                    case Constants.PlayGSTrack:       // radio selected
+                        playGSTrack(trksToPlay[0]);
+                        break; 
                 }
             }
         }

@@ -2,404 +2,662 @@
 <Stations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <stations>
     <radioStation>
+      <Name>metelheadeasterweek</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.projectplaylist.com/standalone/1778718</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>ACADEMY ROCK</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://radionomy.com/listen/academy-rock.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>radio reddit rock stream</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://radioreddit.com/listen/rock/listen.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>radio reddit main stream</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://radioreddit.com/listen/listen.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Radio INDI</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://sc1.uberstreaming.com/m3u/radioindi</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Yesternow Radio</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.yesternow-radio-1.com/listen.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>lautfm/#always-remember</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://stream.laut.fm/always-remember.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>ABC Fifties (Dublin)</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://server2.reliastream.com/tunein.php/bgaffn07/playlist.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>ROCKFM RADIO</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.live365.com/stations/wwwrockfm?site=pro</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>AMPZ Classic Rock - The Hottest Mix of the BEST Classic Rock!!!</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://community.loudcity.com/stations/ampz-classic-rock/files/show/ampzcr.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Radio Oberbayern</Name>
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
+        <urlName>http://stream.radio-oberbayern.org/playlist.asx</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>GotRadio - Jazz So Smooth</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.gotradio.com/itunes/smoothjazz_aacplus.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>kaathalfm</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.prasathmax.webs.com</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Funky Beatz Radio</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.radio-tochka.com:6065/listen.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Retro Jukebox - Vintage Oldies, Swing and Comedy</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://public.wavepanel.net/82ROSJ2IOHISEPHC/listen/m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>MyOpusRadio</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.myopusradio.com:8000/myopusradio.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>CariocaChannel Brasil</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://s3.shoutitaly.com/tunein.php/cariocachannel/playlist.qtl</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Bossa nova and Brazil flavored</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://usa1-vn.mixstream.net/9206.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>CBS Radio KHJZFM - Smooth Jazz</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KHJZFM</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>CBS Radio KMVKHD2 - Smooth Jazz</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KMVKHD2</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>CBS Radio KTWVFM - Smooth Jazz</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KTWVFM</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>CBS Radio WSJTFM - Smooth Jazz</Name>
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
+        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=WSJTFM</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Wild West Radio</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://s7.viastreaming.net:7430/listen.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>EKR - Rock Radio 24/7</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://78.129.163.140:8110/listen.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>R</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://systembrasil.xpg.com.br/virtualdj.mp3</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Radio-Sonline</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.Radio-Sonline.es.tl</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>KOKOMO WebRadio</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://kokomo.fr/streams/stream.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Radio Free Vermont</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.freevermontradio.org/streams/playlist.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Radio Classic Rock</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.radioclassicrock.com/live.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>Rockzone Radio</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://listen.radionomy.com/rockzone-radio.m3u</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name>TuMusicaPRCom Radio</Name>
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
+        <urlName>http://www.tumusicapr.com/radio/stream.pls</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
       <Name> DiscofoxFM - Dein Webradio DiscofoxFM - Nonstop die besten Schlager</Name>
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://87.118.78.71:13000</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://87.118.78.2:8030</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://85.25.133.95:9060</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://87.118.78.2:9000</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://87.118.78.2:8050</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://85.25.133.95:8010</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://87.118.78.2:8000</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://87.118.78.71:12000</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name />
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://205.164.35.9:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://205.164.36.9:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://205.164.62.20:8070</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Alternative Indie Mix.RadioimInternet.de Radio-im-Internet.de - Indie Alternative Radio im Internet</Name>
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://83.169.61.65:8080</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> 1.FM - Channel X</Name>
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://205.164.36.7:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://205.164.35.7:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.90.196:7024</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://205.164.62.20:7024</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> 100Hitz - 90's Alternative</Name>
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://206.217.213.235:8220</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> New. Music. Unfiltered. idobi.com</Name>
-      <Genre>alt</Genre>
-      <Urls isOk="true">
+      <Genre>Alternative Rock</Genre>
+      <Urls isOk="false">
         <urlName>http://173.245.94.219:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.75.99:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.88.19:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://208.53.164.179:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.88.21:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://198.100.125.242:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://173.245.94.220:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://50.117.121.164:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://50.117.121.165:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.75.100:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.88.20:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.86.147:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://173.245.94.221:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://72.13.93.91:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.86.149:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://173.245.94.218:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://72.13.93.90:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://208.53.164.181:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://198.100.125.245:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://198.100.125.243:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://50.117.121.162:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://208.53.164.180:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://198.100.125.244:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.88.18:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.86.148:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.75.98:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://72.13.93.92:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://50.117.121.163:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.75.101:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://72.13.93.93:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://69.46.86.146:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://208.53.164.178:80</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Radio Free Americana</Name>
       <Genre>country</Genre>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://65.49.77.146:9526</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Gravel Road on rockymountainradio.net:  Outside the city-limits.</Name>
       <Genre>country</Genre>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://206.190.150.92:8283</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Rootsradio</Name>
       <Genre>country</Genre>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://174.37.16.73:4947/Live</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> The Whip Radio</Name>
       <Genre>country</Genre>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://192.240.102.195:8690</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> 181.FM - The FrontPorch * Bluegrass From The FrontPorch</Name>
       <Genre>country</Genre>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.118:8016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.119:8016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.115:8016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.120:8016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.115:14016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.120:14016</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.117:8016</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Radio Avant</Name>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://188.165.221.75:8030</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Avant Garde Radio</Name>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://37.187.90.121:4030/stream</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> WSJE-DB - Smooth Jazz Expressions</Name>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://64.78.234.172:8010/stream/2/</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/beejazzy</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/Air-Jazz</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/J-Last</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.streamonomy.com/jazzlovers</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.streamonomy.com/neworleansradio</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>jazz</Genre>
-      <Urls isOk="true">
+      <Genre>Jazz</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.streamonomy.com/sjfplus</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> 103.7 The Rock</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://66.250.28.131:8002/relay</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://66.250.28.137:8002/relay</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> novaclassicrock.nl</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://173.236.29.52:80</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://208.43.9.96:8288</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/70sUnlimited</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Radio Caroline 259 Gold  - Live from Breskens - Holland   s1</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://5.79.83.230:8253</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://46.165.208.21:8253</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://94.75.235.38:8253</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> 181.FM - Classic Buzz -=- Classic Alternative Rock</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://108.61.73.119:8038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.118:14038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.117:14038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.118:8038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.117:8038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.120:8038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.73.115:8038</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://74.86.186.4:12112</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> Classic Rock 109</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://174.36.237.118:10044</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://108.61.20.171:10044</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://173.199.116.227:10044</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://74.86.186.4:10044</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://198.27.70.26:10044</urlName>
       </Urls>
-      <Urls isOk="true">
+      <Urls isOk="false">
         <urlName>http://174.36.51.212:10044</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/a-better-classic-rock-station</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/HammerHeadRadio</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/80sMixTape</urlName>
       </Urls>
     </radioStation>
     <radioStation>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://listen.radionomy.com/4U-70s</urlName>
       </Urls>
     </radioStation>
     <radioStation>
       <Name> GDRADIO.NET - Streaming Grateful Dead and more!</Name>
-      <Genre>rock</Genre>
-      <Urls isOk="true">
+      <Genre>Rock and Roll</Genre>
+      <Urls isOk="false">
         <urlName>http://216.119.152.213:8019</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name> 181.FM - Energy 98 - Dance Hits</Name>
+      <Genre>Dance</Genre>
+      <Urls isOk="false">
+        <urlName>http://108.61.73.118:8800</urlName>
+      </Urls>
+      <Urls isOk="false">
+        <urlName>http://108.61.20.174:10018</urlName>
+      </Urls>
+      <Urls isOk="false">
+        <urlName>http://108.61.73.115:8800</urlName>
+      </Urls>
+      <Urls isOk="false">
+        <urlName>http://108.61.73.119:8800</urlName>
+      </Urls>
+      <Urls isOk="false">
+        <urlName>http://108.61.73.120:8800</urlName>
+      </Urls>
+      <Urls isOk="false">
+        <urlName>http://108.61.73.117:8800</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Genre>Dance</Genre>
+      <Urls isOk="false">
+        <urlName>http://listen.radionomy.com/GruperaRadio</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Name> TOP FM Beograd 106,8  128K</Name>
+      <Genre>Dance</Genre>
+      <Urls isOk="false">
+        <urlName>http://109.206.96.12:8000</urlName>
+      </Urls>
+    </radioStation>
+    <radioStation>
+      <Genre>Dance</Genre>
+      <Urls isOk="false">
+        <urlName>http://listen.radionomy.com/Radio-Nostalgia</urlName>
       </Urls>
     </radioStation>
   </stations>

@@ -1,4 +1,5 @@
 ﻿using MyMusic.Common;
+using MyMusic.HelperClasses;
 using MyMusic.Models;
 using MyMusic.Views;
 using System;
@@ -48,7 +49,8 @@ namespace MyMusic
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;  
+            this.Suspending += OnSuspending;
+            this.UnhandledException += App_UnhandledException;
         }        
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
@@ -59,7 +61,9 @@ namespace MyMusic
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            
+           // Logger.GetLogger().InitiateLogger();
+          //  Logger.GetLogger().Deletefile();
+
             Frame rootFrame = Window.Current.Content as Frame;
            
             if (rootFrame == null)
@@ -82,6 +86,7 @@ namespace MyMusic
                         db.CreateTable<Artist>();
                         db.CreateTable<Genre>();
                         db.CreateTable<RadioStream>();
+                        db.CreateTable<RadioGenre>();
                     }
                    
                     try
@@ -103,6 +108,7 @@ namespace MyMusic
                     db.CreateTable<Artist>();
                     db.CreateTable<Genre>();
                     db.CreateTable<RadioStream>();
+                    db.CreateTable<RadioGenre>();
                 }
                 //rootFrame.CacheSize = 1;
                 //ResetData();
@@ -139,6 +145,11 @@ namespace MyMusic
             var rootFrame = sender as Frame;
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+        }
+
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+     //       Logger.GetLogger().logChannel.LogMessage("Unhandled exception: " + " Type:" +  sender.GetType() + "  Message: " + e.Message + "  exception: "+ e.Exception );
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)

@@ -148,39 +148,43 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[15];
+            _typeNameTable = new string[17];
             _typeNameTable[0] = "MyMusic.Views.Albums";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "MyMusic.Common.NavigationHelper";
-            _typeNameTable[4] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[5] = "MyMusic.Views.ShowAllTracks";
-            _typeNameTable[6] = "MyMusic.Views.ShowByArtist";
-            _typeNameTable[7] = "MyMusic.ViewModels.TopPlayed";
-            _typeNameTable[8] = "MyMusic.Views.ChooseRadio";
-            _typeNameTable[9] = "MyMusic.Views.Collection";
-            _typeNameTable[10] = "MyMusic.Views.MainPage";
-            _typeNameTable[11] = "MyMusic.Views.NowPlaying";
-            _typeNameTable[12] = "MyMusic.Views.RadioStreams";
-            _typeNameTable[13] = "MyMusic.Views.Streaming";
-            _typeNameTable[14] = "MyMusic.Views.YouTube";
+            _typeNameTable[3] = "MyMusic.Common.ObservableDictionary";
+            _typeNameTable[4] = "Object";
+            _typeNameTable[5] = "String";
+            _typeNameTable[6] = "MyMusic.Common.NavigationHelper";
+            _typeNameTable[7] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[8] = "MyMusic.Views.ShowAllTracks";
+            _typeNameTable[9] = "MyMusic.Views.ShowByArtist";
+            _typeNameTable[10] = "MyMusic.ViewModels.TopPlayed";
+            _typeNameTable[11] = "MyMusic.Views.Collection";
+            _typeNameTable[12] = "MyMusic.Views.MainPage";
+            _typeNameTable[13] = "MyMusic.Views.NowPlaying";
+            _typeNameTable[14] = "MyMusic.Views.RadioStreams";
+            _typeNameTable[15] = "MyMusic.Views.Streaming";
+            _typeNameTable[16] = "MyMusic.Views.YouTube";
 
-            _typeTable = new global::System.Type[15];
+            _typeTable = new global::System.Type[17];
             _typeTable[0] = typeof(global::MyMusic.Views.Albums);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::MyMusic.Common.NavigationHelper);
-            _typeTable[4] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[5] = typeof(global::MyMusic.Views.ShowAllTracks);
-            _typeTable[6] = typeof(global::MyMusic.Views.ShowByArtist);
-            _typeTable[7] = typeof(global::MyMusic.ViewModels.TopPlayed);
-            _typeTable[8] = typeof(global::MyMusic.Views.ChooseRadio);
-            _typeTable[9] = typeof(global::MyMusic.Views.Collection);
-            _typeTable[10] = typeof(global::MyMusic.Views.MainPage);
-            _typeTable[11] = typeof(global::MyMusic.Views.NowPlaying);
-            _typeTable[12] = typeof(global::MyMusic.Views.RadioStreams);
-            _typeTable[13] = typeof(global::MyMusic.Views.Streaming);
-            _typeTable[14] = typeof(global::MyMusic.Views.YouTube);
+            _typeTable[3] = typeof(global::MyMusic.Common.ObservableDictionary);
+            _typeTable[4] = typeof(global::System.Object);
+            _typeTable[5] = typeof(global::System.String);
+            _typeTable[6] = typeof(global::MyMusic.Common.NavigationHelper);
+            _typeTable[7] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[8] = typeof(global::MyMusic.Views.ShowAllTracks);
+            _typeTable[9] = typeof(global::MyMusic.Views.ShowByArtist);
+            _typeTable[10] = typeof(global::MyMusic.ViewModels.TopPlayed);
+            _typeTable[11] = typeof(global::MyMusic.Views.Collection);
+            _typeTable[12] = typeof(global::MyMusic.Views.MainPage);
+            _typeTable[13] = typeof(global::MyMusic.Views.NowPlaying);
+            _typeTable[14] = typeof(global::MyMusic.Views.RadioStreams);
+            _typeTable[15] = typeof(global::MyMusic.Views.Streaming);
+            _typeTable[16] = typeof(global::MyMusic.Views.YouTube);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -216,16 +220,23 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         }
 
         private object Activate_0_Albums() { return new global::MyMusic.Views.Albums(); }
-        private object Activate_5_ShowAllTracks() { return new global::MyMusic.Views.ShowAllTracks(); }
-        private object Activate_6_ShowByArtist() { return new global::MyMusic.Views.ShowByArtist(); }
-        private object Activate_7_TopPlayed() { return new global::MyMusic.ViewModels.TopPlayed(); }
-        private object Activate_8_ChooseRadio() { return new global::MyMusic.Views.ChooseRadio(); }
-        private object Activate_9_Collection() { return new global::MyMusic.Views.Collection(); }
-        private object Activate_10_MainPage() { return new global::MyMusic.Views.MainPage(); }
-        private object Activate_11_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
-        private object Activate_12_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
-        private object Activate_13_Streaming() { return new global::MyMusic.Views.Streaming(); }
-        private object Activate_14_YouTube() { return new global::MyMusic.Views.YouTube(); }
+        private object Activate_3_ObservableDictionary() { return new global::MyMusic.Common.ObservableDictionary(); }
+        private object Activate_8_ShowAllTracks() { return new global::MyMusic.Views.ShowAllTracks(); }
+        private object Activate_9_ShowByArtist() { return new global::MyMusic.Views.ShowByArtist(); }
+        private object Activate_10_TopPlayed() { return new global::MyMusic.ViewModels.TopPlayed(); }
+        private object Activate_11_Collection() { return new global::MyMusic.Views.Collection(); }
+        private object Activate_12_MainPage() { return new global::MyMusic.Views.MainPage(); }
+        private object Activate_13_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
+        private object Activate_14_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
+        private object Activate_15_Streaming() { return new global::MyMusic.Views.Streaming(); }
+        private object Activate_16_YouTube() { return new global::MyMusic.Views.YouTube(); }
+        private void MapAdd_3_ObservableDictionary(object instance, object key, object item)
+        {
+            var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
+            var newKey = (global::System.String)key;
+            var newItem = (global::System.Object)item;
+            collection.Add(newKey, newItem);
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -240,6 +251,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             case 0:   //  MyMusic.Views.Albums
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_0_Albums;
+                userType.AddMemberName("DefaultViewModel");
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
@@ -253,91 +265,100 @@ namespace MyMusic.MyMusic_XamlTypeInfo
                 xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  MyMusic.Common.NavigationHelper
+            case 3:   //  MyMusic.Common.ObservableDictionary
+                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.DictionaryAdd = MapAdd_3_ObservableDictionary;
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  Object
+                xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 5:   //  String
+                xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 6:   //  MyMusic.Common.NavigationHelper
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 4:   //  Windows.UI.Xaml.DependencyObject
+            case 7:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 5:   //  MyMusic.Views.ShowAllTracks
+            case 8:   //  MyMusic.Views.ShowAllTracks
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_ShowAllTracks;
+                userType.Activator = Activate_8_ShowAllTracks;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 6:   //  MyMusic.Views.ShowByArtist
+            case 9:   //  MyMusic.Views.ShowByArtist
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_6_ShowByArtist;
+                userType.Activator = Activate_9_ShowByArtist;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 7:   //  MyMusic.ViewModels.TopPlayed
+            case 10:   //  MyMusic.ViewModels.TopPlayed
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_7_TopPlayed;
+                userType.Activator = Activate_10_TopPlayed;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 8:   //  MyMusic.Views.ChooseRadio
+            case 11:   //  MyMusic.Views.Collection
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_8_ChooseRadio;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 9:   //  MyMusic.Views.Collection
-                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_Collection;
+                userType.Activator = Activate_11_Collection;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  MyMusic.Views.MainPage
+            case 12:   //  MyMusic.Views.MainPage
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_10_MainPage;
+                userType.Activator = Activate_12_MainPage;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 11:   //  MyMusic.Views.NowPlaying
+            case 13:   //  MyMusic.Views.NowPlaying
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_11_NowPlaying;
+                userType.Activator = Activate_13_NowPlaying;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 12:   //  MyMusic.Views.RadioStreams
+            case 14:   //  MyMusic.Views.RadioStreams
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_12_RadioStreams;
+                userType.Activator = Activate_14_RadioStreams;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 13:   //  MyMusic.Views.Streaming
+            case 15:   //  MyMusic.Views.Streaming
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_13_Streaming;
+                userType.Activator = Activate_15_Streaming;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 14:   //  MyMusic.Views.YouTube
+            case 16:   //  MyMusic.Views.YouTube
                 userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_14_YouTube;
+                userType.Activator = Activate_16_YouTube;
                 userType.AddMemberName("NavigationHelper");
                 userType.SetIsLocalType();
                 xamlType = userType;
@@ -402,52 +423,57 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             return foundXamlType;
         }
 
-        private object get_0_Albums_NavigationHelper(object instance)
+        private object get_0_Albums_DefaultViewModel(object instance)
+        {
+            var that = (global::MyMusic.Views.Albums)instance;
+            return that.DefaultViewModel;
+        }
+        private object get_1_Albums_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.Albums)instance;
             return that.NavigationHelper;
         }
-        private object get_1_ShowAllTracks_NavigationHelper(object instance)
+        private object get_2_ShowAllTracks_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.ShowAllTracks)instance;
             return that.NavigationHelper;
         }
-        private object get_2_ShowByArtist_NavigationHelper(object instance)
+        private object get_3_ShowByArtist_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.ShowByArtist)instance;
             return that.NavigationHelper;
         }
-        private object get_3_TopPlayed_NavigationHelper(object instance)
+        private object get_4_TopPlayed_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.ViewModels.TopPlayed)instance;
             return that.NavigationHelper;
         }
-        private object get_4_Collection_NavigationHelper(object instance)
+        private object get_5_Collection_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.Collection)instance;
             return that.NavigationHelper;
         }
-        private object get_5_MainPage_NavigationHelper(object instance)
+        private object get_6_MainPage_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.MainPage)instance;
             return that.NavigationHelper;
         }
-        private object get_6_NowPlaying_NavigationHelper(object instance)
+        private object get_7_NowPlaying_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.NowPlaying)instance;
             return that.NavigationHelper;
         }
-        private object get_7_RadioStreams_NavigationHelper(object instance)
+        private object get_8_RadioStreams_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.RadioStreams)instance;
             return that.NavigationHelper;
         }
-        private object get_8_Streaming_NavigationHelper(object instance)
+        private object get_9_Streaming_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.Streaming)instance;
             return that.NavigationHelper;
         }
-        private object get_9_YouTube_NavigationHelper(object instance)
+        private object get_10_YouTube_NavigationHelper(object instance)
         {
             var that = (global::MyMusic.Views.YouTube)instance;
             return that.NavigationHelper;
@@ -460,64 +486,70 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 
             switch (longMemberName)
             {
+            case "MyMusic.Views.Albums.DefaultViewModel":
+                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Albums");
+                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "MyMusic.Common.ObservableDictionary");
+                xamlMember.Getter = get_0_Albums_DefaultViewModel;
+                xamlMember.SetIsReadOnly();
+                break;
             case "MyMusic.Views.Albums.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Albums");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_0_Albums_NavigationHelper;
+                xamlMember.Getter = get_1_Albums_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.ShowAllTracks.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.ShowAllTracks");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_1_ShowAllTracks_NavigationHelper;
+                xamlMember.Getter = get_2_ShowAllTracks_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.ShowByArtist.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.ShowByArtist");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_2_ShowByArtist_NavigationHelper;
+                xamlMember.Getter = get_3_ShowByArtist_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.ViewModels.TopPlayed.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.ViewModels.TopPlayed");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_3_TopPlayed_NavigationHelper;
+                xamlMember.Getter = get_4_TopPlayed_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.Collection.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Collection");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_4_Collection_NavigationHelper;
+                xamlMember.Getter = get_5_Collection_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.MainPage.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.MainPage");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_5_MainPage_NavigationHelper;
+                xamlMember.Getter = get_6_MainPage_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.NowPlaying.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.NowPlaying");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_6_NowPlaying_NavigationHelper;
+                xamlMember.Getter = get_7_NowPlaying_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.RadioStreams.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.RadioStreams");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_7_RadioStreams_NavigationHelper;
+                xamlMember.Getter = get_8_RadioStreams_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.Streaming.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Streaming");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_8_Streaming_NavigationHelper;
+                xamlMember.Getter = get_9_Streaming_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             case "MyMusic.Views.YouTube.NavigationHelper":
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.YouTube");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_9_YouTube_NavigationHelper;
+                xamlMember.Getter = get_10_YouTube_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             }
@@ -845,6 +877,5 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         }
     }
 }
-
 
 

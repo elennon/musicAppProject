@@ -5,9 +5,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyToolkit.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyToolkit.Extended.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\Newtonsoft.Json.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SqLiteClass.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SqLiteClass.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SqLiteClass.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyToolkit.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyToolkit.Extended.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyToolkit.Extended.pri
@@ -27,3 +24,7 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\ARM\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\ARM\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\ARM\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyPlaylistManager.winmd.config
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.pdb
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.pri

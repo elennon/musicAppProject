@@ -54,12 +54,12 @@
       <InProcessServer>
         <Path>CLRHost.dll</Path>
         <ActivatableClass ActivatableClassId="BackgroundTask.BackGroundMusicTask" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.Models.Track" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.Models.Track" ThreadingModel="both" />
       </InProcessServer>
     </Extension>
   </Extensions>

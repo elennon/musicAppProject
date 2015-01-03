@@ -14,5 +14,6 @@ namespace MyMusic.Models
         [PrimaryKey, AutoIncrement]
         public int GenreId { get; set; }
         public string Name { get; set; }
+        public string TrackCount { get; set; }
     }
 }

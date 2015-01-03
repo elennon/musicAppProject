@@ -22,6 +22,9 @@ namespace MyMusic.Models
         [ForeignKey(typeof(Album))]
         public int AlbumId { get; set; }
 
+        [ForeignKey(typeof(Genre))]
+        public int GenreId { get; set; }
+
         public int OrderNo { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }

@@ -5,61 +5,394 @@
     xmlns:local="using:MyMusic.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vs="using:MyMusic.UserControls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
 
+        <DataTemplate x:Key="HubSectionHeaderTemplate">
+            <TextBlock Margin="0,0,0,-9.5" FontSize="34" Text="{Binding}"/>
+        </DataTemplate>
 
+        <DataTemplate x:Key="AllTracksTemplate">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent" >
-        
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid Width="400" Margin="0,0,0,-20" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
-                <Image Width="50" Height="50" Name="imgNote" Source="Assets/Picture1.png" Stretch="Fill"></Image>
-                <TextBlock Text="MY MUSIC" FontSize="25" Margin="12,0"/>
-            </StackPanel>           
-        </StackPanel>
+                <Image Source="{Binding ImageUri}" Width="76" Height="120" Grid.RowSpan="2"
+                           x:Name="imgSongPic"
+                           Stretch="Uniform" 
+                           VerticalAlignment="Top"/>
+                <Border  Margin="6,0,0,0"  Grid.Column="1"  >
+                    <TextBlock x:Name="txtName"                              
+                                Text="{Binding Name}"   
+                                Tag="{Binding OrderNo}"
+                                Style="{StaticResource ListViewItemTextBlockStyle}" 
+                                VerticalAlignment="Top"                             
+                                HorizontalAlignment="Left"/>
+                </Border>
+                <Grid Grid.Column="1" Grid.Row="1"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <TextBlock Text="{Binding Artist}"                                    
+                                    x:Name="txtArtist" 
+                                    Margin="6,-5,0,0" 
+                                    Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                                    VerticalAlignment="Top" 
+                                    />
 
-            <StackPanel>
-                <ListBox Name="lstOptions" SelectionChanged="lstOptions_SelectionChanged"  Foreground="AliceBlue" Background="Black" FontSize="30"  >
-                    <ListBoxItem Content="All Tracks" Tag="All Tracks" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Top Tracks" Tag="Top Tracks" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Artists" Tag="Artist" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Album" Tag="Album" Margin="8,0,12,12" />
-                    <ListBoxItem Content="Genre" Tag="Genre" Margin="8,0,12,12" />
-                </ListBox>
+                    <Image Source="/Assets/bin.png"
+                                    Name="deleteIcon"
+                                    Tapped="deleteIcon_Tapped"
+                                    Tag="{Binding Name}" 
+                                    Visibility="Collapsed"
+                                    Grid.Column="1"
+                                    Margin="0,-10,55,0"
+                                    Width="35" Height="35"
+                                    Stretch="Uniform" 
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"/>
+                </Grid>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="TopPlayTemplate">
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+                <Image Source="{Binding ImageUri}" Grid.Row="0" Width="82" Height="82"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Left"
+                           x:Name="imgSongPic"
+                           Grid.Column="0" 
+                           Stretch="Uniform" 
+                           />
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Name}" 
+                            x:Name="txtName" 
+                            Style="{StaticResource ListViewItemTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Artist}" 
+                            x:Name="txtArtist" 
+                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding}" 
+                            x:Name="txtPlayCount" 
+                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </StackPanel>
             </StackPanel>
 
-        </Grid>
-        
+        </DataTemplate>
 
+        <DataTemplate x:Key="ArtistListViewTemplate">
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="imgPlayArtist"
+                                Margin="2"
+                                VerticalAlignment="Center"                               
+                                Tapped="Play_Tapped_Artist"
+                                Width="50"
+                                Height="50"                                     
+                                />
+                </StackPanel>
+                <StackPanel >
+                    <Border Tapped="ArtistBorder_Tapped"  >
+                        <TextBlock  x:Name="txtArtistName"
+                                Margin="10,15,0,0"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"  
+                                FontSize="25"
+                                Text="{Binding Name}"                                     
+                                />
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AlbumListViewItemTemplate">
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="imgPlayAlbum"
+                            Margin="2"
+                            VerticalAlignment="Center"                               
+                            Tapped="AlbumImage_Tapped"
+                            Width="62"
+                            Height="62" 
+                            Tag="{Binding AlbumId}"
+                            />
+                </StackPanel>
+
+                <StackPanel >
+                    <Border Tapped="Album_Tapped" >
+                        <TextBlock  x:Name="txtAlbumName"
+                            Margin="10,0,0,0"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"  
+                            FontSize="25"
+                            Tag="{Binding AlbumId}"
+                            Text="{Binding Name}"                                    
+                            />
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GenreTemplate">
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
+                <Image Source="/Assets/music2.jpg" Grid.Row="0" Width="82" Height="82"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Left"
+                           x:Name="imgSongPic"
+                           Grid.Column="0" 
+                           Stretch="Uniform" 
+                           />
+
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Name}" 
+                            x:Name="txtName" 
+                            Style="{StaticResource ListViewItemTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                    <TextBlock Text="{Binding TrackCount}" 
+                            x:Name="txtPlayCount" 
+                            Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                            VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="GroupHeaderTemplate">
+            <Border Background="Transparent" Padding="5">
+                <Border Background="SlateGray" 
+                            BorderBrush="Black" BorderThickness="2"	
+                            Width="70" Height="62" Margin="6,0,0,12"  				 
+                            HorizontalAlignment="Stretch">
+                    <TextBlock Text="{Binding Title}" 
+                            Foreground="{StaticResource PhoneForegroundBrush}" 
+                            FontSize="42"
+                            Padding="6"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GroupsTemplate">
+            <Border Padding="5">
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Height="62" Width="70" Background="SlateGray" Margin="8,8,8,18">
+                    <TextBlock Text="{Binding Group.Title}"                        
+                        FontSize="48"
+                        Padding="6"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+    </Page.Resources>
+
+
+    <Grid x:Name="LayoutRoot" >
+
+        <Hub x:Name="CollectionHub" x:Uid="cHub" Header="Music central" SectionsInViewChanged="CollectionHub_SectionsInViewChanged"  >
+            <Hub.Background>
+                <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/concert2.jpg"></ImageBrush>
+            </Hub.Background>
+
+            <HubSection x:Uid="_allTracks" Name="AllTracksSection" Header="All Tracks" Width="Auto"
+                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>                    
+                    <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
+                                  Loaded="AllTracksSemanticZoom_Loaded"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <SemanticZoom.ZoomedInView>
+                            <ListView Name="lstViewDetail"   
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding Tracks }"             
+                                ItemTemplate="{StaticResource AllTracksTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ContainerContentChanging="ItemListView_ContainerContentChanging"
+                                ItemClick="lstViewDetail_ItemClick"
+                                >
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </SemanticZoom.ZoomedInView>
+                        <SemanticZoom.ZoomedOutView>
+                            <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                              />
+                        </SemanticZoom.ZoomedOutView>
+                    </SemanticZoom>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="TopPlaySection" Header="Top Played"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView Name="lstViewDetail"  
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource TopPlayTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"                                
+                                >
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection Name="ArtistSection" x:Uid="ArtistSection" 
+                        Header="Artists" DataContext="{Binding}" 
+                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+
+                    <SemanticZoom x:Name="ArtistSemanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
+                                        Loaded="Artist_Loaded"
+                                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <SemanticZoom.ZoomedInView>
+                            <ListView Name="ArtlstViewDetail"  
+                                    HorizontalContentAlignment="Stretch" 
+                                    IsSwipeEnabled="False"
+                                    ScrollViewer.HorizontalScrollMode="Disabled" 
+                                    ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalRailEnabled="True"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource ArtistListViewTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ContainerContentChanging="ArtistListView_ContainerContentChanging"
+                                  >
+                                <ListView.GroupStyle>
+                                    <GroupStyle  HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}"                                           
+                                            />
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </SemanticZoom.ZoomedInView>
+                        <SemanticZoom.ZoomedOutView>
+                            <GridView x:Name="ArtGrdViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                                          />
+                        </SemanticZoom.ZoomedOutView>
+                    </SemanticZoom>
+
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="AlbumSection" Header="Albums"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
+                                  Loaded="AlbumSemanticZoom_Loaded"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <SemanticZoom.ZoomedInView>
+                            <ListView Name="albumLstViewDetail"  
+                                    HorizontalContentAlignment="Stretch" 
+                                    IsSwipeEnabled="False"
+                                    ScrollViewer.HorizontalScrollMode="Disabled" 
+                                    ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                    ScrollViewer.IsVerticalRailEnabled="True"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource AlbumListViewItemTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ContainerContentChanging="AlbumListView_ContainerContentChanging"
+                                  >
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}"                                                
+                                            />
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </SemanticZoom.ZoomedInView>
+                        <SemanticZoom.ZoomedOutView>
+                            <GridView x:Name="albumGrdViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                                          />
+                        </SemanticZoom.ZoomedOutView>
+                    </SemanticZoom>
+                   
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Name="GenreSection" Header="Genres"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView Name="lstViewDetail"  
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource GenreTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ItemClick="Genre_ItemClick"
+                                >
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+        </Hub>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton  Icon="Shuffle" Label="Shuffle" Click="ShuffleButton_Click" />
-                <!--<AppBarButton Icon="Back"  Label="Back"/>
-                <AppBarButton Icon="Pause"  Label="Pause"/>
-                <AppBarButton Icon="Next"  Label="Next"/>-->
+                <AppBarButton Name="appBarShuffle" Icon="Shuffle" Label="Shuffle" Click="ShuffleButton_Click" />
+                <AppBarButton Name="appBarEdit" Icon="Edit" Click="EditButton_Click"  Label="Edit"/>
+                <AppBarButton Name="appBarShowAll" Icon="AllApps"  Click="AllTracksButton_Click"  Label="Show All"/>
             </CommandBar.PrimaryCommands>
-            <!--<CommandBar.SecondaryCommands>
-                <AppBarButton Label="Test01"/>
-                <AppBarButton Label="Test02"/>
-            </CommandBar.SecondaryCommands>-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Name="appBarShowBinned" Label="Show binned" Icon="Delete" Click="ShowBinnedButton_Click"  />
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

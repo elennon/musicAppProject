@@ -52,7 +52,6 @@ C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\pri.resf
 C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\obj\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\MyPlaylistManager.csprojResolveAssemblyReference.cache
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyPlaylistManager.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyPlaylistManager.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyPlaylistManager.pri
@@ -81,3 +80,5 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SQLiteBase.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SQLiteBase.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\SQLiteBase.pri
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\Debug\MyPlaylistManager.winmd.config
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\obj\Debug\MyPlaylistManager.csprojResolveAssemblyReference.cache

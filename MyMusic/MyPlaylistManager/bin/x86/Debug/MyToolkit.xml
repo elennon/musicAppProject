@@ -286,26 +286,26 @@
             <param name="included">The navigation properties to include in the item (e.g. eager load using EF). </param>
             <returns>The task. </returns>
         </member>
-        <member name="T:MyToolkit.Collections.AlphaGroups`1">
+        <member name="T:MyToolkit.Collections.AlphaGroupCollection`1">
             <summary>Groups a set of objects alphabetically (using the ToString() method). </summary>
             <typeparam name="T">The item type. </typeparam>
         </member>
-        <member name="M:MyToolkit.Collections.AlphaGroups`1.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.AlphaGroups`1"/> class. </summary>
+        <member name="M:MyToolkit.Collections.AlphaGroupCollection`1.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.AlphaGroupCollection`1"/> class. </summary>
         </member>
-        <member name="M:MyToolkit.Collections.AlphaGroups`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.AlphaGroupCollection`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
             <summary>Initializes the group with a list of items. </summary>
             <param name="items">The items. </param>
         </member>
-        <member name="M:MyToolkit.Collections.AlphaGroups`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.AlphaGroupCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>Adds multiple items to the group. </summary>
             <param name="items">The items. </param>
         </member>
-        <member name="M:MyToolkit.Collections.AlphaGroups`1.Add(`0)">
+        <member name="M:MyToolkit.Collections.AlphaGroupCollection`1.Add(`0)">
             <summary>Adds an item to the group. </summary>
             <param name="item">The item. </param>
         </member>
-        <member name="E:MyToolkit.Collections.AlphaGroups`1.CollectionChanged">
+        <member name="E:MyToolkit.Collections.AlphaGroupCollection`1.CollectionChanged">
             <summary>Occurs when the collection changes.</summary>
         </member>
         <member name="T:MyToolkit.Collections.BlockingQueue`1">
@@ -319,7 +319,7 @@
             <summary>Restarts the blocking queue. </summary>
         </member>
         <member name="M:MyToolkit.Collections.BlockingQueue`1.Stop">
-            <summary>Stops all waits in the Enqueue or Dequeue methods. </summary>
+            <summary>Stops all waits in the <see cref="M:MyToolkit.Collections.BlockingQueue`1.Enqueue(`0,System.Int32)"/> or <see cref="M:MyToolkit.Collections.BlockingQueue`1.Dequeue(`0@,System.Int32)"/> methods. </summary>
         </member>
         <member name="M:MyToolkit.Collections.BlockingQueue`1.Enqueue(`0,System.Int32)">
             <summary>Enqueues an item in the queue. </summary>
@@ -335,7 +335,7 @@
             available if the queue is empty. Default is -1 (indefinitely). </param>
             <returns>True when an item could be dequeued during the maximum wait time; otherwise false. </returns>
         </member>
-        <member name="T:MyToolkit.Collections.ExtendedGroup`1">
+        <member name="T:MyToolkit.Collections.TopItemsGroup`1">
             <summary>An extended group implementation with a list of items but showing only a given number of them. </summary>
             <typeparam name="T">The type of an item. </typeparam>
         </member>
@@ -356,56 +356,62 @@
         <member name="P:MyToolkit.Collections.Group`1.HasItems">
             <summary>Gets a value indicating whether the group has items. </summary>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedGroup`1.#ctor(System.String,System.Int32)">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.ExtendedGroup`1"/> class. </summary>
+        <member name="M:MyToolkit.Collections.TopItemsGroup`1.#ctor(System.String,System.Int32)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.TopItemsGroup`1"/> class. </summary>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedGroup`1.#ctor(System.String,System.Collections.Generic.IEnumerable{`0},System.Int32)">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.ExtendedGroup`1"/> class. </summary>
+        <member name="M:MyToolkit.Collections.TopItemsGroup`1.#ctor(System.String,System.Collections.Generic.IEnumerable{`0},System.Int32)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.TopItemsGroup`1"/> class. </summary>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedGroup`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.TopItemsGroup`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
             <summary>Initializes the group with a list of items. </summary>
             <param name="items">The items. </param>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedGroup`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+        <member name="M:MyToolkit.Collections.TopItemsGroup`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
             <summary>Called when the items collection changed. </summary>
             <param name="e">The arguments. </param>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedGroup`1.TopItemsCount">
+        <member name="P:MyToolkit.Collections.TopItemsGroup`1.TopItemsCount">
             <summary>Gets or sets the number of items to show in the group. </summary>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedGroup`1.TopItems">
+        <member name="P:MyToolkit.Collections.TopItemsGroup`1.TopItems">
             <summary>Gets the items to show in the group. </summary>
         </member>
-        <member name="T:MyToolkit.Collections.ExtendedObservableCollection`1">
+        <member name="M:MyToolkit.Collections.ExtendedGroup`1.#ctor(System.String,System.Int32)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.TopItemsGroup`1"/> class. </summary>
+        </member>
+        <member name="M:MyToolkit.Collections.ExtendedGroup`1.#ctor(System.String,System.Collections.Generic.IEnumerable{`0},System.Int32)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Collections.TopItemsGroup`1"/> class. </summary>
+        </member>
+        <member name="T:MyToolkit.Collections.MtObservableCollection`1">
             <summary>Provides a safe collection changed event which always provides the added 
             and removed items, some more events and more range methods. </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.MtObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>Adds multiple items to the collection. </summary>
             <param name="collection">The items to add. </param>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedObservableCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.MtObservableCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>Removes multiple items from the collection. </summary>
             <param name="collection">The items to remove. </param>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedObservableCollection`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MyToolkit.Collections.MtObservableCollection`1.Initialize(System.Collections.Generic.IEnumerable{`0})">
             <summary>Resets the whole collection with a given list. </summary>
             <param name="collection">The collection. </param>
         </member>
-        <member name="M:MyToolkit.Collections.ExtendedObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+        <member name="M:MyToolkit.Collections.MtObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
             <summary>Raises the System.Collections.ObjectModel.ObservableCollection{T}.CollectionChanged event with the provided arguments. </summary>
             <param name="e">Arguments of the event being raised. </param>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedObservableCollection`1.ProvideOldCollection">
+        <member name="P:MyToolkit.Collections.MtObservableCollection`1.ProvideOldCollection">
             <summary>Gets or sets a value indicating whether to provide the previous collection in the extended collection changed event. 
             Enabling this feature may have a performance impact as for each collection changed event a copy of the collection gets created. </summary>
         </member>
-        <member name="E:MyToolkit.Collections.ExtendedObservableCollection`1.PropertyChanged">
+        <member name="E:MyToolkit.Collections.MtObservableCollection`1.PropertyChanged">
             <summary>Occurs when a property value changes. 
             This is the same event as on the <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> except that it is public. </summary>
         </member>
-        <member name="E:MyToolkit.Collections.ExtendedObservableCollection`1.ExtendedCollectionChanged">
+        <member name="E:MyToolkit.Collections.MtObservableCollection`1.ExtendedCollectionChanged">
             <summary>Collection changed event with safe/always correct added items and removed items list. </summary>
         </member>
         <member name="T:MyToolkit.Collections.ObservableCollectionObserver`1">
@@ -447,16 +453,16 @@
             <summary>Gets the list of removed items. </summary>
         </member>
         <member name="P:MyToolkit.Collections.IExtendedNotifyCollectionChangedEventArgs.OldCollection">
-            <summary>Gets the previous collection (only provided when enabled in the <see cref="T:MyToolkit.Collections.ExtendedObservableCollection`1"/> object). </summary>
+            <summary>Gets the previous collection (only provided when enabled in the <see cref="T:MyToolkit.Collections.MtObservableCollection`1"/> object). </summary>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedNotifyCollectionChangedEventArgs`1.AddedItems">
+        <member name="P:MyToolkit.Collections.MtNotifyCollectionChangedEventArgs`1.AddedItems">
             <summary>Gets or sets the list of added items. </summary>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedNotifyCollectionChangedEventArgs`1.RemovedItems">
+        <member name="P:MyToolkit.Collections.MtNotifyCollectionChangedEventArgs`1.RemovedItems">
             <summary>Gets or sets the list of removed items. </summary>
         </member>
-        <member name="P:MyToolkit.Collections.ExtendedNotifyCollectionChangedEventArgs`1.OldCollection">
-            <summary>Gets the previous collection (only provided when enabled in the <see cref="T:MyToolkit.Collections.ExtendedObservableCollection`1"/> object). </summary>
+        <member name="P:MyToolkit.Collections.MtNotifyCollectionChangedEventArgs`1.OldCollection">
+            <summary>Gets the previous collection (only provided when enabled in the <see cref="T:MyToolkit.Collections.MtObservableCollection`1"/> object). </summary>
         </member>
         <member name="T:MyToolkit.Composition.Composition">
             <summary>Provides access to a singleton <see cref="T:MyToolkit.Composition.ICompositionContext"/> object. </summary>
@@ -1223,64 +1229,64 @@
         <member name="P:MyToolkit.Command.AsyncRelayCommand`1.IsRunning">
             <summary>Gets a value indicating whether the command is currently running. </summary>
         </member>
-        <member name="T:MyToolkit.Model.ExtendedObservableObject">
+        <member name="T:MyToolkit.Model.GraphObservableObject">
             <summary>An <see cref="T:MyToolkit.Model.ObservableObject"/> with graph property changed event and extended 
             changed event (including old and new value). </summary>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.Set``1(System.String,``0@,``0)">
+        <member name="M:MyToolkit.Model.GraphObservableObject.Set``1(System.String,``0@,``0)">
             <summary>Updates the property and raises the changed event, but only if the new value does not equal the old value. </summary>
             <param name="propertyName">The property name as lambda. </param>
             <param name="oldValue">A reference to the backing field of the property. </param>
             <param name="newValue">The new value. </param>
             <returns>True if the property has changed. </returns>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.RaisePropertyChanged(System.Object,System.Object,System.String)">
-            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs"/> arguments. </summary>
+        <member name="M:MyToolkit.Model.GraphObservableObject.RaisePropertyChanged(System.Object,System.Object,System.String)">
+            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.GraphPropertyChangedEventArgs"/> arguments. </summary>
             <param name="oldValue">The old value. </param>
             <param name="newValue">The new value. </param>
             <param name="propertyName">The property name. </param>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.RaisePropertyChanged(System.Linq.Expressions.Expression{System.Func{System.Object}},System.Object,System.Object)">
-            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs"/> arguments. </summary>
+        <member name="M:MyToolkit.Model.GraphObservableObject.RaisePropertyChanged(System.Linq.Expressions.Expression{System.Func{System.Object}},System.Object,System.Object)">
+            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.GraphPropertyChangedEventArgs"/> arguments. </summary>
             <param name="oldValue">The old value. </param>
             <param name="newValue">The new value. </param>
             <param name="propertyNameExpression">The property name as lambda. </param>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object,System.Object)">
-            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs"/> arguments. </summary>
+        <member name="M:MyToolkit.Model.GraphObservableObject.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object,System.Object)">
+            <summary>Raises the property changed event with <see cref="T:MyToolkit.Model.GraphPropertyChangedEventArgs"/> arguments. </summary>
             <param name="oldValue">The old value. </param>
             <param name="newValue">The new value. </param>
             <typeparam name="TClass">The type of the class with the property. </typeparam>
             <param name="propertyNameExpression">The property name as lambda. </param>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.RegisterChild(System.Object)">
+        <member name="M:MyToolkit.Model.GraphObservableObject.RegisterChild(System.Object)">
             <summary>Registers a child to receive property changes. </summary>
             <param name="child">The child object. </param>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.DeregisterChild(System.Object)">
+        <member name="M:MyToolkit.Model.GraphObservableObject.DeregisterChild(System.Object)">
             <summary>Deregisters a child. </summary>
             <param name="child">The child object. </param>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedObservableObject.RaisePropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+        <member name="M:MyToolkit.Model.GraphObservableObject.RaisePropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
             <summary>Raises the property changed event. </summary>
             <param name="args">The arguments. </param>
         </member>
-        <member name="E:MyToolkit.Model.ExtendedObservableObject.GraphPropertyChanged">
+        <member name="E:MyToolkit.Model.GraphObservableObject.GraphPropertyChanged">
             <summary>Occurs when a property value of the object or any child changes. </summary>
         </member>
-        <member name="P:MyToolkit.Model.ExtendedObservableObject.ExcludedChildTypes">
+        <member name="P:MyToolkit.Model.GraphObservableObject.ExcludedChildTypes">
             <summary>Gets the child types which are excluded for graph tracking (direct references or in collections).</summary>
         </member>
-        <member name="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs">
+        <member name="T:MyToolkit.Model.GraphPropertyChangedEventArgs">
             <summary>The argument of the ExtendedPropertyChanged event. </summary>
         </member>
-        <member name="M:MyToolkit.Model.ExtendedPropertyChangedEventArgs.#ctor(System.String,System.Object,System.Object)">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs"/> class. </summary>
+        <member name="M:MyToolkit.Model.GraphPropertyChangedEventArgs.#ctor(System.String,System.Object,System.Object)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.Model.GraphPropertyChangedEventArgs"/> class. </summary>
         </member>
-        <member name="P:MyToolkit.Model.ExtendedPropertyChangedEventArgs.OldValue">
+        <member name="P:MyToolkit.Model.GraphPropertyChangedEventArgs.OldValue">
             <summary>Gets the old value of the changed property. </summary>
         </member>
-        <member name="P:MyToolkit.Model.ExtendedPropertyChangedEventArgs.NewValue">
+        <member name="P:MyToolkit.Model.GraphPropertyChangedEventArgs.NewValue">
             <summary>Gets the new value of the changed property. </summary>
         </member>
         <member name="T:MyToolkit.Mvvm.IDispatcher">
@@ -1291,9 +1297,9 @@
             <param name="action">The action. </param>
         </member>
         <member name="T:MyToolkit.Data.UndoRedoManager">
-            <summary>Manages undo/redo for a <see cref="T:MyToolkit.Model.ExtendedObservableObject"/> object. 
-            Only classes which inherit from ExtendedObservableObject and properties which are 
-            changed via the Set method or raise <see cref="T:MyToolkit.Model.ExtendedPropertyChangedEventArgs"/> are tracked for undo/redo. 
+            <summary>Manages undo/redo for a <see cref="T:MyToolkit.Model.GraphObservableObject"/> object. 
+            Only classes which inherit from GraphObservableObject and properties which are 
+            changed via the Set method or raise <see cref="T:MyToolkit.Model.GraphPropertyChangedEventArgs"/> are tracked for undo/redo. 
             Properties must have an accessible setter. Collection must inherit from INotifyCollectionChanged for
             undo/redo of collection changes. The class is not thread-safe; all methods must be called on the UI thread. </summary>
         </member>
@@ -1408,7 +1414,8 @@
         </member>
         <member name="M:MyToolkit.Mvvm.ViewModelBase.HandleException(System.Exception)">
             <summary>Handles an exception which occured in the <see cref="M:MyToolkit.Mvvm.ViewModelBase.RunTaskAsync(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task})"/> method. </summary>
-            <param name="exception">The exception. </param>
+            <param name="exception">The exception to handle. </param>
+            <exception cref="T:System.NotImplementedException">An exception occured in RunTaskAsync. Override ViewModelBase.HandleException to handle this exception. </exception>
         </member>
         <member name="M:MyToolkit.Mvvm.ViewModelBase.DeregisterCancellationTokenSource(System.Threading.CancellationTokenSource)">
             <summary>Disposes and deregisters a <see cref="T:System.Threading.CancellationTokenSource"/>. 
@@ -2180,116 +2187,103 @@
             <param name="handler">The handler to remove. </param>
             <returns>True if the event registration could be found and was removed. </returns>
         </member>
-        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityResult">
+        <member name="T:MyToolkit.WorkflowEngine.ActivityData">
+            <summary>Contains the activity output. </summary>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.ActivityData.ActivityId">
+            <summary>Gets the activity ID. </summary>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.ActivityData.Output">
+            <summary>Gets the last output of the activity. </summary>
+        </member>
+        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityOutput">
             <summary>Represents a result of an activity's execution. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityResult.#ctor(System.Boolean)">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowActivityResult"/> class. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityResult.#ctor(System.Boolean,System.Object)">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowActivityResult"/> class. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityResult.GetNextActivities(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase,MyToolkit.WorkflowEngine.WorkflowDefinition)">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityOutput.GetNextActivities(MyToolkit.WorkflowEngine.IWorkflowActivityBase,MyToolkit.WorkflowEngine.WorkflowDefinition)">
             <summary>Gets the next activities or null when no condition is available. </summary>
             <param name="activity">The current workflow activity. </param>
             <param name="definition">The workflow definition. </param>
             <returns>The next activities. </returns>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">No next activities could be found based on the given condition. </exception>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">More then one activity found for condition but activity is not a ForkActivity. </exception>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityResult.GetResult``1">
-            <summary>Gets the typed result (simply casts and returns the <see cref="P:MyToolkit.WorkflowEngine.WorkflowActivityResult.Result"/> property). </summary>
-            <typeparam name="T">The type of the result. </typeparam>
-            <returns>The result. </returns>
-        </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityResult.Successful">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityOutput.Successful">
             <summary>Gets a value indicating whether the processing of the activity was successful. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityResult.NextActivitiesCondition">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityOutput.NextActivitiesCondition">
             <summary>Gets the condition for the next activities (null if using the default activities from the workflow). </summary>
-        </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityResult.Result">
-            <summary>Gets or sets the result object (only used to pass data to the caller of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowInstance"/> object's CompleteAsync method). </summary>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.Activities.AutomaticWorkflowActivityBase">
             <summary>An abstract class for an activity which is automatically completed: 
-            The <see cref="M:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.CompleteAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider,MyToolkit.WorkflowEngine.WorkflowActivityArguments,System.Threading.CancellationToken)"/> method gets directly called after <see cref="M:MyToolkit.WorkflowEngine.Activities.AutomaticWorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider)"/>. </summary>
+            The <see cref="M:MyToolkit.WorkflowEngine.IWorkflowActivityBase.CompleteAsync(MyToolkit.WorkflowEngine.WorkflowActivityInput,System.Threading.CancellationToken)"/> method gets directly called after <see cref="M:MyToolkit.WorkflowEngine.Activities.AutomaticWorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowActivityInput)"/>. </summary>
         </member>
-        <member name="T:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase">
+        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityBase">
+            <summary>The base workflow activity class with no input and output types. </summary>
+        </member>
+        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityBase`2">
             <summary>The base workflow activity class. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase"/> class. </summary>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowActivityBase`2"/> class. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider)">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.PrepareAsync(`0)">
             <summary>Called when the previous activity has been executed. 
             The method may be called multiple times when there are multiple incoming transitions. </summary>
-            <param name="data">The workflow instance's data provider. </param>
+            <param name="input">The input. </param>
             <returns>True when the activity should be automatically and immediately executed (with no args). </returns>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.CompleteAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider,MyToolkit.WorkflowEngine.WorkflowActivityArguments,System.Threading.CancellationToken)">
-            <summary>Completes the activity. </summary>
-            <param name="data">The workflow instance's data provider. </param>
-            <param name="args">The execution args. </param>
-            <param name="cancellationToken">The cancellation token. </param>
-            <returns>True when the activity has been completed. </returns>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider,MyToolkit.WorkflowEngine.WorkflowDefinition)">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.PrepareAsync(`0,MyToolkit.WorkflowEngine.WorkflowDefinition)">
             <summary>Called when the previous activity has been executed. 
             The method may be called multiple times when there are multiple incoming transitions. </summary>
-            <param name="data">The workflow instance's data provider. </param>
+            <param name="input">The input. </param>
             <param name="definition">The workflow definition. </param>
             <returns>True when the activity should be automatically and immediately executed (with no args). </returns>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.Id">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.CompleteAsync(`0,System.Threading.CancellationToken)">
+            <summary>Completes the activity. </summary>
+            <param name="input">The input. </param>
+            <param name="cancellationToken">The cancellation token. </param>
+            <returns>True when the activity has been completed. </returns>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.Id">
             <summary>Gets or sets the id of the activity. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.Description">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.Description">
             <summary>Gets or sets the description. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.Group">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.Group">
             <summary>Gets or sets the used data group. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.PositionX">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.PositionX">
             <summary>Gets or sets the x position in the designer. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase.PositionY">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.PositionY">
             <summary>Gets or sets the y position in the designer. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.AutomaticWorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider)">
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowActivityBase`2.Routes">
+            <summary>Gets or sets the routes. </summary>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.Activities.AutomaticWorkflowActivityBase.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowActivityInput)">
             <summary>Called when the previous activity has been executed. 
             The method may be called multiple times when there are multiple incoming transitions. </summary>
-            <param name="data">The workflow instance's data provider. </param>
+            <param name="input">The input. </param>
             <returns>True when the activity should be automatically and immediately executed (with no args). </returns>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.Activities.ForkActivity">
             <summary>Activity for which forking is allowed. Only subclasses of this class are allowed to have multiple outbound transitions. </summary>
         </member>
-        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityArguments">
+        <member name="T:MyToolkit.WorkflowEngine.WorkflowActivityInput">
             <summary>A container for accessing typed activity arguments. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityArguments.#ctor(System.Object[])">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowActivityArguments"/> class. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowActivityArguments.GetArgument``1(System.Int32)">
-            <summary>Gets a typed argument. </summary>
-            <typeparam name="T">The argument type. </typeparam>
-            <param name="index">The index. </param>
-            <returns>The argument value. </returns>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.Activities.JoinActivity">
             <summary>Joins two parallel activities. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.Activities.JoinActivity.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowDataProvider,MyToolkit.WorkflowEngine.WorkflowDefinition)">
+        <member name="M:MyToolkit.WorkflowEngine.Activities.JoinActivity.PrepareAsync(MyToolkit.WorkflowEngine.WorkflowActivityInput,MyToolkit.WorkflowEngine.WorkflowDefinition)">
             <summary>Called when the previous activity has been executed. 
             The method may be called multiple times when there are multiple incoming transitions. </summary>
-            <param name="data">The workflow instance's data provider. </param>
+            <param name="input">The input. </param>
             <param name="definition">The workflow definition. </param>
             <returns>True when the activity should be automatically and immediately executed (with no args). </returns>
-        </member>
-        <member name="T:MyToolkit.WorkflowEngine.ActivityDataBase">
-            <summary>Contains activity data. </summary>
-        </member>
-        <member name="P:MyToolkit.WorkflowEngine.ActivityDataBase.Group">
-            <summary>Gets or sets the data group (only one data object per type and group allowed). </summary>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.CurrentActivitiesChangedEventArgs">
             <summary>Event args for the <see cref="E:MyToolkit.WorkflowEngine.WorkflowInstance.CurrentActivitiesChanged"/> event. </summary>
@@ -2300,14 +2294,16 @@
         <member name="M:MyToolkit.WorkflowEngine.Exceptions.WorkflowException.#ctor(System.String)">
             <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException"/> class. </summary>
         </member>
+        <member name="M:MyToolkit.WorkflowEngine.Exceptions.WorkflowException.#ctor(System.String,System.Exception)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException"/> class. </summary>
+        </member>
         <member name="T:MyToolkit.WorkflowEngine.WorkflowDefinition">
             <summary>Describes a workflow using activities and transitions. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.FromXml(System.String,System.Type[],System.Type[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.FromXml(System.String,System.Type[])">
             <summary>Creates a workflow instance from a XML string. </summary>
             <param name="xml">The XML. </param>
-            <param name="activityTypes">The possible activity types. </param>
-            <param name="parameterTypes">The possible parameter types. </param>
+            <param name="activityTypes">The possible inputActivity types. </param>
             <returns>The workflow. </returns>
         </member>
         <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.ToXml">
@@ -2317,24 +2313,35 @@
         <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.CreateInstance">
             <summary>Creates an workflow instance based on this workflow definition. </summary>
             <returns>The <see cref="T:MyToolkit.WorkflowEngine.WorkflowInstance"/>. </returns>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow validation exception occurred. </exception>
         </member>
         <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.GetActivityById(System.String)">
-            <summary>Gets an activity by ID. </summary>
-            <param name="activityId">The activity ID. </param>
-            <returns>The <see cref="T:MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase"/>. </returns>
+            <summary>Gets an inputActivity by ID. </summary>
+            <param name="activityId">The inputActivity ID. </param>
+            <returns>The <see cref="T:MyToolkit.WorkflowEngine.IWorkflowActivityBase"/>. </returns>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">The activity could not be found. </exception>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.GetOutboundTransitions(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase)">
-            <summary>Gets the outbound transitions of a given activity. </summary>
-            <param name="activity">The activity. </param>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.GetOutboundTransitions(MyToolkit.WorkflowEngine.IWorkflowActivityBase)">
+            <summary>Gets the outbound transitions of a given inputActivity. </summary>
+            <param name="activity">The inputActivity. </param>
             <returns>The transitions. </returns>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.GetInboundTransitions(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase)">
-            <summary>Gets the inbound transitions of a given activity. </summary>
-            <param name="activity">The activity. </param>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.GetInboundTransitions(MyToolkit.WorkflowEngine.IWorkflowActivityBase)">
+            <summary>Gets the inbound transitions of a given inputActivity. </summary>
+            <param name="activity">The inputActivity. </param>
             <returns>The transitions. </returns>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.ValidateRoutes">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow validation exception occurred. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowDefinition.ValidateRoute(MyToolkit.WorkflowEngine.IWorkflowActivityBase,MyToolkit.WorkflowEngine.WorkflowRoute)">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow validation exception occurred. </exception>
         </member>
         <member name="P:MyToolkit.WorkflowEngine.WorkflowDefinition.StartActivityId">
-            <summary>Gets or sets the ID of the first activity. </summary>
+            <summary>Gets or sets the ID of the first inputActivity. </summary>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowDefinition.RawActivities">
+            <summary>Gets or sets the workflow activities. </summary>
         </member>
         <member name="P:MyToolkit.WorkflowEngine.WorkflowDefinition.Activities">
             <summary>Gets or sets the workflow activities. </summary>
@@ -2343,47 +2350,21 @@
             <summary>Gets or sets the workflow transitions. </summary>
         </member>
         <member name="P:MyToolkit.WorkflowEngine.WorkflowDefinition.StartActivity">
-            <summary>Gets or sets the first activity. </summary>
-        </member>
-        <member name="T:MyToolkit.WorkflowEngine.WorkflowDataProvider">
-            <summary>Provides data objects for a workflow instance. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDataProvider.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowDataProvider"/> class. </summary>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDataProvider.Resolve``1(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase)">
-            <summary>Resolves the requested data object. </summary>
-            <typeparam name="T">The type of the data object. </typeparam>
-            <param name="activity">The current activity to load the used data group from. </param>
-            <returns>The data object. </returns>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDataProvider.Resolve``1(System.String)">
-            <summary>Resolves the requested data object. </summary>
-            <typeparam name="T">The type of the data object. </typeparam>
-            <param name="group">The data group. Only use activity properties as parameter (no hard-coded strings). </param>
-            <returns>The data object. </returns>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowDataProvider.ResolveInstanceData">
-            <summary>Resolves the instance data. </summary>
-            <returns>The instance data object. </returns>
-        </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowDataProvider.Data">
-            <summary>Gets or sets the data. </summary>
+            <summary>Gets or sets the first inputActivity. </summary>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.WorkflowInstance">
             <summary>Represents an instance of a <see cref="P:MyToolkit.WorkflowEngine.WorkflowInstance.WorkflowDefinition"/>. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.FromXml(System.String,MyToolkit.WorkflowEngine.WorkflowDefinition,System.Type[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.FromXml(System.String,MyToolkit.WorkflowEngine.WorkflowDefinition)">
             <summary>Deserializes a workflow instance from XML. </summary>
             <param name="xml">The XML as string. </param>
             <param name="workflowDefinition">The instance's workflow description. </param>
-            <param name="dataTypes">All possible data container types. </param>
             <returns>The workflow instance. </returns>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.#ctor(MyToolkit.WorkflowEngine.WorkflowDefinition,MyToolkit.WorkflowEngine.WorkflowDataProvider)">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.#ctor(MyToolkit.WorkflowEngine.WorkflowDefinition,System.Collections.Generic.List{MyToolkit.WorkflowEngine.ActivityData})">
             <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowInstance"/> class. </summary>
             <param name="workflowDefinition">The workflow definition. </param>
-            <param name="dataProvider">The data provider. </param>
+            <param name="data">The data provider. </param>
         </member>
         <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.#ctor">
             <summary>Used only for serialization. </summary>
@@ -2392,39 +2373,42 @@
             <summary>Serializes the workflow instance to XML. </summary>
             <returns>The XML. </returns>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.ResolveData``1(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase)">
-            <summary>Resolves the requested data object. </summary>
-            <typeparam name="T">The type of the data object. </typeparam>
-            <param name="activity">The current activity to load the used data group from. </param>
-            <returns>The data object. </returns>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.ResolveData``1(System.String)">
-            <summary>Resolves the requested data object. </summary>
-            <typeparam name="T">The type of the data object. </typeparam>
-            <param name="group">The data group. Only use activity properties as parameter (no hard-coded strings). </param>
-            <returns>The data object. </returns>
-        </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase,System.Object[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(MyToolkit.WorkflowEngine.IWorkflowActivityBase)">
             <summary>Executes the given activity with the given arguments. </summary>
-            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">Thrown when execution failed. </exception>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase,System.Threading.CancellationToken,System.Object[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(MyToolkit.WorkflowEngine.IWorkflowActivityBase,System.Threading.CancellationToken)">
             <summary>Executes the given activity with the given arguments. </summary>
-            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">Thrown when execution failed. </exception>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(System.String,System.Object[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync``1(MyToolkit.WorkflowEngine.IWorkflowActivityBase,``0)">
             <summary>Executes the given activity with the given arguments. </summary>
-            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">Thrown when execution failed. </exception>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync(System.String,System.Threading.CancellationToken,System.Object[])">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteAsync``1(MyToolkit.WorkflowEngine.IWorkflowActivityBase,System.Threading.CancellationToken,``0)">
             <summary>Executes the given activity with the given arguments. </summary>
-            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">Thrown when execution failed. </exception>
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CompleteInternalAsync``1(MyToolkit.WorkflowEngine.IWorkflowActivityBase,System.Threading.CancellationToken,``0)">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.CreateActivityInput``1(MyToolkit.WorkflowEngine.IWorkflowActivityBase,``0)">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.GetDefaultNextActivities(MyToolkit.WorkflowEngine.IWorkflowActivityBase)">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">Default outgoing transitions of cannot be conditional. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.AddNextActivitiesAsync(System.String,System.Collections.Generic.IList{MyToolkit.WorkflowEngine.IWorkflowActivityBase},MyToolkit.WorkflowEngine.WorkflowTransition[])">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstance.PrepareNextActivities(System.Collections.Generic.IEnumerable{MyToolkit.WorkflowEngine.IWorkflowActivityBase})">
+            <exception cref="T:MyToolkit.WorkflowEngine.Exceptions.WorkflowException">A workflow exception occurred. </exception>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowInstance.Data">
+            <summary>Gets the data. </summary>
         </member>
         <member name="P:MyToolkit.WorkflowEngine.WorkflowInstance.WorkflowDefinition">
             <summary>Gets the instance's workflow description. </summary>
-        </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowInstance.Data">
-            <summary>Gets or sets the data provider of the workflow instance. </summary>
         </member>
         <member name="E:MyToolkit.WorkflowEngine.WorkflowInstance.CurrentActivitiesChanged">
             <summary>Occurs when the current activities of the workflow instance changed. </summary>
@@ -2441,17 +2425,50 @@
         <member name="P:MyToolkit.WorkflowEngine.WorkflowInstance.CurrentActivityIds">
             <summary>Gets the list of current activity ids. </summary>
         </member>
-        <member name="T:MyToolkit.WorkflowEngine.WorkflowInstanceData">
-            <summary>Contains the workflow instance state. </summary>
+        <member name="T:MyToolkit.WorkflowEngine.WorkflowRoute">
+            <summary>A route connects the output of an activity with the input of an activity. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowInstanceData.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowInstanceData"/> class. </summary>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowRoute.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/> class. </summary>
         </member>
-        <member name="P:MyToolkit.WorkflowEngine.WorkflowInstanceData.CurrentActivityIds">
-            <summary>Gets or sets the current activity IDs. </summary>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowRoute.#ctor(MyToolkit.WorkflowEngine.IWorkflowActivityBase,System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/> class. </summary>
+            <param name="outputActivity">The output activity. </param>
+            <param name="outputProperty">The output property defined on the output activity's output type. </param>
+            <param name="inputProperty">The input property defined on the input activity's input type. </param>
         </member>
-        <member name="T:MyToolkit.WorkflowEngine.WorkflowParametersBase">
-            <summary>Base class for workflow parameters. </summary>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowRoute.#ctor(System.String,System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/> class. </summary>
+            <param name="outputActivityId">The output activity ID. </param>
+            <param name="outputProperty">The output property defined on the output activity's output type. </param>
+            <param name="inputProperty">The input property defined on the input activity's input type. </param>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowRoute.Create``2(MyToolkit.WorkflowEngine.IWorkflowActivityBase,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Linq.Expressions.Expression{System.Func{``1,System.Object}})">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/> class. </summary>
+            <typeparam name="TOutputActivity">The type of the output activity's output. </typeparam>
+            <typeparam name="TInputActivity">The type of the input activity's input. </typeparam>
+            <param name="outputActivity">The output activity. </param>
+            <param name="outputPropertyExpression">The output property as expression. </param>
+            <param name="inputPropertyExpression">The output property as expression. </param>
+            <returns>The <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/>. </returns>
+        </member>
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowRoute.Create``2(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Linq.Expressions.Expression{System.Func{``1,System.Object}})">
+            <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/> class. </summary>
+            <typeparam name="TOutputActivity">The type of the output activity's output. </typeparam>
+            <typeparam name="TInputActivity">The type of the input activity's input. </typeparam>
+            <param name="outputActivityId">The output activity ID. </param>
+            <param name="outputPropertyExpression">The output property as expression. </param>
+            <param name="inputPropertyExpression">The output property as expression. </param>
+            <returns>The <see cref="T:MyToolkit.WorkflowEngine.WorkflowRoute"/>. </returns>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowRoute.OutputActivityId">
+            <summary>Gets the output activity ID. </summary>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowRoute.OutputProperty">
+            <summary>Gets output property. </summary>
+        </member>
+        <member name="P:MyToolkit.WorkflowEngine.WorkflowRoute.InputProperty">
+            <summary>Gets input property. </summary>
         </member>
         <member name="T:MyToolkit.WorkflowEngine.WorkflowTransition">
             <summary>Describes the transition between two activities. </summary>
@@ -2459,7 +2476,7 @@
         <member name="M:MyToolkit.WorkflowEngine.WorkflowTransition.#ctor">
             <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowTransition"/> class. </summary>
         </member>
-        <member name="M:MyToolkit.WorkflowEngine.WorkflowTransition.#ctor(MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase,MyToolkit.WorkflowEngine.Activities.WorkflowActivityBase)">
+        <member name="M:MyToolkit.WorkflowEngine.WorkflowTransition.#ctor(MyToolkit.WorkflowEngine.IWorkflowActivityBase,MyToolkit.WorkflowEngine.IWorkflowActivityBase)">
             <summary>Initializes a new instance of the <see cref="T:MyToolkit.WorkflowEngine.WorkflowTransition"/> class. </summary>
         </member>
         <member name="P:MyToolkit.WorkflowEngine.WorkflowTransition.From">

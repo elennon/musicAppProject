@@ -1,4 +1,5 @@
 ﻿using MyMusic.Common;
+using MyMusic.HelperClasses;
 using MyMusic.Models;
 using MyMusic.ViewModels;
 using System;
@@ -16,6 +17,8 @@ using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Media.Playback;
 using Windows.Storage;
+using Windows.Storage.Search;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -30,6 +33,9 @@ namespace MyMusic.Views
 {
     public class DataGroup
     {
+        public DataGroup()
+        { }
+
         public DataGroup(String UniqueId, String title, String description, String imagePath)
         {
             this.UniqueId = UniqueId;
@@ -53,93 +59,103 @@ namespace MyMusic.Views
     {
         private TracksViewModel trkView = new TracksViewModel();
         private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
-        
+
         private readonly NavigationHelper navigationHelper;
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
         }
 
-        
-
         public MainPage()
         {
             InitializeComponent();
 
-            //this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
-
-            
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            //lstOptions.SelectedIndex = -1;
+            LoadRadioList();
+            LoadCollectionList();
+            LoadStreamingList();
+
+            //await trkView.SyncDB();
+            //Task.Run(async delegate()
+            //{
+            //    await trkView.SyncDB();
+            //});
+
+  //          Logger.GetLogger().logChannel.LogMessage("Main page nav to");
+            //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
+
+            // foreach (var item in lf)
+            // {
+            //     var ty = item.OpenReadAsync();
+            //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);
+                 
+            // }
+        }
+        
+
+        private void LoadRadioList()
+        {
+            RadioSection.DataContext = rdoView.GetXmlGenres();
+        }
+
+        private void LoadCollectionList()
+        {
             List<DataGroup> groups = new List<DataGroup>();
-            DataGroup sg = new DataGroup("Stream", "Streaming", "music streaming", "ms-appx:///Assets/music.jpg" );
+            DataGroup sg = new DataGroup { Title = "All Tracks", UniqueId = "All Tracks", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
+            sg = new DataGroup { Title = "Top Tracks", UniqueId = "Top Tracks", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
+            sg = new DataGroup { Title = "Artists", UniqueId = "Artist", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
+            sg = new DataGroup { Title = "Album", UniqueId = "Album", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
+            sg = new DataGroup { Title = "Genre", UniqueId = "Genre", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
+            CollectionSection.DataContext = groups;
+            //Hub.DataContext = groups;
+        }
+
+        private void LoadStreamingList()
+        {
+            List<DataGroup> groups = new List<DataGroup>();
+            DataGroup sg = new DataGroup("Stream", "Search GrooveShark", "music streaming", "ms-appx:///Assets/music.jpg");
             groups.Add(sg);
             DataGroup sg1 = new DataGroup("Collection", "Collection", "music collection", "ms-appx:///Assets/music3.jpg");
             groups.Add(sg1);
             DataGroup sg2 = new DataGroup("Radio", "Online Radio", "online radio streaming", "ms-appx:///Assets/radio.jpg");
-            groups.Add(sg2);
-            Hub.DataContext = groups;
-            //await trkView.SyncDB();
-            Task.Run(async delegate()
-            {
-                await trkView.SyncDB();
-            });
+            groups.Add(sg2);            
+            StreamingHubSection.DataContext = groups;
         }
 
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+
+
+        private void RadioStream_ItemClick(object sender, ItemClickEventArgs e)
         {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
+            var itemId = ((RadioGenreViewModel)e.ClickedItem).RadioGenreId;
+            if (!Frame.Navigate(typeof(RadioStreams), itemId))
+            {
+                Debug.WriteLine("navigation failed from main to radio lists ");
+            }
+        }
+
+        private void Collection_ItemClick(object sender, ItemClickEventArgs e)
+        {
             var itemId = ((DataGroup)e.ClickedItem).UniqueId;
-            switch (itemId)
+            if (!Frame.Navigate(typeof(Collection), itemId))
             {
-                case "Stream":
-                    this.Frame.Navigate(typeof(Streaming));
-                    break;
-                case "Collection":
-                    this.Frame.Navigate(typeof(Collection));
-                    break;
-                case "Radio":
-                    //RadioStream rs = new RadioStream { RadioUrl = "apples" };     
-                    //this.Frame.Navigate(typeof(NowPlaying), rs);
-                    this.Frame.Navigate(typeof(RadioStreams));
-                    break;
-            }
+                Debug.WriteLine("navigation failed from main to collection ");
+            }           
         }
-
-        private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox lb = (ListBox)sender;
-
-            if (lb.SelectedIndex != -1)
-            {
-                string title = ((ListBoxItem)lb.SelectedItem).Tag.ToString();
-                switch (title)
-                {
-                    case "Stream":
-                        this.Frame.Navigate(typeof(Streaming));
-                        break;
-                    case "Collection":
-                        this.Frame.Navigate(typeof(Collection));
-                        break;
-                    case "Radio":
-                        //RadioStream rs = new RadioStream { RadioUrl = "apples" };     
-                        //this.Frame.Navigate(typeof(NowPlaying), rs);
-                        this.Frame.Navigate(typeof(RadioStreams));
-                        break;
-                }
-            }
-        }
-
-       
 
         private void btnNowPlaying_Click(object sender, RoutedEventArgs e)
         {
@@ -155,11 +171,20 @@ namespace MyMusic.Views
         {
             //rdoView.AddRadios();
             //trkView.DropDB();
+            //rdoView.AddGenre();
+            rdoView.AddGenrePics();
         }
 
         private void ShortCutButton_Click(object sender, RoutedEventArgs e)
         {
-            var tester = trkView.GetThisArtist("132");
+            string rUrl = "radio,http://grooveshark.com/s/Outro+Eric+Melvin+Accordion+Solo/1ZlpLj?src=3";       //  http://tinysong.com/ieiB";
+        
+            if (!Frame.Navigate(typeof(NowPlaying), rUrl))
+            {
+                Debug.WriteLine("navigation failed from main to radio lists ");
+            }
+            //var tester = trkView.GetThisArtist("132");
+            //this.Frame.Navigate(typeof(ShowAllTracks));
         }
 
         #region NavigationHelper
@@ -195,10 +220,51 @@ namespace MyMusic.Views
         }
         #endregion
 
-        private void LogButton_Click(object sender, RoutedEventArgs e)
+        private async void TestButton_Click(object sender, RoutedEventArgs e)
         {
             //readLog();
+            //trkView.lookIn();
+            //var getPicAndGenre = await trkView.getPic2("nofx", "bob");
+            //var fr = getPicAndGenre.album.image.FirstOrDefault(); //Where(a => a.size == "large").FirstOrDefault();
+            //var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
+            //trkView.loadUpImagesAndGenre();
+            //trkView.sortOrderNum();
+
+
+
+            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+
+            var filename = "Log" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            //StorageFile sf = await folder.GetFileAsync(filename);
+            //using (Stream feedStream = await sf.OpenStreamForReadAsync())
+            //{
+            //    System.IO.TextReader tr = new System.IO.StreamReader(feedStream, System.Text.Encoding.UTF8);
+            //    string data = tr.ReadToEnd();
+
+            //    byte[] buffer = new byte[1024 * 24];
+            //    int bytesRead = 0;
+            //    while ((bytesRead = await feedStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            //    {
+            //       // (bufferStream.AsStreamForRead()).Write(buffer, 0, bytesRead);
+            //    }
+            //}
+
+
+  //          var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
+   //         logSave.Wait();
         }
+
+        private void Streaming_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var itemId = ((DataGroup)e.ClickedItem).UniqueId;
+            if(itemId == "Stream")
+            if (!Frame.Navigate(typeof(Streaming)))
+            {
+                Debug.WriteLine("navigation failed from main to radio lists ");
+            }
+        }
+
+
 
     }
 }

@@ -27,7 +27,7 @@ namespace MyMusic
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[key];
-                ApplicationData.Current.LocalSettings.Values.Remove(key);
+                //ApplicationData.Current.LocalSettings.Values.Remove(key);
                 Debug.WriteLine("FG  value found " + value.ToString());
                 return value;
             }

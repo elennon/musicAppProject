@@ -3,6 +3,7 @@ using MyMusic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,11 +22,11 @@ using Windows.UI.Xaml.Shapes;
 
 namespace MyMusic.Views
 {
-    public class ContactGroup
-    {
-        public string Title { get; set; }
-        public List<TrackViewModel> Tracks { get; set; }
-    }
+    //public class ContactGroup
+    //{
+    //    public string Title { get; set; }
+    //    public List<TrackViewModel> Tracks { get; set; }
+    //}
 
     public sealed partial class ShowAllTracks : Page
     {
@@ -36,8 +37,8 @@ namespace MyMusic.Views
         }
 
         private TracksViewModel trkView = new TracksViewModel();
-        private string albumId = "";
-        private bool editMode = false, InBinList = false;
+        private string albumId = "", genreId = "";
+        //private bool editMode = false, InBinList = false;
 
         public ShowAllTracks()
         {
@@ -52,211 +53,45 @@ namespace MyMusic.Views
         {
             this.navigationHelper.OnNavigatedTo(e);
             var para = e.Parameter;
-            if (para != null)                       // if user clicked on an album on album page, just show tracks from that album
-            {
-                albumId = para.ToString();
-                lstTracksInAlbum.ItemsSource = trkView.GetTracksByAlbum(para.ToString());
-                semanticZoom.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                lstTracksInAlbum.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            }
-            else
-            {
-                LoadList();
-            }  
          
-        }
-
-        private void LoadList()
-        {
-            CollectionViewSource listViewSource = new CollectionViewSource();
-            listViewSource.IsSourceGrouped = true;
-            listViewSource.Source = GetContactGroups(trkView.GetTracks());
-            listViewSource.ItemsPath = new PropertyPath("Tracks");
-            lstViewDetail.ItemsSource = listViewSource.View;
-            lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
-        }
-
-        private void LoadBinList()
-        {
-            CollectionViewSource listViewSource = new CollectionViewSource();
-            listViewSource.IsSourceGrouped = true;
-            listViewSource.Source = GetContactGroups(trkView.GetBinnedTracks());
-            listViewSource.ItemsPath = new PropertyPath("Tracks");
-            lstViewDetail.ItemsSource = listViewSource.View;
-            lstViewSummary.ItemsSource = listViewSource.View.CollectionGroups;
-        }
-
-        #region fill listview incrementally
-
-        private void ItemListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)                                
-        {
-            args.Handled = true;
-
-            if (args.Phase != 0)
+            if (para.ToString().Contains("album"))
             {
-                throw new Exception("Not in phase 0.");
-            }
-
-            Grid templateRoot = (Grid)args.ItemContainer.ContentTemplateRoot;              
-            TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");                
-            TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
-            Image songPic = (Image)templateRoot.FindName("imgSongPic");
-      
-            nameTextBlock.Opacity = 0;
-            artistTextBlock.Opacity = 0;
-            songPic.Opacity = 0;
-
-            args.RegisterUpdateCallback(ShowSongName);  //  show song titles first
-        }
-
-        private void ShowSongName(ListViewBase sender, ContainerContentChangingEventArgs args)    // phase 1 shows title                            
-        {
-            if (args.Phase != 1)
-            {
-                throw new Exception("Not in phase 1.");
-            }
-
-            TrackViewModel track = (TrackViewModel)args.Item;
-            SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;               
-            TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
+                albumId = (para.ToString()).Split(',')[0];
+                lstTracksByGenre.DataContext = trkView.GetTracksByAlbum(albumId);
                 
-            nameTextBlock.Text = track.Name;    // adds song name 
-            nameTextBlock.Tag = track.TrackId;
-            nameTextBlock.Opacity = 1;
-
-            args.RegisterUpdateCallback(ShowArtist);  // show artist next
-        }
-
-        private void ShowArtist(ListViewBase sender, ContainerContentChangingEventArgs args)    // phase 2 shows artist                           
-        {
-            if (args.Phase != 2)
-            {
-                throw new Exception("Not in phase 2.");
             }
-            TrackViewModel track = (TrackViewModel)args.Item;
-            SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                
-            TextBlock artistTextBlock = (TextBlock)templateRoot.FindName("txtArtist");
+            else if (para.ToString().Contains("genre"))
+            {
+                genreId = (para.ToString()).Split(',')[0];
+                lstTracksByGenre.DataContext = trkView.GetTracksByGenre(genreId);
                 
-            artistTextBlock.Text = track.Artist;
-            artistTextBlock.Opacity = 1;
-
-            args.RegisterUpdateCallback(ShowPics);   // show pics next
+            }                 
         }
 
-        private void ShowPics(ListViewBase sender, ContainerContentChangingEventArgs args)     // phase 3 shows image                            
+        private void Track_ItemClick(object sender, ItemClickEventArgs e)   // to play all tracks in this album
         {
-            if (args.Phase != 3)
+            var itemId = ((TrackViewModel)e.ClickedItem).TrackId;
+            string albId = "albTracksFromThisOn," + itemId.ToString() + "," + albumId;
+            if (!Frame.Navigate(typeof(NowPlaying), albId))
             {
-                throw new Exception("Not in phase 3.");
-            }
- 
-            TrackViewModel track = (TrackViewModel)args.Item;
-            SelectorItem itemContainer = (SelectorItem)args.ItemContainer;
-            Grid templateRoot = (Grid)itemContainer.ContentTemplateRoot;                              
-            Image _imgSongPic = (Image)templateRoot.FindName("imgSongPic");
-            Image _deleteIcon = (Image)templateRoot.FindName("deleteIcon");
-
-
-
-            if (string.IsNullOrEmpty(track.ImageUri) == false)      //  if there is no pic, show default
-            {
-                _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(track.ImageUri));
-            }
-            else
-            { 
-                _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/radio672.png")); 
-            }
-            _imgSongPic.Opacity = 1;
-            if (editMode)
-            {
-                string tag = track.Name + "," + track.TrackId.ToString() + ",out";
-                _deleteIcon.Tag = tag;
-                _deleteIcon.Visibility = Visibility.Visible;
-            }
-            else if (InBinList)
-            {
-                string tag = track.Name + "," + track.TrackId.ToString() + ",in";
-                _deleteIcon.Tag = tag;
-                _deleteIcon.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/undo3.png")); 
-                _deleteIcon.Visibility = Visibility.Visible;
-            }
-        }
-
-        #endregion
-
-        private List<ContactGroup> GetContactGroups(ObservableCollection<TrackViewModel> collection)    // method to group all tracks alphabetically
-        {
-            List<ContactGroup> trackGroups = new List<ContactGroup>();
-            List<ContactGroup> tempGroups = new List<ContactGroup>();
-            ObservableCollection<TrackViewModel> allSongs = collection;     // trkView.GetTracks();
-            ObservableCollection<TrackViewModel> songsNotNumbers = new ObservableCollection<TrackViewModel>();  // to hold songs with numbers at the start
-            List<char> firstLetters = new List<char>();
-            var t = allSongs.GroupBy(a => a.Name.Substring(0, 1)).Select(g => g.FirstOrDefault().Name);     // get a list of alphabetical letters that songs in collection begin with
-            foreach (string item in t)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    if (Char.IsLetter(item[i]))
-                    {
-                        firstLetters.Add(Char.ToUpper(item[i]));
-                        break;
-                    }
-                }
-            }
-            ContactGroup tGroup = new ContactGroup();
-            foreach (Char item in firstLetters.OrderBy(a => a.ToString()).Distinct())
-            {
-                var tracksWithLetter = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList();
-                tGroup = new ContactGroup() { Title = item.ToString(), Tracks = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
-                tempGroups.Add(tGroup);
-                foreach (var tr in tracksWithLetter)    // collect all tracks that start with a letter
-                {
-                    songsNotNumbers.Add(tr);
-                }
-            }
-            ObservableCollection<TrackViewModel> numberSongs = new ObservableCollection<TrackViewModel>();  // for all songs that start with numbers
-            foreach (var item in allSongs)
-            {
-                if (songsNotNumbers.Contains(item) == false)
-                { numberSongs.Add(item); }
-            }
-            ContactGroup numbersGroup = new ContactGroup() { Title = "#", Tracks = numberSongs.ToList() };
-            trackGroups.Add(numbersGroup);
-            foreach (var item in tempGroups)
-            {
-                trackGroups.Add(item);
-            }
-
-            return trackGroups;
-        }
-
-        private void lstAlbumTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)    // pass album id from list of track in given album
-        {
-            string albId = "albTracksFromThisOn," + ((ListBox)sender).SelectedIndex.ToString() + "," + albumId;
-            this.Frame.Navigate(typeof(NowPlaying), albId);   
+                Debug.WriteLine("navigation failed from main to collection ");
+            } 
         }
 
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
         {
-            this.Frame.Navigate(typeof(NowPlaying), "shuffle");  
+            string id = "";
+            if (!string.IsNullOrEmpty(albumId))
+            {
+                id = "shuffleThese," + albumId + ",album";
+            }
+            else if (!string.IsNullOrEmpty(genreId))
+            {
+                id = "shuffleThese," + genreId + ",genre";
+            }
+            this.Frame.Navigate(typeof(NowPlaying), id);
         }
 
-        private void Song_Tapped(object sender, TappedRoutedEventArgs e)    // fires when all tracks diplayed, sends tracks order # to play it and all after it
-        {
-            Border grd = (Border)sender;
-            TextBlock nameTextBlock = (TextBlock)grd.FindName("txtName");
-            string tNumber = "allTracks," + nameTextBlock.Tag.ToString() ;
-            this.Frame.Navigate(typeof(NowPlaying), tNumber ); //GetListToPlay(Convert.ToInt32(hh)
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            editMode = true;
-            InBinList = false;
-            LoadList();
-        }
 
         #region NavigationHelper registration
 
@@ -274,54 +109,6 @@ namespace MyMusic.Views
         }
 
         #endregion
-
-        private async void deleteIcon_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Image del = (Image)sender;
-            string inOrOut = del.Tag.ToString().Split(',')[2];
-            if (inOrOut == "out")
-            {
-                string trkName = (del.Tag.ToString()).Split(',')[0];    // track name is 1st part of the tag
-                MessageDialog msgbox = new MessageDialog("Are you sure you want " + trkName + " out??");
-
-                msgbox.Commands.Clear();
-                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
-                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
-                var res = await msgbox.ShowAsync();
-
-                if ((int)res.Id == 0)
-                {
-                    int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                    trkView.BinThis(id);
-                    LoadList();
-                }
-                if ((int)res.Id == 1)
-                {
-                    return;
-                }
-            }
-            else if (inOrOut == "in")
-            {
-                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                trkView.BackIn(id);
-                LoadBinList();
-            }
-
-        }
-
-        private void ShowBinnedButton_Click(object sender, RoutedEventArgs e)
-        {
-            editMode = false;
-            InBinList = true;
-            LoadBinList();
-        }
-
-        private void AllTracksButton_Click(object sender, RoutedEventArgs e)
-        {
-            editMode = false;
-            InBinList = false;
-            LoadList();
-        }
     }
 }
 

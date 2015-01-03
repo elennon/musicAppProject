@@ -12,6 +12,9 @@ namespace MyMusic
     class Constants
     {
         public const string PlayRadio = "playradio";
+        public const string PlayGSTrack = "playgstrack";
+        public const string PlayRadioFailed = "PlayRadioFailed";
+
         public const string TrackIdNo = "trackidno";
         public const string CurrentTrack = "trackname";
         public const string CurrentTrackImg = "currenttrackimg";

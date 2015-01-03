@@ -1,5 +1,6 @@
 
 
+using MyMusic;
 using MyPlaylistManager.Models;
 using MyPlaylistManager.ShoutCast;
 using SQLiteBase;
@@ -12,6 +13,7 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.Media.Core;
 using Windows.Media.MediaProperties;
 using Windows.Media.Playback;
@@ -213,7 +215,7 @@ namespace MyPlaylistManager
 
         private void mediaPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs args)
         {
-            Debug.WriteLine("Failed with error code " + args.ExtendedErrorCode.ToString());
+            Debug.WriteLine("media player failed with error code " + args.ExtendedErrorCode.ToString());
         }
 
         #endregion
@@ -230,6 +232,7 @@ namespace MyPlaylistManager
             mediaPlayer.AutoPlay = false;
             //mediaPlayer.SetFileSource(tracks[id]);
             mediaPlayer.SetFileSource(lf);
+            //mediaPlayer.SetUriSource(new Uri("http://stream190b.grooveshark.com/stream.php?streamKey=ec0ecb2381dd84254d4c6c3840cdb480f2867493_549bfc73_155a009_1161af9_16af82439_8_0"));
         }
 
         public void PlayRadio(string rdoUrl)
@@ -246,7 +249,13 @@ namespace MyPlaylistManager
                     Uri = rdoUrl
                 };
                 rdStream = new MyPlaylistManager.ShoutCast.RadioStream(_ri);
-             
+
+                rdStream.NoSetUp += (obj, e) =>
+                {
+                    bool failed = (bool)obj;
+                    sendNoPlayMessage(failed);                    
+                };  
+
                 rdStream.setUpped += async (obj, e) =>
                 {
                     ri = (radioItems)obj;
@@ -254,7 +263,24 @@ namespace MyPlaylistManager
                     InitializeMediaStreamSource();                   
                 };                          
             }
-            catch (Exception ex) { string t = ex.Message; }
+            catch (Exception ex) 
+            { 
+                string t = ex.Message; 
+            }
+            
+        }
+
+        public void PlayGSTrack(string gsUrl)
+        {
+            mediaPlayer.AutoPlay = false;
+            mediaPlayer.SetUriSource(new Uri(gsUrl));
+        }
+
+        private void sendNoPlayMessage(bool failed)
+        {
+            ValueSet message = new ValueSet();
+            message.Add(Constants.PlayRadioFailed, failed);
+            BackgroundMediaPlayer.SendMessageToForeground(message);
         }
 
         #region MSS stuff
@@ -269,23 +295,122 @@ namespace MyPlaylistManager
             encodingPropertiesToRetrieve.Add("System.Audio.SampleRate");
             encodingPropertiesToRetrieve.Add("System.Audio.ChannelCount");
             encodingPropertiesToRetrieve.Add("System.Audio.EncodingBitrate");
-
+                                                                                    // sets up MSS with parameters gotten from Radiostream class
             AudioEncodingProperties audioProps = AudioEncodingProperties.CreateMp3(ri.samplePerSec, ri.channels, ri.agvBytes);
 
             AudioStreamDescriptor audioDescriptor = new AudioStreamDescriptor(audioProps);
-
-            // creating the MediaStreamSource for the MP3 file
+         
             MSS = new Windows.Media.Core.MediaStreamSource(audioDescriptor);
             MSS.CanSeek = true;
             MSS.MusicProperties.Title = "Title";
-            MSS.Duration = new TimeSpan(0, 0, 6, 0);
+            MSS.Duration = new TimeSpan(10, 0, 0, 0);
 
-            // hooking up the MediaStreamSource event handlers
-            MSS.Starting += MSS_Starting;
+            MSS.Starting += MSS_Starting;               // MSS handlers
             MSS.SampleRequested += MSS_SampleRequested;
             MSS.Closed += MSS_Closed;
             mediaPlayer.SetMediaSource(MSS);
         }
+
+
+
+        //async private void InitializeMediaStreamSource2()
+        //{          
+        //    byteOffset = 0;
+        //    timeOffset = new TimeSpan(0);
+
+        //    List<string> encodingPropertiesToRetrieve = new List<string>();
+
+        //    encodingPropertiesToRetrieve.Add("System.Audio.SampleRate");
+        //    encodingPropertiesToRetrieve.Add("System.Audio.ChannelCount");
+        //    encodingPropertiesToRetrieve.Add("System.Audio.EncodingBitrate");
+
+        //    IDictionary<string, object> encodingProperties = await inputMP3File.Properties.RetrievePropertiesAsync(encodingPropertiesToRetrieve);
+
+        //    uint sampleRate = (uint)encodingProperties["System.Audio.SampleRate"];
+        //    uint channelCount = (uint)encodingProperties["System.Audio.ChannelCount"];
+        //    uint bitRate = (uint)encodingProperties["System.Audio.EncodingBitrate"];
+
+        //    MusicProperties mp3FileProperties = await inputMP3File.Properties.GetMusicPropertiesAsync();
+        //    songDuration = mp3FileProperties.Duration;
+
+        //    AudioEncodingProperties audioProps = AudioEncodingProperties.CreateMp3(sampleRate, channelCount, bitRate);
+        //    AudioStreamDescriptor audioDescriptor = new AudioStreamDescriptor(audioProps);
+
+        //    MSS = new Windows.Media.Core.MediaStreamSource(audioDescriptor);
+        //    MSS.CanSeek = true;
+        //    MSS.MusicProperties.Title = mp3FileProperties.Title;
+        //    MSS.Duration = songDuration;
+
+        //    MSS.Starting += MSS_Starting;
+        //    MSS.SampleRequested += MSS_SampleRequested;
+        //    MSS.Closed += MSS_Closed;
+        //    mediaPlayer.SetMediaSource(MSS);
+        //}
+
+        //async void MSS_SampleRequested2(Windows.Media.Core.MediaStreamSource sender, MediaStreamSourceSampleRequestedEventArgs args)
+        //{
+        //    MediaStreamSourceSampleRequest request = args.Request;
+
+        //    // check if the sample requested byte offset is within the file size
+
+        //    if (byteOffset + sampleSize <= mssStream.Size)
+        //    {
+        //        MediaStreamSourceSampleRequestDeferral deferal = request.GetDeferral();
+        //        inputStream = mssStream.GetInputStreamAt(byteOffset);
+
+        //        // create the MediaStreamSample and assign to the request object. 
+        //        // You could also create the MediaStreamSample using createFromBuffer(...)
+
+        //        MediaStreamSample sample = await MediaStreamSample.CreateFromStreamAsync(inputStream, sampleSize, timeOffset);
+        //        sample.Duration = sampleDuration;
+        //        sample.KeyFrame = true;
+
+        //        // increment the time and byte offset
+
+        //        byteOffset += sampleSize;
+        //        timeOffset = timeOffset.Add(sampleDuration);
+        //        request.Sample = sample;
+        //        deferal.Complete();
+        //    }
+        //}
+
+        //async void MSS_Starting2(Windows.Media.Core.MediaStreamSource sender, MediaStreamSourceStartingEventArgs args)
+        //{
+        //    MediaStreamSourceStartingRequest request = args.Request;
+        //    if ((request.StartPosition != null) && request.StartPosition.Value <= MSS.Duration)
+        //    {
+        //        UInt64 sampleOffset = (UInt64)request.StartPosition.Value.Ticks / (UInt64)sampleDuration.Ticks;
+        //        timeOffset = new TimeSpan((long)sampleOffset * sampleDuration.Ticks);
+        //        byteOffset = sampleOffset * sampleSize;
+        //    }
+
+        //    // create the RandomAccessStream for the input file for the first time 
+
+        //    if (mssStream == null)
+        //    {
+        //        MediaStreamSourceStartingRequestDeferral deferal = request.GetDeferral();
+        //        try
+        //        {
+        //            mssStream = await inputMP3File.OpenAsync(FileAccessMode.Read);
+        //            request.SetActualStartPosition(timeOffset);
+        //            deferal.Complete();
+        //        }
+        //        catch (Exception)
+        //        {
+        //            MSS.NotifyError(MediaStreamSourceErrorStatus.FailedToOpenFile);
+        //            deferal.Complete();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        request.SetActualStartPosition(timeOffset);
+        //    }
+        //}
+
+
+
+
+
 
         async void MSS_SampleRequested(Windows.Media.Core.MediaStreamSource sender, MediaStreamSourceSampleRequestedEventArgs args)
         {
@@ -315,20 +440,18 @@ namespace MyPlaylistManager
             }
 
         }
-
+        
         void MSS_Starting(Windows.Media.Core.MediaStreamSource sender, MediaStreamSourceStartingEventArgs args)
         {
             //await Task.Delay(TimeSpan.FromSeconds(10));
             // sampleSize = (uint)mp3Frame.FrameSize;
             MediaStreamSourceStartingRequest request = args.Request;
-            if ((request.StartPosition != null) && request.StartPosition.Value <= MSS.Duration)
+            if ((request.StartPosition != null) && request.StartPosition.Value <= MSS.Duration)     // pauses if MSS caught up with buffered stream
             {
                 UInt64 sampleOffset = (UInt64)request.StartPosition.Value.Ticks / (UInt64)sampleDuration.Ticks;
                 timeOffset = new TimeSpan((long)sampleOffset * sampleDuration.Ticks);
                 byteOffset = sampleOffset * ri.sampleSize;
             }
-
-            // create the RandomAccessStream for the input file for the first time 
 
             if (mssStream == null)
             {

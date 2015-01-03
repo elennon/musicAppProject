@@ -1,4 +1,5 @@
 ﻿using MyMusic.Common;
+using MyMusic.HelperClasses;
 using MyMusic.Models;
 using MyMusic.ViewModels;
 using System;
@@ -47,7 +48,7 @@ namespace MyMusic.Views
 
         private TracksViewModel trkView = new TracksViewModel();
         private string[] orders;
-        private bool isPlayRadio = false;
+        private bool isPlayRadio = false, isPlayGSTrack = false;
         private AutoResetEvent SererInitialized;
         //private bool backGroundIsRunning = false;
 
@@ -76,6 +77,7 @@ namespace MyMusic.Views
 
         public NowPlaying()
         {
+            Debug.WriteLine("in now playing Constructor");
             this.InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
             App.Current.Resuming += Current_Resuming;
@@ -89,7 +91,8 @@ namespace MyMusic.Views
         {
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive); 
             AddMediaPlayerEventHandlers();
-            Debug.WriteLine("in resume");
+            Debug.WriteLine("in fg Current_Resuming");
+       //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
 
             bool bkrunning = false;
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(Constants.BackgroundTaskState))
@@ -99,7 +102,7 @@ namespace MyMusic.Views
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[Constants.BackgroundTaskState];
-                Debug.WriteLine("FG  bkrunning found " + value.ToString());
+                Debug.WriteLine("FG  bk running found " + value.ToString());
                 if (value.ToString() == "BKRunning")
                     bkrunning = true;
             }
@@ -131,19 +134,33 @@ namespace MyMusic.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
             this.navigationHelper.OnNavigatedTo(e);
             
-            Debug.WriteLine("nav to");
+            Debug.WriteLine("in now playing nav to");
         
             var arg = e.Parameter;
             if (arg != null && ((App)Application.Current).isResumingFromTermination == false)
             {
-                if (arg.ToString().Contains("shuffle")) { orders = shuffleAll(); }
+                if (arg.ToString().Contains("shuffleAll")) { orders = shuffleAll(); }
 
+                else if (arg.ToString().Contains("shuffleThese"))       // for a collection to shuffle play e.g. tracks in album or by genre
+                {
+                    string id = (arg.ToString().Split(',')[1]);
+                    string type = (arg.ToString().Split(','))[2];
+                    if (type.Contains("album"))
+                    {
+                        orders = trkView.ShuffleAlbum(id);
+                    }
+                    if (type.Contains("genre"))
+                    {
+                        orders = trkView.ShuffleGenre(id);
+                    }
+                }
                 else if (arg.ToString().Contains("allTracks"))
                 {
                     int trackNumber = Convert.ToInt32((arg.ToString().Split(','))[1]);
-                    orders = GetListToPlay(trackNumber);
+                    orders = trkView.GetListToPlay(trackNumber);
                 }
                 else if (arg.ToString().Contains("albumTracks"))
                 {
@@ -166,6 +183,12 @@ namespace MyMusic.Views
                     orders = new string[1];
                     orders[0] = (arg.ToString().Split(','))[1];
                     isPlayRadio = true;
+                }
+                else if (arg.ToString().Contains("gsStreamTrack"))
+                {
+                    orders = new string[1];
+                    orders[0] = (arg.ToString().Split(','))[1];
+                    isPlayGSTrack = true;
                 }
                 
                 if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing )      //  if BK is running its a selection change
@@ -217,7 +240,6 @@ namespace MyMusic.Views
 
         private string[] shuffleAll()
         {
-            List<int> trks = new List<int>();
             ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
             shuffled = trkView.GetShuffleTracks();
             string[] trkks = new string[shuffled.Count];
@@ -229,9 +251,9 @@ namespace MyMusic.Views
             return trkks;
         }
 
-        private string[] GetListToPlay(int id) // orders all songs that come after selected song (+ selected) into a string[]
+        private string[] GetSongsAllInAlbum(int albumId) // orders all songs in album into a string[]
         {
-            var trks = (trkView.GetTracks()).Where(a => a.TrackId >= id).ToList(); // get all tracks listed after selected one
+            var trks = (trkView.GetTracksByAlbum(albumId.ToString())).ToList();         // get all tracks in given album
             string[] trkArray = new string[trks.Count];
 
             for (int i = 0; i < trks.Count; i++)
@@ -241,28 +263,20 @@ namespace MyMusic.Views
             return trkArray;
         }
 
-        private string[] GetSongsAllInAlbum(int albumId) // orders all songs in album into a string[]
-        {
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            var trks = (trkView.GetTracksByAlbum(albumId.ToString())).ToList();         // get all tracks in given album
-            string[] trkArray = new string[trks.Count];
-
-            for (int i = 0; i < trks.Count; i++)
-            {
-                trkArray[i] = trks[i].TrackId.ToString() + "," + shuffled[i].FileName + "," + shuffled[i].Artist + ",notShuffle";
-            }
-            return trkArray;
-        }
-
-        private string[] GetSongsInAlbumFromThis(int trackIndex, int albumId) // orders all songs in album into a string[]
+        private string[] GetSongsInAlbumFromThis(int trackId, int albumId) // orders all songs in album into a string[]
         {
             List<string> tracks = new List<string>();
-            var trks = (trkView.GetTracksByAlbum(albumId.ToString())).ToList();         // get all tracks in given album    trkView.GetTracksByAlbum(para.ToString());
-            
-            for (int i = trackIndex; i < trks.Count; i++)
+            var trks = trkView.GetTracksByAlbum(albumId.ToString());    // get all tracks in given album
+            bool yes = false;
+            foreach (var item in trks)                                  // then only take the selected song and all after it in the list
             {
-                tracks.Add(trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle");
+                if (item.TrackId == trackId) { yes = true; }
+                if(yes)
+                {
+                    tracks.Add(item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle");
+                }
             }
+
             string[] trkArray = new string[tracks.Count];
             for (int i = 0; i < tracks.Count; i++)
             {
@@ -288,12 +302,12 @@ namespace MyMusic.Views
 
         async void BackgroundMediaPlayer_MessageReceivedFromBackground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
-            Debug.WriteLine("message recieved loud and clear");
+            Debug.WriteLine("message recieved loud and clear  ");
             TrackViewModel tr = new TrackViewModel();
             //string artist = "", title = "";
             int trackId = 0;
             string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');     // current track will be a comma seperated string with name, artist...
-            if (currentTrack[0] != string.Empty)
+            if (currentTrack[0] != string.Empty && currentTrack[0] != "True")
             {
                 if (currentTrack.Length > 1)
                 {
@@ -332,15 +346,18 @@ namespace MyMusic.Views
 
                             tbkSongName.Text = tr.Artist + "-" + tr.Name;
                             SkippedTrackName = tr.Artist + "-" + tr.Name;
-
-                            //var message = new ValueSet();
-                            //message.Add(Constants.CurrentTrackImg, pic);
-                            //BackgroundMediaPlayer.SendMessageToBackground(message);
                         }
                         );
                         break;
                     case Constants.BackgroundTaskStarted:
                         SererInitialized.Set();
+                        break;
+                    case Constants.PlayRadioFailed:
+                        await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            tbkSongName.Text = "radio don't play good";
+                        }
+                        );                      
                         break;
                 }
             }
@@ -439,50 +456,70 @@ namespace MyMusic.Views
 
         private void StartBackgroundAudioTask()             // starts background---sends mesaage (tracks to play) from here
         {
-            //AddMediaPlayerEventHandlers();
-            Task.Run(delegate()
+           
+            var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (isPlayRadio == true)
+                bool result = SererInitialized.WaitOne(2000);
+                //bool result = true;
+                if (result == true)
                 {
-                    var message = new ValueSet();
-                    message.Add(Constants.PlayRadio, orders);
-                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                    if (isPlayRadio == true)
+                    {
+                        var message = new ValueSet();
+                        message.Add(Constants.PlayRadio, orders);
+                        Debug.WriteLine("FG: sending Message");
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                        isPlayRadio = false;
+                    }
+                    else if (isPlayGSTrack == true)
+                    {
+                        var message = new ValueSet();
+                        message.Add(Constants.PlayGSTrack, orders);
+                        Debug.WriteLine("FG: sending Message");
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                        isPlayGSTrack = false;
+                    }
+                    else
+                    {
+                        var message = new ValueSet();
+                        message.Add(Constants.StartPlayback, orders);
+                        Debug.WriteLine("FG: sending Message");
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                    }
                 }
                 else
                 {
-                    var message = new ValueSet();
-                    message.Add(Constants.StartPlayback, orders);
-                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                    //throw new Exception("Background Audio Task didn't start in expected time");
+                    Task.Run(delegate()
+                    {
+                        if (isPlayRadio == true)
+                        {
+                            var message = new ValueSet();
+                            message.Add(Constants.PlayRadio, orders);
+                            Debug.WriteLine("FG: sending Message");
+                            BackgroundMediaPlayer.SendMessageToBackground(message);
+                            isPlayRadio = false;
+                        }
+                        else if (isPlayGSTrack == true)
+                        {
+                            var message = new ValueSet();
+                            message.Add(Constants.PlayGSTrack, orders);
+                            Debug.WriteLine("FG: sending Message");
+                            BackgroundMediaPlayer.SendMessageToBackground(message);
+                            isPlayGSTrack = false;
+                        }
+                        else
+                        {
+                            var message = new ValueSet();
+                            message.Add(Constants.StartPlayback, orders);
+                            Debug.WriteLine("FG: sending Message");
+                            BackgroundMediaPlayer.SendMessageToBackground(message);
+                        }
+                    });
                 }
-            });                
-
-            //var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //{
-
-            //    bool result = SererInitialized.WaitOne(2000);
-            //    //bool result = true;
-            //    if (result == true)
-            //    {
-            //        if (isPlayRadio == true)
-            //        {
-            //            var message = new ValueSet();
-            //            message.Add(Constants.PlayRadio, orders);
-            //            BackgroundMediaPlayer.SendMessageToBackground(message);
-            //        }
-            //        else
-            //        {
-            //            var message = new ValueSet();
-            //            message.Add(Constants.StartPlayback, orders);
-            //            BackgroundMediaPlayer.SendMessageToBackground(message);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("Background Audio Task didn't start in expected time");
-            //    }
-            //}
-            //);
-            //backgroundtaskinitializationresult.Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);
+            }
+            );
+            backgroundtaskinitializationresult.Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);
         }
 
         private void BackgroundTaskInitializationCompleted(IAsyncAction action, AsyncStatus status)
@@ -540,3 +577,102 @@ namespace MyMusic.Views
         //    }           
         //}
 
+
+
+
+//private void StartBackgroundAudioTask()             // starts background---sends mesaage (tracks to play) from here
+//        {
+//            //AddMediaPlayerEventHandlers();
+//            //Task.Run(delegate()
+//            //{
+//            //    if (isPlayRadio == true)
+//            //    {
+//            //        var message = new ValueSet();
+//            //        message.Add(Constants.PlayRadio, orders);
+//            //        Debug.WriteLine("FG: sending Message");
+//            //        BackgroundMediaPlayer.SendMessageToBackground(message);
+//            //        isPlayRadio = false;
+//            //    }
+//            //    else if (isPlayGSTrack == true)
+//            //    {
+//            //        var message = new ValueSet();
+//            //        message.Add(Constants.PlayGSTrack, orders);
+//            //        Debug.WriteLine("FG: sending Message");
+//            //        BackgroundMediaPlayer.SendMessageToBackground(message);
+//            //        isPlayGSTrack = false;
+//            //    }
+//            //    else
+//            //    {
+//            //        var message = new ValueSet();
+//            //        message.Add(Constants.StartPlayback, orders);
+//            //        Debug.WriteLine("FG: sending Message");
+//            //        BackgroundMediaPlayer.SendMessageToBackground(message);
+//            //    }
+//            //});
+
+
+//            var backgroundtaskinitializationresult = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+//            {
+//                bool result = SererInitialized.WaitOne(2000);
+//                //bool result = true;
+//                if (result == true)
+//                {
+//                    if (isPlayRadio == true)
+//                    {
+//                        var message = new ValueSet();
+//                        message.Add(Constants.PlayRadio, orders);
+//                        Debug.WriteLine("FG: sending Message");
+//                        BackgroundMediaPlayer.SendMessageToBackground(message);
+//                        isPlayRadio = false;
+//                    }
+//                    else if (isPlayGSTrack == true)
+//                    {
+//                        var message = new ValueSet();
+//                        message.Add(Constants.PlayGSTrack, orders);
+//                        Debug.WriteLine("FG: sending Message");
+//                        BackgroundMediaPlayer.SendMessageToBackground(message);
+//                        isPlayGSTrack = false;
+//                    }
+//                    else
+//                    {
+//                        var message = new ValueSet();
+//                        message.Add(Constants.StartPlayback, orders);
+//                        Debug.WriteLine("FG: sending Message");
+//                        BackgroundMediaPlayer.SendMessageToBackground(message);
+//                    }
+//                }
+//                else
+//                {
+//                    //throw new Exception("Background Audio Task didn't start in expected time");
+//                    Task.Run(delegate()
+//                    {
+//                        if (isPlayRadio == true)
+//                        {
+//                            var message = new ValueSet();
+//                            message.Add(Constants.PlayRadio, orders);
+//                            Debug.WriteLine("FG: sending Message");
+//                            BackgroundMediaPlayer.SendMessageToBackground(message);
+//                            isPlayRadio = false;
+//                        }
+//                        else if (isPlayGSTrack == true)
+//                        {
+//                            var message = new ValueSet();
+//                            message.Add(Constants.PlayGSTrack, orders);
+//                            Debug.WriteLine("FG: sending Message");
+//                            BackgroundMediaPlayer.SendMessageToBackground(message);
+//                            isPlayGSTrack = false;
+//                        }
+//                        else
+//                        {
+//                            var message = new ValueSet();
+//                            message.Add(Constants.StartPlayback, orders);
+//                            Debug.WriteLine("FG: sending Message");
+//                            BackgroundMediaPlayer.SendMessageToBackground(message);
+//                        }
+//                    });
+//                }
+//            }
+//            );
+//            backgroundtaskinitializationresult.Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);
+            
+//        }

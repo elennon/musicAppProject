@@ -62,6 +62,35 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private string _artistName;
+        public string ArtistName
+        {
+            get
+            {
+                return _artistName;
+            }
+            set
+            {
+                if (_artistName != value)
+                {
+                    _artistName = value;
+                    NotifyPropertyChanged("ArtistName");
+                }
+            }
+        }
+
+        //private ObservableCollection<Track> _songs;
+        //public ObservableCollection<Track> Songs
+        //{
+        //    get { return _songs; }
+        //    set { _songs = value; }
+        //}
+
+        public override string ToString()
+        {
+            return string.Format("Albums by {0}", ArtistName);
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -125,11 +154,15 @@ namespace MyMusic.ViewModels
                 var albs = db.Table<Album>().Where(a => a.ArtistId == _id);
                 foreach (var item in albs)
                 {
+                    ObservableCollection<Track> ts = new ObservableCollection<Track>();
+                    var tracks = db.Table<Track>().Where(a => a.AlbumId == item.AlbumId).ToList();                   
                     AlbumViewModel al = new AlbumViewModel
                     {
                         Name = item.Name,
                         ArtistId = item.ArtistId,
-                        AlbumId = item.AlbumId
+                        AlbumId = item.AlbumId,
+                        //Songs = ts,
+                        ArtistName = tracks.Select(a => a.Artist).FirstOrDefault() //artNme.Name
                     };
                     _albums.Add(al);
                 }
