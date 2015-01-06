@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyMusicModelStoreContainer" CdmEntityContainer="MyMusicEntities">
+    <EntitySetMapping Name="OnlineRadios">
+      <EntityTypeMapping TypeName="MyMusicModel.OnlineRadio">
+        <MappingFragment StoreEntitySet="OnlineRadio">
+          <ScalarProperty Name="RadioID" ColumnName="RadioID" />
+          <ScalarProperty Name="RadioName" ColumnName="RadioName" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RadioGenres">
+      <EntityTypeMapping TypeName="MyMusicModel.RadioGenre">
+        <MappingFragment StoreEntitySet="RadioGenre">
+          <ScalarProperty Name="RadioGenreId" ColumnName="RadioGenreId" />
+          <ScalarProperty Name="RadioGenreKey" ColumnName="RadioGenreKey" />
+          <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
+          <ScalarProperty Name="RadioImage" ColumnName="RadioImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
