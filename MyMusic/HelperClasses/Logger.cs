@@ -11,7 +11,6 @@ namespace MyMusic.HelperClasses
 {
     public class Logger
     {
-
         public LoggingChannel logChannel;
 
         public LoggingSession logSession;
@@ -33,11 +32,16 @@ namespace MyMusic.HelperClasses
             await RegisterUnhandledErrorHandler();
         }
 
+        static public bool CheckIfNull()
+        {
+            if (logger == null)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
 
-        /// <summary>
-        /// Maintains singleton object 
-        /// </summary>
-        /// <returns></returns>
         static public Logger GetLogger()
         {
             if (logger == null)
@@ -50,31 +54,20 @@ namespace MyMusic.HelperClasses
 
         private async Task RegisterUnhandledErrorHandler()
         {
-            logUploadFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("MyLogFile",
-                CreationCollisionOption.OpenIfExists);
-
+            logUploadFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("MyLogFile", CreationCollisionOption.OpenIfExists);                
             CoreApplication.UnhandledErrorDetected += CoreApplication_UnhandledErrorDetected;
-
         }
 
-        /// <summary>
-        /// Any  uncaught exceptions are thrown to here
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CoreApplication_UnhandledErrorDetected(object sender, UnhandledErrorDetectedEventArgs e)
         {
             try
             {
                 logChannel.LogMessage("Caught the exception");
                 e.UnhandledError.Propagate();
-
             }
             catch (Exception ex)
             {
-                //logChannel.LogMessage(string.Format("UnhandledErro: 0x{0:X})", ex.HResult), LoggingLevel.Critical);
                 logChannel.LogMessage(string.Format("Effor Message: {0}", ex.Message));
-
                 if (logSession != null)
                 {
                     //var filename = DateTime.Now.ToString("yyyyMMdd-HHmmssTzz") + ".etl";
@@ -90,10 +83,6 @@ namespace MyMusic.HelperClasses
                 // throw;
             }
         }
-
-        /// <summary>
-        /// Deelete the files based on the days mentioned
-        /// </summary>
 
         public async void Deletefile()
         {

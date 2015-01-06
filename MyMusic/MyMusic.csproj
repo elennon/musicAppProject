@@ -102,6 +102,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="HelperClasses\Constants.cs" />
+    <Compile Include="HelperClasses\Log.cs" />
     <Compile Include="HelperClasses\Logger.cs" />
     <Compile Include="HelperClasses\ParseXml.cs" />
     <Compile Include="HelperClasses\RndAccessStream.cs" />

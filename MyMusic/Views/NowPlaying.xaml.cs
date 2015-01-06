@@ -92,6 +92,7 @@ namespace MyMusic.Views
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive); 
             AddMediaPlayerEventHandlers();
             Debug.WriteLine("in fg Current_Resuming");
+            
        //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
 
             bool bkrunning = false;
@@ -341,7 +342,7 @@ namespace MyMusic.Views
                         await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {                           
                             string pic = tr.ImageUri;
-                            if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                            if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/radio672.png"; }
                             imgPlayingTrack.Source = new BitmapImage(new Uri(pic));    // the image for this song
 
                             tbkSongName.Text = tr.Artist + "-" + tr.Name;

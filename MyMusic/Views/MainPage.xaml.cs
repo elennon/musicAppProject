@@ -1,4 +1,5 @@
-﻿using MyMusic.Common;
+﻿using BackgroundTask;
+using MyMusic.Common;
 using MyMusic.HelperClasses;
 using MyMusic.Models;
 using MyMusic.ViewModels;
@@ -77,7 +78,7 @@ namespace MyMusic.Views
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
             LoadRadioList();
@@ -85,12 +86,13 @@ namespace MyMusic.Views
             LoadStreamingList();
 
             //await trkView.SyncDB();
-            //Task.Run(async delegate()
-            //{
-            //    await trkView.SyncDB();
-            //});
+            Task.Run(async delegate()
+            {
+                await trkView.SyncDB();
+            });
 
-  //          Logger.GetLogger().logChannel.LogMessage("Main page nav to");
+            Log.GetLog().Write("Main page nav tooooollooooooo");
+            Logger.GetLogger().logChannel.LogMessage("Main page nav to");
             //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
             //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
 
@@ -220,7 +222,7 @@ namespace MyMusic.Views
         }
         #endregion
 
-        private async void TestButton_Click(object sender, RoutedEventArgs e)
+        private void TestButton_Click(object sender, RoutedEventArgs e)
         {
             //readLog();
             //trkView.lookIn();
@@ -231,27 +233,29 @@ namespace MyMusic.Views
             //trkView.sortOrderNum();
 
 
+            object obj = null; 
+            var t = obj.ToString();
+            
 
-            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            Log.GetLog().SaveLogFile();
 
-            var filename = "Log" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
-            //StorageFile sf = await folder.GetFileAsync(filename);
-            //using (Stream feedStream = await sf.OpenStreamForReadAsync())
+
+            //var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
+            //logSave.Wait();
+        }
+        public void ThrowsException()
+        {
+            throw new Exception("A problem was encountered.");
+            //try
             //{
-            //    System.IO.TextReader tr = new System.IO.StreamReader(feedStream, System.Text.Encoding.UTF8);
-            //    string data = tr.ReadToEnd();
-
-            //    byte[] buffer = new byte[1024 * 24];
-            //    int bytesRead = 0;
-            //    while ((bytesRead = await feedStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-            //    {
-            //       // (bufferStream.AsStreamForRead()).Write(buffer, 0, bytesRead);
-            //    }
+            //    throw new Exception("A problem was encountered.");
             //}
-
-
-  //          var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
-   //         logSave.Wait();
+            //catch (Exception e)
+            //{               
+            //    //throw e;
+            //}
         }
 
         private void Streaming_ItemClick(object sender, ItemClickEventArgs e)
@@ -263,8 +267,6 @@ namespace MyMusic.Views
                 Debug.WriteLine("navigation failed from main to radio lists ");
             }
         }
-
-
-
-    }
+        
+    }    
 }

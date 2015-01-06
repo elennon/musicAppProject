@@ -91,6 +91,7 @@ namespace BackgroundTask
             ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, "BKRunning");
             deferral = taskInstance.GetDeferral();
             Debug.WriteLine("BK-- run completed");
+            
         }
       
         void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
@@ -250,6 +251,7 @@ namespace BackgroundTask
 
         void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
+            //Log.GetLog().Write("BK: message recieved from FG");
             string currentImge = "";
             foreach (var item in e.Data.Values)
             {

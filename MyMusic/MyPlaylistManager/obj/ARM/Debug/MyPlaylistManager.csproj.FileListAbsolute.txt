@@ -28,3 +28,4 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlay
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.dll
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\SQLiteBase.pri
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\bin\ARM\Debug\MyPlaylistManager.winmd.CodeAnalysisLog.xml
