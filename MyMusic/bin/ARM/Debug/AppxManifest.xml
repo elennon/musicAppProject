@@ -23,7 +23,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="MyMusic.exe" EntryPoint="MyMusic.App">
-      <m3:VisualElements DisplayName="MyMusic" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="MyMusic" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="MyMusic" Square150x150Logo="Assets\rec.png" Square44x44Logo="Assets\SmallLogo.png" Description="MyMusic" ForegroundText="light" BackgroundColor="transparent">
         <m3:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Logo.png">
           <m3:ShowNameOnTiles>
@@ -31,7 +31,7 @@
             <m3:ShowOn Tile="wide310x150Logo" />
           </m3:ShowNameOnTiles>
         </m3:DefaultTile>
-        <m3:SplashScreen Image="Assets\SplashScreen.png" />
+        <m3:SplashScreen Image="Assets\splash.png" />
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackGroundMusicTask">
@@ -54,11 +54,12 @@
       <InProcessServer>
         <Path>CLRHost.dll</Path>
         <ActivatableClass ActivatableClassId="BackgroundTask.BackGroundMusicTask" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="BackgroundTask.StreamMgr" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="MyPlaylistManager.Models.Track" ThreadingModel="both" />
       </InProcessServer>
     </Extension>

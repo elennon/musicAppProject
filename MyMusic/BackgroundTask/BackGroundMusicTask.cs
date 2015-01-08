@@ -28,6 +28,7 @@ namespace BackgroundTask
 
         private SystemMediaTransportControls systemmediatransportcontrol;
         private MyPlaylistMgr playlistManager;
+        private StreamMgr streamingManager;
         private BackgroundTaskDeferral deferral; // Used to keep task alive
         private ForegroundAppStatus foregroundAppState = ForegroundAppStatus.Unknown; 
         private AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
@@ -45,6 +46,18 @@ namespace BackgroundTask
                     playlistManager = new MyPlaylistMgr();
                 }
                 return playlistManager.Current;
+            }
+        }
+
+        private StreamingManager StreamManager
+        {
+            get
+            {
+                if (null == streamingManager)
+                {
+                    streamingManager = new StreamMgr();
+                }
+                return streamingManager.Current;
             }
         }
 
@@ -192,7 +205,7 @@ namespace BackgroundTask
         {
             try
             {
-                Playlist.PlayRadio(rdoUrl);
+                StreamManager.PlayRadio(rdoUrl);
             }
             catch (Exception ex)
             {
@@ -202,7 +215,7 @@ namespace BackgroundTask
 
         private void playGSTrack(string Url)
         {
-            Playlist.PlayGSTrack(Url);
+         //   StreamingManager.PlayGSTrack(Url);
         }
 
         void playList_TrackChanged(MyPlaylist sender, object args)
@@ -211,9 +224,11 @@ namespace BackgroundTask
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
 
-            int trkId = Convert.ToInt32(trksToPlay[sender.CurrentTrackNumber].Split(',')[0]);   // pull out the track id from comma seperated string
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
-
+            if (trksToPlay[sender.CurrentTrackNumber].Split(',').Count() > 1)
+            {
+                int trkId = Convert.ToInt32(trksToPlay[sender.CurrentTrackNumber].Split(',')[0]);   // pull out the track id from comma seperated string
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
+            }
             string currentTrack = "";
             if (Skipped)
             {

@@ -77,14 +77,14 @@ namespace MyPlaylistManager.ShoutCast
             Debug.WriteLine("starting first stream to read frame size ");
             response1 = (result.AsyncState as HttpWebRequest).EndGetResponse(result) as HttpWebResponse;
             r = response1.GetResponseStream();
-            if(response1.ContentLength == -1)
-            {
-                Debug.WriteLine("streaming failed ");
-                CloseMedia();
-                bool failed = true;
-                NoSetUp.Invoke(failed, new System.EventArgs());
-                return;
-            }
+            //if(response1.ContentLength == -1)
+            //{
+            //    Debug.WriteLine("streaming failed ");
+            //    CloseMedia();
+            //    bool failed = true;
+            //    NoSetUp.Invoke(failed, new System.EventArgs());
+            //    return;
+            //}
 
             httpClient = new HttpClient();
             Debug.WriteLine("starting http web stream to feed buffer");

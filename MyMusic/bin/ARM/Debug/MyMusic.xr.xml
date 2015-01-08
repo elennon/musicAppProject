@@ -11,6 +11,7 @@
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="OrderNo" />
     <RootPropertyPathName Name="Group" />
+    <RootPropertyPathName Name="BackgroundColour" />
     <RootPropertyPathName Name="TrackCount" />
     <RootPropertyPathName Name="Tracks" />
     <RootPropertyPathName Name="ImagePath" />
@@ -79,6 +80,9 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Padding" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontStyle" />
       <RootProperty Name="Name" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
@@ -120,10 +124,10 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.HubSection">
       <RootProperty Name="Name" />
-      <RootProperty Name="Width" />
       <RootProperty Name="HeaderTemplate" />
       <RootProperty Name="ContentTemplate" />
       <RootProperty Name="DataContext" />
+      <RootProperty Name="Width" />
       <RootProperty Name="Header" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">

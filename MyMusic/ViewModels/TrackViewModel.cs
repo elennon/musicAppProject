@@ -403,6 +403,7 @@ namespace MyMusic.ViewModels
                 var topShufflePlays = db.Table<Track>().Where(a => a.RandomPlays > 0).OrderByDescending(c => c.RandomPlays).ToList();              
                 foreach (var tr in topPlays)
                 {
+                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
@@ -411,7 +412,8 @@ namespace MyMusic.ViewModels
                         RandomPlays = tr.RandomPlays,                
                         Plays = tr.Plays,
                         Skips = tr.Skips,
-                        ImageUri = tr.ImageUri
+                        ImageUri = tr.ImageUri,
+                        OrderNo = tr.OrderNo
                     };
                     _tracks.Add(trk);
                 }

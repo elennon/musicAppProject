@@ -70,7 +70,7 @@
             <Hub.Background>
                 <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="{Binding ImageUri}"></ImageBrush>             
             </Hub.Background>
-            <HubSection x:Uid="albumsSection" Name="albumsSection"  Width="Auto" 
+            <HubSection x:Uid="albumsSection" Name="albumsSection" 
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}"
                          >
                 <!--<HubSection.Background>

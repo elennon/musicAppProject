@@ -32,16 +32,19 @@ namespace MyMusic.Views
     public class ContactGroup
     {
         public string Title { get; set; }
+        public string BackgroundColour { get; set; }
         public List<TrackViewModel> Tracks { get; set; }
     }
     public class ArtistContactGroup
     {
         public string Title { get; set; }
+        public string BackgroundColour { get; set; }
         public List<ArtistViewModel> Artists { get; set; }
     }
     public class AlbumContactGroup
     {
         public string Title { get; set; }
+        public string BackgroundColour { get; set; }
         public List<AlbumViewModel> Albums { get; set; }
     }
 
@@ -53,7 +56,7 @@ namespace MyMusic.Views
         private AlbumsViewModel albView = new AlbumsViewModel();
         private GenreCollViewModel genView = new GenreCollViewModel();
 
-        //private string albumId = "";
+        private char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
         private bool editMode = false, InBinList = false;
         private ListView lstDetails = new ListView();
         private GridView grdSummary = new GridView();
@@ -131,34 +134,48 @@ namespace MyMusic.Views
             this.Frame.Navigate(typeof(NowPlaying), playThese);
         }
 
-        private void lstOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Track_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ListBox lb = (ListBox)sender;
+            Border brd = (Border)sender;
+            TextBlock nameTextBlock = (TextBlock)brd.FindName("txtName");
+            string playThese = "allTracks," + nameTextBlock.Tag.ToString();
+            this.Frame.Navigate(typeof(NowPlaying), playThese);
+        }
 
-            if (lb.SelectedIndex != -1)
+        private async void deleteIcon_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Image del = (Image)sender;
+            string inOrOut = del.Tag.ToString().Split(',')[2];
+            if (inOrOut == "out")
             {
-                string title = ((ListBoxItem)lb.SelectedItem).Tag.ToString();
-                switch (title)
+                string trkName = (del.Tag.ToString()).Split(',')[0];    // track name is 1st part of the tag
+                MessageDialog msgbox = new MessageDialog("Are you sure you want " + trkName + " out??");
+
+                msgbox.Commands.Clear();
+                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
+                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
+                var res = await msgbox.ShowAsync();
+
+                if ((int)res.Id == 0)
                 {
-                    case "All Tracks":
-                        this.Frame.Navigate(typeof(ShowAllTracks));
-                        break;
-                    case "Top Tracks":
-                        this.Frame.Navigate(typeof(TopPlayed));
-                        break;
-                    case "Artist":
-                        this.Frame.Navigate(typeof(ShowByArtist));
-                        break;
-                    case "Album":
-                        this.Frame.Navigate(typeof(Albums));
-                        break;
-                    //case "Genre":
-                    //    NavigationService.Navigate(new Uri("/Pages/Genres.xaml?title=" + title, UriKind.Relative));
-                    //    break;
+                    int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
+                    trkView.BinThis(id);
+                    LoadList();
+                }
+                if ((int)res.Id == 1)
+                {
+                    return;
                 }
             }
+            else if (inOrOut == "in")
+            {
+                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
+                trkView.BackIn(id);
+                LoadBinList();
+            }
+
         }
-                
+     
         public void AllTracksSemanticZoom_Loaded(object sender, RoutedEventArgs e)
         {
             SemanticZoom sm = (SemanticZoom)sender;
@@ -225,7 +242,7 @@ namespace MyMusic.Views
             TextBlock nameTextBlock = (TextBlock)templateRoot.FindName("txtName");
 
             nameTextBlock.Text = track.Name;    // adds song name 
-            nameTextBlock.Tag = track.TrackId;
+            nameTextBlock.Tag = track.OrderNo;
             nameTextBlock.Opacity = 1;
 
             args.RegisterUpdateCallback(ShowArtist);  // show artist next
@@ -312,7 +329,7 @@ namespace MyMusic.Views
             foreach (Char item in firstLetters.OrderBy(a => a.ToString()).Distinct())
             {
                 var tracksWithLetter = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList();
-                tGroup = new ContactGroup() { Title = item.ToString(), Tracks = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
+                tGroup = new ContactGroup() { Title = item.ToString(), BackgroundColour = "SlateGray", Tracks = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
                 tempGroups.Add(tGroup);
                 foreach (var tr in tracksWithLetter)    // collect all tracks that start with a letter
                 {
@@ -325,12 +342,23 @@ namespace MyMusic.Views
                 if (songsNotNumbers.Contains(item) == false)
                 { numberSongs.Add(item); }
             }
-            ContactGroup numbersGroup = new ContactGroup() { Title = "#", Tracks = numberSongs.ToList() };
+            ContactGroup numbersGroup = new ContactGroup() { Title = "#", Tracks = numberSongs.ToList(), BackgroundColour = "SlateGray" };
             trackGroups.Add(numbersGroup);
             foreach (var item in tempGroups)
             {
                 trackGroups.Add(item);
             }
+
+            foreach (Char item in alpha)        // alpha is a list of all letter
+            {
+                if(!firstLetters.Contains(item))     // all letters that don't have songs listed under, set opacity down
+                {
+                    ContactGroup lettersToBeDimmed = new ContactGroup() { Title = item.ToString(), BackgroundColour = "Gray" };
+                    trackGroups.Add(lettersToBeDimmed);
+                }
+            }
+            ContactGroup dots = new ContactGroup() { Title = "...", BackgroundColour = "Gray" };    // last group title to add
+            trackGroups.Add(dots);
 
             return trackGroups;
         }
@@ -406,7 +434,7 @@ namespace MyMusic.Views
             StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;
             Image _imgSongPic = (Image)templateRoot.FindName("imgPlayArtist");
 
-            _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/play4.png"));
+            _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/plaay.png"));
             _imgSongPic.Tag = artist.ArtistId;
             _imgSongPic.Opacity = 1;
         }
@@ -436,7 +464,7 @@ namespace MyMusic.Views
             foreach (Char item in firstLetters.OrderBy(a => a.ToString()).Distinct())
             {
                 var tracksWithLetter = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList();
-                tGroup = new ArtistContactGroup() { Title = item.ToString(), Artists = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
+                tGroup = new ArtistContactGroup() { Title = item.ToString(), BackgroundColour = "SlateGray", Artists = allSongs.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
                 tempGroups.Add(tGroup);
                 foreach (var tr in tracksWithLetter)    // collect all tracks that start with a letter
                 {
@@ -449,12 +477,23 @@ namespace MyMusic.Views
                 if (songsNotNumbers.Contains(item) == false)
                 { numberSongs.Add(item); }
             }
-            ArtistContactGroup numbersGroup = new ArtistContactGroup() { Title = "#", Artists = numberSongs.ToList() };
+            ArtistContactGroup numbersGroup = new ArtistContactGroup() { Title = "#", Artists = numberSongs.ToList(), BackgroundColour = "SlateGray" };
             trackGroups.Add(numbersGroup);
             foreach (var item in tempGroups)
             {
                 trackGroups.Add(item);
             }
+
+            foreach (Char item in alpha)        // alpha is a list of all letter
+            {
+                if (!firstLetters.Contains(item))     // all letters that don't have songs listed under, set opacity down
+                {
+                    ArtistContactGroup lettersToBeDimmed = new ArtistContactGroup() { Title = item.ToString(), BackgroundColour = "Gray" };
+                    trackGroups.Add(lettersToBeDimmed);
+                }
+            }
+            ArtistContactGroup dots = new ArtistContactGroup() { Title = "...", BackgroundColour = "Gray" };    // last group title to add
+            trackGroups.Add(dots);
 
             return trackGroups;
         }
@@ -555,7 +594,7 @@ namespace MyMusic.Views
             StackPanel templateRoot = (StackPanel)itemContainer.ContentTemplateRoot;
             Image _imgSongPic = (Image)templateRoot.FindName("imgPlayAlbum");
 
-            _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/play4.png"));
+            _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/plaay.png"));
             _imgSongPic.Tag = album.AlbumId;
             _imgSongPic.Opacity = 1;
         }
@@ -585,7 +624,7 @@ namespace MyMusic.Views
             foreach (Char item in firstLetters.OrderBy(a => a.ToString()).Distinct())
             {
                 var tracksWithLetter = allAlbums.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList();
-                tGroup = new AlbumContactGroup() { Title = item.ToString(), Albums = allAlbums.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
+                tGroup = new AlbumContactGroup() { Title = item.ToString(), BackgroundColour = "SlateGray", Albums = allAlbums.Where(a => Char.ToLower(a.Name[0]) == Char.ToLower(item)).ToList() };
                 tempGroups.Add(tGroup);
                 foreach (var tr in tracksWithLetter)    // collect all tracks that start with a letter
                 {
@@ -598,12 +637,23 @@ namespace MyMusic.Views
                 if (songsNotNumbers.Contains(item) == false)
                 { numberSongs.Add(item); }
             }
-            AlbumContactGroup numbersGroup = new AlbumContactGroup() { Title = "#", Albums = numberSongs.ToList() };
+            AlbumContactGroup numbersGroup = new AlbumContactGroup() { Title = "#", Albums = numberSongs.ToList(), BackgroundColour = "SlateGray" };
             albumGroups.Add(numbersGroup);
             foreach (var item in tempGroups)
             {
                 albumGroups.Add(item);
             }
+
+            foreach (Char item in alpha)        // alpha is a list of all letter
+            {
+                if (!firstLetters.Contains(item))     // all letters that don't have songs listed under, set opacity down
+                {
+                    AlbumContactGroup lettersToBeDimmed = new AlbumContactGroup() { Title = item.ToString(), BackgroundColour = "Gray" };
+                    albumGroups.Add(lettersToBeDimmed);
+                }
+            }
+            AlbumContactGroup dots = new AlbumContactGroup() { Title = "...", BackgroundColour = "Gray" };    // last group title to add
+            albumGroups.Add(dots);
 
             return albumGroups;
         }
@@ -659,41 +709,7 @@ namespace MyMusic.Views
 
             LoadList();
         }
-
-        private async void deleteIcon_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Image del = (Image)sender;
-            string inOrOut = del.Tag.ToString().Split(',')[2];
-            if (inOrOut == "out")
-            {
-                string trkName = (del.Tag.ToString()).Split(',')[0];    // track name is 1st part of the tag
-                MessageDialog msgbox = new MessageDialog("Are you sure you want " + trkName + " out??");
-
-                msgbox.Commands.Clear();
-                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
-                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
-                var res = await msgbox.ShowAsync();
-
-                if ((int)res.Id == 0)
-                {
-                    int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                    trkView.BinThis(id);
-                    LoadList();
-                }
-                if ((int)res.Id == 1)
-                {
-                    return;
-                }
-            }
-            else if (inOrOut == "in")
-            {
-                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                trkView.BackIn(id);
-                LoadBinList();
-            }
-
-        }
-
+       
         private void ShowBinnedButton_Click(object sender, RoutedEventArgs e)
         {
             editMode = false;
@@ -770,11 +786,7 @@ namespace MyMusic.Views
                 appBar.Visibility = Visibility.Collapsed;
             }
         }
-
-        
-
-        
-       
+  
     }
 }
 

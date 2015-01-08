@@ -29,6 +29,7 @@ namespace MyMusic.Views
         private NavigationHelper navigationHelper;
         private AlbumsViewModel albView = new AlbumsViewModel();
         private TracksViewModel trkView = new TracksViewModel();
+        private string albumId = "";
 
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         public ObservableDictionary DefaultViewModel
@@ -81,72 +82,12 @@ namespace MyMusic.Views
 
         private void Track_ItemClick(object sender, ItemClickEventArgs e)   // to play all tracks in this album
         {            
-            var itemId = ((TrackViewModel)e.ClickedItem).TrackId;
-            string playThese = "albumTracks," + itemId.ToString();
+            var trk = (TrackViewModel)e.ClickedItem;
+            string playThese = "albTracksFromThisOn," + trk.TrackId.ToString() + "," + trk.AlbumId.ToString();
             this.Frame.Navigate(typeof(NowPlaying), playThese);
         }
 
         #region bottom app buttons
-
-        private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
-        {
-            this.Frame.Navigate(typeof(NowPlaying), "shuffle");
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            //editMode = true;
-            //InBinList = false;
-            //LoadList();
-        }
-
-        private async void deleteIcon_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Image del = (Image)sender;
-            string inOrOut = del.Tag.ToString().Split(',')[2];
-            if (inOrOut == "out")
-            {
-                string trkName = (del.Tag.ToString()).Split(',')[0];    // track name is 1st part of the tag
-                MessageDialog msgbox = new MessageDialog("Are you sure you want " + trkName + " out??");
-
-                msgbox.Commands.Clear();
-                msgbox.Commands.Add(new UICommand { Label = "Yes", Id = 0 });
-                msgbox.Commands.Add(new UICommand { Label = "No", Id = 1 });
-                var res = await msgbox.ShowAsync();
-
-                if ((int)res.Id == 0)
-                {
-                    int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                    trkView.BinThis(id);
-                    //LoadList();
-                }
-                if ((int)res.Id == 1)
-                {
-                    return;
-                }
-            }
-            else if (inOrOut == "in")
-            {
-                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
-                trkView.BackIn(id);
-                //LoadBinList();
-            }
-
-        }
-
-        private void ShowBinnedButton_Click(object sender, RoutedEventArgs e)
-        {
-            //editMode = false;
-            //InBinList = true;
-            //LoadBinList();
-        }
-
-        private void AllTracksButton_Click(object sender, RoutedEventArgs e)
-        {
-            //editMode = false;
-            //InBinList = false;
-            //LoadList();
-        }
 
         #endregion
        

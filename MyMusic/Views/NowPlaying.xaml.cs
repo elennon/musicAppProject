@@ -170,9 +170,9 @@ namespace MyMusic.Views
                 }
                 else if (arg.ToString().Contains("albTracksFromThisOn"))
                 {
-                    int trackIndex = Convert.ToInt32((arg.ToString().Split(','))[1]);
+                    int trackId = Convert.ToInt32((arg.ToString().Split(','))[1]);
                     int albumId = Convert.ToInt32((arg.ToString().Split(','))[2]);
-                    orders = GetSongsInAlbumFromThis(trackIndex, albumId);
+                    orders = GetSongsInAlbumFromThis(trackId, albumId);
                 }
                 else if (arg.ToString().Contains("artistTracks"))
                 {
@@ -331,7 +331,9 @@ namespace MyMusic.Views
                 }
                 else
                 {
-                    tbkSongName.Text = currentTrack[0];   // this is a radio station
+                    tr.Artist = "Radio :";
+                    tr.Name = currentTrack[0];
+                    //tbkSongName.Text = currentTrack[0];   // this is a radio station
                 }
             }
             foreach (string key in e.Data.Keys)
@@ -413,21 +415,19 @@ namespace MyMusic.Views
 
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (((App)Application.Current).IsMyBackgroundTaskRunning)
-            //{
-                if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    BackgroundMediaPlayer.Current.Pause();
-                }
-                else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    BackgroundMediaPlayer.Current.Play();
-                }
-                else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
-                {
-                    StartBackgroundAudioTask();
-                }
-            //}
+            if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                BackgroundMediaPlayer.Current.Pause();
+            }
+            else if (MediaPlayerState.Paused == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                BackgroundMediaPlayer.Current.Play();
+            }
+            else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
+            {
+                StartBackgroundAudioTask();
+            }
+            
             else
             {
                 StartBackgroundAudioTask();

@@ -231,19 +231,16 @@ namespace MyMusic.Views
             //var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
             //trkView.loadUpImagesAndGenre();
             //trkView.sortOrderNum();
-
-
-            object obj = null; 
-            var t = obj.ToString();
-            
-
-            Log.GetLog().SaveLogFile();
-
-
             //var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
             //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
             //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
             //logSave.Wait();
+
+            string rUrl = "radio,http://listen.radionomy.com/IStreettFm";
+            if (!Frame.Navigate(typeof(NowPlaying), rUrl))
+            {
+                Debug.WriteLine("navigation failed from main to radio lists ");
+            }
         }
         public void ThrowsException()
         {

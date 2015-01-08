@@ -161,13 +161,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\672.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\back.png" />
-    <Content Include="Assets\BadgeLogo.scale-100.png" />
-    <Content Include="Assets\BadgeLogo.scale-140.png" />
-    <Content Include="Assets\BadgeLogo.scale-240.png" />
     <Content Include="Assets\bin.png" />
     <Content Include="Assets\concert2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -180,48 +174,27 @@
     <Content Include="Assets\floyd.jpg" />
     <Content Include="Assets\jazz.jpg" />
     <Content Include="Assets\jazz2.jpg" />
-    <Content Include="Assets\Logo.scale-100.png" />
-    <Content Include="Assets\Logo.scale-140.png" />
-    <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\music.jpg" />
     <Content Include="Assets\music2.jpg" />
     <Content Include="Assets\music3.jpg" />
     <Content Include="Assets\next.png" />
-    <Content Include="Assets\note.png" />
-    <Content Include="Assets\note4.png" />
-    <Content Include="Assets\PicPlaceholder.png" />
-    <Content Include="Assets\Picture1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Assets\plaay.png" />
     <Content Include="Assets\play3.png" />
     <Content Include="Assets\play4.png" />
     <Content Include="Assets\radio.jpg" />
     <Content Include="Assets\radio672.png" />
+    <Content Include="Assets\rec.scale-100.png" />
+    <Content Include="Assets\rec2.png" />
+    <Content Include="Assets\record.png" />
+    <Content Include="Assets\record2.scale-100.png" />
     <Content Include="Assets\rnr.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\rock.jpg" />
     <Content Include="Assets\settings.png" />
     <Content Include="Assets\Shuffle.76.png" />
-    <Content Include="Assets\small.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
-    <Content Include="Assets\SmallLogo.scale-140.png" />
-    <Content Include="Assets\SmallLogo.scale-240.png" />
-    <Content Include="Assets\splash1.png" />
-    <Content Include="Assets\splash2.png" />
-    <Content Include="Assets\splash3.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-140.png" />
-    <Content Include="Assets\SplashScreen.scale-240.png" />
-    <Content Include="Assets\Square150x150Logo.scale-100.png" />
-    <Content Include="Assets\Square150x150Logo.scale-140.png" />
-    <Content Include="Assets\Square150x150Logo.scale-240.png" />
-    <Content Include="Assets\Square71x71Logo.scale-240.png" />
-    <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\StoreLogo.scale-140.png" />
-    <Content Include="Assets\StoreLogo.scale-240.png" />
-    <Content Include="Assets\transport.pause.png" />
-    <Content Include="Assets\transport.play.png" />
+    <Content Include="Assets\splash.scale-100.png" />
     <Content Include="Assets\undo3.png" />
     <Content Include="Assets\vintageBikes.jpg" />
     <Content Include="Data\debugFile.txt">
