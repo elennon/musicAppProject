@@ -39,11 +39,8 @@ namespace MyMusic.Views
     
     public sealed partial class NowPlaying : Page
     {
-        #region Private Fields and Properties
+        #region Properties
 
-        //private HttpBaseProtocolFilter filter;
-        //private HttpClient httpClient;
-        //private CancellationTokenSource cts;
         private readonly NavigationHelper navigationHelper;
 
         private TracksViewModel trkView = new TracksViewModel();
@@ -98,12 +95,12 @@ namespace MyMusic.Views
             bool bkrunning = false;
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(Constants.BackgroundTaskState))
             {
-                Debug.WriteLine("FG  null returned");
+                Debug.WriteLine("FG: BK null returned");
             }
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[Constants.BackgroundTaskState];
-                Debug.WriteLine("FG  bk running found " + value.ToString());
+                Debug.WriteLine("FG:  bk running " + value.ToString());
                 if (value.ToString() == "BKRunning")
                     bkrunning = true;
             }
@@ -134,16 +131,14 @@ namespace MyMusic.Views
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            this.navigationHelper.OnNavigatedTo(e);
-            
+        {            
+            this.navigationHelper.OnNavigatedTo(e);           
             Debug.WriteLine("in now playing nav to");
         
             var arg = e.Parameter;
             if (arg != null && ((App)Application.Current).isResumingFromTermination == false)
             {
-                if (arg.ToString().Contains("shuffleAll")) { orders = shuffleAll(); }
+                if (arg.ToString().Contains("shuffleAll")) { orders = trkView.shuffleAll(); }
 
                 else if (arg.ToString().Contains("shuffleThese"))       // for a collection to shuffle play e.g. tracks in album or by genre
                 {
@@ -157,8 +152,12 @@ namespace MyMusic.Views
                     {
                         orders = trkView.ShuffleGenre(id);
                     }
+                    if (type.Contains("topplay"))
+                    {
+                        orders = trkView.ShuffleTopPlays();
+                    }
                 }
-                else if (arg.ToString().Contains("allTracks"))
+                else if (arg.ToString().Contains("allTracks"))          // track selected in all track list and top track list. playes selected and then all listed after
                 {
                     int trackNumber = Convert.ToInt32((arg.ToString().Split(','))[1]);
                     orders = trkView.GetListToPlay(trackNumber);
@@ -231,27 +230,16 @@ namespace MyMusic.Views
                 {
                     int trackId = (int)value2;
                     pic = (trkView.GetThisTrack(trackId)).ImageUri;
-                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                    if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/music3.png"; }
                     imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
+                    imgPlayingTrack.Width = 250;
+                    imgPlayingTrack.Height = 250;
                 }
             }
         }
 
         #region playlist managing
-
-        private string[] shuffleAll()
-        {
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            shuffled = trkView.GetShuffleTracks();
-            string[] trkks = new string[shuffled.Count];
-            for (int i = 0; i < shuffled.Count; i++)
-            {
-                //trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
-                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].FileName + "," + shuffled[i].Artist + ",shuffle";
-            }
-            return trkks;
-        }
-
+        
         private string[] GetSongsAllInAlbum(int albumId) // orders all songs in album into a string[]
         {
             var trks = (trkView.GetTracksByAlbum(albumId.ToString())).ToList();         // get all tracks in given album

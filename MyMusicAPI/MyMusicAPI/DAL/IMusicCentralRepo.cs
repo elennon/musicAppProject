@@ -10,9 +10,16 @@ namespace MyMusicAPI.DAL
     public interface IMusicCentralRepo
     {
         //string test();
-        List<RadioStream> GetAllStations();
-        List<RadioGenre> GetAllStationGenres();
+        IEnumerable<RadioStream> GetAllStations();
+        IEnumerable<RadioGenre> GetAllStationGenres();
+        RadioGenre GetGenre(string gName);
+        void DeleteGenreAndSts(string gNme);
+        
+        bool CheckGenre(string gn);
+        void AddGenreKey(string name, string key);
         void insertGenre(RadioGenre gn);
         void insertRadioStation(RadioStream rs);
+        void UpdateStation(RadioStream st, bool isOk);
+        void DropDb();
     }
 }

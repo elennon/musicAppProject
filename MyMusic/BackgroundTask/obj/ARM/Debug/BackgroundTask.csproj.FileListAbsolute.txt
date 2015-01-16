@@ -3,14 +3,8 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Backgr
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\BackgroundTask.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\BackgroundTask.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\BackgroundTask.pri
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\MyPlaylistManager.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\MyToolkit.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\SQLiteBase.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\MyPlaylistManager.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\MyPlaylistManager.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\MyToolkit.xml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\SQLiteBase.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\ARM\Debug\SQLiteBase.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\BackgroundTask.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\BackgroundTask.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\BackgroundTask.winmdobj

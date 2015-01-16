@@ -151,3 +151,5 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyM
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyMusicAPI\bin\Ninject.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyMusicAPI\bin\Ninject.Web.Common.xml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyMusicAPI\bin\Ninject.Web.Mvc.xml
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyMusicAPI\bin\EntityFramework.SqlServer.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusicAPI\MyMusicAPI\bin\EntityFramework.SqlServer.xml

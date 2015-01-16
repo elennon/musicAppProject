@@ -26,7 +26,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="TwoLineItemTemplate">
-            <Grid>
+            <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -55,8 +55,6 @@
                     <GridView x:ConnectionId='3'
                         Margin="0,9.5,0,0"
                         ItemsSource="{Binding}"
-                        AutomationProperties.AutomationId="ItemGridView"
-                        AutomationProperties.Name="Items In Group"
                         ItemTemplate="{StaticResource RadioItemTemplate}"
                         SelectionMode="None"
                         IsItemClickEnabled="True"
@@ -96,8 +94,6 @@
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:ConnectionId='1' 
-                        AutomationProperties.AutomationId="ItemListViewSection5"
-                        AutomationProperties.Name="Items In Group"
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"

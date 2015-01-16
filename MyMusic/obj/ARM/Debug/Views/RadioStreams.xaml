@@ -10,24 +10,24 @@
 
     <Page.Resources>
         <DataTemplate x:Key="HubSectionHeaderTemplate">
-            <TextBlock Margin="0,0,0,-9.5" FontSize="34" Text="{Binding}"/>
+            <TextBlock Margin="30,0,0,-9.5" FontSize="34" Text="{Binding}"/>
         </DataTemplate>
 
-        <DataTemplate x:Key="StandardDoubleLineItemTemplate">
-            
-                <StackPanel Grid.Column="1" Margin="14.5,10,0,0">
-                    <TextBlock Text="{Binding RadioName}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>                    
-                </StackPanel>
-          
-        </DataTemplate>
+        <!--<DataTemplate x:Key="StandardDoubleLineItemTemplate">
+            <StackPanel Grid.Column="1" Margin="14.5,10,0,0">
+                <TextBlock Text="{Binding RadioName}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+            </StackPanel>
+        </DataTemplate>-->
         
     </Page.Resources>
     
     <Grid x:Name="LayoutRoot">
         <Hub x:Name="RadioHub" x:Uid="Hub" Header="music central" >
-
-            <HubSection x:Name="RockSection" Header="Rock"
-                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+            <Hub.Background>
+                <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/try3.jpg"></ImageBrush>
+            </Hub.Background>
+            <HubSection x:Name="Section1" 
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">              
                 <DataTemplate>
                     <ListView x:ConnectionId='5' 
                         AutomationProperties.AutomationId="ItemListViewSection5"
@@ -35,14 +35,14 @@
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"
-                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemTemplate="{StaticResource DoubleLineTemplate}"
                                                       
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="AlternativeSection" Header="Alternative"
+            <HubSection x:Name="Section2" 
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:ConnectionId='4' 
@@ -51,14 +51,14 @@
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"
-                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemTemplate="{StaticResource DoubleLineTemplate}"
                                                       
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="JazzSection" Header="Jazz"
+            <HubSection x:Name="Section3" 
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:ConnectionId='3' 
@@ -67,14 +67,14 @@
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"
-                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemTemplate="{StaticResource DoubleLineTemplate}"
                                                       
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="CountrySection" Header="Country"
+            <HubSection x:Name="Section4" 
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:ConnectionId='2' 
@@ -83,14 +83,14 @@
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"
-                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemTemplate="{StaticResource DoubleLineTemplate}"
                                                       
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="DanceSection" Header="Dance"
+            <HubSection x:Name="Section5" 
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView x:ConnectionId='1' 
@@ -99,13 +99,12 @@
                         SelectionMode="None"
                         IsItemClickEnabled="True"
                         ItemsSource="{Binding}"
-                        ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
+                        ItemTemplate="{StaticResource DoubleLineTemplate}"
                                                       
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
             </HubSection>
-
         </Hub>
     </Grid>
     

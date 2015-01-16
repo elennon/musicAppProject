@@ -1,664 +1,1326 @@
 ﻿<?xml version="1.0"?>
-<Stations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <stations>
-    <radioStation>
-      <Name>metelheadeasterweek</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.projectplaylist.com/standalone/1778718</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>ACADEMY ROCK</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://radionomy.com/listen/academy-rock.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>radio reddit rock stream</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://radioreddit.com/listen/rock/listen.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>radio reddit main stream</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://radioreddit.com/listen/listen.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Radio INDI</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://sc1.uberstreaming.com/m3u/radioindi</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Yesternow Radio</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.yesternow-radio-1.com/listen.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>lautfm/#always-remember</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://stream.laut.fm/always-remember.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>ABC Fifties (Dublin)</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://server2.reliastream.com/tunein.php/bgaffn07/playlist.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>ROCKFM RADIO</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.live365.com/stations/wwwrockfm?site=pro</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>AMPZ Classic Rock - The Hottest Mix of the BEST Classic Rock!!!</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://community.loudcity.com/stations/ampz-classic-rock/files/show/ampzcr.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Radio Oberbayern</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://stream.radio-oberbayern.org/playlist.asx</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>GotRadio - Jazz So Smooth</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.gotradio.com/itunes/smoothjazz_aacplus.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>kaathalfm</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.prasathmax.webs.com</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Funky Beatz Radio</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.radio-tochka.com:6065/listen.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Retro Jukebox - Vintage Oldies, Swing and Comedy</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://public.wavepanel.net/82ROSJ2IOHISEPHC/listen/m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>MyOpusRadio</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.myopusradio.com:8000/myopusradio.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>CariocaChannel Brasil</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://s3.shoutitaly.com/tunein.php/cariocachannel/playlist.qtl</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Bossa nova and Brazil flavored</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://usa1-vn.mixstream.net/9206.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>CBS Radio KHJZFM - Smooth Jazz</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KHJZFM</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>CBS Radio KMVKHD2 - Smooth Jazz</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KMVKHD2</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>CBS Radio KTWVFM - Smooth Jazz</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=KTWVFM</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>CBS Radio WSJTFM - Smooth Jazz</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://cbsplayer.streamtheworld.com/?CALLSIGN=WSJTFM</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Wild West Radio</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://s7.viastreaming.net:7430/listen.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>EKR - Rock Radio 24/7</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://78.129.163.140:8110/listen.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>R</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://systembrasil.xpg.com.br/virtualdj.mp3</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Radio-Sonline</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.Radio-Sonline.es.tl</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>KOKOMO WebRadio</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://kokomo.fr/streams/stream.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Radio Free Vermont</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.freevermontradio.org/streams/playlist.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Radio Classic Rock</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.radioclassicrock.com/live.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>Rockzone Radio</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/rockzone-radio.m3u</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name>TuMusicaPRCom Radio</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://www.tumusicapr.com/radio/stream.pls</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> DiscofoxFM - Dein Webradio DiscofoxFM - Nonstop die besten Schlager</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.71:13000</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.2:8030</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://85.25.133.95:9060</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.2:9000</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.2:8050</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://85.25.133.95:8010</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.2:8000</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://87.118.78.71:12000</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name />
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://205.164.35.9:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://205.164.36.9:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://205.164.62.20:8070</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Alternative Indie Mix.RadioimInternet.de Radio-im-Internet.de - Indie Alternative Radio im Internet</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://83.169.61.65:8080</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 1.FM - Channel X</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://205.164.36.7:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://205.164.35.7:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.90.196:7024</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://205.164.62.20:7024</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 100Hitz - 90's Alternative</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://206.217.213.235:8220</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> New. Music. Unfiltered. idobi.com</Name>
-      <Genre>Alternative Rock</Genre>
-      <Urls isOk="false">
-        <urlName>http://173.245.94.219:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.75.99:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.88.19:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://208.53.164.179:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.88.21:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://198.100.125.242:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://173.245.94.220:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://50.117.121.164:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://50.117.121.165:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.75.100:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.88.20:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.86.147:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://173.245.94.221:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://72.13.93.91:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.86.149:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://173.245.94.218:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://72.13.93.90:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://208.53.164.181:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://198.100.125.245:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://198.100.125.243:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://50.117.121.162:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://208.53.164.180:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://198.100.125.244:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.88.18:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.86.148:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.75.98:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://72.13.93.92:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://50.117.121.163:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.75.101:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://72.13.93.93:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://69.46.86.146:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://208.53.164.178:80</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Radio Free Americana</Name>
-      <Genre>country</Genre>
-      <Urls isOk="false">
-        <urlName>http://65.49.77.146:9526</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Gravel Road on rockymountainradio.net:  Outside the city-limits.</Name>
-      <Genre>country</Genre>
-      <Urls isOk="false">
-        <urlName>http://206.190.150.92:8283</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Rootsradio</Name>
-      <Genre>country</Genre>
-      <Urls isOk="false">
-        <urlName>http://174.37.16.73:4947/Live</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> The Whip Radio</Name>
-      <Genre>country</Genre>
-      <Urls isOk="false">
-        <urlName>http://192.240.102.195:8690</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 181.FM - The FrontPorch * Bluegrass From The FrontPorch</Name>
-      <Genre>country</Genre>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.118:8016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.119:8016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.115:8016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.120:8016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.115:14016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.120:14016</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.117:8016</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Radio Avant</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://188.165.221.75:8030</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Avant Garde Radio</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://37.187.90.121:4030/stream</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> WSJE-DB - Smooth Jazz Expressions</Name>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://64.78.234.172:8010/stream/2/</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/beejazzy</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/Air-Jazz</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/J-Last</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.streamonomy.com/jazzlovers</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.streamonomy.com/neworleansradio</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Jazz</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.streamonomy.com/sjfplus</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 103.7 The Rock</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://66.250.28.131:8002/relay</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://66.250.28.137:8002/relay</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> novaclassicrock.nl</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://173.236.29.52:80</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://208.43.9.96:8288</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/70sUnlimited</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Radio Caroline 259 Gold  - Live from Breskens - Holland   s1</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://5.79.83.230:8253</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://46.165.208.21:8253</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://94.75.235.38:8253</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 181.FM - Classic Buzz -=- Classic Alternative Rock</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.119:8038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.118:14038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.117:14038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.118:8038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.117:8038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.120:8038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.115:8038</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://74.86.186.4:12112</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> Classic Rock 109</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://174.36.237.118:10044</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.20.171:10044</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://173.199.116.227:10044</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://74.86.186.4:10044</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://198.27.70.26:10044</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://174.36.51.212:10044</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/a-better-classic-rock-station</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/HammerHeadRadio</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/80sMixTape</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/4U-70s</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> GDRADIO.NET - Streaming Grateful Dead and more!</Name>
-      <Genre>Rock and Roll</Genre>
-      <Urls isOk="false">
-        <urlName>http://216.119.152.213:8019</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> 181.FM - Energy 98 - Dance Hits</Name>
-      <Genre>Dance</Genre>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.118:8800</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.20.174:10018</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.115:8800</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.119:8800</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.120:8800</urlName>
-      </Urls>
-      <Urls isOk="false">
-        <urlName>http://108.61.73.117:8800</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Dance</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/GruperaRadio</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Name> TOP FM Beograd 106,8  128K</Name>
-      <Genre>Dance</Genre>
-      <Urls isOk="false">
-        <urlName>http://109.206.96.12:8000</urlName>
-      </Urls>
-    </radioStation>
-    <radioStation>
-      <Genre>Dance</Genre>
-      <Urls isOk="false">
-        <urlName>http://listen.radionomy.com/Radio-Nostalgia</urlName>
-      </Urls>
-    </radioStation>
-  </stations>
-</Stations>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>8293.live.streamtheworld.com</RadioName>
+  <RadioStreamId>1</RadioStreamId>
+  <RadioUrl>http://8293.live.streamtheworld.com/WKQXFM_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>serv.leanstream-hd.com</RadioName>
+  <RadioStreamId>2</RadioStreamId>
+  <RadioUrl>http://serv.leanstream-hd.com/CFNYFM-MP3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>stream.4zzzfm.org.au:789</RadioName>
+  <RadioStreamId>3</RadioStreamId>
+  <RadioUrl>http://stream.4zzzfm.org.au:789/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>54.237.58.174</RadioName>
+  <RadioStreamId>4</RadioStreamId>
+  <RadioUrl>http://54.237.58.174/entercom-wlkkfmaac-64</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>relay.181.fm:8038</RadioName>
+  <RadioStreamId>5</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8038/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>65.60.25.26</RadioName>
+  <RadioStreamId>6</RadioStreamId>
+  <RadioUrl>http://65.60.25.26/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>sc2.3wk.com:80</RadioName>
+  <RadioStreamId>7</RadioStreamId>
+  <RadioUrl>http://sc2.3wk.com:80/3wk-ca-mp3-hi</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>relay.181.fm:8052</RadioName>
+  <RadioStreamId>8</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8052/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>9</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m16_5</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>stream.us.gslb.liquidcompass.net</RadioName>
+  <RadioStreamId>10</RadioStreamId>
+  <RadioUrl>http://stream.us.gslb.liquidcompass.net/KPNTFMAAC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>ice7.securenetsystems.net</RadioName>
+  <RadioStreamId>11</RadioStreamId>
+  <RadioUrl>http://ice7.securenetsystems.net/WJSE</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>173.244.215.162:8220</RadioName>
+  <RadioStreamId>12</RadioStreamId>
+  <RadioUrl>http://173.244.215.162:8220</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>69.4.234.186:9030</RadioName>
+  <RadioStreamId>13</RadioStreamId>
+  <RadioUrl>http://69.4.234.186:9030</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>69.4.234.186:9110</RadioName>
+  <RadioStreamId>14</RadioStreamId>
+  <RadioUrl>http://69.4.234.186:9110</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>107.155.126.58:8090</RadioName>
+  <RadioStreamId>15</RadioStreamId>
+  <RadioUrl>http://107.155.126.58:8090/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>ktbh.streamon.fm:8000</RadioName>
+  <RadioStreamId>16</RadioStreamId>
+  <RadioUrl>http://ktbh.streamon.fm:8000/KTBH-32k.aac</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>37.58.75.163:9272</RadioName>
+  <RadioStreamId>17</RadioStreamId>
+  <RadioUrl>http://37.58.75.163:9272/stream</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>sc2.3wk.com</RadioName>
+  <RadioStreamId>18</RadioStreamId>
+  <RadioUrl>http://sc2.3wk.com/3wk-u-mp3-hi</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>54.147.242.106</RadioName>
+  <RadioStreamId>19</RadioStreamId>
+  <RadioUrl>http://54.147.242.106/entercom-wlkkhd2aac-64</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>2583.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>20</RadioStreamId>
+  <RadioUrl>
+    http://2583.live.streamtheworld.com:80/THEFRINGE_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>1671.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>21</RadioStreamId>
+  <RadioUrl>
+    http://1671.live.streamtheworld.com:80/WGBFFMAAC_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>sc2b-sjc.1.fm:10084</RadioName>
+  <RadioStreamId>22</RadioStreamId>
+  <RadioUrl>http://sc2b-sjc.1.fm:10084</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>sc-gorillafm.1.fm:10016</RadioName>
+  <RadioStreamId>23</RadioStreamId>
+  <RadioUrl>http://sc-gorillafm.1.fm:10016/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Altenrative</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>24</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m18_9</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>72.13.82.82:5100</RadioName>
+  <RadioStreamId>25</RadioStreamId>
+  <RadioUrl>http://72.13.82.82:5100/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>26</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m5_2</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>27</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-blues_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>sc-blues.1.fm:8030</RadioName>
+  <RadioStreamId>28</RadioStreamId>
+  <RadioUrl>http://sc-blues.1.fm:8030</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>29</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/Azur-BLUES</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>216.119.152.213:8054</RadioName>
+  <RadioStreamId>30</RadioStreamId>
+  <RadioUrl>http://216.119.152.213:8054/92blues</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>31</RadioStreamId>
+  <RadioUrl>
+    http://streaming.radionomy.com/A-Better-Classic-Blues-Vintage-Station
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>sc1.paulmerrell.net:8639</RadioName>
+  <RadioStreamId>32</RadioStreamId>
+  <RadioUrl>http://sc1.paulmerrell.net:8639/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>108.163.197.114:8157</RadioName>
+  <RadioStreamId>33</RadioStreamId>
+  <RadioUrl>http://108.163.197.114:8157</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>lin2.san.fast-serv.com:6004</RadioName>
+  <RadioStreamId>34</RadioStreamId>
+  <RadioUrl>http://lin2.san.fast-serv.com:6004/stream</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>s4.radioboss.fm:8101</RadioName>
+  <RadioStreamId>35</RadioStreamId>
+  <RadioUrl>http://s4.radioboss.fm:8101/stream</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>36</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/m13_24</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Blues</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>37</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/v13_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>162.213.196.53:8000</RadioName>
+  <RadioStreamId>38</RadioStreamId>
+  <RadioUrl>http://162.213.196.53:8000/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>wma.cdn.radiostorm.com</RadioName>
+  <RadioStreamId>39</RadioStreamId>
+  <RadioUrl>http://wma.cdn.radiostorm.com/comedy104</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>icecastsource2.amri.ca:80</RadioName>
+  <RadioStreamId>40</RadioStreamId>
+  <RadioUrl>http://icecastsource2.amri.ca:80/ckmx-mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>7639.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>41</RadioStreamId>
+  <RadioUrl>
+    http://7639.live.streamtheworld.com:80/977_COMEDY_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>42</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m4_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>43</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m3_5</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>s4.streammonster.com:8506</RadioName>
+  <RadioStreamId>44</RadioStreamId>
+  <RadioUrl>http://s4.streammonster.com:8506/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>209.105.250.69:8265</RadioName>
+  <RadioStreamId>45</RadioStreamId>
+  <RadioUrl>http://209.105.250.69:8265</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>91.121.166.38:7690</RadioName>
+  <RadioStreamId>46</RadioStreamId>
+  <RadioUrl>http://91.121.166.38:7690</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>91.121.166.38:7016</RadioName>
+  <RadioStreamId>47</RadioStreamId>
+  <RadioUrl>http://91.121.166.38:7016</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>stream.beatradar.com:8007</RadioName>
+  <RadioStreamId>48</RadioStreamId>
+  <RadioUrl>http://stream.beatradar.com:8007/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>panel2.raven-radio.com:7048</RadioName>
+  <RadioStreamId>49</RadioStreamId>
+  <RadioUrl>http://panel2.raven-radio.com:7048</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>50</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/ComedyTimeRadio</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>2173.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>51</RadioStreamId>
+  <RadioUrl>
+    http://2173.live.streamtheworld.com:80/COMEDY_103_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>1651.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>52</RadioStreamId>
+  <RadioUrl>
+    http://1651.live.streamtheworld.com:80/COMEDY_S02A_AAC_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Comedy</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>53</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/v11_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>209.222.129.133:80</RadioName>
+  <RadioStreamId>54</RadioStreamId>
+  <RadioUrl>Ref2=http://209.222.129.133:80/KOFM?MSWMExt=.asf</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>67.228.177.153:8909</RadioName>
+  <RadioStreamId>55</RadioStreamId>
+  <RadioUrl>http://67.228.177.153:8909/Live</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>sc-acountry.1.fm:7800</RadioName>
+  <RadioStreamId>56</RadioStreamId>
+  <RadioUrl>http://sc-acountry.1.fm:7800</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>57</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m14_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>sc-ccountry.1.fm:7806</RadioName>
+  <RadioStreamId>58</RadioStreamId>
+  <RadioUrl>http://sc-ccountry.1.fm:7806</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>1661.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>59</RadioStreamId>
+  <RadioUrl>http://1661.live.streamtheworld.com:80/WWKIFM_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>nebcastwest.dyndns.org:1010</RadioName>
+  <RadioStreamId>60</RadioStreamId>
+  <RadioUrl>http://nebcastwest.dyndns.org:1010/KRAN</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>173.244.215.162:8120</RadioName>
+  <RadioStreamId>61</RadioStreamId>
+  <RadioUrl>http://173.244.215.162:8120</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>stream.us.gslb.liquidcompass.net</RadioName>
+  <RadioStreamId>62</RadioStreamId>
+  <RadioUrl>http://stream.us.gslb.liquidcompass.net/WVMDFMMP3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>96.31.83.87:8014</RadioName>
+  <RadioStreamId>63</RadioStreamId>
+  <RadioUrl>http://96.31.83.87:8014</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>8703.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>64</RadioStreamId>
+  <RadioUrl>http://8703.live.streamtheworld.com:80/WLIFHD2_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>2233.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>65</RadioStreamId>
+  <RadioUrl>http://2233.live.streamtheworld.com:80/KWHTFM_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>stream.laut.fm</RadioName>
+  <RadioStreamId>66</RadioStreamId>
+  <RadioUrl>http://stream.laut.fm/1000countryhits</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Country</RadioGenreName>
+  <RadioName>8323.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>67</RadioStreamId>
+  <RadioUrl>http://8323.live.streamtheworld.com:80/KHAYFM_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>sc-trance.1.fm:8040</RadioName>
+  <RadioStreamId>68</RadioStreamId>
+  <RadioUrl>http://sc-trance.1.fm:8040</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>69</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m8_4</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>fr3.1mix.co.uk:8022</RadioName>
+  <RadioStreamId>70</RadioStreamId>
+  <RadioUrl>http://fr3.1mix.co.uk:8022</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>71</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m12_3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>72</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/1TopFunRadio</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>sc-spanishparty-128kmp3.1.fm</RadioName>
+  <RadioStreamId>73</RadioStreamId>
+  <RadioUrl>http://sc-spanishparty-128kmp3.1.fm</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>74</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/1-Dance</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>75</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m7_0</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>76</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m14_17</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>77</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m15_24</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>78</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m7_20</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>79</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m13_29</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Dance</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>80</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/m16_33</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>sc4.mystreamserver.com:8046</RadioName>
+  <RadioStreamId>81</RadioStreamId>
+  <RadioUrl>http://sc4.mystreamserver.com:8046</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>wms-15.streamsrus.com:11330</RadioName>
+  <RadioStreamId>82</RadioStreamId>
+  <RadioUrl>http://wms-15.streamsrus.com:11330</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>69.162.65.226:8202</RadioName>
+  <RadioStreamId>83</RadioStreamId>
+  <RadioUrl>http://69.162.65.226:8202/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>calm11.calmradio.com:10356</RadioName>
+  <RadioStreamId>84</RadioStreamId>
+  <RadioUrl>http://calm11.calmradio.com:10356/stream</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>s4.total-streaming.com:9046</RadioName>
+  <RadioStreamId>85</RadioStreamId>
+  <RadioUrl>http://s4.total-streaming.com:9046/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>86</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/m1_5</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Folk</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>87</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/m16_26</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>pri.gocaster.net</RadioName>
+  <RadioStreamId>88</RadioStreamId>
+  <RadioUrl>http://pri.gocaster.net/nt</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>icy-e-01.sharp-stream.com</RadioName>
+  <RadioStreamId>89</RadioStreamId>
+  <RadioUrl>http://icy-e-01.sharp-stream.com/oceanfm.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>icecast2.rte.ie</RadioName>
+  <RadioStreamId>90</RadioStreamId>
+  <RadioUrl>http://icecast2.rte.ie/radio1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>66.90.73.250:8888</RadioName>
+  <RadioStreamId>91</RadioStreamId>
+  <RadioUrl>http://66.90.73.250:8888/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>www.digitalradionetworks.com:7039</RadioName>
+  <RadioStreamId>92</RadioStreamId>
+  <RadioUrl>http://www.digitalradionetworks.com:7039</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>91.121.113.129:8035</RadioName>
+  <RadioStreamId>93</RadioStreamId>
+  <RadioUrl>http://91.121.113.129:8035/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>icecast2.rte.ie</RadioName>
+  <RadioStreamId>94</RadioStreamId>
+  <RadioUrl>http://icecast2.rte.ie/radio1extra</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>nodec.gocaster.net</RadioName>
+  <RadioStreamId>95</RadioStreamId>
+  <RadioUrl>http://nodec.gocaster.net/td</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>67.213.213.143:8050</RadioName>
+  <RadioStreamId>96</RadioStreamId>
+  <RadioUrl>http://67.213.213.143:8050/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>78.129.228.187:8007</RadioName>
+  <RadioStreamId>97</RadioStreamId>
+  <RadioUrl>http://78.129.228.187:8007/live</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Irish</RadioGenreName>
+  <RadioName>icecast2.rte.ie</RadioName>
+  <RadioStreamId>98</RadioStreamId>
+  <RadioUrl>http://icecast2.rte.ie/2fm</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>99</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m10_5</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>100</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-vocals_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>101</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-classicaljazz_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>102</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-bebop_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>103</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-trancejazz_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>104</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-acidjazz_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>icyrelay.181.fm</RadioName>
+  <RadioStreamId>105</RadioStreamId>
+  <RadioUrl>http://icyrelay.181.fm/181-fusionjazz_128k.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>106</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m18_4</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>107</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m18_14</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>108</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m7_29</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Jazz</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>109</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m18_2</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>sc-b280s.1.fm:6900</RadioName>
+  <RadioStreamId>110</RadioStreamId>
+  <RadioUrl>http://sc-b280s.1.fm:6900</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>111</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m9_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>112</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m13_14</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>113</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m13_13</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>114</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m13_20</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>115</RadioStreamId>
+  <RadioUrl>
+    http://streaming.radionomy.com/1000-HITS-Sweet-Radio
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>116</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/100-BEATLES</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>213.8.143.168</RadioName>
+  <RadioStreamId>117</RadioStreamId>
+  <RadioUrl>http://213.8.143.168/100Hits</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>sc-loveclassic.1.fm:10048</RadioName>
+  <RadioStreamId>118</RadioStreamId>
+  <RadioUrl>http://sc-loveclassic.1.fm:10048</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>119</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m13_25</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>120</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m15_10</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>121</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m17_26</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Pop</RadioGenreName>
+  <RadioName>ru1.101.ru:8000</RadioName>
+  <RadioStreamId>122</RadioStreamId>
+  <RadioUrl>http://ru1.101.ru:8000/e2_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>shoutcast.unitedradio.it:1113</RadioName>
+  <RadioStreamId>123</RadioStreamId>
+  <RadioUrl>http://shoutcast.unitedradio.it:1113</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>relay.181.fm:8054</RadioName>
+  <RadioStreamId>124</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8054/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>relay.181.fm:8042</RadioName>
+  <RadioStreamId>125</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8042/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>126</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m4_3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>127</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m9_4</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>184.154.57.230:8000</RadioName>
+  <RadioStreamId>128</RadioStreamId>
+  <RadioUrl>http://184.154.57.230:8000/981fm128.mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>relay.181.fm:8058</RadioName>
+  <RadioStreamId>129</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8058/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>relay.181.fm:8068</RadioName>
+  <RadioStreamId>130</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8068</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>rfe2b-r1.alldigital.net:8000</RadioName>
+  <RadioStreamId>131</RadioStreamId>
+  <RadioUrl>http://rfe2b-r1.alldigital.net:8000/lmjc1886</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>132</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/_rb_cream</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>164.138.29.82:8002</RadioName>
+  <RadioStreamId>133</RadioStreamId>
+  <RadioUrl>http://164.138.29.82:8002/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>curiosity.shoutca.st:8569</RadioName>
+  <RadioStreamId>134</RadioStreamId>
+  <RadioUrl>http://curiosity.shoutca.st:8569/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>R and B</RadioGenreName>
+  <RadioName>107.181.227.250:8118</RadioName>
+  <RadioStreamId>135</RadioStreamId>
+  <RadioUrl>http://107.181.227.250:8118/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>136</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m5_5</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>radio.bigupradio.com:8013</RadioName>
+  <RadioStreamId>137</RadioStreamId>
+  <RadioUrl>http://radio.bigupradio.com:8013/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>75.126.73.136:8004</RadioName>
+  <RadioStreamId>138</RadioStreamId>
+  <RadioUrl>http://75.126.73.136:8004</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>50.7.53.2</RadioName>
+  <RadioStreamId>139</RadioStreamId>
+  <RadioUrl>http://50.7.53.2/cocoradio_hifi</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>wms-13.streamsrus.com:17110</RadioName>
+  <RadioStreamId>140</RadioStreamId>
+  <RadioUrl>http://wms-13.streamsrus.com:17110</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>generations-caraibes.ice.infomaniak.ch</RadioName>
+  <RadioStreamId>141</RadioStreamId>
+  <RadioUrl>
+    http://generations-caraibes.ice.infomaniak.ch/generations-caraibes-high.mp3
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>relay1.181.fm:8096</RadioName>
+  <RadioStreamId>142</RadioStreamId>
+  <RadioUrl>http://relay1.181.fm:8096/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>80.246.63.96:8010</RadioName>
+  <RadioStreamId>143</RadioStreamId>
+  <RadioUrl>http://80.246.63.96:8010</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>2toneroom.com:10020</RadioName>
+  <RadioStreamId>144</RadioStreamId>
+  <RadioUrl>http://2toneroom.com:10020/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>145</RadioStreamId>
+  <RadioUrl>http://streaming.radionomy.com/Ambiance-Reggae</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>s7.streammonster.com:8217</RadioName>
+  <RadioStreamId>146</RadioStreamId>
+  <RadioUrl>http://s7.streammonster.com:8217/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>streaming.radionomy.com</RadioName>
+  <RadioStreamId>147</RadioStreamId>
+  <RadioUrl>
+    http://streaming.radionomy.com/A-Better-Smokin-Reggae-Roots-Station
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>2173.live.streamtheworld.com:443</RadioName>
+  <RadioStreamId>148</RadioStreamId>
+  <RadioUrl>
+    http://2173.live.streamtheworld.com:443/KBZTFM_HD2_SC
+  </RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>96.31.83.86:8072</RadioName>
+  <RadioStreamId>149</RadioStreamId>
+  <RadioUrl>http://96.31.83.86:8072/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>37.153.90.197:9001</RadioName>
+  <RadioStreamId>150</RadioStreamId>
+  <RadioUrl>http://37.153.90.197:9001/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Reggae</RadioGenreName>
+  <RadioName>s8.voscast.com:9098</RadioName>
+  <RadioStreamId>151</RadioStreamId>
+  <RadioUrl>http://s8.voscast.com:9098/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>stream.100xr.com:80</RadioName>
+  <RadioStreamId>152</RadioStreamId>
+  <RadioUrl>http://stream.100xr.com:80</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>2943.live.streamtheworld.com:80</RadioName>
+  <RadioStreamId>153</RadioStreamId>
+  <RadioUrl>http://2943.live.streamtheworld.com:80/WZMRFM_SC</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>relay.181.fm:8000</RadioName>
+  <RadioStreamId>154</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8000</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>relay.181.fm:8014</RadioName>
+  <RadioStreamId>155</RadioStreamId>
+  <RadioUrl>http://relay.181.fm:8014/</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>ru2.101.ru:8000</RadioName>
+  <RadioStreamId>156</RadioStreamId>
+  <RadioUrl>http://ru2.101.ru:8000/m7_19</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>eu7.101.ru:8000</RadioName>
+  <RadioStreamId>157</RadioStreamId>
+  <RadioUrl>http://eu7.101.ru:8000/m11_1</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>173.244.215.162:8240</RadioName>
+  <RadioStreamId>158</RadioStreamId>
+  <RadioUrl>http://173.244.215.162:8240</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>streaming.radiowyo.com:1010</RadioName>
+  <RadioStreamId>159</RadioStreamId>
+  <RadioUrl>http://streaming.radiowyo.com:1010/KTED</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>icecastsource2.amri.ca:80</RadioName>
+  <RadioStreamId>160</RadioStreamId>
+  <RadioUrl>http://icecastsource2.amri.ca:80/ckrx-mp3</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>72.10.14.138:8080</RadioName>
+  <RadioStreamId>161</RadioStreamId>
+  <RadioUrl>http://72.10.14.138:8080/KDEP</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>162</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m7_21</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+<RadioStream>
+  <Image i:nil="true"/>
+  <RadioGenreName>Rock</RadioGenreName>
+  <RadioName>eu4.101.ru:8000</RadioName>
+  <RadioStreamId>163</RadioStreamId>
+  <RadioUrl>http://eu4.101.ru:8000/m13_30</RadioUrl>
+  <StatnType>Download</StatnType>
+</RadioStream>
+</ArrayOfRadioStream>

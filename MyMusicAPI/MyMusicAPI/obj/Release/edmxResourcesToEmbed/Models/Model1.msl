@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MusicCentralDBModelStoreContainer" CdmEntityContainer="MusicCentralDBEntities">
+    <EntitySetMapping Name="RadioGenres">
+      <EntityTypeMapping TypeName="MusicCentralDBModel.RadioGenre">
+        <MappingFragment StoreEntitySet="RadioGenre">
+          <ScalarProperty Name="RadioGenreKey" ColumnName="RadioGenreKey" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
+          <ScalarProperty Name="RadioImage" ColumnName="RadioImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RadioStreams">
+      <EntityTypeMapping TypeName="MusicCentralDBModel.RadioStream">
+        <MappingFragment StoreEntitySet="RadioStream">
+          <ScalarProperty Name="TestedOk" ColumnName="TestedOk" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RadioName" ColumnName="RadioName" />
+          <ScalarProperty Name="RadioUrl" ColumnName="RadioUrl" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="StatnType" ColumnName="StatnType" />
+          <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
+          <ScalarProperty Name="RadioGenreId" ColumnName="RadioGenreId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

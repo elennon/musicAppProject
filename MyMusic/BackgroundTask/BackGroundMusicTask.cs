@@ -1,7 +1,7 @@
 ﻿using MyMusic;
-using MyPlaylistManager;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ using Windows.Foundation.Collections;
 using Windows.Media;
 using Windows.Media.Playback;
 using Windows.Storage;
+using Windows.UI.Xaml;
 
 namespace BackgroundTask
 {
@@ -21,46 +22,59 @@ namespace BackgroundTask
         Suspended,
         Unknown
     }
+   public enum PlayMode
+   {
+       Collection,
+       Radio,
+       Streams,
+       Unknown
+   }
 
-    public sealed class BackGroundMusicTask : IBackgroundTask
+   public sealed class BackGroundMusicTask  :IBackgroundTask,  INotifyPropertyChanged
     {
-        #region Private properties
+        #region properties
 
         private SystemMediaTransportControls systemmediatransportcontrol;
-        private MyPlaylistMgr playlistManager;
-        private StreamMgr streamingManager;
+        private PlaylistManager playlistManager;
+
         private BackgroundTaskDeferral deferral; // Used to keep task alive
-        private ForegroundAppStatus foregroundAppState = ForegroundAppStatus.Unknown; 
+        private ForegroundAppStatus foregroundAppState = ForegroundAppStatus.Unknown;
+        
         private AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
         private bool backgroundtaskrunning = false, Skipped = false;
         private List<int> trks = new List<int>();
         private string[] trksToPlay;
         //private string radioUrl = "";
         
-        private MyPlaylist Playlist
+        private Playlist Playlist
         {
             get
             {
                 if (null == playlistManager)
                 {
-                    playlistManager = new MyPlaylistMgr();
+                    playlistManager = new PlaylistManager();
                 }
                 return playlistManager.Current;
             }
         }
 
-        private StreamingManager StreamManager
+        private PlayMode _playMode = PlayMode.Unknown;
+        private PlayMode PlayMode
         {
             get
             {
-                if (null == streamingManager)
+                return _playMode;
+            }
+            set
+            {
+                if (_playMode != value)
                 {
-                    streamingManager = new StreamMgr();
+                    _playMode = value;
+                    NotifyPropertyChanged("PlayMode");
                 }
-                return streamingManager.Current;
             }
         }
-
+        
         #endregion
 
         #region main task methods 
@@ -89,7 +103,7 @@ namespace BackgroundTask
             Playlist.TrackChanged += playList_TrackChanged;
 
             //Initialize message channel 
-            BackgroundMediaPlayer.MessageReceivedFromForeground += BackgroundMediaPlayer_MessageReceivedFromForeground;
+            BackgroundMediaPlayer.MessageReceivedFromForeground += BackgroundMediaPlayer_MessageReceivedFromForeground;          
             
             //Send information to foreground that background task has been started if app is active
             if (foregroundAppState != ForegroundAppStatus.Suspended)
@@ -205,7 +219,7 @@ namespace BackgroundTask
         {
             try
             {
-                StreamManager.PlayRadio(rdoUrl);
+                Playlist.PlayRadio(rdoUrl);
             }
             catch (Exception ex)
             {
@@ -218,13 +232,13 @@ namespace BackgroundTask
          //   StreamingManager.PlayGSTrack(Url);
         }
 
-        void playList_TrackChanged(MyPlaylist sender, object args)
+        void playList_TrackChanged(Playlist sender, object args)
         {
             Debug.WriteLine("track changed ");
             UpdateUVCOnNewTrack();
             ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, sender.CurrentTrackName);
 
-            if (trksToPlay[sender.CurrentTrackNumber].Split(',').Count() > 1)
+            if (PlayMode == PlayMode.Collection)
             {
                 int trkId = Convert.ToInt32(trksToPlay[sender.CurrentTrackNumber].Split(',')[0]);   // pull out the track id from comma seperated string
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
@@ -293,31 +307,50 @@ namespace BackgroundTask
                         foregroundAppState = ForegroundAppStatus.Active;
                         ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
                         int trkId = Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0]); // pull out the track id from comma seperated string
-                        ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId ); // save no. for app to get image
-                        
+                        ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId ); // save no. for app to get image                       
                         break;
                     case Constants.StartPlayback:            //start playlist
                         Debug.WriteLine("Starting Playback");
+                        PlayMode = PlayMode.Collection;
                         StartPlayback(trksToPlay);
                         break;
                     case Constants.SkipNext:            // User has pressed next
                         Debug.WriteLine("Skipping to next");
+                        PlayMode = PlayMode.Collection;
                         SkipToNext();
                         break;
                     case Constants.SkipPrevious:         // User has pressed back
                         Debug.WriteLine("Skipping to previous");
+                        PlayMode = PlayMode.Collection;
                         SkipToPrevious();
                         break;
                     case Constants.PlayRadio:       // radio selected
+                        PlayMode = PlayMode.Radio;
                         playRadio(trksToPlay[0]);
                         break;
-                    case Constants.PlayGSTrack:       // radio selected
+                    case Constants.PlayGSTrack:       // GS stream selected
+                        PlayMode = PlayMode.Streams;
                         playGSTrack(trksToPlay[0]);
                         break; 
                 }
             }
         }
 
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify the page that a data context property changed
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            Playlist.playMode = PlayMode;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
         
     }
 }

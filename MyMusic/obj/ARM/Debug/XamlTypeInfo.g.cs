@@ -148,7 +148,7 @@ namespace MyMusic.MyMusic_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[17];
+            _typeNameTable = new string[16];
             _typeNameTable[0] = "MyMusic.Views.Albums";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -165,9 +165,8 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             _typeNameTable[13] = "MyMusic.Views.NowPlaying";
             _typeNameTable[14] = "MyMusic.Views.RadioStreams";
             _typeNameTable[15] = "MyMusic.Views.Streaming";
-            _typeNameTable[16] = "MyMusic.Views.YouTube";
 
-            _typeTable = new global::System.Type[17];
+            _typeTable = new global::System.Type[16];
             _typeTable[0] = typeof(global::MyMusic.Views.Albums);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -184,7 +183,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             _typeTable[13] = typeof(global::MyMusic.Views.NowPlaying);
             _typeTable[14] = typeof(global::MyMusic.Views.RadioStreams);
             _typeTable[15] = typeof(global::MyMusic.Views.Streaming);
-            _typeTable[16] = typeof(global::MyMusic.Views.YouTube);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -229,7 +227,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
         private object Activate_13_NowPlaying() { return new global::MyMusic.Views.NowPlaying(); }
         private object Activate_14_RadioStreams() { return new global::MyMusic.Views.RadioStreams(); }
         private object Activate_15_Streaming() { return new global::MyMusic.Views.Streaming(); }
-        private object Activate_16_YouTube() { return new global::MyMusic.Views.YouTube(); }
         private void MapAdd_3_ObservableDictionary(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
@@ -355,14 +352,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
-
-            case 16:   //  MyMusic.Views.YouTube
-                userType = new global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_16_YouTube;
-                userType.AddMemberName("NavigationHelper");
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
             }
             return xamlType;
         }
@@ -473,11 +462,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
             var that = (global::MyMusic.Views.Streaming)instance;
             return that.NavigationHelper;
         }
-        private object get_10_YouTube_NavigationHelper(object instance)
-        {
-            var that = (global::MyMusic.Views.YouTube)instance;
-            return that.NavigationHelper;
-        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
@@ -544,12 +528,6 @@ namespace MyMusic.MyMusic_XamlTypeInfo
                 userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.Streaming");
                 xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
                 xamlMember.Getter = get_9_Streaming_NavigationHelper;
-                xamlMember.SetIsReadOnly();
-                break;
-            case "MyMusic.Views.YouTube.NavigationHelper":
-                userType = (global::MyMusic.MyMusic_XamlTypeInfo.XamlUserType)GetXamlTypeByName("MyMusic.Views.YouTube");
-                xamlMember = new global::MyMusic.MyMusic_XamlTypeInfo.XamlMember(this, "NavigationHelper", "MyMusic.Common.NavigationHelper");
-                xamlMember.Getter = get_10_YouTube_NavigationHelper;
                 xamlMember.SetIsReadOnly();
                 break;
             }

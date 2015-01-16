@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MusicCentralDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RadioGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadioGenreName" Type="varchar(max)" />
+          <Property Name="RadioImage" Type="varchar(max)" />
+          <Property Name="RadioGenreKey" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RadioStream">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadioName" Type="varchar(max)" />
+          <Property Name="RadioUrl" Type="varchar(max)" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="StatnType" Type="varchar" MaxLength="50" />
+          <Property Name="RadioGenreName" Type="varchar(max)" />
+          <Property Name="RadioGenreId" Type="int" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="TestedOk" Type="bit" />
+        </EntityType>
+        <Association Name="FK_RadioStream_ToTable">
+          <End Role="RadioGenre" Type="Self.RadioGenre" Multiplicity="0..1" />
+          <End Role="RadioStream" Type="Self.RadioStream" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RadioGenre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RadioStream">
+              <PropertyRef Name="RadioGenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicCentralDBModelStoreContainer">
+          <EntitySet Name="RadioGenre" EntityType="Self.RadioGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RadioStream" EntityType="Self.RadioStream" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_RadioStream_ToTable" Association="Self.FK_RadioStream_ToTable">
+            <End Role="RadioGenre" EntitySet="RadioGenre" />
+            <End Role="RadioStream" EntitySet="RadioStream" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicCentralDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RadioGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadioGenreName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RadioImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RadioStreams" Relationship="Self.FK_RadioStream_ToTable" FromRole="RadioGenre" ToRole="RadioStream" />
+          <Property Name="RadioGenreKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RadioStream">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadioName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RadioUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StatnType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RadioGenreName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RadioGenreId" Type="Int32" />
+          <NavigationProperty Name="RadioGenre" Relationship="Self.FK_RadioStream_ToTable" FromRole="RadioStream" ToRole="RadioGenre" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="TestedOk" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_RadioStream_ToTable">
+          <End Role="RadioGenre" Type="Self.RadioGenre" Multiplicity="0..1" />
+          <End Role="RadioStream" Type="Self.RadioStream" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RadioGenre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RadioStream">
+              <PropertyRef Name="RadioGenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicCentralDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RadioGenres" EntityType="Self.RadioGenre" />
+          <EntitySet Name="RadioStreams" EntityType="Self.RadioStream" />
+          <AssociationSet Name="FK_RadioStream_ToTable" Association="Self.FK_RadioStream_ToTable">
+            <End Role="RadioGenre" EntitySet="RadioGenres" />
+            <End Role="RadioStream" EntitySet="RadioStreams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicCentralDBModelStoreContainer" CdmEntityContainer="MusicCentralDBEntities">
+          <EntitySetMapping Name="RadioGenres">
+            <EntityTypeMapping TypeName="MusicCentralDBModel.RadioGenre">
+              <MappingFragment StoreEntitySet="RadioGenre">
+                <ScalarProperty Name="RadioGenreKey" ColumnName="RadioGenreKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
+                <ScalarProperty Name="RadioImage" ColumnName="RadioImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RadioStreams">
+            <EntityTypeMapping TypeName="MusicCentralDBModel.RadioStream">
+              <MappingFragment StoreEntitySet="RadioStream">
+                <ScalarProperty Name="TestedOk" ColumnName="TestedOk" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RadioName" ColumnName="RadioName" />
+                <ScalarProperty Name="RadioUrl" ColumnName="RadioUrl" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="StatnType" ColumnName="StatnType" />
+                <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
+                <ScalarProperty Name="RadioGenreId" ColumnName="RadioGenreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

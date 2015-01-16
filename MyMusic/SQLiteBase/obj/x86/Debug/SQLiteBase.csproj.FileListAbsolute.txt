@@ -17,5 +17,3 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLite
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLiteBase\obj\x86\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLiteBase\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLiteBase\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLiteBase\bin\x86\Debug\SQLiteBase.dll.CodeAnalysisLog.xml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\SQLiteBase\bin\x86\Debug\SQLiteBase.dll.lastcodeanalysissucceeded

@@ -29,7 +29,7 @@ namespace MyMusic.Views
         private NavigationHelper navigationHelper;
         private AlbumsViewModel albView = new AlbumsViewModel();
         private TracksViewModel trkView = new TracksViewModel();
-        private string albumId = "";
+        //private string albumId = "";
 
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         public ObservableDictionary DefaultViewModel

@@ -76,17 +76,8 @@ namespace MyPlaylistManager
         private MediaPlayer mediaPlayer;
         private TimeSpan startPosition = TimeSpan.FromSeconds(0);
         private static string DBPath = string.Empty;
-
-        internal MyPlaylist()
-        {                      
-            mediaPlayer = BackgroundMediaPlayer.Current;
-            mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
-            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-            mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
-            DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");         
-        }
+       
         private static readonly string _dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.sqlite");
-
         
         void lookHere()
         {
@@ -132,6 +123,15 @@ namespace MyPlaylistManager
         #endregion
 
         #region Public properties
+
+        public enum PlayMode
+        {
+            Collection,
+            Radio,
+            Streams,
+            Unknown
+        }
+        public PlayMode playMode = PlayMode.Unknown;
 
         public string CurrentTrackName
         {
@@ -190,6 +190,15 @@ namespace MyPlaylistManager
         public event TypedEventHandler<MyPlaylist, object> TrackChanged;
        
         #endregion
+
+        internal MyPlaylist()
+        {
+            mediaPlayer = BackgroundMediaPlayer.Current;
+            mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+            mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
+            DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+        }
 
         #region MediaPlayer Handlers
         

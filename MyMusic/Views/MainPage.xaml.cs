@@ -44,7 +44,6 @@ namespace MyMusic.Views
             this.Description = description;
             this.ImagePath = imagePath;
         }
-
         public string UniqueId { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
@@ -80,34 +79,32 @@ namespace MyMusic.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //trkView.DoPercent();
             this.navigationHelper.OnNavigatedTo(e);
             LoadRadioList();
             LoadCollectionList();
             LoadStreamingList();
 
             //await trkView.SyncDB();
-            Task.Run(async delegate()
-            {
-                await trkView.SyncDB();
-            });
+            //Task.Run(async delegate()
+            //{
+            //    await trkView.SyncDB();
+            //});
 
-            Log.GetLog().Write("Main page nav tooooollooooooo");
-            Logger.GetLogger().logChannel.LogMessage("Main page nav to");
+            //Log.GetLog().Write("Main page nav tooooollooooooo");
+            //Logger.GetLogger().logChannel.LogMessage("Main page nav to");
             //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
             //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
-
             // foreach (var item in lf)
             // {
             //     var ty = item.OpenReadAsync();
-            //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);
-                 
+            //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);               
             // }
         }
         
-
         private void LoadRadioList()
         {
-            RadioSection.DataContext = rdoView.GetXmlGenres();
+            RadioSection.DataContext = rdoView.GetRadioGenres();
         }
 
         private void LoadCollectionList()
@@ -123,6 +120,8 @@ namespace MyMusic.Views
             groups.Add(sg);
             sg = new DataGroup { Title = "Genre", UniqueId = "Genre", ImagePath = "ms-appx:///Assets/music3.jpg" };
             groups.Add(sg);
+            sg = new DataGroup { Title = "Quick Pick", UniqueId = "QuickPick", ImagePath = "ms-appx:///Assets/music3.jpg" };
+            groups.Add(sg);
             CollectionSection.DataContext = groups;
             //Hub.DataContext = groups;
         }
@@ -132,19 +131,17 @@ namespace MyMusic.Views
             List<DataGroup> groups = new List<DataGroup>();
             DataGroup sg = new DataGroup("Stream", "Search GrooveShark", "music streaming", "ms-appx:///Assets/music.jpg");
             groups.Add(sg);
-            DataGroup sg1 = new DataGroup("Collection", "Collection", "music collection", "ms-appx:///Assets/music3.jpg");
+            DataGroup sg1 = new DataGroup("Play Lists", "Play Lists", "music collection", "ms-appx:///Assets/music3.jpg");
             groups.Add(sg1);
-            DataGroup sg2 = new DataGroup("Radio", "Online Radio", "online radio streaming", "ms-appx:///Assets/radio.jpg");
+            DataGroup sg2 = new DataGroup("Create PlayList", "Create PlayList", "online radio streaming", "ms-appx:///Assets/radio.jpg");
             groups.Add(sg2);            
             StreamingHubSection.DataContext = groups;
         }
 
-
-
         private void RadioStream_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var itemId = ((RadioGenreViewModel)e.ClickedItem).RadioGenreId;
-            if (!Frame.Navigate(typeof(RadioStreams), itemId))
+            var rdoName = ((RadioGenreViewModel)e.ClickedItem).RadioGenreName;
+            if (!Frame.Navigate(typeof(RadioStreams), rdoName))
             {
                 Debug.WriteLine("navigation failed from main to radio lists ");
             }
@@ -236,25 +233,17 @@ namespace MyMusic.Views
             //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
             //logSave.Wait();
 
-            string rUrl = "radio,http://listen.radionomy.com/IStreettFm";
-            if (!Frame.Navigate(typeof(NowPlaying), rUrl))
-            {
-                Debug.WriteLine("navigation failed from main to radio lists ");
-            }
-        }
-        public void ThrowsException()
-        {
-            throw new Exception("A problem was encountered.");
-            //try
-            //{
-            //    throw new Exception("A problem was encountered.");
-            //}
-            //catch (Exception e)
-            //{               
-            //    //throw e;
-            //}
-        }
+            //string rUrl = "radio,http://37.58.75.163:9272/stream";
 
+            //if (!Frame.Navigate(typeof(NowPlaying), rUrl))
+            //{
+            //    Debug.WriteLine("navigation failed from main to radio lists ");
+            //}
+
+            RadioStreamsViewModel rsvm = new RadioStreamsViewModel();
+            var stst = rsvm.GetApiFillDB();
+        }
+       
         private void Streaming_ItemClick(object sender, ItemClickEventArgs e)
         {
             var itemId = ((DataGroup)e.ClickedItem).UniqueId;

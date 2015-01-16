@@ -165,6 +165,24 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private bool _inQuickPick = false;
+        public bool InQuickPick
+        {
+            get
+            {
+                return _inQuickPick;
+            }
+            set
+            {
+                if (_inQuickPick != value)
+                {
+                    _inQuickPick = value;
+                    NotifyPropertyChanged("InQuickPick");
+                }
+            }
+        }
+
+
         private int _plays;
         public int Plays
         {
@@ -211,7 +229,24 @@ namespace MyMusic.ViewModels
                 if (_skips != value)
                 {
                     _skips = value;
-                    NotifyPropertyChanged("Skips");
+                    NotifyPropertyChanged("Skips"); 
+                }
+            }
+        }
+
+        private int _perCentRate;
+        public int PerCentRate
+        {
+            get
+            {
+                return _perCentRate;
+            }
+            set
+            {
+                if (_perCentRate != value)
+                {
+                    _perCentRate = value;
+                    NotifyPropertyChanged("PerCentRate"); 
                 }
             }
         }
@@ -250,6 +285,23 @@ namespace MyMusic.ViewModels
             }
         }
 
+        private string _dateAdded;
+        public string DateAdded
+        {
+            get
+            {
+                return _dateAdded;
+            }
+            set
+            {
+                if (_dateAdded != value)
+                {
+                    _dateAdded = value;
+                    NotifyPropertyChanged("DateAdded");
+                }
+            }
+        }
+
         private int _genreId;
         public int GenreId
         {
@@ -271,8 +323,11 @@ namespace MyMusic.ViewModels
 
         public override string ToString()
         {
-            return string.Format(" Play count:  {0} ", Plays + RandomPlays);
+            //return string.Format(" Play count:  {0} ", Plays + RandomPlays);
+            return string.Format(" Play count:  {0} ({1}) %", Plays + RandomPlays, PerCentRate);
         }
+
+        
    
         #region INotifyPropertyChanged Members
 
@@ -309,24 +364,7 @@ namespace MyMusic.ViewModels
         private static HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
         private HttpClient httpClient = new HttpClient(filter);
         private CancellationTokenSource cts = new CancellationTokenSource();
-        
-        public TrackViewModel ShowStats(string id)
-        {
-            TrackViewModel trk = new TrackViewModel();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var tr = db.Table<Track>().Where(a => a.TrackId == Convert.ToInt32(id)).FirstOrDefault();
-                trk = new TrackViewModel()
-                {
-                    TrackId = tr.TrackId,
-                    Name = tr.Name,
-                    Skips = tr.Skips,
-                    Plays = tr.Plays
-                };
-            }
-            return trk;
-        }
-
+               
         public void AddRandomPlay(int id)
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -367,6 +405,19 @@ namespace MyMusic.ViewModels
             }
         }
 
+        public void AddThisToQuickPick(int trackId)
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == trackId).FirstOrDefault();
+                if (tr != null)
+                {
+                    tr.InQuickPick = true;
+                    db.Update(tr);
+                }
+            }
+        }
+
         public void BinThis(int trackId)
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -393,15 +444,41 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public IEnumerable<TrackViewModel> GetTopTracks()
+        public void DoPercent()
         {
-            _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var topPlays = db.Table<Track>().Where(a => a.Plays > 0).OrderByDescending(c => c.Plays).ToList();
-                var topPplays = db.Table<Track>().Where(a => a.Plays > 0).ToList();
-                var topShufflePlays = db.Table<Track>().Where(a => a.RandomPlays > 0).OrderByDescending(c => c.RandomPlays).ToList();              
-                foreach (var tr in topPlays)
+                var trs = db.Table<Track>();
+                int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;
+                int highestShuf = (trs.OrderByDescending(a => a.RandomPlays).Take(1)).FirstOrDefault().RandomPlays;
+                var highestSkip = (trs.OrderByDescending(a => a.Skips).Take(1)).FirstOrDefault();
+
+                var averagePlays = (trs.Where(n => n.Plays > 0).ToList()).Select(a => a.Plays).Average();
+                var averageShuffles = (trs.Where(n => n.RandomPlays > 0).ToList()).Select(a => a.RandomPlays).Average();
+
+                var bestAverageRate = (highestPlay * 3) + averageShuffles;      // based on plays * 3, +  shuffle * 1
+                
+                foreach (var item in trs)
+                {
+                    var thisAverRate = (item.Plays * 3) + item.RandomPlays;
+                    var playPerC = (thisAverRate / bestAverageRate) * 100;        // this track % of highest
+                    double minusSkips = playPerC - (playPerC * (item.Skips / 10));     // minus 10% for every skip
+                    item.perCentRate = (int)Math.Ceiling(minusSkips); 
+
+                    db.Update(item);
+                }
+            }
+        }   // todo: add higher level shuffle(from )
+
+        public ObservableCollection<TrackViewModel> GetTopTracks()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            List<TrackViewModel> trs = new List<TrackViewModel>();
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                //var topPlays = db.Table<Track>().Where(a => a.Plays > 0 && a.InTheBin == false).OrderByDescending(c => c.Plays).ToList();
+                var topPlays = db.Table<Track>().Where(a => a.Plays > 0 && a.InTheBin == false).OrderByDescending(a => a.perCentRate).Take(30).ToList();                           
+                foreach (var tr in topPlays)        // gets all tracks that were intentionally selected
                 {
                     if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new TrackViewModel()
@@ -413,12 +490,27 @@ namespace MyMusic.ViewModels
                         Plays = tr.Plays,
                         Skips = tr.Skips,
                         ImageUri = tr.ImageUri,
-                        OrderNo = tr.OrderNo
+                        OrderNo = tr.OrderNo,
+                        FileName = tr.FileName,
+                        PerCentRate = tr.perCentRate
                     };
                     _tracks.Add(trk);
-                }
-                foreach (var tr in topShufflePlays)
+                }                
+            }            
+            return _tracks;
+        }
+
+        public ObservableCollection<TrackViewModel> GetQuickPicks()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var qp = db.Table<Track>().Where(a => a.InQuickPick == true && a.InTheBin == false).ToList();
+                
+                foreach (var tr in qp)        
                 {
+                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
@@ -427,12 +519,14 @@ namespace MyMusic.ViewModels
                         RandomPlays = tr.RandomPlays,
                         Plays = tr.Plays,
                         Skips = tr.Skips,
-                        ImageUri = tr.ImageUri
+                        ImageUri = tr.ImageUri,
+                        OrderNo = tr.OrderNo,
+                        FileName = tr.FileName
                     };
                     _tracks.Add(trk);
-                }
-            }
-            return _tracks.Take(30);
+                }                
+            }            
+            return _tracks;
         }
 
         public TrackViewModel GetThisTrack(int id)
@@ -508,12 +602,12 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
-        public ObservableCollection<TrackViewModel> GetShuffleTracks()
+        public ObservableCollection<TrackViewModel> GetShuffleTracks()         //  todo: sort into layers by rate%, binned, q.p.s
         {
             _tracks = new ObservableCollection<TrackViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var query = db.Table<Track>();
+                var query = db.Table<Track>().Where(a => a.InTheBin == false);
                 foreach (var tr in query)
                 {
                     var trk = new TrackViewModel()
@@ -540,6 +634,18 @@ namespace MyMusic.ViewModels
             return _tracks;
         }
 
+        public string[] shuffleAll()
+        {
+            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
+            shuffled = GetShuffleTracks();
+            string[] trkks = new string[shuffled.Count];
+            for (int i = 0; i < shuffled.Count; i++)
+            {
+                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].FileName + "," + shuffled[i].Artist + ",shuffle";
+            }
+            return trkks;
+        }
+
         public string[] ShuffleAlbum(string id)
         {
             _tracks = new ObservableCollection<TrackViewModel>();           
@@ -562,6 +668,24 @@ namespace MyMusic.ViewModels
         {
             _tracks = new ObservableCollection<TrackViewModel>();
             _tracks = GetTracksByGenre(id);
+
+            Random rng = new Random();
+            int n = _tracks.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                TrackViewModel value = _tracks[k];
+                _tracks[k] = _tracks[n];
+                _tracks[n] = value;
+            }
+            return shuffleThese(_tracks);
+        }
+
+        public string[] ShuffleTopPlays()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            _tracks = GetTopTracks();
 
             Random rng = new Random();
             int n = _tracks.Count;
@@ -684,16 +808,29 @@ namespace MyMusic.ViewModels
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                string[] trkArray = new string[trks.Count - (startPos )];
+                var trks = db.Table<Track>().Where(a => a.InTheBin == false && a.OrderNo >= startPos).OrderBy(a => a.Name).ToList();
+                string[] trkArray = new string[trks.Count];
                 int counter = 0;
-                for (int i = startPos; i < trks.Count(); i++)
+                foreach (var item in trks)
                 {
-                    trkArray[counter] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
+                    trkArray[counter] = item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle";
                     counter++;
                 }
+                
                 return trkArray;
-            }           
+            }
+            //using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            //{
+            //    var trks = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(a => a.Name).ToList();
+            //    string[] trkArray = new string[trks.Count - (startPos)];
+            //    int counter = 0;
+            //    for (int i = startPos; i < trks.Count(); i++)
+            //    {
+            //        trkArray[counter] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
+            //        counter++;
+            //    }
+            //    return trkArray;
+            //}           
         }
 
         private string[] shuffleThese(ObservableCollection<TrackViewModel> shfThese)
@@ -1000,7 +1137,7 @@ namespace MyMusic.ViewModels
                     db.Update(tr);
                     db.Update(album);
                 }
-                catch (Exception ex) { }
+                catch (Exception ex) { throw ex; }
             }
         }
 
@@ -1064,7 +1201,7 @@ namespace MyMusic.ViewModels
                             select el).First().Value;                                                      
                 }
             }
-            catch (Exception exx) 
+            catch (Exception) 
             {
                 return null;
             }
@@ -1088,7 +1225,7 @@ namespace MyMusic.ViewModels
                 if (xml != null)
                     tr = xml.ParseXML<lfm>();
             }
-            catch (Exception exx)
+            catch (Exception)
             {
                 return null;
             }
@@ -1143,3 +1280,4 @@ namespace MyMusic.ViewModels
         }        
     }
 }
+

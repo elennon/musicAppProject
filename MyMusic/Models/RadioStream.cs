@@ -18,7 +18,28 @@ namespace MyMusic.Models
         [ForeignKey(typeof(Artist))]
         public int RadioGenreId { get; set; }
         public string RadioUrl { get; set; }
-        public string Image { get; set; } 
+        public string Image { get; set; }
+        public string RadioType { get; set; }
+        public int FailedAttempts { get; set; }
+    }
+    
+
+    public class RadioGenre
+    {
+        [PrimaryKey, AutoIncrement]
+        public int RadioGenreId { get; set; }
+        public string RadioGenreKey { get; set; }
+        public string RadioGenreName { get; set; }
+        public string RadioImage { get; set; }
+        public int Group { get; set; }
+        public int SectionNo { get; set; }
+    }
+
+    public class RootObject
+    {
+        public int Id { get; set; }
+        public string RadioGenreName { get; set; }
+        public string RadioImage { get; set; }
     }
 
     [XmlRoot(ElementName = "Stations")]
@@ -48,12 +69,5 @@ namespace MyMusic.Models
 
 
 
-    public class RadioGenre
-    {
-        [PrimaryKey, AutoIncrement]
-        public int RadioGenreId { get; set; }
-        public string RadioGenreKey { get; set; }
-        public string RadioGenreName { get; set; }
-        public string RadioImage { get; set; }
-    }
+    
 }

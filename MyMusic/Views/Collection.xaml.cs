@@ -50,6 +50,7 @@ namespace MyMusic.Views
 
     public sealed partial class Collection : Page
     {
+        private enum Section { AllTracks, TopPlays, Artist, Album, Genre, QuickPick }
         private TracksViewModel trkView = new TracksViewModel();
         private RadioStreamsViewModel rdoView = new RadioStreamsViewModel();
         private ArtistsViewModel artView = new ArtistsViewModel();
@@ -57,7 +58,8 @@ namespace MyMusic.Views
         private GenreCollViewModel genView = new GenreCollViewModel();
 
         private char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        private bool editMode = false, InBinList = false;
+        private bool editMode = false, InBinList = false, addPickMode = false;
+        private Section inSection;
         private ListView lstDetails = new ListView();
         private GridView grdSummary = new GridView();
         private ListView ArtLstDetails = new ListView();
@@ -89,18 +91,22 @@ namespace MyMusic.Views
  //           Logger.GetLogger().logChannel.LogMessage("Collection page, in nav to");
             TopPlaySection.DataContext = trkView.GetTopTracks();
             GenreSection.DataContext = genView.GetGenres();
+            QpSection.DataContext = trkView.GetQuickPicks();
 
             string arg = (string)e.Parameter;
             switch (arg)
             {
-                case "All Tracks":                   
+                case "All Tracks":
+                    inSection = Section.AllTracks;
                     appBarEdit.Visibility = Visibility.Visible;
                     appBarShowAll.Visibility = Visibility.Visible;
                     appBarShowBinned.Visibility = Visibility.Visible;
                     appBarShuffle.Visibility = Visibility.Visible;
+                    appBarAddToQp.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     CollectionHub.ScrollToSection(AllTracksSection);
                     break;
-                case "TopPlay":
+                case "Top Tracks":
+                    inSection = Section.TopPlays;
                     appBarEdit.Visibility = Visibility.Collapsed;
                     appBarShowAll.Visibility = Visibility.Collapsed;
                     appBarShowBinned.Visibility = Visibility.Collapsed;
@@ -108,20 +114,31 @@ namespace MyMusic.Views
                     CollectionHub.ScrollToSection(TopPlaySection);
                     break;
                 case "Artist":
+                    inSection = Section.Artist;
                     appBar.Visibility = Visibility.Collapsed;
                     CollectionHub.ScrollToSection(ArtistSection);
                     break;
                 case "Album":
+                    inSection = Section.Album;
                     appBar.Visibility = Visibility.Collapsed;
                     CollectionHub.ScrollToSection(AlbumSection);
                     break;
                 case "Genre":
+                    inSection = Section.Genre;
                     appBarEdit.Visibility = Visibility.Collapsed;
                     appBarShowAll.Visibility = Visibility.Collapsed;
                     appBarShowBinned.Visibility = Visibility.Collapsed;
                     appBarShuffle.Visibility = Visibility.Visible;
                     CollectionHub.ScrollToSection(GenreSection);
-                    break; 
+                    break;
+                case "Quick Pick":
+                    inSection = Section.QuickPick;
+                    appBarEdit.Visibility = Visibility.Visible;
+                    appBarShowAll.Visibility = Visibility.Visible;
+                    appBarShowBinned.Visibility = Visibility.Visible;
+                    appBarShuffle.Visibility = Visibility.Visible;
+                    CollectionHub.ScrollToSection(QpSection);
+                    break;
             }   
         }
 
@@ -160,7 +177,7 @@ namespace MyMusic.Views
                 {
                     int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
                     trkView.BinThis(id);
-                    LoadList();
+                    //LoadList();
                 }
                 if ((int)res.Id == 1)
                 {
@@ -172,6 +189,12 @@ namespace MyMusic.Views
                 int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
                 trkView.BackIn(id);
                 LoadBinList();
+            }
+            else if (inOrOut == "add")
+            {
+                int id = Convert.ToInt32((del.Tag.ToString()).Split(',')[1]);   // track id is 2nd part of tag 
+                trkView.AddThisToQuickPick(id);
+                //LoadList();
             }
 
         }
@@ -289,9 +312,18 @@ namespace MyMusic.Views
                 _imgSongPic.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/radio672.png"));
             }
             _imgSongPic.Opacity = 1;
+
             if (editMode)
             {
                 string tag = track.Name + "," + track.TrackId.ToString() + ",out";
+                _deleteIcon.Source=new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/bin.png"));
+                _deleteIcon.Tag = tag;
+                _deleteIcon.Visibility = Visibility.Visible;
+            }
+            if (addPickMode)
+            {
+                string tag = track.Name + "," + track.TrackId.ToString() + ",add";
+                _deleteIcon.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri("ms-appx:///Assets/plus.png"));
                 _deleteIcon.Tag = tag;
                 _deleteIcon.Visibility = Visibility.Visible;
             }
@@ -682,31 +714,47 @@ namespace MyMusic.Views
 
         #endregion
 
-        private string[] shuffleAll()
-        {
-            List<int> trks = new List<int>();
-            ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
-            shuffled = trkView.GetShuffleTracks();
-            string[] trkks = new string[shuffled.Count];
-            for (int i = 0; i < shuffled.Count; i++)
-            {
-                trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
-            }
-            return trkks;
-        }
+        //private string[] shuffleAll()
+        //{
+        //    List<int> trks = new List<int>();
+        //    ObservableCollection<TrackViewModel> shuffled = new ObservableCollection<TrackViewModel>();
+        //    shuffled = trkView.GetShuffleTracks();
+        //    string[] trkks = new string[shuffled.Count];
+        //    for (int i = 0; i < shuffled.Count; i++)
+        //    {
+        //        trkks[i] = shuffled[i].TrackId.ToString() + "," + shuffled[i].Artist + "," + shuffled[i].Name + ",shuffle";
+        //    }
+        //    return trkks;
+        //}
 
         #region bottom app buttons
 
         private void ShuffleButton_Click(object sender, RoutedEventArgs e)  // shuffle all
         {
-            this.Frame.Navigate(typeof(NowPlaying), "shuffleAll");
+            if (inSection == Section.AllTracks)
+            { this.Frame.Navigate(typeof(NowPlaying), "shuffleAll"); }
+            else if(inSection == Section.TopPlays)
+            {
+                string id = "shuffleThese," + "0,topplay";
+                this.Frame.Navigate(typeof(NowPlaying), id);
+            }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            editMode = true;
-            InBinList = false;
-
+            AppBarButton abb = (AppBarButton)sender;
+            if (abb.Tag.ToString() == "edit")
+            {
+                editMode = true;
+                addPickMode = false;
+                InBinList = false;
+            }
+            else
+            {
+                addPickMode = true;
+                editMode = false;
+                InBinList = false;
+            }
             LoadList();
         }
        
@@ -719,6 +767,7 @@ namespace MyMusic.Views
 
         private void AllTracksButton_Click(object sender, RoutedEventArgs e)
         {
+            addPickMode = false;
             editMode = false;
             InBinList = false;
             LoadList();
@@ -759,6 +808,7 @@ namespace MyMusic.Views
         {
             if (CollectionHub.SectionsInView[0] == AllTracksSection)
             {
+                inSection = Section.AllTracks;
                 appBar.Visibility = Visibility.Visible;
                 appBarEdit.Visibility = Visibility.Visible;
                 appBarShowAll.Visibility = Visibility.Visible;
@@ -767,6 +817,7 @@ namespace MyMusic.Views
             }
             else if (CollectionHub.SectionsInView[0] == TopPlaySection)
             {
+                inSection = Section.TopPlays;
                 appBar.Visibility = Visibility.Visible;
                 appBarEdit.Visibility = Visibility.Collapsed;
                 appBarShowAll.Visibility = Visibility.Collapsed;
@@ -775,14 +826,17 @@ namespace MyMusic.Views
             }
             else if (CollectionHub.SectionsInView[0] == ArtistSection)
             {
+                inSection = Section.Artist;
                 appBar.Visibility = Visibility.Collapsed;
             }
             else if (CollectionHub.SectionsInView[0] == AlbumSection)
             {
+                inSection = Section.Album;
                 appBar.Visibility = Visibility.Collapsed;
             }
             else if (CollectionHub.SectionsInView[0] == GenreSection)
             {
+                inSection = Section.Genre;
                 appBar.Visibility = Visibility.Collapsed;
             }
         }

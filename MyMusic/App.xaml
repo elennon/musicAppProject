@@ -9,11 +9,19 @@
                 <ResourceDictionary x:Key="Default">
                     <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="/Assets/jazz2.jpg"/>
                 </ResourceDictionary>
+                
                 <ResourceDictionary x:Key="HighContrast">
                     <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-
+            <DataTemplate x:Key="HubSectionHeaderTemplate">
+                <TextBlock Margin="30,0,0,-9.5" FontSize="34" Text="{Binding}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="DoubleLineTemplate">
+                <StackPanel Grid.Column="1" Margin="14.5,10,0,0">
+                    <TextBlock Text="{Binding RadioName}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                </StackPanel>              
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,16 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="proj400" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\ed\\Documents\\Visual\ Studio\ 2013\\Projects\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ed\\Documents\\Visual\ Studio\ 2013\\Projects\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\ed\\Downloads\\4thYearProject-master\\4thYearProject-master\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ed\\Downloads\\4thYearProject-master\\4thYearProject-master\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="proj400/App_Data" tags="Hidden">
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ed\\Documents\\Visual\ Studio\ 2013\\Projects\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ed\\Downloads\\4thYearProject-master\\4thYearProject-master\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
   </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=ed-pc;Initial Catalog=MyMusic;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\ed\\Documents\\Visual\ Studio\ 2013\\Projects\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
-  </parameter>
-  <parameter name="MyMusicEntities-Web.config Connection String" description="" value="metadata=res://*/Models.MyMusic.csdl|res://*/Models.MyMusic.ssdl|res://*/Models.MyMusic.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=ed-pc;initial catalog=MyMusic;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework;App=EntityFramework&quot;" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\ed\\Documents\\Visual\ Studio\ 2013\\Projects\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='MyMusicEntities']/@connectionString" />
+  <parameter name="EfMusic-Web.config Connection String" description="" value="data source=(LocalDb)\v11.0;initial catalog=MyMusicAPI.EfMusic;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot; providerName=&quot;System.Data.SqlClient&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ed\\Downloads\\4thYearProject-master\\4thYearProject-master\\MyMusicAPI\\MyMusicAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EfMusic']/@connectionString" />
   </parameter>
 </parameters>

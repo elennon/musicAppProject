@@ -30,6 +30,7 @@ namespace MyMusic
         public const string AppState = "appstate";
         public const string BackgroundTaskState = "backgroundtaskstate";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
+        public const string BackgroundTaskRunning = "BackgroundTaskRunning";
        
         public const string ForegroundAppActive = "Active";
         public const string ForegroundAppSuspended = "Suspended";

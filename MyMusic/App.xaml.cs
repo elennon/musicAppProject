@@ -64,13 +64,13 @@ namespace MyMusic
 #endif
             //if (Log.CheckIfNull() == true)
             //{
-                Log.GetLog().InitiateLog();
+            //    Log.GetLog().InitiateLog();
             //}
-            if (Logger.CheckIfNull() == true)
-            {
-                Logger.GetLogger().InitiateLogger();
-                Logger.GetLogger().Deletefile();
-            }
+            //if (Logger.CheckIfNull() == true)
+            //{
+            //    Logger.GetLogger().InitiateLogger();
+            //    Logger.GetLogger().Deletefile();
+            //}
 
             Frame rootFrame = Window.Current.Content as Frame;
            
@@ -84,7 +84,7 @@ namespace MyMusic
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     Debug.WriteLine("app class after termination");
-                    Logger.GetLogger().logChannel.LogMessage("FG: app class after termination");
+                    //Logger.GetLogger().logChannel.LogMessage("FG: app class after termination");
                     isResumingFromTermination = true;
                     DBPath = Path.Combine(
                     Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
@@ -163,14 +163,14 @@ namespace MyMusic
             //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
             //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
             //logSave.Wait();
-            Log.GetLog().Write("Unhandled exception: " + " Type:" + sender.GetType() + "  Message: " + e.Message + "  exception: " + e.Exception);
-            Log.GetLog().SaveLogFile();
+            //Log.GetLog().Write("Unhandled exception: " + " Type:" + sender.GetType() + "  Message: " + e.Message + "  exception: " + e.Exception);
+            //Log.GetLog().SaveLogFile();
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             Debug.WriteLine("FG: In on suspending");
-            Logger.GetLogger().logChannel.LogMessage("FG: In on suspending");
+            //Logger.GetLogger().logChannel.LogMessage("FG: In on suspending");
 
             var deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();

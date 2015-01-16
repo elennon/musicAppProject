@@ -53,14 +53,9 @@
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
         <Path>CLRHost.dll</Path>
+        <ActivatableClass ActivatableClassId="BackgroundTask.PlaylistManager" ThreadingModel="both" />
         <ActivatableClass ActivatableClassId="BackgroundTask.BackGroundMusicTask" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="BackgroundTask.StreamMgr" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.MyPlaylistMgr" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.RadioStream" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.radioItems" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.WaveFormatEx" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.ShoutCast.MP3Frame" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="MyPlaylistManager.Models.Track" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="BackgroundTask.RadioStreaming.RadioItems" ThreadingModel="both" />
       </InProcessServer>
     </Extension>
   </Extensions>
@@ -69,10 +64,11 @@
     <build:Item Name="VisualStudio" Version="12.0" />
     <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Professional 2013" />
     <build:Item Name="OperatingSystem" Version="6.3.9600.16384 (winblue_rtm.130821-1623)" />
-    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="12.0.30501.0" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="12.0.31101.0" />
+    <build:Item Name="ProjectGUID" Value="{12D8BE58-4ACB-412B-9275-A45C57B2A53F}" />
     <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="12.0.30501.0" />
     <build:Item Name="BehaviorsXamlSDKManaged" Version="12.0" />
-    <build:Item Name="SQLite.WP81" Version="3.8.7" />
-    <build:Item Name="MakePri.exe" Version="6.3.9600.17029 (winblue_gdr.140219-1702)" />
+    <build:Item Name="SQLite.WP81" Version="3.8.7.4" />
+    <build:Item Name="MakePri.exe" Version="6.3.9600.17298 (winblue.141024-1500)" />
   </build:Metadata>
 </Package>

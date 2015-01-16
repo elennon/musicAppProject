@@ -1,4 +1,5 @@
 ﻿using SQLite;
+//using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,11 @@ namespace MyMusic.Models
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
+        public int perCentRate { get; set; }
         
         public string ImageUri { get; set; }
         public string FileName { get; set; }
+        public DateTime DateAdded { get; set; }
 
         private bool inTheBin = false;
         public bool InTheBin
@@ -39,7 +42,7 @@ namespace MyMusic.Models
             get { return inTheBin; }
             set { inTheBin = value; }
         }
-        
-        
+
+        public bool InQuickPick { get; set; }
     }   
 }

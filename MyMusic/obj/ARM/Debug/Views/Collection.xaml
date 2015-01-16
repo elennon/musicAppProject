@@ -51,7 +51,7 @@
                                     VerticalAlignment="Center" 
                                     />
 
-                    <Image x:ConnectionId='6' Source="/Assets/bin.png"
+                    <Image x:ConnectionId='6' 
                                     Name="deleteIcon"
                                                               
                                     Tag="{Binding Name}" 
@@ -382,19 +382,83 @@
                 </DataTemplate>
             </HubSection>
 
+            <HubSection x:Name="QpSection" Header="Quick Picks"
+                        DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView Name="qplstViewDetail"  
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding}"             
+                                ItemTemplate="{StaticResource AllTracksTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                
+                                >
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
         </Hub>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:ConnectionId='16' Name="appBarShuffle" Icon="Shuffle" Label="Shuffle"                             />
-                <AppBarButton x:ConnectionId='17' Name="appBarEdit" Icon="Edit"                           Label="Edit"/>
-                <AppBarButton x:ConnectionId='18' Name="appBarShowAll" Icon="AllApps"                                 Label="Show All"/>
+                <AppBarButton x:ConnectionId='17' Name="appBarEdit" Tag="edit" Icon="Edit"                           Label="Edit"/>
+                <AppBarButton x:ConnectionId='18' Name="appBarAddToQp" Tag="qp" Icon="Add"                            Label="Add To Picks"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:ConnectionId='19' Name="appBarShowBinned" Label="Show binned" Icon="Delete"                                 />
+                <AppBarButton x:ConnectionId='20' Name="appBarShowAll" Label="Show All" Icon="AllApps"                                />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
+
+
+
+<!--<HubSection x:Uid="_quickTracks" Name="QuickPickSection" Header="Quick Pick" Width="Auto"
+                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+    <DataTemplate>
+        <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
+                                  Loaded="QuickPickSemanticZoom_Loaded"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <SemanticZoom.ZoomedInView>
+                <ListView Name="lstViewDetail"   
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled" 
+                                ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                                ScrollViewer.IsVerticalRailEnabled="True"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                                ItemsSource="{Binding Tracks }"             
+                                ItemTemplate="{StaticResource AllTracksTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"
+                                ContainerContentChanging="ItemListView_ContainerContentChanging"                               
+                                >
+                    <ListView.GroupStyle>
+                        <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
+                    </ListView.GroupStyle>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+            <SemanticZoom.ZoomedOutView>
+                <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                              />
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
+    </DataTemplate>
+</HubSection>-->
 

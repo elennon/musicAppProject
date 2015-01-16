@@ -1,3 +1,2 @@
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\BackgroundTask.csproj;arm
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyMusic.csproj;arm
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyPlaylistManager\MyPlaylistManager.csproj;arm
