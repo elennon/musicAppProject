@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation.Diagnostics;
 using Windows.Storage;
 
@@ -54,7 +53,7 @@ namespace MyMusic.HelperClasses
 
         private async Task RegisterUnhandledErrorHandler()
         {
-            logUploadFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("MyLogFile", CreationCollisionOption.OpenIfExists);                
+            logUploadFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("MyLogFile", CreationCollisionOption.OpenIfExists);
             CoreApplication.UnhandledErrorDetected += CoreApplication_UnhandledErrorDetected;
         }
 

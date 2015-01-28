@@ -2,6 +2,7 @@
 using MyMusic.Common;
 using MyMusic.HelperClasses;
 using MyMusic.Models;
+using MyMusic.ViewModels;
 using MyMusic.Views;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
@@ -34,6 +36,9 @@ namespace MyMusic
     {
         public static string DBPath = string.Empty;
         private TransitionCollection transitions;
+
+        private TracksViewModel trkView = new TracksViewModel();
+
         private bool _isResuming = false;
         public bool isResumingFromTermination
         {
@@ -46,12 +51,73 @@ namespace MyMusic
                 _isResuming = value;
             }
         }
-    
+
+        private bool isMyBackgroundTaskRunning = false;
+        public bool IsMyBackgroundTaskRunning
+        {
+            get
+            {
+                if (isMyBackgroundTaskRunning)
+                    return true;
+
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.IsBackgroundActive);
+                if (value == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    isMyBackgroundTaskRunning = (bool)value;  // ((String)value).Equals(Constants.BackgroundTaskRunning);
+                    return isMyBackgroundTaskRunning;
+                }
+            }
+        }
+
+        public NowPlaying np = NowPlaying.NowPlayingInst;
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.UnhandledException += App_UnhandledException;
+            this.Resuming += App_Resuming;
+        }
+
+        void App_Resuming(object sender, object e)
+        {
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+            np.AddMediaPlayerEventHandlers();
+            Debug.WriteLine("in fg Current_Resuming");
+            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
+
+            if (IsMyBackgroundTaskRunning)
+            {
+                ValueSet messageDictionary = new ValueSet();
+                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+                string pic = "";
+                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                var tName = np.FindName("tbkSongName") as TextBlock;
+                if (value1 == null)
+                {
+                    tName.Text = "current Track null ( in resuming )";
+                }
+                if (value1 != null)
+                {
+                    tName.Text = (string)value1 + "( in resuming )";
+                }
+
+                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                else
+                {
+                    int trackId = (int)value2;
+                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                    var npImg = np.FindName("imgPlayingTrack") as Image;
+                    npImg.Source = new BitmapImage(new Uri(pic));
+                }
+            }
         }        
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
@@ -62,6 +128,7 @@ namespace MyMusic
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            bool test = IsMyBackgroundTaskRunning;
             //if (Log.CheckIfNull() == true)
             //{
             //    Log.GetLog().InitiateLog();
@@ -169,10 +236,10 @@ namespace MyMusic
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            var deferral = e.SuspendingOperation.GetDeferral();
             Debug.WriteLine("FG: In on suspending");
             //Logger.GetLogger().logChannel.LogMessage("FG: In on suspending");
-
-            var deferral = e.SuspendingOperation.GetDeferral();
+            np.RemoveMediaPlayerEventHandlers();
             await SuspensionManager.SaveAsync();
             ValueSet messageDictionary = new ValueSet();
             messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());

@@ -96,17 +96,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="bp.xaml.cs">
+      <DependentUpon>bp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\BindablePage.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\Repository.cs" />
     <Compile Include="HelperClasses\ApplicationSettingsHelper.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Commands\Commands.cs" />
     <Compile Include="HelperClasses\Constants.cs" />
+    <Compile Include="HelperClasses\Logger.cs" />
     <Compile Include="HelperClasses\ParseXml.cs" />
     <Compile Include="HelperClasses\RndAccessStream.cs" />
     <Compile Include="HelperClasses\SQLite.cs" />
     <Compile Include="HelperClasses\SQLiteAsync.cs" />
-    <Compile Include="HelperClasses\YoutubeVideo.cs" />
     <Compile Include="HelperClasses\Helpers.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -114,13 +121,15 @@
     <Compile Include="Models\RadioStream.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HelperClasses\Utube.cs" />
     <Compile Include="HelperClasses\LastFm.cs" />
     <Compile Include="test\test.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />
     <Compile Include="ViewModels\ArtistViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
-    <Compile Include="ViewModels\RadioStreamViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="UserControls\RadioStreamViewModel.cs" />
+    <Compile Include="ViewModels\RadioViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Albums.xaml.cs">
       <DependentUpon>Albums.xaml</DependentUpon>
     </Compile>
@@ -146,9 +155,6 @@
     </Compile>
     <Compile Include="Views\RadioStreams.xaml.cs">
       <DependentUpon>RadioStreams.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Streaming.xaml.cs">
-      <DependentUpon>Streaming.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -204,12 +210,14 @@
     <Content Include="Assets\Shuffle.76.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\splash.scale-100.png" />
+    <Content Include="Assets\tickk.png" />
     <Content Include="Assets\try3.jpg" />
     <Content Include="Assets\try4.jpg" />
     <Content Include="Assets\try5.jpg" />
     <Content Include="Assets\try7.jpg" />
     <Content Include="Assets\undo3.png" />
     <Content Include="Assets\vintageBikes.jpg" />
+    <Content Include="Data\BackUpDb.xml" />
     <Content Include="Data\debugFile.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -217,12 +225,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Data\tester.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="bp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Albums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,31 +268,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Streaming.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MyToolkit, Version=2.3.22.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MyToolkit.2.3.22.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit.Extended, Version=2.3.22.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MyToolkit.Extended.2.3.22.0\lib\portable-wpa81+win8\MyToolkit.Extended.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\wpa81\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\wpa81\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Nokia.Music.Wp81, Version=3.5.0.1459, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NokiaMusic.3.5.0\lib\wpa81\Nokia.Music.Wp81.dll</HintPath>
     </Reference>
     <Reference Include="QKit">
       <HintPath>..\packages\QKit.0.4.1\lib\wpa81\QKit.dll</HintPath>

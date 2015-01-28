@@ -100,6 +100,7 @@ namespace BackgroundTask
                 foregroundAppState = (ForegroundAppStatus)Enum.Parse(typeof(ForegroundAppStatus), value.ToString());
 
             //Add handlers for playlist trackchanged
+            BackgroundMediaPlayer.Current.CurrentStateChanged += Current_CurrentStateChanged;
             Playlist.TrackChanged += playList_TrackChanged;
 
             //Initialize message channel 
@@ -115,7 +116,7 @@ namespace BackgroundTask
             BackgroundTaskStarted.Set();
             backgroundtaskrunning = true;
 
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, "BKRunning");
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundActive, true);
             deferral = taskInstance.GetDeferral();
             Debug.WriteLine("BK-- run completed");
             
@@ -137,7 +138,7 @@ namespace BackgroundTask
                 //save state
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0])); //[0] is the track id
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.BackgroundTaskState, "BKCancelled");
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundActive, false);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
                 systemmediatransportcontrol.ButtonPressed -= systemmediatransportcontrol_ButtonPressed;                
@@ -250,8 +251,7 @@ namespace BackgroundTask
             }
             else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
 
-            Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);
-            
+            Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);            
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
                 Debug.WriteLine("foregroundApp is active still ");
@@ -277,6 +277,18 @@ namespace BackgroundTask
         }
 
         #endregion
+
+        void Current_CurrentStateChanged(MediaPlayer sender, object args)
+        {
+            if (sender.CurrentState == MediaPlayerState.Playing)
+            {
+                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
+            }
+            else if (sender.CurrentState == MediaPlayerState.Paused)
+            {
+                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Paused;
+            }
+        }
 
         void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender, MediaPlayerDataReceivedEventArgs e)
         {

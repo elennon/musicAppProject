@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using MyMusic.HelperClasses;
 using System.Xml;
 using SQLite;
+using GalaSoft.MvvmLight;
 
 
 namespace MyMusic.ViewModels
@@ -403,7 +404,7 @@ namespace MyMusic.ViewModels
                     db.Update(tr);
                 }
             }
-        }
+        }   
 
         public void AddThisToQuickPick(int trackId)
         {
@@ -413,6 +414,19 @@ namespace MyMusic.ViewModels
                 if (tr != null)
                 {
                     tr.InQuickPick = true;
+                    db.Update(tr);
+                }
+            }
+        }
+
+        public void OutFromQuickPick(int trackId)
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var tr = db.Table<Track>().Where(a => a.TrackId == trackId).FirstOrDefault();
+                if (tr != null)
+                {
+                    tr.InQuickPick = false;
                     db.Update(tr);
                 }
             }
@@ -502,12 +516,10 @@ namespace MyMusic.ViewModels
 
         public ObservableCollection<TrackViewModel> GetQuickPicks()
         {
-            _tracks = new ObservableCollection<TrackViewModel>();
-            
+            _tracks = new ObservableCollection<TrackViewModel>();          
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var qp = db.Table<Track>().Where(a => a.InQuickPick == true && a.InTheBin == false).ToList();
-                
+                var qp = db.Table<Track>().Where(a => a.InQuickPick == true && a.InTheBin == false).ToList();               
                 foreach (var tr in qp)        
                 {
                     if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
@@ -700,6 +712,24 @@ namespace MyMusic.ViewModels
             return shuffleThese(_tracks);
         }
 
+        public string[] ShuffleQuickPicks()
+        {
+            _tracks = new ObservableCollection<TrackViewModel>();
+            _tracks = GetQuickPicks();
+
+            Random rng = new Random();
+            int n = _tracks.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                TrackViewModel value = _tracks[k];
+                _tracks[k] = _tracks[n];
+                _tracks[n] = value;
+            }
+            return shuffleThese(_tracks);
+        }
+
         public ObservableCollection<TrackViewModel> GetTracksByArtist(int id)
         {
             _tracks = new ObservableCollection<TrackViewModel>();
@@ -802,7 +832,7 @@ namespace MyMusic.ViewModels
                 }
             }
             return _tracks;
-        }
+        }   // temp
 
         public string[] GetListToPlay(int startPos) // orders all songs that come after selected song (+ selected) into a string[]
         {
@@ -815,22 +845,9 @@ namespace MyMusic.ViewModels
                 {
                     trkArray[counter] = item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle";
                     counter++;
-                }
-                
+                }               
                 return trkArray;
-            }
-            //using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            //{
-            //    var trks = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(a => a.Name).ToList();
-            //    string[] trkArray = new string[trks.Count - (startPos)];
-            //    int counter = 0;
-            //    for (int i = startPos; i < trks.Count(); i++)
-            //    {
-            //        trkArray[counter] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
-            //        counter++;
-            //    }
-            //    return trkArray;
-            //}           
+            }                 
         }
 
         private string[] shuffleThese(ObservableCollection<TrackViewModel> shfThese)
@@ -844,79 +861,7 @@ namespace MyMusic.ViewModels
             return trkks;
         }
 
-        public async void fillDB()
-        {
-            DropDB();
-            _tracks = new ObservableCollection<TrackViewModel>();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-
-                var cnt = db.Table<Track>().ToList();
-                try
-                {
-                    List<StorageFile> sf = new List<StorageFile>();
-                    StorageFolder folder = KnownFolders.MusicLibrary;
-                    IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
-                                 
-                    foreach (var item in lf)
-                    {
-                        var song = await item.Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty )
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.Artist = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.Artist = splitter[0];  
-                            }                                                 
-                        }
-                        else
-                        { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0 }; }
-
-                        tr.FileName = item.Name;
-                        tr.InTheBin = false;
-                        Artist ar = new Artist { Name = song.Artist };
-                        Album al = new Album { Name = song.Album };
-                        
-                        db.Insert(tr);
-
-                        var checkArtist = (from a in db.Table<Artist>()
-                                           where a.Name == ar.Name
-                                           select a).ToList();
-                        if (checkArtist.Count < 1) { db.Insert(ar); }
-
-                        var checkAlb = (from a in db.Table<Album>()
-                                        where a.Name == al.Name
-                                        select a).ToList();
-                        if (checkAlb.Count < 1) { db.Insert(al); }
-
-                        var arty = db.Table<Artist>().Where(a => a.Name == song.Artist).FirstOrDefault();
-                        tr.ArtistId = arty.ArtistId;
-                        db.Update(tr);
-
-                        var album = db.Table<Album>().Where(a => a.Name == song.Album).FirstOrDefault();
-                        tr.AlbumId = album.AlbumId;
-                        al.ArtistId = arty.ArtistId;
-                        db.Update(tr);
-                        db.Update(al);
-                    }                    
-                }
-                catch (Exception ex)
-                {
-                    string g = ex.InnerException.Message;
-                }
-                var tcnt = db.Table<Track>().ToList();
-                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                for (int i = 0; i < trks.Count(); i++)
-                {
-                    trks[i].OrderNo = i;
-                    db.Update(trks[i]);
-                }
-                AddRadios();
-            }
-        }
+        
 
         public async void AddRadios()
         {
@@ -970,50 +915,7 @@ namespace MyMusic.ViewModels
             }
         }
 
-        private void DropDB()
-        {
-            try
-            {
-                //StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //StorageFile dbFile = await folder.GetFileAsync("tracks.s3db");
-
-               
-               // SQLiteConnection connection = new SQLite.SQLiteConnection(App.DBPath);
-              //  connection.Dispose();
-              //  connection.Close();
-                //        SQLiteCommand.Dispose();
-                //GC.Collect();
-                //GC.WaitForPendingFinalizers();
-
-                //await dbFile.DeleteAsync();
-
-                //using (var db = new SQLite.SQLiteConnection(App.DBPath))
-                //{
-                //    db.CreateTable<Track>();
-                //    db.CreateTable<Album>();
-                //    db.CreateTable<Artist>();
-                //    db.CreateTable<Genre>();
-                //    db.CreateTable<RadioStream>();
-                //    db.CreateTable<RadioGenre>();
-                //}
-                //File.Delete(filename);
-
-                using (var db = new SQLite.SQLiteConnection(App.DBPath))
-                {
-                    db.DeleteAll<Track>();
-                    //db.CreateTable<Track>();
-                    db.DeleteAll<Album>();
-                    db.DeleteAll<Artist>();
-                    db.DeleteAll<Genre>();
-                    db.DeleteAll<RadioStream>();
-                    db.DeleteAll<RadioGenre>();                    
-                }
-            }
-            catch (Exception ex)
-            {
-                string g = ex.InnerException.Message;
-            }
-        }
+        
       
         public void addaColumn()
         {
@@ -1131,7 +1033,7 @@ namespace MyMusic.ViewModels
 
                     Album album = db.Table<Album>().Where(a => a.Name == song.Album).FirstOrDefault();
                     tr.AlbumId = album.AlbumId;
-                    if(album.ArtistId == 0 || album.ArtistId == null)
+                    if(album.ArtistId == 0 )
                     { al.ArtistId = arty.ArtistId; }
                     
                     db.Update(tr);

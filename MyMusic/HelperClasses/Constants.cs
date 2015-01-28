@@ -19,6 +19,7 @@ namespace MyMusic
         public const string CurrentTrack = "trackname";
         public const string CurrentTrackImg = "currenttrackimg";
         public const string Trackchanged = "songchanged";
+        public const string PlaylistArray = "PlaylistArray";
        
         public const string AppSuspended = "appsuspend";
         public const string AppResumed = "appresumed";
@@ -28,7 +29,7 @@ namespace MyMusic
         public const string SkipPrevious = "skipprevious";
 
         public const string AppState = "appstate";
-        public const string BackgroundTaskState = "backgroundtaskstate";
+        public const string IsBackgroundActive = "IsBackgroundActive";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
         public const string BackgroundTaskRunning = "BackgroundTaskRunning";
        

@@ -50,14 +50,13 @@
                                     Style="{StaticResource ListViewItemContentTextBlockStyle}" 
                                     VerticalAlignment="Center" 
                                     />
-
                     <Image 
                                     Name="deleteIcon"
                                     Tapped="deleteIcon_Tapped"
                                     Tag="{Binding Name}" 
                                     Visibility="Collapsed"
                                     Grid.Column="1"
-                                    Margin="0,-17,55,0"
+                                    Margin="0,-10,55,0"
                                     Width="35" Height="35"
                                     Stretch="Uniform" 
                                     HorizontalAlignment="Right"
@@ -215,7 +214,7 @@
 
             <HubSection x:Uid="_allTracks" Name="AllTracksSection" Header="All Tracks" Width="Auto"
                          DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
-                <DataTemplate>                    
+                <DataTemplate>
                     <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
                                   Loaded="AllTracksSemanticZoom_Loaded"
                                           HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
@@ -385,7 +384,11 @@
             <HubSection x:Name="QpSection" Header="Quick Picks"
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView Name="qplstViewDetail"  
+                    <SemanticZoom x:Name="qpSemanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
+                                  Loaded="QuickPickSemanticZoom_Loaded"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <SemanticZoom.ZoomedInView>
+                            <ListView Name="lstViewDetail"   
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -393,17 +396,41 @@
                                 ScrollViewer.IsVerticalScrollChainingEnabled="True"
                                 ScrollViewer.IsVerticalRailEnabled="True"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
-                                ItemsSource="{Binding}"             
+                                ItemsSource="{Binding Tracks }"             
                                 ItemTemplate="{StaticResource AllTracksTemplate}" 
                                 IsItemClickEnabled="True"
                                 SelectionMode="None"
+                                ContainerContentChanging="QpListView_ContainerContentChanging"
                                 
                                 >
-                    </ListView>
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </SemanticZoom.ZoomedInView>
+                        <SemanticZoom.ZoomedOutView>
+                            <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                              />
+                        </SemanticZoom.ZoomedOutView>
+                    </SemanticZoom>
                 </DataTemplate>
             </HubSection>
-
         </Hub>
+        <Popup VerticalOffset="10" HorizontalOffset="265" x:Name="StandardPopup">
+            <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                Background="ForestGreen"
+                BorderThickness="2" Width="85" Height="38">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Done" FontSize="16" HorizontalAlignment="Center" />                    
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
@@ -414,7 +441,7 @@
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Name="appBarShowBinned" Label="Show binned" Icon="Delete" Click="ShowBinnedButton_Click"  />
-                <AppBarButton Name="appBarShowAll" Label="Show All" Icon="AllApps" Click="AllTracksButton_Click"  />
+                <AppBarButton Name="appBarShowAll" Label="Show All" Icon="AllApps" Click="AllTracksButton_Click"  />                               
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

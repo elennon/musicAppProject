@@ -1,4 +1,5 @@
-﻿using MyMusic.Models;
+﻿using GalaSoft.MvvmLight;
+using MyMusic.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

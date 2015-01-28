@@ -42,12 +42,12 @@ namespace MyMusic.Views
         #region Properties
 
         private readonly NavigationHelper navigationHelper;
+        public static NowPlaying NowPlayingInst; 
 
         private TracksViewModel trkView = new TracksViewModel();
         private string[] orders;
         private bool isPlayRadio = false, isPlayGSTrack = false;
         private AutoResetEvent SererInitialized;
-        //private bool backGroundIsRunning = false;
 
         private string CurrentTrack
         {
@@ -77,57 +77,11 @@ namespace MyMusic.Views
             Debug.WriteLine("in now playing Constructor");
             this.InitializeComponent();
             SererInitialized = new AutoResetEvent(false);
-            App.Current.Resuming += Current_Resuming;
-
+            NowPlayingInst = this;
+            ((App)Application.Current).np = this;
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-        }
-
-        void Current_Resuming(object sender, object e)
-        {
-            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive); 
-            AddMediaPlayerEventHandlers();
-            Debug.WriteLine("in fg Current_Resuming");
-            
-       //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
-
-            bool bkrunning = false;
-            if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(Constants.BackgroundTaskState))
-            {
-                Debug.WriteLine("FG: BK null returned");
-            }
-            else
-            {
-                var value = ApplicationData.Current.LocalSettings.Values[Constants.BackgroundTaskState];
-                Debug.WriteLine("FG:  bk running " + value.ToString());
-                if (value.ToString() == "BKRunning")
-                    bkrunning = true;
-            }
-            if (bkrunning)
-            {
-                ValueSet messageDictionary = new ValueSet();
-                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
-                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-
-                string pic = "";
-                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                if (value1 == null) { tbkSongName.Text = "current Track null"; }
-                if (value1 != null)
-                {
-                    tbkSongName.Text = (string)value1 + "  resuming";
-                }
-
-                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
-                else
-                {
-                    int trackId = (int)value2;
-                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
-                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
-                    imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
-                }
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -136,7 +90,7 @@ namespace MyMusic.Views
             Debug.WriteLine("in now playing nav to");
         
             var arg = e.Parameter;
-            if (arg != null && ((App)Application.Current).isResumingFromTermination == false)
+            if (arg != null && ((App)Application.Current).isResumingFromTermination == false)   // condition 1: normal state + tracks sent here to play
             {
                 if (arg.ToString().Contains("shuffleAll")) { orders = trkView.shuffleAll(); }
 
@@ -155,6 +109,10 @@ namespace MyMusic.Views
                     if (type.Contains("topplay"))
                     {
                         orders = trkView.ShuffleTopPlays();
+                    }
+                    if (type.Contains("qPick"))
+                    {
+                        orders = trkView.ShuffleQuickPicks();
                     }
                 }
                 else if (arg.ToString().Contains("allTracks"))          // track selected in all track list and top track list. playes selected and then all listed after
@@ -190,8 +148,8 @@ namespace MyMusic.Views
                     orders[0] = (arg.ToString().Split(','))[1];
                     isPlayGSTrack = true;
                 }
-                
-                if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing )      //  if BK is running its a selection change
+
+                if (((App)Application.Current).IsMyBackgroundTaskRunning) 
                 {
                     Task.Run( delegate()
                     {
@@ -214,28 +172,57 @@ namespace MyMusic.Views
                     StartBackgroundAudioTask();     // else start it up
                 }
             }
-            else 
+            else        // condition 2: normal state + user hasn't selected tracks, just wants a look 
             {
-                string pic = "";
-                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                if (value1 == null) { tbkSongName.Text = "current Track null"; }
-                if (value1 != null)
+                if (((App)Application.Current).IsMyBackgroundTaskRunning && ((App)Application.Current).isResumingFromTermination == false)
                 {
-                    tbkSongName.Text = (string)value1 + "  not restore";
-                }
+                    string pic = "";
+                    object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                    if (value1 == null)
+                    {
+                        tbkSongName.Text = "current Track null ( in NP nav to )";
+                    }
+                    if (value1 != null)
+                    {
+                        tbkSongName.Text = (string)value1 + "( in NP nav to )";
+                    }
 
-                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
-                else
+                    object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    else
+                    {
+                        int trackId = (int)value2;
+                        pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
+                    }
+                }                                                           // check here if resuming from termination if media if running(in pause or play or stopped)
+                else if (BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Closed && ((App)Application.Current).isResumingFromTermination == true)
                 {
-                    int trackId = (int)value2;
-                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
-                    if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/music3.png"; }
-                    imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
-                    imgPlayingTrack.Width = 250;
-                    imgPlayingTrack.Height = 250;
+                    string pic = "";
+                    object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                    if (value1 == null)
+                    {
+                        tbkSongName.Text = "current Track null ( in NP nav to )";
+                    }
+                    if (value1 != null)
+                    {
+                        tbkSongName.Text = (string)value1 + "( in NP nav to )";
+                    }
+
+                    object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    else
+                    {
+                        int trackId = (int)value2;
+                        pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
+                    }
                 }
-            }
+                else
+                    tbkSongName.Text = "nothing playing";
+            }                               
         }
 
         #region playlist managing
@@ -355,41 +342,6 @@ namespace MyMusic.Views
 
         }
 
-        //private async void testApi()
-        //{
-        //    Uri resourceUri;
-        //    string secHalf = "http://localhost:59436/api/connection";
-        //    if (!Helpers.TryGetUri(secHalf, out resourceUri))
-        //    {
-        //        //rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
-        //        return;
-        //    }
-        //    try
-        //    {
-        //        HttpResponseMessage response = await httpClient.GetAsync(resourceUri).AsTask(cts.Token);
-        //        var xmlString = response.Content.ReadAsStringAsync().GetResults();
-        //        XDocument doc = XDocument.Parse(xmlString);
-
-        //        if (doc.Root.FirstAttribute.Value == "failed")
-        //        {
-        //            //imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri("Assets/PicPlaceholder.png", UriKind.Relative));
-        //            imgPlayingTrack.Source = new BitmapImage(new Uri("ms-appx:///Assets/radio672.png", UriKind.Absolute));
-        //        }
-        //        else
-        //        {
-        //            string picc = (from el in doc.Descendants("image")
-        //                           where (string)el.Attribute("size") == "large"
-        //                           select el).First().Value;
-        //            if (!string.IsNullOrEmpty(picc))
-        //            { imgPlayingTrack.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new System.Uri(picc)); }
-
-        //        }
-
-        //    }
-        //    catch (Exception exx) { string error = exx.Message; }
-        //    //imgPlayingTrack.Source = await getPic(trkName);
-        //}        
-
         #endregion
 
         #region Button Clicks
@@ -433,7 +385,7 @@ namespace MyMusic.Views
 
         #region setup/start background task
 
-        private void RemoveMediaPlayerEventHandlers()
+        public void RemoveMediaPlayerEventHandlers()
         {
             BackgroundMediaPlayer.MessageReceivedFromBackground -= this.BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
@@ -534,7 +486,36 @@ namespace MyMusic.Views
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             AddMediaPlayerEventHandlers();
-            Debug.WriteLine("load state");            
+            Debug.WriteLine("load state");
+            if (((App)Application.Current).IsMyBackgroundTaskRunning && BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Closed)
+            {
+                ValueSet messageDictionary = new ValueSet();
+                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+                string pic = "";
+                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                //var tName = np.FindName("tbkSongName") as TextBlock;
+                if (value1 == null)
+                {
+                    tbkSongName.Text = "current Track null ( in load )";
+                }
+                if (value1 != null)
+                {
+                    tbkSongName.Text = (string)value1 + "( in load )";
+                }
+
+                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                else
+                {
+                    int trackId = (int)value2;
+                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
+                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                    //var npImg = np.FindName("imgPlayingTrack") as Image;
+                    imgPlayingTrack.Source = new BitmapImage(new Uri(pic));
+                }
+            }
         }
        
         protected override void OnNavigatedFrom(NavigationEventArgs e)

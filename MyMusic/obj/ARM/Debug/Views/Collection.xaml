@@ -50,14 +50,13 @@
                                     Style="{StaticResource ListViewItemContentTextBlockStyle}" 
                                     VerticalAlignment="Center" 
                                     />
-
                     <Image x:ConnectionId='6' 
                                     Name="deleteIcon"
                                                               
                                     Tag="{Binding Name}" 
                                     Visibility="Collapsed"
                                     Grid.Column="1"
-                                    Margin="0,-17,55,0"
+                                    Margin="0,-10,55,0"
                                     Width="35" Height="35"
                                     Stretch="Uniform" 
                                     HorizontalAlignment="Right"
@@ -215,12 +214,12 @@
 
             <HubSection x:Uid="_allTracks" Name="AllTracksSection" Header="All Tracks" Width="Auto"
                          DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
-                <DataTemplate>                    
-                    <SemanticZoom x:ConnectionId='14' x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
+                <DataTemplate>
+                    <SemanticZoom x:ConnectionId='16' x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
                                                                        
                                           HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <SemanticZoom.ZoomedInView>
-                            <ListView x:ConnectionId='15' Name="lstViewDetail"   
+                            <ListView x:ConnectionId='17' Name="lstViewDetail"   
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -257,7 +256,7 @@
             <HubSection x:Name="TopPlaySection" Header="Top Played"
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView x:ConnectionId='13' Name="lstViewDetail"  
+                    <ListView x:ConnectionId='15' Name="lstViewDetail"  
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -280,11 +279,11 @@
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
 
-                    <SemanticZoom x:ConnectionId='11' x:Name="ArtistSemanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
+                    <SemanticZoom x:ConnectionId='13' x:Name="ArtistSemanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
                                                               
                                         HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <SemanticZoom.ZoomedInView>
-                            <ListView x:ConnectionId='12' Name="ArtlstViewDetail"  
+                            <ListView x:ConnectionId='14' Name="ArtlstViewDetail"  
                                     HorizontalContentAlignment="Stretch" 
                                     IsSwipeEnabled="False"
                                     ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -322,11 +321,11 @@
             <HubSection x:Name="AlbumSection" Header="Albums"
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <SemanticZoom x:ConnectionId='9' x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
+                    <SemanticZoom x:ConnectionId='11' x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" 
                                                                    
                                           HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <SemanticZoom.ZoomedInView>
-                            <ListView x:ConnectionId='10' Name="albumLstViewDetail"  
+                            <ListView x:ConnectionId='12' Name="albumLstViewDetail"  
                                     HorizontalContentAlignment="Stretch" 
                                     IsSwipeEnabled="False"
                                     ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -364,7 +363,7 @@
             <HubSection x:Name="GenreSection" Header="Genres"
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView x:ConnectionId='8' Name="lstViewDetail"  
+                    <ListView x:ConnectionId='10' Name="lstViewDetail"  
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -385,7 +384,11 @@
             <HubSection x:Name="QpSection" Header="Quick Picks"
                         DataContext="{Binding }" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView Name="qplstViewDetail"  
+                    <SemanticZoom x:ConnectionId='8' x:Name="qpSemanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" DataContext="{Binding}"
+                                                                       
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <SemanticZoom.ZoomedInView>
+                            <ListView x:ConnectionId='9' Name="lstViewDetail"   
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -393,28 +396,52 @@
                                 ScrollViewer.IsVerticalScrollChainingEnabled="True"
                                 ScrollViewer.IsVerticalRailEnabled="True"
                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
-                                ItemsSource="{Binding}"             
+                                ItemsSource="{Binding Tracks }"             
                                 ItemTemplate="{StaticResource AllTracksTemplate}" 
                                 IsItemClickEnabled="True"
                                 SelectionMode="None"
+                                                                                              
                                 
                                 >
-                    </ListView>
+                                <ListView.GroupStyle>
+                                    <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
+                                </ListView.GroupStyle>
+                            </ListView>
+                        </SemanticZoom.ZoomedInView>
+                        <SemanticZoom.ZoomedOutView>
+                            <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding}"
+                              />
+                        </SemanticZoom.ZoomedOutView>
+                    </SemanticZoom>
                 </DataTemplate>
             </HubSection>
-
         </Hub>
+        <Popup VerticalOffset="10" HorizontalOffset="265" x:Name="StandardPopup">
+            <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                Background="ForestGreen"
+                BorderThickness="2" Width="85" Height="38">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Done" FontSize="16" HorizontalAlignment="Center" />                    
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:ConnectionId='16' Name="appBarShuffle" Icon="Shuffle" Label="Shuffle"                             />
-                <AppBarButton x:ConnectionId='17' Name="appBarEdit" Tag="edit" Icon="Edit"                           Label="Edit"/>
-                <AppBarButton x:ConnectionId='18' Name="appBarAddToQp" Tag="qp" Icon="Add"                            Label="Add To Picks"/>
+                <AppBarButton x:ConnectionId='18' Name="appBarShuffle" Icon="Shuffle" Label="Shuffle"                             />
+                <AppBarButton x:ConnectionId='19' Name="appBarEdit" Tag="edit" Icon="Edit"                           Label="Edit"/>
+                <AppBarButton x:ConnectionId='20' Name="appBarAddToQp" Tag="qp" Icon="Add"                            Label="Add To Picks"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:ConnectionId='19' Name="appBarShowBinned" Label="Show binned" Icon="Delete"                                 />
-                <AppBarButton x:ConnectionId='20' Name="appBarShowAll" Label="Show All" Icon="AllApps"                                />
+                <AppBarButton x:ConnectionId='21' Name="appBarShowBinned" Label="Show binned" Icon="Delete"                                 />
+                <AppBarButton x:ConnectionId='22' Name="appBarShowAll" Label="Show All" Icon="AllApps"                                />                               
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

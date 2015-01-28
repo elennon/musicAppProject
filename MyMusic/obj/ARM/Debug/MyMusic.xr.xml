@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots >
+  <Roots.Interfaces>
+    <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
+  </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="RadioName" />
     <RootPropertyPathName Name="DefaultViewModel" />
     <RootPropertyPathName Name="AlbumId" />
     <RootPropertyPathName Name="Name" />
@@ -15,37 +17,49 @@
     <RootPropertyPathName Name="BackgroundColour" />
     <RootPropertyPathName Name="TrackCount" />
     <RootPropertyPathName Name="Tracks" />
+    <RootPropertyPathName Name="MainViewModel" />
+    <RootPropertyPathName Name="LoadCommand" />
     <RootPropertyPathName Name="ImagePath" />
     <RootPropertyPathName Name="RadioGenreName" />
-    <RootPropertyPathName Name="Image" />
+    <RootPropertyPathName Name="RadioImage" />
+    <RootPropertyPathName Name="Streams" />
+    <RootPropertyPathName Name="StreamingItemSelectedCommand" />
+    <RootPropertyPathName Name="Collections" />
+    <RootPropertyPathName Name="CollectionItemSelectedCommand" />
+    <RootPropertyPathName Name="Genres" />
+    <RootPropertyPathName Name="RadioItemSelectedCommand" />
+    <RootPropertyPathName Name="TestCommand" />
+    <RootPropertyPathName Name="NowPlayingCommand" />
+    <RootPropertyPathName Name="BackUpCommand" />
+    <RootPropertyPathName Name="FillDbCommand" />
+    <RootPropertyPathName Name="RadioViewModel" />
+    <RootPropertyPathName Name="RadioName" />
+    <RootPropertyPathName Name="hubSection5" />
+    <RootPropertyPathName Name="hubSection4" />
+    <RootPropertyPathName Name="hubSection3" />
+    <RootPropertyPathName Name="hubSection2" />
+    <RootPropertyPathName Name="hubSection1" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
       <RootProperty Name="Resources" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.ResourceDictionary">
-      <RootProperty Name="ThemeDictionaries" />
+    <RootType FullName="MyMusic.ViewModels.ViewModelLocator" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Page">
+      <RootProperty Name="Background" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Resources" />
+      <RootProperty Name="BottomAppBar" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
-      <RootProperty Name="ImageSource" />
-      <RootProperty Name="Stretch" />
-      <RootProperty Name="Opacity" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
-    <RootType FullName="Windows.UI.Xaml.DataTemplate">
-      <RootProperty Name="Template" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Children" />
-      <RootProperty Name="Orientation" />
-      <RootProperty Name="VerticalAlignment" />
-    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
-      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Width" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Width" />
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ChildrenTransitions" />
       <RootProperty Name="Background" />
@@ -56,15 +70,41 @@
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Children" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
+      <RootProperty Name="VerticalOffset" />
+      <RootProperty Name="HorizontalOffset" />
+      <RootProperty Name="Child" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Border">
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Child" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootEvent Name="Tapped" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Text" />
-      <RootProperty Name="Style" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Tag" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Padding" />
       <RootProperty Name="FontWeight" />
@@ -72,33 +112,19 @@
       <RootProperty Name="FontStyle" />
       <RootProperty Name="Name" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Content" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="MyMusic.bp" />
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="RelativeSource" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.ThemeResourceExtension" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Page">
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Resources" />
-      <RootProperty Name="Content" />
-      <RootProperty Name="BottomAppBar" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="Foreground" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="Path" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.RelativeSource" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Border">
-      <RootProperty Name="Child" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Padding" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="BorderThickness" />
-      <RootEvent Name="Tapped" />
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Margin" />
@@ -121,6 +147,11 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Sections" />
       <RootEvent Name="SectionsInViewChanged" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
+      <RootProperty Name="Stretch" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="ImageSource" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.HubSection">
       <RootProperty Name="Name" />
@@ -152,7 +183,6 @@
       <RootMethod Name="GetExitElementContainer" />
       <RootMethod Name="SetExitElementContainer" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="MyMusic.Views.Albums" />
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -181,6 +211,7 @@
       <RootProperty Name="Label" />
       <RootProperty Name="Name" />
       <RootProperty Name="Tag" />
+      <RootProperty Name="Command" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="MyMusic.Views.ShowAllTracks" />
@@ -206,11 +237,33 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="IsItemClickEnabled" />
       <RootProperty Name="ItemsPanel" />
-      <RootEvent Name="ItemClick" />
     </RootType>
     <RootType FullName="MyMusic.Views.ShowByArtist" />
     <RootType FullName="MyMusic.ViewModels.TopPlayed" />
     <RootType FullName="MyMusic.Views.Collection" />
+    <RootType FullName="MyMusic.Common.BindablePage">
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Resources" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="BottomAppBar" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+      <RootProperty Name="InputConverter" />
+    </RootType>
+    <RootType FullName="MyMusic.Commands.ItemClickedConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -221,28 +274,5 @@
     <RootType FullName="MyMusic.Views.MainPage" />
     <RootType FullName="MyMusic.Views.NowPlaying" />
     <RootType FullName="MyMusic.Views.RadioStreams" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
-      <RootProperty Name="Name" />
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="DisplayMemberPath" />
-      <RootProperty Name="SelectedValuePath" />
-      <RootEvent Name="SelectionChanged" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Content" />
-      <RootEvent Name="Click" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="FontSize" />
-    </RootType>
-    <RootType FullName="MyMusic.Views.Streaming" />
   </Roots.RootTypes>
 </Roots>

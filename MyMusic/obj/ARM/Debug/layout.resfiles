@@ -41,6 +41,7 @@ Assets\settings.png
 Assets\Shuffle.76.png
 Assets\SmallLogo.scale-100.png
 Assets\splash.scale-100.png
+Assets\tickk.png
 Assets\try3.jpg
 Assets\try4.jpg
 Assets\try5.jpg
@@ -48,9 +49,9 @@ Assets\try7.jpg
 Assets\undo3.png
 Assets\vintageBikes.jpg
 App.xbf
+bp.xbf
 MyMusic.xr.xml
 UserControls\ShowByArtist.xbf
-UserControls\Streaming.xbf
 UserControls\TopPlayed.xbf
 Views\Albums.xbf
 Views\Collection.xbf
@@ -58,5 +59,7 @@ Views\MainPage.xbf
 Views\NowPlaying.xbf
 Views\RadioStreams.xbf
 Views\ShowAllTracks.xbf
+Data\BackUpDb.xml
 Data\debugFile.txt
 Data\Stations.xml
+Data\tester.xml
