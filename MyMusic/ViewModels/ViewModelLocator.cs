@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using MyMusic.Common;
 using MyMusic.Views;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace MyMusic.ViewModels
 {
     public class ViewModelLocator
     {
+        //public IMainViewModel View1Model { get { return IocContainer.Get<MainViewModel>(); } }
+        //public RadioViewModel View2Model { get { return IocContainer.Get<RadioViewModel>(); } }
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -22,9 +25,17 @@ namespace MyMusic.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<RadioViewModel>();
+            SimpleIoc.Default.Register<testViewModel>();
+            SimpleIoc.Default.Register<CollectionViewModel>();
+            SimpleIoc.Default.Register<NowPlayingViewModel>();
+            SimpleIoc.Default.Register<CreatePlaylistViewModel>();
+            SimpleIoc.Default.Register<ViewPlaylistViewModel>();
+            SimpleIoc.Default.Register<SavedPlaylistsViewModel>();
+            SimpleIoc.Default.Register<AddToPlaylistViewModel>();
 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
            
+
         }
 
         private INavigationService CreateNavigationService()
@@ -34,6 +45,14 @@ namespace MyMusic.ViewModels
             navigationService.Configure("Radio", typeof(RadioStreams));
             navigationService.Configure("Collection", typeof(Collection));
             navigationService.Configure("NowPlaying", typeof(NowPlaying));
+            navigationService.Configure("Albums", typeof(Albums));
+            navigationService.Configure("ShowAllTracks", typeof(ShowAllTracks));
+            navigationService.Configure("CreatePlaylist", typeof(CreatePlaylist));
+            navigationService.Configure("ViewPlaylist", typeof(ViewPlaylist));
+            navigationService.Configure("SavedPlaylists", typeof(SavedPlaylists));
+            navigationService.Configure("AddToPlaylist", typeof(AddToPlaylist));
+            navigationService.Configure("test", typeof(Views.test));
+            
             return navigationService;
         }
 
@@ -49,6 +68,55 @@ namespace MyMusic.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<RadioViewModel>();
+            }
+        }
+        public testViewModel testViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<testViewModel>();
+            }
+        }
+        public CollectionViewModel CollectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CollectionViewModel>();
+            }
+        }
+        public NowPlayingViewModel NowPlayingViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NowPlayingViewModel>();
+            }
+        }
+        public CreatePlaylistViewModel CreatePlaylistViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CreatePlaylistViewModel>();
+            }
+        }
+        public ViewPlaylistViewModel ViewPlaylistViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ViewPlaylistViewModel>();
+            }
+        }
+        public SavedPlaylistsViewModel SavedPlaylistsViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SavedPlaylistsViewModel>();
+            }
+        }
+        public AddToPlaylistViewModel AddToPlaylistViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddToPlaylistViewModel>();
             }
         }
     }

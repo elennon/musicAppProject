@@ -1,7 +1,9 @@
 ﻿
+using Microsoft.Practices.Unity;
 using MyMusic.Common;
 using MyMusic.HelperClasses;
 using MyMusic.Models;
+using MyMusic.Utilities;
 using MyMusic.ViewModels;
 using MyMusic.Views;
 using System;
@@ -38,6 +40,14 @@ namespace MyMusic
         private TransitionCollection transitions;
 
         private TracksViewModel trkView = new TracksViewModel();
+        
+        private BKPlayer bkPlayer;
+        public BKPlayer BkPlayer
+        {
+            get { return bkPlayer; }
+            set { bkPlayer = value; }
+        }
+        
 
         private bool _isResuming = false;
         public bool isResumingFromTermination
@@ -73,51 +83,21 @@ namespace MyMusic
             }
         }
 
-        public NowPlaying np = NowPlaying.NowPlayingInst;
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.UnhandledException += App_UnhandledException;
             this.Resuming += App_Resuming;
+            this.BkPlayer = new BKPlayer();
         }
 
         void App_Resuming(object sender, object e)
         {
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
-            np.AddMediaPlayerEventHandlers();
-            Debug.WriteLine("in fg Current_Resuming");
-            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
-
-            if (IsMyBackgroundTaskRunning)
-            {
-                ValueSet messageDictionary = new ValueSet();
-                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
-                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
-
-                string pic = "";
-                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                var tName = np.FindName("tbkSongName") as TextBlock;
-                if (value1 == null)
-                {
-                    tName.Text = "current Track null ( in resuming )";
-                }
-                if (value1 != null)
-                {
-                    tName.Text = (string)value1 + "( in resuming )";
-                }
-
-                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
-                else
-                {
-                    int trackId = (int)value2;
-                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
-                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
-                    var npImg = np.FindName("imgPlayingTrack") as Image;
-                    npImg.Source = new BitmapImage(new Uri(pic));
-                }
-            }
+            BkPlayer.AddMediaPlayerEventHandlers();
+            Debug.WriteLine("in FG Current_Resuming");
+            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");            
         }        
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
@@ -139,6 +119,7 @@ namespace MyMusic
             //    Logger.GetLogger().Deletefile();
             //}
 
+            //InitializeIocBindings();
             Frame rootFrame = Window.Current.Content as Frame;
            
             if (rootFrame == null)
@@ -161,6 +142,8 @@ namespace MyMusic
                         db.CreateTable<Album>();
                         db.CreateTable<Artist>();
                         db.CreateTable<Genre>();
+                        db.CreateTable<Playlist>();
+                        db.CreateTable<PlaylistTracks>();
                         db.CreateTable<RadioStream>();
                         db.CreateTable<RadioGenre>();
                     }
@@ -183,6 +166,7 @@ namespace MyMusic
                     db.CreateTable<Album>();
                     db.CreateTable<Artist>();
                     db.CreateTable<Genre>();
+                    db.CreateTable<Playlist>();
                     db.CreateTable<RadioStream>();
                     db.CreateTable<RadioGenre>();
                 }
@@ -222,7 +206,7 @@ namespace MyMusic
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
-
+       
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             //Logger.GetLogger().logChannel.LogMessage("Unhandled exception: " + " Type:" +  sender.GetType() + "  Message: " + e.Message + "  exception: "+ e.Exception );
@@ -239,7 +223,7 @@ namespace MyMusic
             var deferral = e.SuspendingOperation.GetDeferral();
             Debug.WriteLine("FG: In on suspending");
             //Logger.GetLogger().logChannel.LogMessage("FG: In on suspending");
-            np.RemoveMediaPlayerEventHandlers();
+            BkPlayer.RemoveMediaPlayerEventHandlers();
             await SuspensionManager.SaveAsync();
             ValueSet messageDictionary = new ValueSet();
             messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());
@@ -249,3 +233,62 @@ namespace MyMusic
         }
     }
 }
+
+
+
+//private void InitializeIocBindings()
+//        {
+//            /// Register ViewModel interfaces and types (as singletons)
+
+//            IocContainer.Container
+
+//                .RegisterType(
+//                    typeof(IMainViewModel),
+//                    typeof(MainViewModel),
+//                    null,
+//                    new ContainerControlledLifetimeManager())
+//                .RegisterType(
+//                    typeof(IRadioViewModel),
+//                    typeof(RadioViewModel),
+//                    null,
+//                    new ContainerControlledLifetimeManager());
+//        }
+
+
+//void App_Resuming(object sender, object e)
+//        {
+//            ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
+//            BkPlayer.AddMediaPlayerEventHandlers();
+//            Debug.WriteLine("in fg Current_Resuming");
+//            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");
+
+//            if (IsMyBackgroundTaskRunning)
+//            {
+//                ValueSet messageDictionary = new ValueSet();
+//                messageDictionary.Add(Constants.AppResumed, DateTime.Now.ToString());
+//                BackgroundMediaPlayer.SendMessageToBackground(messageDictionary);
+
+//                string pic = "";
+//                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+//                var tName = np.FindName("tbkSongName") as TextBlock;
+//                if (value1 == null)
+//                {
+//                    tName.Text = "current Track null ( in resuming )";
+//                }
+//                if (value1 != null)
+//                {
+//                    tName.Text = (string)value1 + "( in resuming )";
+//                }
+
+//                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+//                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+//                else
+//                {
+//                    int trackId = (int)value2;
+//                    pic = (trkView.GetThisTrack(trackId)).ImageUri;
+//                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+//                    var npImg = np.FindName("imgPlayingTrack") as Image;
+//                    npImg.Source = new BitmapImage(new Uri(pic));
+//                }
+//            }
+//        }        

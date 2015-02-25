@@ -21,14 +21,14 @@ namespace MyMusic.ViewModels
     {
         private Repository repo =new Repository();
         private INavigationService _navigationService;
-        public static ObservableCollection<RadioGenre> Genres { get; set; }
-        public static ObservableCollection<DataGroup> Collections { get; set; }
-        public static ObservableCollection<DataGroup> Streams { get; set; }
+        public ObservableCollection<RadioGenre> Genres { get; set; }
+        public ObservableCollection<DataGroup> Collections { get; set; }
+        public ObservableCollection<DataGroup> Streams { get; set; }
 
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
         public RelayCommand<RadioGenre> RadioItemSelectedCommand { get; set; }
         public RelayCommand<DataGroup> CollectionItemSelectedCommand { get; set; }
-        public RelayCommand<DataGroup> StreamingItemSelectedCommand { get; set; }
+        public RelayCommand<DataGroup> PlaylistItemSelectedCommand { get; set; }
         public RelayCommand NowPlayingCommand { get; set; }
         public RelayCommand BackUpCommand { get; set; }
         public RelayCommand FillDbCommand { get; set; }
@@ -36,85 +36,99 @@ namespace MyMusic.ViewModels
 
         public MainViewModel(INavigationService navigationService)
         {
-            //_navigationService = new NavigationService();
             _navigationService = navigationService;
             Genres = repo.GetRadioGenres();
             Collections = LoadCollectionList();
             Streams = LoadStreamingList();
-
-            LoadCommand = new RelayCommand<RoutedEventArgs>((args) =>
-            {
-                //await trkView.SyncDB();
-                //Task.Run(async delegate()
-                //{
-                //    await trkView.SyncDB();
-                //});
-
-                //Log.GetLog().Write("Main page nav tooooollooooooo");
-                //Logger.GetLogger().logChannel.LogMessage("Main page nav to");
-                //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
-                //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
-                // foreach (var item in lf)
-                // {
-                //     var ty = item.OpenReadAsync();
-                //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);               
-                // }
+            this.LoadCommand = new RelayCommand<RoutedEventArgs>(OnLoadCommand);
+            this.RadioItemSelectedCommand = new RelayCommand<RadioGenre>(OnRadioItemSelectedCommand);
+            this.CollectionItemSelectedCommand = new RelayCommand<DataGroup>(OnCollectionItemSelectedCommand);
+            this.PlaylistItemSelectedCommand = new RelayCommand<DataGroup>(OnPlaylistItemSelectedCommand);
+            this.NowPlayingCommand = new RelayCommand(OnNowPlayingCommand);
+            this.BackUpCommand = new RelayCommand(OnBackUpCommand);
+            this.FillDbCommand = new RelayCommand(OnFillDbCommand);
+            this.TestCommand = new RelayCommand(OnTestCommand);
             
-            });
- 
-            RadioItemSelectedCommand = new RelayCommand<RadioGenre>((rg) =>
-            {
-                var rdoName = rg.RadioGenreName;
-                //_navigationService.Navigate(typeof(RadioStreams), rdoName);
-                _navigationService.NavigateTo("Radio", rdoName);
-            });
-            CollectionItemSelectedCommand = new RelayCommand<DataGroup>((gp) =>
-            {
-                var itemId = gp.UniqueId; 
-                _navigationService.NavigateTo("Collection", itemId);
-            });
-            StreamingItemSelectedCommand = new RelayCommand<DataGroup>((gp) =>
-            {
-                
-            });
-            NowPlayingCommand = new RelayCommand(() =>
-            {
-                //_navigationService.Navigate(typeof(NowPlaying));   
-                _navigationService.NavigateTo("NowPlaying");
-            });
-            BackUpCommand = new RelayCommand(() =>
-            {
-                repo.BackUpDb();
-            });
-            FillDbCommand = new RelayCommand(() =>
-            {
-                repo.fillDB();
-            });
-            TestCommand = new RelayCommand(() =>
-            {
-                //readLog();
-                //trkView.lookIn();
-                //var getPicAndGenre = await trkView.getPic2("nofx", "bob");
-                //var fr = getPicAndGenre.album.image.FirstOrDefault(); //Where(a => a.size == "large").FirstOrDefault();
-                //var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
-                //trkView.loadUpImagesAndGenre();
-                //trkView.sortOrderNum();
-                //var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
-                //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
-                //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
-                //logSave.Wait();
-
-                //string rUrl = "radio,http://37.58.75.163:9272/stream";
-
-                //if (!Frame.Navigate(typeof(NowPlaying), rUrl))
-                //{
-                //    Debug.WriteLine("navigation failed from main to radio lists ");
-                //}
-
-                
-                repo.GetApiFillDB();
-            });
         }
+
+        #region Commands
+
+        private void OnTestCommand()
+        {
+            //readLog();
+            //trkView.lookIn();
+            //var getPicAndGenre = await trkView.getPic2("nofx", "bob");
+            //var fr = getPicAndGenre.album.image.FirstOrDefault(); //Where(a => a.size == "large").FirstOrDefault();
+            //var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
+            //trkView.loadUpImagesAndGenre();
+            //trkView.sortOrderNum();
+            //var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
+            //logSave.Wait();
+            //string rUrl = "radio,http://37.58.75.163:9272/stream";
+            //if (!Frame.Navigate(typeof(NowPlaying), rUrl))
+            //{
+            //    Debug.WriteLine("navigation failed from main to radio lists ");
+            //}                
+            //repo.GetApiFillDB();
+            _navigationService.NavigateTo("Collection2");
+        }
+
+        private void OnFillDbCommand()
+        {
+            repo.fillDB();
+        }
+
+        private void OnBackUpCommand()
+        {
+            repo.BackUpDb();
+        }
+
+        private void OnNowPlayingCommand()
+        {
+            _navigationService.NavigateTo("NowPlaying");
+        }
+
+        private void OnPlaylistItemSelectedCommand(DataGroup obj)
+        {
+            var itemId = obj.UniqueId;
+            _navigationService.NavigateTo("SavedPlaylists");
+        }
+
+        private void OnCollectionItemSelectedCommand(DataGroup gp)
+        {
+            var itemId = gp.UniqueId;
+            _navigationService.NavigateTo("Collection", itemId);
+        }
+
+        private void OnRadioItemSelectedCommand(RadioGenre rg)
+        {
+            var rdoName = rg.RadioGenreName;
+            //_navigationService.Navigate(typeof(RadioStreams), rdoName);
+            _navigationService.NavigateTo("Radio", rdoName);
+        }
+
+        private async void OnLoadCommand(RoutedEventArgs obj)
+        {
+           // await trkView.SyncDB();
+            await Task.Run(async delegate()
+            {
+                await repo.SyncDB();
+            });
+
+            //Log.GetLog().Write("Main page nav tooooollooooooo");
+            //Logger.GetLogger().logChannel.LogMessage("Main page nav to");
+            //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
+            // foreach (var item in lf)
+            // {
+            //     var ty = item.OpenReadAsync();
+            //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);               
+            // }
+        }
+
+        #endregion
 
         public void Activate(object parameter)
         {
@@ -126,10 +140,10 @@ namespace MyMusic.ViewModels
             string hu = "22";
         }
 
-        private ObservableCollection<DataGroup> LoadCollectionList()
+        public ObservableCollection<DataGroup> LoadCollectionList()
         {
             ObservableCollection<DataGroup> groups = new ObservableCollection<DataGroup>();
-            groups.Add(new DataGroup { Title = "Top Tracks", UniqueId = "Top Tracks", ImagePath = "ms-appx:///Assets/music3.jpg" });
+            groups.Add(new DataGroup { Title = "All Tracks", UniqueId = "All Tracks", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "Top Tracks", UniqueId = "Top Tracks", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "Artists", UniqueId = "Artist", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "Album", UniqueId = "Album", ImagePath = "ms-appx:///Assets/music3.jpg" });
@@ -138,14 +152,15 @@ namespace MyMusic.ViewModels
             return groups;
         }
 
-        private ObservableCollection<DataGroup> LoadStreamingList()
+        public ObservableCollection<DataGroup> LoadStreamingList()
         {
             ObservableCollection<DataGroup> groups = new ObservableCollection<DataGroup>();
             groups.Add(new DataGroup("Stream", "Search GrooveShark", "music streaming", "ms-appx:///Assets/music.jpg"));           
             groups.Add(new DataGroup("Play Lists", "Play Lists", "music collection", "ms-appx:///Assets/music3.jpg"));
-            groups.Add(new DataGroup("Create PlayList", "Create PlayList", "online radio streaming", "ms-appx:///Assets/radio.jpg"));
+            groups.Add(new DataGroup("SavedPlayList", "Saved PlayLists", "Playlists collection", "ms-appx:///Assets/radio.jpg"));
             return groups;
         }
+
     }
 
     public class DataGroup

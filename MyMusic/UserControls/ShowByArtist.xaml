@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
+    <!--<Page.Resources>
 
         <DataTemplate x:Key="ArtistListViewTemplate">
                 <StackPanel Orientation="Horizontal" >
@@ -80,7 +80,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
+        --><!-- Title Panel --><!--
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
                 <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
@@ -88,7 +88,7 @@
             </StackPanel>
         </StackPanel>
 
-        <!--TODO: Content should be placed within the following grid-->
+        --><!--TODO: Content should be placed within the following grid--><!--
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             
             <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled" Grid.Row="1"
@@ -134,15 +134,15 @@
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
 
-                <!--<AppBarButton Icon="Edit" Click="EditButton_Click"  Label="Edit"/>-->
+                --><!--<AppBarButton Icon="Edit" Click="EditButton_Click"  Label="Edit"/>--><!--
                
             </CommandBar.PrimaryCommands>
-            <!--<CommandBar.SecondaryCommands>
+            --><!--<CommandBar.SecondaryCommands>
                 <AppBarButton Label="Test01"/>
                 <AppBarButton Label="Test02"/>
-            </CommandBar.SecondaryCommands>-->
+            </CommandBar.SecondaryCommands>--><!--
         </CommandBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 </Page>
 
     

@@ -165,7 +165,7 @@ namespace MyMusic.ViewModels
             string hu = "22";
         }
 
-        private void loadHub(string gName)  // param passed from loaded event to set up hub sections depending on selected stations
+        public void loadHub(string gName)  // param passed from loaded event to set up hub sections depending on selected stations
         {
             rs = RadioStreams.thisRadioStreams;
             var genres = repo.GetRadioGenres().ToList();        // get all genres and stations 

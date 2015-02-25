@@ -1,7 +1,19 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\obj\x86\debug\intermediatexaml\mymusic.exe" HashGuid="e7d39177-760e-2fba-89a9-c073432bc8fa" />
+    <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
+    <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
-    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\samplebackgroundaudiotask\bin\x86\debug\samplebackgroundaudiotask.winmd" HashGuid="17d106c9-6906-7a12-39bb-3991bc60f72e" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\backgroundtask\bin\arm\debug\backgroundtask.winmd" HashGuid="a9e27e62-da30-56f0-df88-f9a457bcecf7" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.dll" HashGuid="da07be64-1093-25cd-c992-377d44b6dd02" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.extras.dll" HashGuid="28bb2089-c7a4-73bb-7a72-1ea8b02698b0" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.platform.dll" HashGuid="54c1f1ed-b921-337f-8ad6-f2d8c553df06" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\commonservicelocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\microsoft.practices.servicelocation.dll" HashGuid="89de7f80-26d8-a17c-5ad9-b855f81ea5b2" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\bin\arm\debug\microsoft.practices.unity.dll" HashGuid="bfbab92e-125a-5b6e-9ddc-f777451b52b9" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\newtonsoft.json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\newtonsoft.json.dll" HashGuid="225745d8-3693-ad6f-ebd5-8845d81f8e0f" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\qkit.0.4.1\lib\wpa81\qkit.dll" HashGuid="9fcd7cc9-c875-b826-82c5-2db30fe9048f" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\sqlite.net-pcl.2.5\lib\portable-win8+net45+wp8+wpa81+monoandroid1+monotouch1\sqlite.net.dll" HashGuid="86419390-e8c2-7b5b-2ae1-7b668bfb445a" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\sqlitenetextensions.dll" HashGuid="6757fd43-5b4d-4952-88fc-68e1988ea648" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\microsoft.net.http.2.2.28\lib\wpa81\system.net.http.extensions.dll" HashGuid="794366f8-cc6d-f0fa-3d07-33b45136e193" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\microsoft.net.http.2.2.28\lib\wpa81\system.net.http.primitives.dll" HashGuid="7b71418d-e056-7613-c839-85fb8f6472a6" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

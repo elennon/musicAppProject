@@ -437,21 +437,21 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public async Task GetTest()
-        {
-            _radioGenres = new ObservableCollection<RadioGenreViewModel>();
-            client.BaseAddress = new Uri("http://api.dirble.com/v1/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //public async Task GetTest()
+        //{
+        //    _radioGenres = new ObservableCollection<RadioGenreViewModel>();
+        //    client.BaseAddress = new Uri("http://api.dirble.com/v1/");
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string resp = await client.GetStringAsync("stations/apikey/2525c6b82d53ec0a6f9b58ea5efc7d27aa1109ea/id/11");
-            var result = JsonConvert.DeserializeObject<List<MyMusic.test.RootObject>>(resp);
-            List<RadioStream> stationList = new List<RadioStream>();
-            foreach (var m in result)
-            {
-                RadioStream st = new RadioStream {  RadioName = m.name, RadioUrl = m.streamurl };
-                stationList.Add(st);
-            }
-        }
+        //    string resp = await client.GetStringAsync("stations/apikey/2525c6b82d53ec0a6f9b58ea5efc7d27aa1109ea/id/11");
+        //    var result = JsonConvert.DeserializeObject<List<MyMusic.test.RootObject>>(resp);
+        //    List<RadioStream> stationList = new List<RadioStream>();
+        //    foreach (var m in result)
+        //    {
+        //        RadioStream st = new RadioStream {  RadioName = m.name, RadioUrl = m.streamurl };
+        //        stationList.Add(st);
+        //    }
+        //}
 
         
 

@@ -1,5 +1,4 @@
 ﻿using SQLite;
-//using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace MyMusic.Models
         public int ArtistId { get; set; }
         [ForeignKey(typeof(Album))]
         public int AlbumId { get; set; }
+        public string Album { get; set; }
 
         [ForeignKey(typeof(Genre))]
         public int GenreId { get; set; }
@@ -30,9 +30,16 @@ namespace MyMusic.Models
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
-        public int perCentRate { get; set; }
+        public int PerCentRate { get; set; }
+       
+        private string _imageUri = "ms-appx:///Assets/radio672.png";
+        public string ImageUri
+        {
+            get { return _imageUri; }
+            set { _imageUri = value; }
+        }
         
-        public string ImageUri { get; set; }
+
         public string FileName { get; set; }
         public DateTime DateAdded { get; set; }
 
@@ -44,5 +51,11 @@ namespace MyMusic.Models
         }
 
         public bool InQuickPick { get; set; }
+
+        public bool InEditMode { get; set; }
+
+        //[ManyToMany(typeof(PlaylistTracks))]
+        //public List<Playlist> Playlists { get; set; }
+       
     }   
 }

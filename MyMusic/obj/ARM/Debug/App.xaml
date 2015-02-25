@@ -10,7 +10,12 @@
 </Application>
 
 <!--<ResourceDictionary>
+
     <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Locator">
+
+        </ResourceDictionary>
+
         <ResourceDictionary x:Key="Default">
             <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="/Assets/jazz2.jpg"/>
         </ResourceDictionary>

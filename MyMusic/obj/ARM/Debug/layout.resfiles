@@ -53,12 +53,17 @@ bp.xbf
 MyMusic.xr.xml
 UserControls\ShowByArtist.xbf
 UserControls\TopPlayed.xbf
+Views\AddToPlaylist.xbf
 Views\Albums.xbf
 Views\Collection.xbf
+Views\CreatePlaylist.xbf
 Views\MainPage.xbf
 Views\NowPlaying.xbf
 Views\RadioStreams.xbf
+Views\SavedPlaylists.xbf
 Views\ShowAllTracks.xbf
+Views\test.xbf
+Views\ViewPlaylist.xbf
 Data\BackUpDb.xml
 Data\debugFile.txt
 Data\Stations.xml

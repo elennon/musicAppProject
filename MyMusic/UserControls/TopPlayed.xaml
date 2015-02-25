@@ -57,7 +57,13 @@
                 <TextBlock Text="MY MUSIC" FontSize="25" Margin="12,0"/>
             </StackPanel>           
         </StackPanel>
-
+        
+        <ScrollViewer x:Name="scrollViewer" Width="480" Height="270" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" ZoomMode="Enabled" MinZoomFactor="0.7">
+            <StackPanel Width="480" Height="270" Orientation="Horizontal">
+                <Image AutomationProperties.Name="Image of a cliff" Source="images/cliff.jpg" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+        </ScrollViewer>
+        
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             

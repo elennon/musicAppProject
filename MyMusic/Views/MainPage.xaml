@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:cmds="using:MyMusic.Commands"
+    xmlns:cmds="using:MyMusic.Converters"
     DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -122,7 +122,7 @@
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction Command="{Binding StreamingItemSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
+                                <core:InvokeCommandAction Command="{Binding PlaylistItemSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                     </ListView>
@@ -136,7 +136,7 @@
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Now Playing" Icon="Audio" Command="{Binding NowPlayingCommand}"/>
-                <AppBarButton Label="Short Cut" Icon="Directions"  />
+                <AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
                 <AppBarButton Label="tester" Icon="AddFriend"  Command="{Binding TestCommand}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
