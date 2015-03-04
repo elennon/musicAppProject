@@ -57,7 +57,7 @@
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-
+        
         <Hub x:Name="Hub" x:Uid="Hub" Header="Music central"  >
             <Hub.Background>
                 <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/rnr.jpg"></ImageBrush>
@@ -137,7 +137,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Now Playing" Icon="Audio" Command="{Binding NowPlayingCommand}"/>
                 <AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
-                <AppBarButton Label="tester" Icon="AddFriend"  Command="{Binding TestCommand}"/>
+                <AppBarButton Label="tester" Icon="AddFriend" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Fill DataBase" Icon="Admin" Command="{Binding FillDbCommand}" />

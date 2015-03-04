@@ -29,7 +29,8 @@ namespace MyMusic.DAL
         void OutFromQuickPick(int trackId);
         void BinThis(int trackId);
         void BackIn(int trackId);
-        void DoPercent();
+        int DoPercent(Track tr);
+        void DoAllPercent();
 
         string[] shuffleThese(ObservableCollection<Track> shfThese);
         string[] shuffleAll();
@@ -52,6 +53,9 @@ namespace MyMusic.DAL
         ObservableCollection<Track> GetPlaylistTracks(Playlist pl);
         ObservableCollection<Track> GetTracksLessThisPlaylist(Playlist pl);
         string[] GetPlayListToPlay(int id);
+
+        Task<string> GetGSSessionId(string nme, string pword);
+        Task<ObservableCollection<Artist>> GetListArtists(string sessionId);
 
         void AddToPlaylist(int playlistId, int trackId);
         void RemoveFromPlaylist(int playlistId, int trackId);

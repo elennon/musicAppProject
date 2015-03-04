@@ -21,21 +21,18 @@ namespace MyMusic
             Debug.WriteLine(key);
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                Debug.WriteLine("FG  null returned");
+                Debug.WriteLine("FG(read Settings) null returned");
                 return null;
             }
             else
             {
                 var value = ApplicationData.Current.LocalSettings.Values[key];
-                //ApplicationData.Current.LocalSettings.Values.Remove(key);
-                Debug.WriteLine("FG  value found " + value.ToString());
+            
+                Debug.WriteLine("FG(read Settings) value found " + value.ToString());
                 return value;
             }
         }
 
-        /// <summary>
-        /// Save a key value pair in settings. Create if it doesn't exist
-        /// </summary>
         public static void SaveSettingsValue(string key, object value)
         {
             Debug.WriteLine("FG " + key + ":" + value.ToString());

@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using MyMusic.DAL;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace MyMusic.Models
 {
     public class Track
     {
+        private IRepository repo = new Repository();
+
         [PrimaryKey, AutoIncrement]
         public int TrackId { get; set; }
         public string Name { get; set; }
@@ -30,8 +33,16 @@ namespace MyMusic.Models
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
-        public int PerCentRate { get; set; }
-       
+        //public int PerCentRate { get; set; }
+        public int PerCentRate
+        {
+            get
+            {
+                return repo.DoPercent(this);
+            }
+            protected set { }
+        }
+
         private string _imageUri = "ms-appx:///Assets/radio672.png";
         public string ImageUri
         {
@@ -54,8 +65,13 @@ namespace MyMusic.Models
 
         public bool InEditMode { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format(" Play count:  {0} ({1}) %", Plays + RandomPlays, PerCentRate);
+        }
+
         //[ManyToMany(typeof(PlaylistTracks))]
         //public List<Playlist> Playlists { get; set; }
-       
+        
     }   
 }

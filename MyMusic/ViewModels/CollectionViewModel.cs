@@ -282,13 +282,11 @@ namespace MyMusic.ViewModels
             EditPic = "/Assets/bin.png";
             if (inSection == Section.AllTracks)
             {
-                if (IsVisible) IsVisible = false;
-                else IsVisible = true;
+                IsVisible = !IsVisible;
             }
             else if (inSection == Section.QuickPick)
             {
-                if (qpIsVisible) qpIsVisible = false;
-                else qpIsVisible = true;
+                IsVisible = !IsVisible;
             }
         }
 
@@ -404,8 +402,9 @@ namespace MyMusic.ViewModels
                     col.collHub.ScrollToSection(col.genreSec);
                     break;
                 case "QuickPick":
-                    inSection = Section.QuickPick;
+                    inSection = Section.QuickPick;                    
                     setAppBarQuickPicks();
+                    col.collHub.ScrollToSection(col.qpSec);
                     break;
             }
         }

@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -41,6 +42,14 @@ namespace MyMusic.ViewModels
             set { _image = value; NotifyPropertyChanged("TrImage"); }
         }
 
+        private bool _isVisible = false;
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { _isVisible = value; NotifyPropertyChanged("IsVisible"); }
+        }
+
+
         private SymbolIcon _playPause = new SymbolIcon(Symbol.Pause);
         public SymbolIcon PlayPause
         {
@@ -67,23 +76,22 @@ namespace MyMusic.ViewModels
         }
 
         private void OnLoadCommand(RoutedEventArgs obj)
-        {
-            //NavigateParam = obj.ToString();
+        {           
             if (string.IsNullOrEmpty(NavigateParam) == false && ((App)Application.Current).isResumingFromTermination == false)   // condition 1: normal state + tracks sent here to play
             {
                 SortPlayList(NavigateParam);
             }
-            else if (((App)Application.Current).IsMyBackgroundTaskRunning ) //// condition 2: normal state + no tracks to play(either user navigated here or resuming from termination)
+            else if (((App)Application.Current).IsMyBackgroundTaskRunning && BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing) //// condition 2: normal state + no tracks to play(either user navigated here or resuming from termination)
             {
                 string pic = "";
                 object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
                 if (value1 == null)
                 {
-                    TrackName = "current Track null ( in NP nav to (condition 2) )";
+                    TrackName = "current Track null ( in NP nav to(condition 2) )";
                 }
                 if (value1 != null)
                 {
-                    TrackName = (string)value1 + "( in NP nav to )";
+                    TrackName = (string)value1 + "( in Np (condition 2) )";
                 }
 
                 object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
@@ -102,21 +110,24 @@ namespace MyMusic.ViewModels
 
         private void SortPlayList(string NavigateParameter)
         {
+            IsVisible = true;
             ((App)Application.Current).BkPlayer.PlayThese(NavigateParameter);
         }
+
+        #region button clicks
 
         private void OnBackCommand()
         {
             var value = new ValueSet();
             value.Add(Constants.SkipPrevious, "");
-            ((App)Application.Current).BkPlayer.SendMessageTpBK(value);
+            ((App)Application.Current).BkPlayer.SendMessageToBK(value);
         }
 
         private void OnNextCommand()
         {
             var value = new ValueSet();
             value.Add(Constants.SkipNext, "");
-            ((App)Application.Current).BkPlayer.SendMessageTpBK(value);
+            ((App)Application.Current).BkPlayer.SendMessageToBK(value);
         }
 
         private void OnPlayPauseCommand()
@@ -127,6 +138,7 @@ namespace MyMusic.ViewModels
             playSwitch = !playSwitch;
         }
 
+        #endregion
 
         #region playlist managing
 
@@ -179,6 +191,7 @@ namespace MyMusic.ViewModels
        
         public void Activate(object parameter)
         {
+            if (parameter != null)
             NavigateParam = parameter.ToString();
         }
 

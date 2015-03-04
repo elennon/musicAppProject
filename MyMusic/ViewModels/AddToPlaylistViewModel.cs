@@ -59,12 +59,20 @@ namespace MyMusic.ViewModels
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
         
         public RelayCommand<Track> AddCommand { get; set; }
+        public RelayCommand DoneAddingCommand { get; set; }
+
 
         public AddToPlaylistViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             this.LoadCommand = new RelayCommand<RoutedEventArgs>(OnLoadCommand);           
             this.AddCommand = new RelayCommand<Track>(OnAddCommand);
+            this.DoneAddingCommand = new RelayCommand(OnDoneAddingCommand);
+        }
+
+        private void OnDoneAddingCommand()
+        {
+            _navigationService.NavigateTo("SavedPlaylists");
         }
 
         private void LoadList()

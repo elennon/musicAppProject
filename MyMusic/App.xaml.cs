@@ -48,7 +48,6 @@ namespace MyMusic
             set { bkPlayer = value; }
         }
         
-
         private bool _isResuming = false;
         public bool isResumingFromTermination
         {
@@ -133,11 +132,15 @@ namespace MyMusic
                 {
                     Debug.WriteLine("app class after termination");
                     //Logger.GetLogger().logChannel.LogMessage("FG: app class after termination");
+
                     isResumingFromTermination = true;
+                    if (IsMyBackgroundTaskRunning) { BkPlayer.AddMediaPlayerEventHandlers(); }
+
                     DBPath = Path.Combine(
                     Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
                     using (var db = new SQLite.SQLiteConnection(DBPath))
                     {
+                        //db.DropTable<PlaylistTracks>();
                         db.CreateTable<Track>();
                         db.CreateTable<Album>();
                         db.CreateTable<Artist>();
@@ -146,8 +149,7 @@ namespace MyMusic
                         db.CreateTable<PlaylistTracks>();
                         db.CreateTable<RadioStream>();
                         db.CreateTable<RadioGenre>();
-                    }
-                   
+                    }                   
                     try
                     {
                         await SuspensionManager.RestoreAsync();
@@ -162,11 +164,13 @@ namespace MyMusic
                               
                 using (var db = new SQLite.SQLiteConnection(DBPath))
                 {
+                    //db.DropTable<PlaylistTracks>();
                     db.CreateTable<Track>();
                     db.CreateTable<Album>();
                     db.CreateTable<Artist>();
                     db.CreateTable<Genre>();
                     db.CreateTable<Playlist>();
+                    db.CreateTable<PlaylistTracks>();
                     db.CreateTable<RadioStream>();
                     db.CreateTable<RadioGenre>();
                 }
@@ -191,7 +195,7 @@ namespace MyMusic
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
-                if (!rootFrame.Navigate(typeof(MainPage), args.Arguments))
+                if (!rootFrame.Navigate(typeof(Splash), args.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -223,7 +227,7 @@ namespace MyMusic
             var deferral = e.SuspendingOperation.GetDeferral();
             Debug.WriteLine("FG: In on suspending");
             //Logger.GetLogger().logChannel.LogMessage("FG: In on suspending");
-            BkPlayer.RemoveMediaPlayerEventHandlers();
+            //BkPlayer.RemoveMediaPlayerEventHandlers();
             await SuspensionManager.SaveAsync();
             ValueSet messageDictionary = new ValueSet();
             messageDictionary.Add(Constants.AppSuspended, DateTime.Now.ToString());

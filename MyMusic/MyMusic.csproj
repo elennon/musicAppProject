@@ -121,6 +121,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\ContactGroups.cs" />
+    <Compile Include="Models\DataGroup.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\RadioStream.cs" />
@@ -132,6 +133,8 @@
     <Compile Include="UserControls\GenreViewModel.cs" />
     <Compile Include="Utilities\BKPlayer.cs" />
     <Compile Include="ViewModels\AddToPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\StreamingPlaylists\GSMainPageViewModel.cs" />
+    <Compile Include="ViewModels\StreamingPlaylists\GSSignInViewModel.cs" />
     <Compile Include="ViewModels\ViewPlaylistViewModel.cs" />
     <Compile Include="ViewModels\CollectionViewModel.cs" />
     <Compile Include="ViewModels\CreatePlaylistViewModel.cs" />
@@ -147,6 +150,15 @@
     </Compile>
     <Compile Include="Views\Albums.xaml.cs">
       <DependentUpon>Albums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Streaming\GSMainPage.xaml.cs">
+      <DependentUpon>GSMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Streaming\GSSignIn.xaml.cs">
+      <DependentUpon>GSSignIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewPlaylist.xaml.cs">
       <DependentUpon>ViewPlaylist.xaml</DependentUpon>
@@ -267,6 +279,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Albums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Streaming\GSMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Streaming\GSSignIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

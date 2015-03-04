@@ -1,10 +1,10 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\obj\arm\debug\intermediatexaml\mymusic.exe" HashGuid="4032ea0b-21f1-bb8b-13f0-405d764ab9b3" />
+    <LocalAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\obj\arm\debug\intermediatexaml\mymusic.exe" HashGuid="3bacb950-6911-c558-7b25-028a96be0592" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\microsoft.vclibs\12.0\references\commonconfiguration\neutral\platform.winmd" HashGuid="58b6b6d1-928e-9908-9804-eb460e5e101b" />
-    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\backgroundtask\bin\arm\debug\backgroundtask.winmd" HashGuid="a9e27e62-da30-56f0-df88-f9a457bcecf7" />
+    <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\mymusic\backgroundtask\bin\arm\debug\backgroundtask.winmd" HashGuid="76b9536c-c80e-f8ad-d5f4-a31accd7cfc7" />
     <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.dll" HashGuid="da07be64-1093-25cd-c992-377d44b6dd02" />
     <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.extras.dll" HashGuid="28bb2089-c7a4-73bb-7a72-1ea8b02698b0" />
     <ReferenceAssembly PathName="c:\users\ed\downloads\4thyearproject-master\4thyearproject-master\packages\mvvmlightlibs.5.0.2.0\lib\wpa81\galasoft.mvvmlight.platform.dll" HashGuid="54c1f1ed-b921-337f-8ad6-f2d8c553df06" />

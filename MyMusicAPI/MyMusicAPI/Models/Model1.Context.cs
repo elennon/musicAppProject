@@ -18,7 +18,6 @@ namespace MyMusicAPI.Models
         public MusicCentralDBEntities()
             : base("name=MusicCentralDBEntities")
         {
-            base.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,5 +27,6 @@ namespace MyMusicAPI.Models
     
         public virtual DbSet<RadioGenre> RadioGenres { get; set; }
         public virtual DbSet<RadioStream> RadioStreams { get; set; }
+        public virtual DbSet<Artist> Artists { get; set; }
     }
 }

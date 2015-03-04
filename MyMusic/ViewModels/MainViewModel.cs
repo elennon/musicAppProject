@@ -55,24 +55,7 @@ namespace MyMusic.ViewModels
 
         private void OnTestCommand()
         {
-            //readLog();
-            //trkView.lookIn();
-            //var getPicAndGenre = await trkView.getPic2("nofx", "bob");
-            //var fr = getPicAndGenre.album.image.FirstOrDefault(); //Where(a => a.size == "large").FirstOrDefault();
-            //var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
-            //trkView.loadUpImagesAndGenre();
-            //trkView.sortOrderNum();
-            //var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
-            //var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
-            //var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
-            //logSave.Wait();
-            //string rUrl = "radio,http://37.58.75.163:9272/stream";
-            //if (!Frame.Navigate(typeof(NowPlaying), rUrl))
-            //{
-            //    Debug.WriteLine("navigation failed from main to radio lists ");
-            //}                
-            //repo.GetApiFillDB();
-            _navigationService.NavigateTo("Collection2");
+             
         }
 
         private void OnFillDbCommand()
@@ -92,8 +75,27 @@ namespace MyMusic.ViewModels
 
         private void OnPlaylistItemSelectedCommand(DataGroup obj)
         {
-            var itemId = obj.UniqueId;
-            _navigationService.NavigateTo("SavedPlaylists");
+            string itemId = obj.UniqueId;
+            switch (itemId)
+            {
+                case "Stream":
+                    object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.GSSessionId);
+                    if (value == null)
+                    {
+                        _navigationService.NavigateTo("GSSignIn");
+                    }
+                    else
+                    {
+                        _navigationService.NavigateTo("GSMainPage", (string)value);
+                    }
+                    break;
+                case "Something":
+                    _navigationService.NavigateTo("SavedPlaylists", itemId);
+                    break;
+                case "SavedPlayList":
+                    _navigationService.NavigateTo("SavedPlaylists", itemId);
+                    break;
+            }          
         }
 
         private void OnCollectionItemSelectedCommand(DataGroup gp)
@@ -155,35 +157,39 @@ namespace MyMusic.ViewModels
         public ObservableCollection<DataGroup> LoadStreamingList()
         {
             ObservableCollection<DataGroup> groups = new ObservableCollection<DataGroup>();
-            groups.Add(new DataGroup("Stream", "Search GrooveShark", "music streaming", "ms-appx:///Assets/music.jpg"));           
-            groups.Add(new DataGroup("Play Lists", "Play Lists", "music collection", "ms-appx:///Assets/music3.jpg"));
+            groups.Add(new DataGroup("Stream", "Streaming", "music streaming and playlist generation", "ms-appx:///Assets/music.jpg"));           
+            groups.Add(new DataGroup("Something", "A Filler Thing", "music collection", "ms-appx:///Assets/music3.jpg"));
             groups.Add(new DataGroup("SavedPlayList", "Saved PlayLists", "Playlists collection", "ms-appx:///Assets/radio.jpg"));
             return groups;
         }
 
     }
 
-    public class DataGroup
-    {
-        public DataGroup()
-        { }
-
-        public DataGroup(String UniqueId, String title, String description, String imagePath)
-        {
-            this.UniqueId = UniqueId;
-            this.Title = title;
-            this.Description = description;
-            this.ImagePath = imagePath;
-        }
-        public string UniqueId { get; set; }
-        public string Title { get; set; }
-        public string Subtitle { get; set; }
-        public string Description { get; set; }
-        public string ImagePath { get; set; }
-
-        public override string ToString()
-        {
-            return this.Title;
-        }
-    }
+    
 }
+
+
+
+
+
+
+
+
+
+//readLog();
+//trkView.lookIn();
+//var getPicAndGenre = await trkView.getPic2("nofx", "bob");
+//var fr = getPicAndGenre.album.image.FirstOrDefault(); //Where(a => a.size == "large").FirstOrDefault();
+//var tyu = getPicAndGenre.toptags.tag.FirstOrDefault().name;
+//trkView.loadUpImagesAndGenre();
+//trkView.sortOrderNum();
+//var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+//var filename = DateTime.Now.ToString("yyyyMMdd") + ".txt";
+//var logSave = Logger.GetLogger().logSession.SaveToFileAsync(folder, filename).AsTask();
+//logSave.Wait();
+//string rUrl = "radio,http://37.58.75.163:9272/stream";
+//if (!Frame.Navigate(typeof(NowPlaying), rUrl))
+//{
+//    Debug.WriteLine("navigation failed from main to radio lists ");
+//}                
+//repo.GetApiFillDB();

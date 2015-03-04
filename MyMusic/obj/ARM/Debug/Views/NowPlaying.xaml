@@ -21,6 +21,7 @@
     <Page.Resources>
 
         <cmds:ItemClickedConverter x:Name="ItemClickedConverter" />
+        <cmds:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter" />
         
     </Page.Resources>
 
@@ -44,24 +45,21 @@
                 <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
             </StackPanel>
         </StackPanel>
-
+       
         <Grid x:Name="Playing" Grid.Row="1" Margin="12,0,12,0">
+            <!--<ProgressRing x:Name="LoadingBar" IsActive="{Binding DataContext.IsVisible}" Height="4" HorizontalAlignment="Stretch"
+                          Visibility="{Binding DataContext.IsVisible, ElementName=LayoutRoot, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
+            
             <StackPanel>
+                
                 <Image Source="{Binding TrImage}" ></Image>
                 <TextBlock Text="{Binding TrackName}" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" ></TextBlock>
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="0.5*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center"  Text="Collection" Margin="0,0,0,0" />
-                               
-                    <Image Grid.Column="2" Source="/Assets/next.png" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                             Margin="10,10,10,10"  />
-
-                </Grid>
+                <ProgressRing Visibility="{Binding IsVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+                        IsActive ="True"                        
+                        MinHeight="70"
+                        MinWidth="70">
+                </ProgressRing>
             </StackPanel>
         </Grid>
     </Grid>
@@ -69,7 +67,7 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-
+                <AppBarButton Icon="Favorite" Label="ring" Command="{Binding BackCommand}"/>
                 <AppBarButton Icon="Back" Label="Back" Command="{Binding BackCommand}"/>
                 <AppBarButton Icon="{Binding PlayPause}" Label="Pause" Command="{Binding PlayPauseCommand}" />
                 <AppBarButton Icon="Next" Label="Next" Command="{Binding NextCommand}" />

@@ -202,6 +202,9 @@
     <Compile Include="Helper_Classes\FilterStations.cs" />
     <Compile Include="Helper_Classes\GrooveShark.cs" />
     <Compile Include="Helper_Classes\DownloadedStations.cs" />
+    <Compile Include="Models\Artist.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

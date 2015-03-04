@@ -16,6 +16,8 @@ namespace MyMusicAPI.DAL
             //cd = new EfMusic();
         }
 
+        #region Radio
+
         public IEnumerable<RadioStream> GetAllStations()
         {
             var sts = cd.RadioStreams.Where(a => a.TestedOk == true && a.Status == 1);
@@ -118,6 +120,8 @@ namespace MyMusicAPI.DAL
             }
             cd.SaveChanges();
         }
+
+        #endregion
 
         protected void Dispose(bool disposing)
         {

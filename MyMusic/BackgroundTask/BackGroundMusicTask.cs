@@ -41,7 +41,7 @@ namespace BackgroundTask
         private ForegroundAppStatus foregroundAppState = ForegroundAppStatus.Unknown;
         
         private AutoResetEvent BackgroundTaskStarted = new AutoResetEvent(false);
-        private bool backgroundtaskrunning = false, Skipped = false;
+        private bool backgroundtaskrunning = false, Skipped = false, IsRadio = false;
         private List<int> trks = new List<int>();
         private string[] trksToPlay;
         //private string radioUrl = "";
@@ -136,8 +136,10 @@ namespace BackgroundTask
             try
             {
                 //save state
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0])); //[0] is the track id
+                //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
+                //ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0])); //[0] is the track id
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, null);
+                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, null);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundActive, false);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;
@@ -245,12 +247,18 @@ namespace BackgroundTask
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
             }
             string currentTrack = "";
-            if (Skipped)
+            if (PlayMode == PlayMode.Collection)
             {
-                currentTrack = trksToPlay[sender.CurrentTrackNumber] + ",skipped"; // skipped true so add skipped so the foreground knows
+                if (Skipped)
+                {
+                    currentTrack = trksToPlay[sender.CurrentTrackNumber] + ",skipped"; // skipped true so add skipped so the foreground knows
+                }
+                else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
             }
-            else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
-
+            else if (PlayMode == PlayMode.Radio)
+            {
+                currentTrack = (trksToPlay[sender.CurrentTrackNumber]).Split(',')[1];
+            }
             Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);            
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
@@ -337,11 +345,14 @@ namespace BackgroundTask
                         SkipToPrevious();
                         break;
                     case Constants.PlayRadio:       // radio selected
+                      
                         PlayMode = PlayMode.Radio;
-                        playRadio(trksToPlay[0]);
+                        string url = (trksToPlay[0]).Split(',')[0];
+                        playRadio(url);
                         break;
                     case Constants.PlayGSTrack:       // GS stream selected
                         PlayMode = PlayMode.Streams;
+
                         playGSTrack(trksToPlay[0]);
                         break; 
                 }

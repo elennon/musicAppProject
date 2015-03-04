@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Playback;
@@ -82,7 +83,7 @@ namespace MyMusic.Utilities
                     break;
                 case "radio":
                     orders = new string[1];
-                    orders[0] = (request.ToString().Split(','))[1];
+                    orders[0] = ((request.ToString().Split(','))[1]) + "," + ((request.ToString().Split(','))[2]);
                     isPlayRadio = true;
                     break;
                 case "gsStreamTrack":
@@ -210,6 +211,7 @@ namespace MyMusic.Utilities
                 switch (key)
                 {
                     case Constants.Trackchanged:
+                        npi.IsVisible = false;
                         string pic = tr.ImageUri;
                         if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/radio672.png"; }
                         npi.TrImage = pic;    // the image for this song
@@ -219,7 +221,8 @@ namespace MyMusic.Utilities
                         SererInitialized.Set();
                         break;
                     case Constants.PlayRadioFailed:
-                        npi.TrackName = "radio don't play good";
+                        npi.IsVisible = false;
+                        npi.TrackName = "radio don't play good";                        
                         break;
                 }
             }
@@ -239,38 +242,35 @@ namespace MyMusic.Utilities
             BackgroundMediaPlayer.MessageReceivedFromBackground += this.BackgroundMediaPlayer_MessageReceivedFromBackground;
         }
 
-        private void StartBackgroundAudioTask()             // starts background---sends mesaage (tracks to play) from here
+        private async void StartBackgroundAudioTask()             // starts background---sends mesaage (tracks to play) from here
         {
-            var backgroundtaskinitializationresult = Task.Run(delegate()
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                //if (((App)Application.Current).IsMyBackgroundTaskRunning && BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Closed)
-                //{                   
-                    if (isPlayRadio == true)
-                    {
-                        var message = new ValueSet();
-                        message.Add(Constants.PlayRadio, orders);
-                        Debug.WriteLine("FG: sending Message");
-                        BackgroundMediaPlayer.SendMessageToBackground(message);
-                        isPlayRadio = false;
-                    }
-                    else if (isPlayGSTrack == true)
-                    {
-                        var message = new ValueSet();
-                        message.Add(Constants.PlayGSTrack, orders);
-                        Debug.WriteLine("FG: sending Message");
-                        BackgroundMediaPlayer.SendMessageToBackground(message);
-                        isPlayGSTrack = false;
-                    }
-                    else
-                    {
-                        var message = new ValueSet();
-                        message.Add(Constants.StartPlayback, orders);
-                        Debug.WriteLine("FG: sending Message");
-                        BackgroundMediaPlayer.SendMessageToBackground(message);
-                    }
-                //}                                   
-            });
-            backgroundtaskinitializationresult.AsAsyncAction().Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);
+                if (isPlayRadio == true)
+                {
+                    var message = new ValueSet();
+                    message.Add(Constants.PlayRadio, orders);
+                    Debug.WriteLine("FG: sending Message");
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                    isPlayRadio = false;
+                }
+                else if (isPlayGSTrack == true)
+                {
+                    var message = new ValueSet();
+                    message.Add(Constants.PlayGSTrack, orders);
+                    Debug.WriteLine("FG: sending Message");
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                    isPlayGSTrack = false;
+                }
+                else
+                {
+                    var message = new ValueSet();
+                    message.Add(Constants.StartPlayback, orders);
+                    Debug.WriteLine("FG: sending Message");
+                    BackgroundMediaPlayer.SendMessageToBackground(message);
+                }
+            });   
+            //bkStart.Completed = new AsyncActionCompletedHandler(BackgroundTaskInitializationCompleted);          
         }
 
         private void BackgroundTaskInitializationCompleted(IAsyncAction action, AsyncStatus status)
@@ -287,7 +287,7 @@ namespace MyMusic.Utilities
 
         #endregion
 
-        public void SendMessageTpBK(ValueSet value)
+        public void SendMessageToBK(ValueSet value)
         {           
             BackgroundMediaPlayer.SendMessageToBackground(value);
         }

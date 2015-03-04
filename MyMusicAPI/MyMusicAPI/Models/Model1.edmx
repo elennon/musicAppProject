@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MusicCentralDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="GSId" Type="int" />
+        </EntityType>
         <EntityType Name="RadioGenre">
           <Key>
             <PropertyRef Name="Id" />
@@ -41,6 +50,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MusicCentralDBModelStoreContainer">
+          <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RadioGenre" EntityType="Self.RadioGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RadioStream" EntityType="Self.RadioStream" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_RadioStream_ToTable" Association="Self.FK_RadioStream_ToTable">
@@ -96,7 +106,19 @@
             <End Role="RadioGenre" EntitySet="RadioGenres" />
             <End Role="RadioStream" EntitySet="RadioStreams" />
           </AssociationSet>
+          <EntitySet Name="Artists" EntityType="MusicCentralDBModel.Artist" />
         </EntityContainer>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ArtistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GSId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -125,6 +147,16 @@
                 <ScalarProperty Name="StatnType" ColumnName="StatnType" />
                 <ScalarProperty Name="RadioGenreName" ColumnName="RadioGenreName" />
                 <ScalarProperty Name="RadioGenreId" ColumnName="RadioGenreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="MusicCentralDBModel.Artist">
+              <MappingFragment StoreEntitySet="Artist">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GSId" ColumnName="GSId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

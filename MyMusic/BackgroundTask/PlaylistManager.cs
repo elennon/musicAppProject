@@ -131,7 +131,7 @@ namespace BackgroundTask
             DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
         }
 
-        //void lookHere()
+        //void lookInHere()
         //{
         //    string dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
         //    string nme = "";
@@ -175,7 +175,7 @@ namespace BackgroundTask
                 if (rdStream != null)
                 {
                     rdStream.CloseMedia();
-                //    sendNoPlayMessage();
+                    sendNoPlayMessage();
                     rdStream = null;
                 }
                 onRadioChange = false;

@@ -1,5 +1,7 @@
-﻿using RestSharp;
+﻿using MyMusicAPI.Models;
+using RestSharp;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,7 +40,7 @@ namespace MyMusicAPI.Helper_Classes
 
             Dictionary<string, Object> gh = responseParameters.result;
             string sId = gh["sessionID"].ToString();
-            //auth(userName, password, sId);
+            auth(userName, password, sId);
             return sId;
         }
 
@@ -72,8 +74,103 @@ namespace MyMusicAPI.Helper_Classes
            
         }
 
+        public List<Artist> getSimilarArtists(string artist, string sessionId)
+        {
+            sessionId = GetSessionId("kilmaced", "Rhiabit1");
+            int artistId = GetArtist(artist, sessionId);
+            object country = getCountry(sessionId);
+            RequestParameters requestParameters = new RequestParameters();
+            requestParameters.method = "getSimilarArtists";
+            requestParameters.parameters.Add("artistID", artistId);
+            requestParameters.parameters.Add("country", country);
+            requestParameters.parameters.Add("limit", "10");
+
+            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("sessionID", sessionId);
+
+            var jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(requestParameters);
+            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
+            string serviceUrl = this.baseServiceUrl;
+            if (useHttps)
+            {
+                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+            }
+            var client = new RestClient(serviceUrl);
+            var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddBody(requestParameters);
+
+            RestResponse response = (RestResponse)client.Execute(request);
+            ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
+
+            Dictionary<string, Object> gh = responseParameters.result;
+            List<object> artists = gh.Values.ToList();
+
+            var b = artists[0];
+            var g = b.GetType();
+            Dictionary<string, Object> it = (Dictionary<string, Object>)b;
+            var f = it["artists"];
+                
+            ArrayList tf = (ArrayList)f;      // pull out the first song id
+            List<Artist> arts = new List<Artist>();
+            foreach (Dictionary<string, Object> j in tf)
+            {
+                Artist art = new Artist{ Name = j["artistName"].ToString(), GSId = Convert.ToInt32(j["artistID"].ToString()) };
+                arts.Add(art);
+            }
+            return arts;
+        }
+
+        private int GetArtist(string artist, string sessionId)
+        {
+            sessionId = GetSessionId("kilmaced", "Rhiabit1");
+            object country = getCountry(sessionId);
+            RequestParameters requestParameters = new RequestParameters();
+            requestParameters.method = "getArtistSearchResults";
+            requestParameters.parameters.Add("query", artist);
+            requestParameters.parameters.Add("country", country);
+            requestParameters.parameters.Add("limit", "1");
+
+            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("sessionID", sessionId);
+
+            var jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(requestParameters);
+            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
+            string serviceUrl = this.baseServiceUrl;
+            if (useHttps)
+            {
+                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+            }
+            var client = new RestClient(serviceUrl);
+            var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddBody(requestParameters);
+
+            RestResponse response = (RestResponse)client.Execute(request);
+            ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
+
+            Dictionary<string, Object> gh = responseParameters.result;
+            var we = gh.Values.ToList();
+
+            string artistId = "";
+            System.Collections.ArrayList tf = (System.Collections.ArrayList)we[1];      // pull out the first song id
+            foreach (Dictionary<string, Object> item in tf)
+            {
+                var sId = item.ToString();
+                artistId = item["ArtistID"].ToString();
+            }
+            return Convert.ToInt32(artistId);
+        }
+
+
+
+
         public string getTrack(string artist, string track, string sessionId)
         {
+            sessionId = GetSessionId("kilmaced", "Rhiabit1");
+            var t = getSimilarArtists(artist, sessionId);
             object country = getCountry(sessionId);
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "getSongSearchResults";

@@ -2,7 +2,9 @@
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using MyMusic.Common;
+using MyMusic.ViewModels.StreamingPlaylists;
 using MyMusic.Views;
+using MyMusic.Views.Streaming;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +34,10 @@ namespace MyMusic.ViewModels
             SimpleIoc.Default.Register<ViewPlaylistViewModel>();
             SimpleIoc.Default.Register<SavedPlaylistsViewModel>();
             SimpleIoc.Default.Register<AddToPlaylistViewModel>();
+            SimpleIoc.Default.Register<GSSignInViewModel>();
+            SimpleIoc.Default.Register<GSMainPageViewModel>();
 
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default); 
            
 
         }
@@ -51,6 +55,8 @@ namespace MyMusic.ViewModels
             navigationService.Configure("ViewPlaylist", typeof(ViewPlaylist));
             navigationService.Configure("SavedPlaylists", typeof(SavedPlaylists));
             navigationService.Configure("AddToPlaylist", typeof(AddToPlaylist));
+            navigationService.Configure("GSSignIn", typeof(GSSignIn));
+            navigationService.Configure("GSMainPage", typeof(GSMainPage));
             navigationService.Configure("test", typeof(Views.test));
             
             return navigationService;
@@ -117,6 +123,20 @@ namespace MyMusic.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<AddToPlaylistViewModel>();
+            }
+        }
+        public GSSignInViewModel GSSignInViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GSSignInViewModel>();
+            }
+        }
+        public GSMainPageViewModel GSMainPageViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GSMainPageViewModel>();
             }
         }
     }

@@ -11,7 +11,6 @@ namespace MyMusicAPI.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
     public partial class RadioStream
     {
@@ -24,8 +23,7 @@ namespace MyMusicAPI.Models
         public Nullable<int> RadioGenreId { get; set; }
         public Nullable<short> Status { get; set; }
         public Nullable<bool> TestedOk { get; set; }
-
-        [IgnoreDataMember]
+    
         public virtual RadioGenre RadioGenre { get; set; }
     }
 }

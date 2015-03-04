@@ -18,6 +18,7 @@ namespace MyMusic.ViewModels
     {
         private Repository repo = new Repository();
         private INavigationService _navigationService;
+        private bool InEdit = false;
 
         private bool _isVisible = false;
         public bool IsVisible
@@ -62,8 +63,11 @@ namespace MyMusic.ViewModels
 
 
         private void OnItemSelectedCommand(Playlist obj)
-        {           
-            _navigationService.NavigateTo("ViewPlaylist", obj.PlaylistId);
+        {
+            if (!InEdit)
+            {
+                _navigationService.NavigateTo("ViewPlaylist", obj.PlaylistId);
+            }
         }
 
         private void OnPlaylistDeleteSelectedCommand(Playlist obj)
@@ -74,6 +78,7 @@ namespace MyMusic.ViewModels
 
         private void OnEditCommand()
         {
+            InEdit = !InEdit;
             IsVisible = !IsVisible;      
         }
 

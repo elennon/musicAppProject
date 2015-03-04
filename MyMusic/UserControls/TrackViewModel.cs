@@ -456,31 +456,31 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public void DoPercent()
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var trs = db.Table<Track>();
-                int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;
-                int highestShuf = (trs.OrderByDescending(a => a.RandomPlays).Take(1)).FirstOrDefault().RandomPlays;
-                var highestSkip = (trs.OrderByDescending(a => a.Skips).Take(1)).FirstOrDefault();
+        //public void DoPercent()
+        //{
+        //    using (var db = new SQLite.SQLiteConnection(App.DBPath))
+        //    {
+        //        var trs = db.Table<Track>();
+        //        int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;
+        //        int highestShuf = (trs.OrderByDescending(a => a.RandomPlays).Take(1)).FirstOrDefault().RandomPlays;
+        //        var highestSkip = (trs.OrderByDescending(a => a.Skips).Take(1)).FirstOrDefault();
 
-                var averagePlays = (trs.Where(n => n.Plays > 0).ToList()).Select(a => a.Plays).Average();
-                var averageShuffles = (trs.Where(n => n.RandomPlays > 0).ToList()).Select(a => a.RandomPlays).Average();
+        //        var averagePlays = (trs.Where(n => n.Plays > 0).ToList()).Select(a => a.Plays).Average();
+        //        var averageShuffles = (trs.Where(n => n.RandomPlays > 0).ToList()).Select(a => a.RandomPlays).Average();
 
-                var bestAverageRate = (highestPlay * 3) + averageShuffles;      // based on plays * 3, +  shuffle * 1
+        //        var bestAverageRate = (highestPlay * 3) + averageShuffles;      // based on plays * 3, +  shuffle * 1
                 
-                foreach (var item in trs)
-                {
-                    var thisAverRate = (item.Plays * 3) + item.RandomPlays;
-                    var playPerC = (thisAverRate / bestAverageRate) * 100;        // this track % of highest
-                    double minusSkips = playPerC - (playPerC * (item.Skips / 10));     // minus 10% for every skip
-                    item.PerCentRate = (int)Math.Ceiling(minusSkips); 
+        //        foreach (var item in trs)
+        //        {
+        //            var thisAverRate = (item.Plays * 3) + item.RandomPlays;
+        //            var playPerC = (thisAverRate / bestAverageRate) * 100;        // this track % of highest
+        //            double minusSkips = playPerC - (playPerC * (item.Skips / 10));     // minus 10% for every skip
+        //            item.PerCentRate = (int)Math.Ceiling(minusSkips); 
 
-                    db.Update(item);
-                }
-            }
-        }   // todo: add higher level shuffle(from )
+        //            db.Update(item);
+        //        }
+        //    }
+        //}   // todo: add higher level shuffle(from )
 
         public ObservableCollection<TrackViewModel> GetTopTracks()
         {

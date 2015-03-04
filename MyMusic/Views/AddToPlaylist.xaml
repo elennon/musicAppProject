@@ -200,6 +200,12 @@
             </SemanticZoom>
         </Grid>
     </Grid>
-    
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Done" Icon="Save" Command="{Binding DoneAddingCommand}"/>                
+            </CommandBar.PrimaryCommands>           
+        </CommandBar>
+    </Page.BottomAppBar>
 </common:BindablePage>
 

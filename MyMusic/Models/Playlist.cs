@@ -21,6 +21,8 @@ namespace MyMusic.Models
 
     public class PlaylistTracks
     {
+        [PrimaryKey, AutoIncrement]
+        public int PlaylistTracksId { get; set; }
         [ForeignKey(typeof(Track))]
         public int TrackId { get; set; }
 

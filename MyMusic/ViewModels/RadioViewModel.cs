@@ -117,21 +117,24 @@ namespace MyMusic.ViewModels
 
         public RadioViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;            
+            _navigationService = navigationService;
             StationsList = AddSectionLists();
             //hubSection1 = repo.GetRadioStations();
             hubSection1 = StationsList[0].RdoList;
+            this.LoadCommand = new RelayCommand<RoutedEventArgs>(OnLoadCommand);
+            this.RadioItemSelectedCommand = new RelayCommand<RadioStream>(OnRadioItemSelectedCommand);
+        }
 
-            LoadCommand = new RelayCommand<RoutedEventArgs>((args) =>
-            {                
-                loadHub(para);                               
-                AddToRdoLists();
-            });
-            RadioItemSelectedCommand = new RelayCommand<RadioStream>((rs) =>
-            {
-                string rUrl = "radio," + rs.RadioUrl;
-                _navigationService.NavigateTo("NowPlaying", rUrl);
-            });
+        private void OnRadioItemSelectedCommand(RadioStream obj)
+        {
+            string rUrl = "radio," + obj.RadioUrl + "," + obj.RadioName;
+            _navigationService.NavigateTo("NowPlaying", rUrl);
+        }
+
+        private void OnLoadCommand(RoutedEventArgs obj)
+        {
+            loadHub(para);
+            AddToRdoLists();
         }
 
         private void AddToRdoLists()

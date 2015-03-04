@@ -19,3 +19,4 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Backgr
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\ARM\Debug\BackgroundTask.csprojResolveAssemblyReference.cache

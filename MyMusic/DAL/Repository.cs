@@ -58,25 +58,11 @@ namespace MyMusic.DAL
             {
                 var all = db.Table<Track>().Where(a => a.InTheBin == true).ToList();
                 //var al = db.Table<Track>().Where(a => a.Name[0] == '1').ToList();
-
                 var query = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/radio672.png"; }
-                    var trk = new Track()
-                    {
-                        TrackId = tr.TrackId,
-                        ArtistId = tr.ArtistId,
-                        AlbumId = tr.AlbumId,
-                        Name = tr.Name,
-                        Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
-                        FileName = tr.FileName,
-                        InTheBin = tr.InTheBin,
-                        OrderNo = tr.OrderNo
-                        //InEditMode = false
-                    };
-                    _tracks.Add(trk);
+                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/radio672.png"; }                  
+                    _tracks.Add(tr);
                 }
             }
             return _tracks;
@@ -161,21 +147,8 @@ namespace MyMusic.DAL
                 var topPlays = db.Table<Track>().Where(a => a.Plays > 0 && a.InTheBin == false).OrderByDescending(a => a.PerCentRate).Take(30).ToList();
                 foreach (var tr in topPlays)        // gets all tracks that were intentionally selected
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
-                    var trk = new Track()
-                    {
-                        TrackId = tr.TrackId,
-                        Name = tr.Name,
-                        Artist = tr.Artist,
-                        RandomPlays = tr.RandomPlays,
-                        Plays = tr.Plays,
-                        Skips = tr.Skips,
-                        ImageUri = tr.ImageUri,
-                        OrderNo = tr.OrderNo,
-                        FileName = tr.FileName,
-                        PerCentRate = tr.PerCentRate
-                    };
-                    _tracks.Add(trk);
+                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }                   
+                    _tracks.Add(tr);
                 }
             }
             return _tracks;
@@ -312,6 +285,7 @@ namespace MyMusic.DAL
                     tr.RandomPlays = tr.RandomPlays + 1;
                     db.Update(tr);
                 }
+                DoPercent(tr);
             }
         }
 
@@ -325,6 +299,7 @@ namespace MyMusic.DAL
                     tr.Plays++;
                     db.Update(tr);
                 }
+                DoPercent(tr);
             }
         }
 
@@ -339,6 +314,7 @@ namespace MyMusic.DAL
                     tr.Skips++;
                     db.Update(tr);
                 }
+                DoPercent(tr);
             }
         }
 
@@ -394,31 +370,54 @@ namespace MyMusic.DAL
             }
         }
 
-        public void DoPercent()
+        public int DoPercent(Track tr)
         {
+            int perCent = 0;
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
                 var trs = db.Table<Track>();
-                int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;
-                int highestShuf = (trs.OrderByDescending(a => a.RandomPlays).Take(1)).FirstOrDefault().RandomPlays;
-                var highestSkip = (trs.OrderByDescending(a => a.Skips).Take(1)).FirstOrDefault();
-
-                var averagePlays = (trs.Where(n => n.Plays > 0).ToList()).Select(a => a.Plays).Average();
+                int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;                
                 var averageShuffles = (trs.Where(n => n.RandomPlays > 0).ToList()).Select(a => a.RandomPlays).Average();
 
                 var bestAverageRate = (highestPlay * 3) + averageShuffles;      // based on plays * 3, +  shuffle * 1
 
-                foreach (var item in trs)
+                var thisAverRate = (tr.Plays * 3) + tr.RandomPlays;
+                var playPerC = (thisAverRate / bestAverageRate) * 100;        // this track % of highest
+                double minusSkips = playPerC - (playPerC * (tr.Skips / 10));     // minus 10% for every skip
+                //tr.PerCentRate = (int)Math.Ceiling(minusSkips);
+                perCent = (int)Math.Ceiling(minusSkips);
+                return perCent;
+                //db.Update(tr);               
+            }
+        }   // todo: add higher level shuffle(from )
+
+        public void DoAllPercent()
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var trs = db.Table<Track>().ToList();
+                
+                int highestPlay = (trs.OrderByDescending(a => a.Plays).Take(1)).FirstOrDefault().Plays;
+                //int highestShuf = (trs.OrderByDescending(a => a.RandomPlays).Take(1)).FirstOrDefault().RandomPlays;
+                //var highestSkip = (trs.OrderByDescending(a => a.Skips).Take(1)).FirstOrDefault();
+
+                //var averagePlays = (trs.Where(n => n.Plays > 0).ToList()).Select(a => a.Plays).Average();
+                var averageShuffles = (trs.Where(n => n.RandomPlays > 0).ToList()).Select(a => a.RandomPlays).Average();
+
+                var bestAverageRate = (highestPlay * 3) + averageShuffles;      // based on plays * 3, +  shuffle * 1
+
+                foreach (Track item in trs)
                 {
                     var thisAverRate = (item.Plays * 3) + item.RandomPlays;
                     var playPerC = (thisAverRate / bestAverageRate) * 100;        // this track % of highest
                     double minusSkips = playPerC - (playPerC * (item.Skips / 10));     // minus 10% for every skip
-                    item.PerCentRate = (int)Math.Ceiling(minusSkips);
+               //     item.PerCentRate = (int)Math.Ceiling(minusSkips);
 
                     db.Update(item);
-                }
+                }                
+                var trzs = db.Table<Track>().ToList();
             }
-        }   // todo: add higher level shuffle(from )
+        } 
 
         public ObservableCollection<Track> GetShuffleTracks()         //  todo: sort into layers by rate%, binned, q.p.s
         {
@@ -683,6 +682,8 @@ namespace MyMusic.DAL
             return _radioStreams;
         }
 
+        #region local playlists
+
         public int CreatePlaylist(Playlist pl)
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -722,13 +723,25 @@ namespace MyMusic.DAL
             ObservableCollection<Track> plTracks = new ObservableCollection<Track>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var ft = db.Table<PlaylistTracks>().Where(a => a.PlaylistId == pl.PlaylistId).ToList();
-                //List<int> pls = db.Table<PlaylistTracks>().Where(a => a.PlaylistId == pl.PlaylistId).Select(n => n.TrackId).ToList();
-                foreach (var item in ft)
+                try
                 {
-                    var track = db.Table<Track>().Where(a => a.TrackId == item.TrackId).FirstOrDefault();
-                    plTracks.Add(track);
-                }                
+                    var list = db.Table<PlaylistTracks>().ToList();
+                    if (list.Count > 0)
+                    {
+                        var ft = db.Table<PlaylistTracks>().Where(a => a.PlaylistId == pl.PlaylistId).ToList();
+                        //List<int> pls = db.Table<PlaylistTracks>().Where(a => a.PlaylistId == pl.PlaylistId).Select(n => n.TrackId).ToList();
+                        foreach (var item in ft)
+                        {
+                            var track = db.Table<Track>().Where(a => a.TrackId == item.TrackId).FirstOrDefault();
+                            plTracks.Add(track);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    string bh = ex.Message;
+                }
+                           
             }
             return plTracks;
         }
@@ -798,7 +811,44 @@ namespace MyMusic.DAL
             }           
         }
 
+        #endregion
 
+        #region Groove shark
+
+        public async Task<string> GetGSSessionId(string nme, string pword)
+        {
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var sampleTracks = GetTopTracks().Take(5);
+            string resp = await client.GetStringAsync("api/grooveshark?userName=" + nme + "&password=" + pword);//
+
+            return resp;
+        }
+
+        public async Task<ObservableCollection<Artist>> GetListArtists(string sessionId)
+        {
+            List<Artist> artists = new List<Artist>();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var sampleTracks = GetTopTracks().Take(3);
+            foreach (var item in sampleTracks)
+            {
+                List<Artist> arts = new List<Artist>();
+                string resp = await client.GetStringAsync("api/grooveshark?arts=" + item.Artist + "&sessionId=" + sessionId);
+                var result = JsonConvert.DeserializeObject<List<Artist>>(resp);
+                //foreach (var tr in result)
+                //{
+                //    Artist ar = new Artist { Name = tr.ArtistName };
+                //    arts.Add(ar);
+                //}
+                artists.AddRange(result);
+            }            
+            return new ObservableCollection<Artist>(artists);
+        }
+
+        #endregion
+
+        #region data base stuf
 
         public async void GetApiFillDB()
         {           
@@ -865,7 +915,7 @@ namespace MyMusic.DAL
                 cnt = db.Table<RadioStream>().Count();
                 count = db.Table<RadioGenre>().Count();
             }
-        }
+        }   // radio from api
 
         public async void BackUpDb()
         {            
@@ -1131,6 +1181,7 @@ namespace MyMusic.DAL
             }
         }
 
+        #endregion
     }
 
     [XmlRoot]

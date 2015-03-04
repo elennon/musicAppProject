@@ -44,7 +44,7 @@ namespace MyMusic.Views
             edit = appBarEdit; shuffle = appBarShuffle; addToQp = appBarAddToQp; showBinned = appBarShowBinned;
             collHub = CollectionHub;
             allTracksSec = AllTracksSection; topPlaysSec = TopPlaySection; artistSec = ArtistSection; albumSec = AlbumSection;
-            genreSec = GenreSection; qpSec = QpSection;
+            genreSec = GenreSection; qpSec = QuickPickSection;
             appBarr = appBar;
             
         }
@@ -61,9 +61,6 @@ namespace MyMusic.Views
 
         #endregion
 
-        private void CollectionHub_SectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -75,5 +75,6 @@ namespace MyMusic.Views
 
         #endregion
 
+        
     }    
 }

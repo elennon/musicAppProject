@@ -44,5 +44,17 @@
       <End Role="RadioGenre" EntitySet="RadioGenres" />
       <End Role="RadioStream" EntitySet="RadioStreams" />
     </AssociationSet>
+    <EntitySet Name="Artists" EntityType="MusicCentralDBModel.Artist" />
   </EntityContainer>
+  <EntityType Name="Artist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ArtistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GSId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

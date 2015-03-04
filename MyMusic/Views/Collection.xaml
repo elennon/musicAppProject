@@ -356,7 +356,7 @@
 
     <Grid>
         
-        <Hub x:Name="CollectionHub" x:Uid="cHub" Header="Music central" SectionsInViewChanged="CollectionHub_SectionsInViewChanged" >
+        <Hub x:Name="CollectionHub" Header="Music central"  >
             <Hub.Background>
                 <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/concert2.jpg"></ImageBrush>
             </Hub.Background>
@@ -523,7 +523,7 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="QpSection" Header="Quick Picks"
+            <HubSection x:Name="QuickPickSection" Header="Quick Picks"
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <SemanticZoom x:Name="qpSemanticZoom" 
