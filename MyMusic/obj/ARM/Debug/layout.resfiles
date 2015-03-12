@@ -63,6 +63,7 @@ Views\RadioStreams.xbf
 Views\SavedPlaylists.xbf
 Views\ShowAllTracks.xbf
 Views\Splash.xbf
+Views\Streaming\CreateListFromQP.xbf
 Views\Streaming\GSMainPage.xbf
 Views\Streaming\GSSignIn.xbf
 Views\test.xbf

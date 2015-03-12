@@ -212,7 +212,7 @@ namespace MyMusic.Utilities
                 {
                     case Constants.Trackchanged:
                         npi.IsVisible = false;
-                        string pic = tr.ImageUri;
+                        string pic = tr.ImageUrl;
                         if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/radio672.png"; }
                         npi.TrImage = pic;    // the image for this song
                         npi.TrackName = tr.Artist + "-" + tr.Name;                                                                   

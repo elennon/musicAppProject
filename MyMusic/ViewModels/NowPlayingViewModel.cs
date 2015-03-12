@@ -99,7 +99,7 @@ namespace MyMusic.ViewModels
                 else
                 {
                     int trackId = (int)value2;
-                    pic = (repo.GetThisTrack(trackId)).ImageUri;
+                    pic = (repo.GetThisTrack(trackId)).ImageUrl;
                     if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
                     TrImage = pic;
                 }

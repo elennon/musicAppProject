@@ -125,6 +125,7 @@ namespace BackgroundTask
         void Taskcompleted(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
         {
             Debug.WriteLine("MyBackgroundAudioTask " + sender.TaskId + " Completed...");
+            ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundCompleted, true);
             //Log("BK-- in task completed");
             deferral.Complete();
         }
@@ -138,8 +139,8 @@ namespace BackgroundTask
                 //save state
                 //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, Playlist.CurrentTrackName);
                 //ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, Convert.ToInt32(trksToPlay[Playlist.CurrentTrackNumber].Split(',')[0])); //[0] is the track id
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, null);
-                ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, null);
+                //ApplicationSettingsHelper.SaveSettingsValue(Constants.CurrentTrack, null);
+                //ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, null);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundActive, false);
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Enum.GetName(typeof(ForegroundAppStatus), foregroundAppState));
                 backgroundtaskrunning = false;

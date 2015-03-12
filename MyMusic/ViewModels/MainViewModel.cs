@@ -53,9 +53,9 @@ namespace MyMusic.ViewModels
 
         #region Commands
 
-        private void OnTestCommand()
+        private async void OnTestCommand()
         {
-             
+            await repo.SortPics();
         }
 
         private void OnFillDbCommand()

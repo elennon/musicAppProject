@@ -36,6 +36,7 @@ namespace MyMusic.ViewModels
             SimpleIoc.Default.Register<AddToPlaylistViewModel>();
             SimpleIoc.Default.Register<GSSignInViewModel>();
             SimpleIoc.Default.Register<GSMainPageViewModel>();
+            SimpleIoc.Default.Register<CreateListFromQPViewModel>();
 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default); 
            
@@ -57,6 +58,7 @@ namespace MyMusic.ViewModels
             navigationService.Configure("AddToPlaylist", typeof(AddToPlaylist));
             navigationService.Configure("GSSignIn", typeof(GSSignIn));
             navigationService.Configure("GSMainPage", typeof(GSMainPage));
+            navigationService.Configure("CreateListFromQP", typeof(CreateListFromQP));
             navigationService.Configure("test", typeof(Views.test));
             
             return navigationService;
@@ -137,6 +139,13 @@ namespace MyMusic.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<GSMainPageViewModel>();
+            }
+        }
+        public CreateListFromQPViewModel CreateListFromQPViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CreateListFromQPViewModel>();
             }
         }
     }

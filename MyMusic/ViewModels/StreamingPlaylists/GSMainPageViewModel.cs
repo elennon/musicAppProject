@@ -48,31 +48,41 @@ namespace MyMusic.ViewModels.StreamingPlaylists
         }
         
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
-        public RelayCommand<RoutedEventArgs> MethodSelectedCommand { get; set; }
+        public RelayCommand<DataGroup> MethodSelectedCommand { get; set; }
         
         public GSMainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             Methods = LoadCollectionList();
             this.LoadCommand = new RelayCommand<RoutedEventArgs>(OnLoadCommand);
-            this.MethodSelectedCommand = new RelayCommand<RoutedEventArgs>(OnMethodSelectedCommand);
+            this.MethodSelectedCommand = new RelayCommand<DataGroup>(OnMethodSelectedCommand);
         }
 
-        private async void OnLoadCommand(RoutedEventArgs obj)
+        private void OnLoadCommand(RoutedEventArgs obj)
         {
-            Artists = await repo.GetListArtists(Session);            
+                        
         }
 
-        private void OnMethodSelectedCommand(RoutedEventArgs obj)
+        private void OnMethodSelectedCommand(DataGroup obj)
         {
-            throw new NotImplementedException();
+            switch (obj.UniqueId)
+            {
+                case "Method1":
+                    _navigationService.NavigateTo("CreateListFromQP", Session);
+                  //  Artists = await repo.GetListArtists(Session);
+                    break;
+                case "Method2":
+                    _navigationService.NavigateTo("NowPlaying");
+                    break;
+            }
+            
         }
 
         public ObservableCollection<DataGroup> LoadCollectionList()
         {
             ObservableCollection<DataGroup> groups = new ObservableCollection<DataGroup>();
-            groups.Add(new DataGroup { Title = "Method One", UniqueId = "Method1", ImagePath = "ms-appx:///Assets/music3.jpg" });
-            groups.Add(new DataGroup { Title = "Method Two", UniqueId = "Method2", ImagePath = "ms-appx:///Assets/music3.jpg" });
+            groups.Add(new DataGroup { Title = "Quick Picks Top 5", UniqueId = "Method1", ImagePath = "ms-appx:///Assets/music3.jpg" });
+            groups.Add(new DataGroup { Title = "Choose 3", UniqueId = "Method2", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "Method Three", UniqueId = "Method3", ImagePath = "ms-appx:///Assets/music3.jpg" });
             return groups;
         }

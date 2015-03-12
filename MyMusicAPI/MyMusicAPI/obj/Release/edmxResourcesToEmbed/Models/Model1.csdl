@@ -45,16 +45,44 @@
       <End Role="RadioStream" EntitySet="RadioStreams" />
     </AssociationSet>
     <EntitySet Name="Artists" EntityType="MusicCentralDBModel.Artist" />
+    <EntitySet Name="Tracks" EntityType="MusicCentralDBModel.Track" />
+    <AssociationSet Name="FK_Track_ToTable" Association="MusicCentralDBModel.FK_Track_ToTable">
+      <End Role="Artist" EntitySet="Artists" />
+      <End Role="Track" EntitySet="Tracks" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Artist">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="ArtistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="GSId" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tracks" Relationship="MusicCentralDBModel.FK_Track_ToTable" FromRole="Artist" ToRole="Track" />
   </EntityType>
+  <EntityType Name="Track">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ArtistId" Type="Int32" />
+    <NavigationProperty Name="Artist" Relationship="MusicCentralDBModel.FK_Track_ToTable" FromRole="Track" ToRole="Artist" />
+    <Property Name="GSSongKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Track_ToTable">
+    <End Type="MusicCentralDBModel.Artist" Role="Artist" Multiplicity="0..1" />
+    <End Type="MusicCentralDBModel.Track" Role="Track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Track">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -133,6 +133,7 @@
     <Compile Include="UserControls\GenreViewModel.cs" />
     <Compile Include="Utilities\BKPlayer.cs" />
     <Compile Include="ViewModels\AddToPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\StreamingPlaylists\CreateListFromQPViewModel.cs" />
     <Compile Include="ViewModels\StreamingPlaylists\GSMainPageViewModel.cs" />
     <Compile Include="ViewModels\StreamingPlaylists\GSSignInViewModel.cs" />
     <Compile Include="ViewModels\ViewPlaylistViewModel.cs" />
@@ -153,6 +154,9 @@
     </Compile>
     <Compile Include="Views\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Streaming\CreateListFromQP.xaml.cs">
+      <DependentUpon>CreateListFromQP.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Streaming\GSMainPage.xaml.cs">
       <DependentUpon>GSMainPage.xaml</DependentUpon>
@@ -283,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Streaming\CreateListFromQP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

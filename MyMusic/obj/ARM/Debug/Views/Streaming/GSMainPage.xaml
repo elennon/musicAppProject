@@ -79,45 +79,16 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection Name="secondSection" Header="second section"  HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
-                                               
+            <HubSection Name="secondSection" Header="second section"  HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">                                               
                 <DataTemplate>
-                    <ListView
-                        ItemsSource="{Binding Artists}"
-                        IsItemClickEnabled="True"
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True"
-                        >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,27.5">
-                                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <i:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction Command="{Binding MethodSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
-                            </core:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </ListView>
+                    
                 </DataTemplate>
             </HubSection>
 
             <HubSection x:Name="thirdSection" Header="3rd section"
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView 
-                        SelectionMode="None"
-                        IsItemClickEnabled="True"
-                        ItemsSource="{Binding Streams}"
-                        ItemTemplate="{StaticResource TwoLineItemTemplate}"                       
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <i:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction Command="{Binding }" InputConverter="{StaticResource ItemClickedConverter}" />
-                            </core:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </ListView>
+                    
                 </DataTemplate>
             </HubSection>
         </Hub>
@@ -127,9 +98,7 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Now Playing" Icon="Audio" Command="{Binding NowPlayingCommand}"/>
-                <AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
-                <AppBarButton Label="tester" Icon="AddFriend" />
+                
             </CommandBar.PrimaryCommands>           
         </CommandBar>
     </Page.BottomAppBar>

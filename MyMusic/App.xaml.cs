@@ -119,8 +119,22 @@ namespace MyMusic
             //}
 
             //InitializeIocBindings();
-            Frame rootFrame = Window.Current.Content as Frame;
-           
+            Frame rootFrame = Window.Current.Content as Frame;  // where another app takes over the UVC, bk needs to be restarted
+            object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.IsBackgroundCompleted); // 
+            if (value != null)
+            {
+                if ((bool)value == true)
+                {
+                    BkPlayer.AddMediaPlayerEventHandlers();
+                    ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundCompleted, false);
+                }
+            }
+            
+            if (!IsMyBackgroundTaskRunning)
+            {
+                this.BkPlayer = new BKPlayer();
+                //BkPlayer.AddMediaPlayerEventHandlers();
+            }
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
@@ -134,7 +148,7 @@ namespace MyMusic
                     //Logger.GetLogger().logChannel.LogMessage("FG: app class after termination");
 
                     isResumingFromTermination = true;
-                    if (IsMyBackgroundTaskRunning) { BkPlayer.AddMediaPlayerEventHandlers(); }
+                    //if (IsMyBackgroundTaskRunning) { BkPlayer.AddMediaPlayerEventHandlers(); }
 
                     DBPath = Path.Combine(
                     Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");

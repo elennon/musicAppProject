@@ -32,6 +32,17 @@
     <Property Name="Status" Type="smallint" />
     <Property Name="TestedOk" Type="bit" />
   </EntityType>
+  <EntityType Name="Track">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="GSSongKey" Type="varchar(max)" />
+    <Property Name="ArtistName" Type="varchar(max)" />
+    <Property Name="ArtistId" Type="int" />
+  </EntityType>
   <Association Name="FK_RadioStream_ToTable">
     <End Role="RadioGenre" Type="Self.RadioGenre" Multiplicity="0..1" />
     <End Role="RadioStream" Type="Self.RadioStream" Multiplicity="*" />
@@ -44,13 +55,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Track_ToTable">
+    <End Role="Artist" Type="Self.Artist" Multiplicity="0..1" />
+    <End Role="Track" Type="Self.Track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Track">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MusicCentralDBModelStoreContainer">
     <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RadioGenre" EntityType="Self.RadioGenre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RadioStream" EntityType="Self.RadioStream" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Track" EntityType="Self.Track" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_RadioStream_ToTable" Association="Self.FK_RadioStream_ToTable">
       <End Role="RadioGenre" EntitySet="RadioGenre" />
       <End Role="RadioStream" EntitySet="RadioStream" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Track_ToTable" Association="Self.FK_Track_ToTable">
+      <End Role="Artist" EntitySet="Artist" />
+      <End Role="Track" EntitySet="Track" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

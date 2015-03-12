@@ -54,8 +54,11 @@ namespace MyMusic.DAL
         ObservableCollection<Track> GetTracksLessThisPlaylist(Playlist pl);
         string[] GetPlayListToPlay(int id);
 
+        ///     api calls
         Task<string> GetGSSessionId(string nme, string pword);
-        Task<ObservableCollection<Artist>> GetListArtists(string sessionId);
+        Task<ObservableCollection<Artist>> GetSimilarArtists(string sessionId, string artist, int top);
+        Task<Track> GetGrooveSharkTrackUrl(string artist, string track, string sessionId);
+        Task<ObservableCollection<Track>> GetDeezerArtistTracks(string artist, int topNo, string sessionId);
 
         void AddToPlaylist(int playlistId, int trackId);
         void RemoveFromPlaylist(int playlistId, int trackId);
@@ -64,6 +67,6 @@ namespace MyMusic.DAL
         void BackUpDb();
         void GetApiFillDB();
         void fillDB();
-        
+        Task SortPics();
     }
 }

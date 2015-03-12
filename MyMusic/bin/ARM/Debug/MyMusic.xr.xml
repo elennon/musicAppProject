@@ -24,14 +24,15 @@
     <RootPropertyPathName Name="DefaultViewModel" />
     <RootPropertyPathName Name="AlbumId" />
     <RootPropertyPathName Name="Plays" />
+    <RootPropertyPathName Name="CreateListFromQPViewModel" />
+    <RootPropertyPathName Name="ImageUrl" />
+    <RootPropertyPathName Name="Tracks" />
+    <RootPropertyPathName Name="Artists" />
+    <RootPropertyPathName Name="QpListViewSource" />
     <RootPropertyPathName Name="GSMainPageViewModel" />
     <RootPropertyPathName Name="ImagePath" />
-    <RootPropertyPathName Name="Streams" />
-    <RootPropertyPathName Name="Artists" />
-    <RootPropertyPathName Name="MethodSelectedCommand" />
     <RootPropertyPathName Name="Methods" />
-    <RootPropertyPathName Name="TestCommand" />
-    <RootPropertyPathName Name="NowPlayingCommand" />
+    <RootPropertyPathName Name="MethodSelectedCommand" />
     <RootPropertyPathName Name="GSSignInViewModel" />
     <RootPropertyPathName Name="SignInCommand" />
     <RootPropertyPathName Name="PWord" />
@@ -54,7 +55,6 @@
     <RootPropertyPathName Name="IsVisible" />
     <RootPropertyPathName Name="DeleteSelectedCommand" />
     <RootPropertyPathName Name="QpTracks" />
-    <RootPropertyPathName Name="QpListViewSource" />
     <RootPropertyPathName Name="Genres" />
     <RootPropertyPathName Name="AlbumListViewSource" />
     <RootPropertyPathName Name="ArtistListViewSource" />
@@ -77,10 +77,13 @@
     <RootPropertyPathName Name="MainViewModel" />
     <RootPropertyPathName Name="RadioGenreName" />
     <RootPropertyPathName Name="RadioImage" />
+    <RootPropertyPathName Name="Streams" />
     <RootPropertyPathName Name="PlaylistItemSelectedCommand" />
     <RootPropertyPathName Name="Collections" />
     <RootPropertyPathName Name="CollectionItemSelectedCommand" />
     <RootPropertyPathName Name="RadioItemSelectedCommand" />
+    <RootPropertyPathName Name="TestCommand" />
+    <RootPropertyPathName Name="NowPlayingCommand" />
     <RootPropertyPathName Name="BackUpCommand" />
     <RootPropertyPathName Name="FillDbCommand" />
     <RootPropertyPathName Name="NowPlayingViewModel" />
@@ -98,7 +101,6 @@
     <RootPropertyPathName Name="hubSection2" />
     <RootPropertyPathName Name="hubSection1" />
     <RootPropertyPathName Name="testViewModel" />
-    <RootPropertyPathName Name="Tracks" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
@@ -348,6 +350,8 @@
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="MyMusic.Views.Splash" />
+    <RootType FullName="MyMusic.Converters.BooleanToVisibilityConverter" />
+    <RootType FullName="MyMusic.Views.Streaming.CreateListFromQP" />
     <RootType FullName="MyMusic.Views.Streaming.GSMainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Header" />
@@ -382,7 +386,6 @@
     </RootType>
     <RootType FullName="MyMusic.Views.GSSignIn" />
     <RootType FullName="MyMusic.Views.ViewPlaylist" />
-    <RootType FullName="MyMusic.Converters.BooleanToVisibilityConverter" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />
     </RootType>

@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="MusicCentralDBModel.RadioStream" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="MusicCentralDBModel.FK_RadioStream_ToTable" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MusicCentralDBModel.Artist" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.Track" Width="1.5" PointX="5.625" PointY="4.875" />
+        <AssociationConnector Association="MusicCentralDBModel.FK_Track_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

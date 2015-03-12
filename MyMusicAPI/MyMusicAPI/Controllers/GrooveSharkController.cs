@@ -6,32 +6,46 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace MyMusicAPI.Controllers
 {
     public class GrooveSharkController : ApiController
     {
-        public GrooveShark gShark { get; set; }
-
+        // base.Configuration.ProxyCreationEnabled = false;     [IgnoreDataMember]
+        
         // GET api/grooveshark
         public string GetAuthenticate(string userName, string password)
         {
-            return gShark.GetSessionId(userName, password);
+            return GrooveShark.GetSessionId(userName, password);
         }
        
         // GET api/grooveshark/5
-        public string GetTrack(string artist, string track, string sessionId)
+        public async Task<Track> GetTrack(string artist, string track, string sessionId)
         {
-            gShark = new GrooveShark();
-            return gShark.getTrack(artist, track, sessionId);
-        }
+            string output = "", output2 = "";
+            
+            if (track.Contains('(') || track.Contains(')'))
+            {
+                track = track.Substring(0, track.IndexOf(" ("));
+            }
 
-        public List<Artist> GetSimilarArtists(string arts, string sessionId)
+            if (output.Contains('[') || output.Contains(']'))
+            {
+                track = track.Substring(0, track.IndexOf("["));
+            }
+            var pic = await Deezer.getPic(artist, track);           
+            string key = GrooveShark.getTrack(artist, output2, sessionId);
+            Track tr = new Track { Image = pic, GSSongKey = key, ArtistName = artist, Name = track };
+            return tr;
+        }
+        
+        public List<Artist> GetSimilarArtists(string arts, string sessionId, int limit)
         {
-            gShark = new GrooveShark();
+           // gShark = new GrooveShark();
             //List<Artist> lsts = new List<Artist>();
-            List<Artist> lst = gShark.getSimilarArtists(arts, sessionId);
+            List<Artist> lst = GrooveShark.getSimilarArtists(arts, sessionId, limit);
             
             return lst;
         }

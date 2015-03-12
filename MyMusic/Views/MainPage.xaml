@@ -137,7 +137,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Now Playing" Icon="Audio" Command="{Binding NowPlayingCommand}"/>
                 <AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
-                <AppBarButton Label="tester" Icon="AddFriend" />
+                <AppBarButton Label="tester" Icon="AddFriend" Command="{Binding TestCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Fill DataBase" Icon="Admin" Command="{Binding FillDbCommand}" />

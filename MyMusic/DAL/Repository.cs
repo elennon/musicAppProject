@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using Windows.Storage;
 using Windows.Storage.Search;
@@ -31,21 +32,9 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/radio672.png"; }
-                    var trk = new Track()
-                    {
-                        TrackId = tr.TrackId,
-                        ArtistId = tr.ArtistId,
-                        AlbumId = tr.AlbumId,
-                        Name = tr.Name,
-                        Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
-                        FileName = tr.FileName,
-                        InTheBin = tr.InTheBin,
-                        OrderNo = tr.OrderNo
-                        //InEditMode = false
-                    };
-                    _tracks.Add(trk);
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }
+                    
+                    _tracks.Add(tr);
                 }
             }
             return _tracks;
@@ -61,7 +50,7 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/radio672.png"; }                  
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }                  
                     _tracks.Add(tr);
                 }
             }
@@ -90,7 +79,7 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().Where(a => a.InTheBin == false && a.InQuickPick == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/radio672.png"; }
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }
                     var trk = new Track()
                     {
                         TrackId = tr.TrackId,
@@ -98,7 +87,7 @@ namespace MyMusic.DAL
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
+                        ImageUrl = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin,
                         OrderNo = tr.OrderNo
@@ -118,7 +107,7 @@ namespace MyMusic.DAL
                 var qp = db.Table<Track>().Where(a => a.InQuickPick == true && a.InTheBin == false).ToList();
                 foreach (var tr in qp)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new Track()
                     {
                         TrackId = tr.TrackId,
@@ -127,7 +116,7 @@ namespace MyMusic.DAL
                         RandomPlays = tr.RandomPlays,
                         Plays = tr.Plays,
                         Skips = tr.Skips,
-                        ImageUri = tr.ImageUri,
+                        ImageUrl = tr.ImageUrl,
                         OrderNo = tr.OrderNo,
                         FileName = tr.FileName
                     };
@@ -147,7 +136,7 @@ namespace MyMusic.DAL
                 var topPlays = db.Table<Track>().Where(a => a.Plays > 0 && a.InTheBin == false).OrderByDescending(a => a.PerCentRate).Take(30).ToList();
                 foreach (var tr in topPlays)        // gets all tracks that were intentionally selected
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }                   
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/music3.jpg"; }                   
                     _tracks.Add(tr);
                 }
             }
@@ -169,7 +158,7 @@ namespace MyMusic.DAL
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
+                        ImageUrl = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin
                     };
@@ -195,7 +184,7 @@ namespace MyMusic.DAL
                         Name = tr.Name,
                         Artist = tr.Artist,
                         FileName = tr.FileName,
-                        ImageUri = tr.ImageUri
+                        ImageUrl = tr.ImageUrl
                     };
                     _tracks.Add(trk);
                 }
@@ -221,7 +210,7 @@ namespace MyMusic.DAL
                         Name = tr.Name,
                         Artist = tr.Artist,
                         FileName = tr.FileName,
-                        ImageUri = tr.ImageUri,
+                        ImageUrl = tr.ImageUrl,
                         Album = album.Name
                     };
                     _tracks.Add(trk);
@@ -249,7 +238,7 @@ namespace MyMusic.DAL
                         Artist = tr.Artist,
                         FileName = tr.FileName,
                         GenreId = tr.GenreId,
-                        ImageUri = tr.ImageUri,
+                        ImageUrl = tr.ImageUrl,
                         Album = albums.Where(a => a.AlbumId == tr.AlbumId).FirstOrDefault().Name
                     };
                     _tracks.Add(trk);
@@ -825,30 +814,128 @@ namespace MyMusic.DAL
             return resp;
         }
 
-        public async Task<ObservableCollection<Artist>> GetListArtists(string sessionId)
+        public async Task<ObservableCollection<Artist>> GetSimilarArtists(string sessionId, string artist, int top)
         {
             List<Artist> artists = new List<Artist>();
+            client = new HttpClient();
             client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var sampleTracks = GetTopTracks().Take(3);
-            foreach (var item in sampleTracks)
+            List<Artist> arts = new List<Artist>();
+            try
             {
-                List<Artist> arts = new List<Artist>();
-                string resp = await client.GetStringAsync("api/grooveshark?arts=" + item.Artist + "&sessionId=" + sessionId);
+                string url = string.Format("api/grooveshark?arts={0}&sessionId={1}&limit={2}", artist, sessionId, top);
+                string resp = await client.GetStringAsync(url);
                 var result = JsonConvert.DeserializeObject<List<Artist>>(resp);
-                //foreach (var tr in result)
-                //{
-                //    Artist ar = new Artist { Name = tr.ArtistName };
-                //    arts.Add(ar);
-                //}
+
                 artists.AddRange(result);
-            }            
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }             
             return new ObservableCollection<Artist>(artists);
+        }
+
+        public async Task<Track> GetGrooveSharkTrackUrl(string artist, string track, string sessionId)
+        {
+            Track tr = new Track();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                string url = string.Format("api/grooveshark?artist={0}&track={1}&sessionId={2}", artist, track, sessionId);
+                string resp = await client.GetStringAsync(url);
+                var r = JsonConvert.DeserializeObject<TrackDTO>(resp);  
+                tr.Name = r.Name;
+                tr.Artist = r.ArtistName;
+                tr.ImageUrl = r.Image;
+                tr.GSId = r.GSSongKey;
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }
+            return tr;
+        }
+
+        // gets a list of tracks by given artists. then gets gs url for each and returns collection as Tracks
+        public async Task<ObservableCollection<Track>> GetDeezerArtistTracks(string artist, int top, string sessionId)
+        {
+            List<Track> tracks = new List<Track>();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                string url = string.Format("api/deezer?artist={0}&topNo={1}", artist, top);
+                string resp = await client.GetStringAsync(url);
+                var result = JsonConvert.DeserializeObject<KeyValuePair<string, List<string>>>(resp);
+                foreach (var item in result.Value)
+                {
+                    var tr = await GetGrooveSharkTrackUrl(result.Key, item, sessionId);
+                    if (tr != null)
+                    {                                              
+                        tracks.Add(tr);
+                    }
+                }                
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
+            return new ObservableCollection<Track>(tracks);
         }
 
         #endregion
 
-        #region data base stuf
+        #region data base stuff
+
+        public async Task SortPics()
+        {
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {
+                var all = db.Table<Track>().ToList();
+                foreach (var tr in all)
+                {
+                    tr.ImageUrl = await getPic(tr.Artist, tr.Name);
+                    db.Update(tr);
+                }
+            }
+        }
+
+        private async Task<string> getPic(string artist, string title)
+        {
+            string pic = "";
+            try
+            {
+                client = new HttpClient();
+                client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+                string url = string.Format("?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+                string xmlString = await client.GetStringAsync(url);
+                XDocument doc = XDocument.Parse(xmlString);
+
+                if (doc.Root.FirstAttribute.Value == "failed")
+                {
+                    pic = "ms-appx:///Assets/radio672.png";
+                }
+                else
+                {
+                    if (doc.Descendants("image").Any())
+                    {
+                        pic = (from el in doc.Descendants("image")
+                               where (string)el.Attribute("size") == "large"
+                               select el).First().Value;
+                    }
+                }
+            }
+            catch (HttpRequestException)
+            {
+                return null;
+            }
+            return pic;
+        }
 
         public async void GetApiFillDB()
         {           

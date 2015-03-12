@@ -12,22 +12,22 @@ using System.Web.Script.Serialization;
 
 namespace MyMusicAPI.Helper_Classes
 {
-    public class GrooveShark
+    public static class GrooveShark
     {
-        private string key = "edu_lennon3";     //userName = "kilmaced",   sessionID = "885891ce6963035c0c5cfc578abbbca4",
-        private string secret = "3c5667b78a1b5343def5797e882b2b58", baseServiceUrl = "https://api.grooveshark.com";
-        private bool useHttps = false;
-        
-        public string GetSessionId(string userName, string password)
+        private static string key = "edu_lennon3";     //userName = "kilmaced",   sessionID = "885891ce6963035c0c5cfc578abbbca4",
+        private static string secret = "3c5667b78a1b5343def5797e882b2b58", baseServiceUrl = "https://api.grooveshark.com";
+        private static bool useHttps = false;
+
+        public static string GetSessionId(string userName, string password)
         {
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "startSession";
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
 
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -44,24 +44,24 @@ namespace MyMusicAPI.Helper_Classes
             return sId;
         }
 
-        private void auth(string userName, string password, string sesId)
+        private static void auth(string userName, string password, string sesId)
         {
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "authenticateEx";
             requestParameters.parameters.Add("login", userName);
             requestParameters.parameters.Add("password", password);
  
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sesId);
 
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -74,7 +74,7 @@ namespace MyMusicAPI.Helper_Classes
            
         }
 
-        public List<Artist> getSimilarArtists(string artist, string sessionId)
+        public static List<Artist> getSimilarArtists(string artist, string sessionId, int limit)
         {
             sessionId = GetSessionId("kilmaced", "Rhiabit1");
             int artistId = GetArtist(artist, sessionId);
@@ -83,18 +83,18 @@ namespace MyMusicAPI.Helper_Classes
             requestParameters.method = "getSimilarArtists";
             requestParameters.parameters.Add("artistID", artistId);
             requestParameters.parameters.Add("country", country);
-            requestParameters.parameters.Add("limit", "10");
+            requestParameters.parameters.Add("limit", limit);
 
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sessionId);
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -122,7 +122,7 @@ namespace MyMusicAPI.Helper_Classes
             return arts;
         }
 
-        private int GetArtist(string artist, string sessionId)
+        private static int GetArtist(string artist, string sessionId)
         {
             sessionId = GetSessionId("kilmaced", "Rhiabit1");
             object country = getCountry(sessionId);
@@ -132,16 +132,16 @@ namespace MyMusicAPI.Helper_Classes
             requestParameters.parameters.Add("country", country);
             requestParameters.parameters.Add("limit", "1");
 
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sessionId);
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -164,13 +164,10 @@ namespace MyMusicAPI.Helper_Classes
             return Convert.ToInt32(artistId);
         }
 
-
-
-
-        public string getTrack(string artist, string track, string sessionId)
+        public static string getTrack(string artist, string track, string sessionId)
         {
             sessionId = GetSessionId("kilmaced", "Rhiabit1");
-            var t = getSimilarArtists(artist, sessionId);
+            //var t = getSimilarArtists(artist, sessionId);
             object country = getCountry(sessionId);
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "getSongSearchResults";
@@ -178,16 +175,16 @@ namespace MyMusicAPI.Helper_Classes
             requestParameters.parameters.Add("country", country);
             requestParameters.parameters.Add("limit", "1");
 
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sessionId);
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -210,27 +207,28 @@ namespace MyMusicAPI.Helper_Classes
             //Stream st = getSongStream(songId, country, sessionId);
             //return st;
             string url = getSongStream(songId, country, sessionId);
+            Track tr = new Track { Name = track, ArtistName = artist, GSSongKey = url };
             return url;
         }
 
-        private string getSongStream(string songId, object country, string sessionId)
+        private static string getSongStream(string songId, object country, string sessionId)
         {
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "getSubscriberStreamKey";
             requestParameters.parameters.Add("songID", songId);
             requestParameters.parameters.Add("country", country);
 
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sessionId);
 
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -263,22 +261,22 @@ namespace MyMusicAPI.Helper_Classes
             return reader;
         }
 
-        private object getCountry(string sessionID)
+        private static object getCountry(string sessionID)
         {
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "getCountry";
 
-            requestParameters.header.Add("wsKey", this.key);
+            requestParameters.header.Add("wsKey", key);
             requestParameters.header.Add("sessionID", sessionID);
 
 
             var jsonSerializer = new JavaScriptSerializer();
             string json = jsonSerializer.Serialize(requestParameters);
-            string encryptedJson = Encryptor.Md5Encrypt(json, this.secret);
-            string serviceUrl = this.baseServiceUrl;
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
             if (useHttps)
             {
-                serviceUrl = this.baseServiceUrl.Replace("http://", "https://");
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
             }
             var client = new RestClient(serviceUrl);
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
@@ -326,13 +324,7 @@ namespace MyMusicAPI.Helper_Classes
     }
 
     public static class Encryptor
-    {
-        /// <summary>
-        /// Encrypts string using MD5s encrypt.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <param name="secret">The secret.</param>
-        /// <returns>encrypted md5 hash</returns>
+    {    
         public static string Md5Encrypt(string message, string secret = "")
         {
             System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();

@@ -492,7 +492,7 @@ namespace MyMusic.ViewModels
                 var topPlays = db.Table<Track>().Where(a => a.Plays > 0 && a.InTheBin == false).OrderByDescending(a => a.PerCentRate).Take(30).ToList();                           
                 foreach (var tr in topPlays)        // gets all tracks that were intentionally selected
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
@@ -501,7 +501,7 @@ namespace MyMusic.ViewModels
                         RandomPlays = tr.RandomPlays,                
                         Plays = tr.Plays,
                         Skips = tr.Skips,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         OrderNo = tr.OrderNo,
                         FileName = tr.FileName,
                         PerCentRate = tr.PerCentRate
@@ -520,7 +520,7 @@ namespace MyMusic.ViewModels
                 var qp = db.Table<Track>().Where(a => a.InQuickPick == true && a.InTheBin == false).ToList();               
                 foreach (var tr in qp)        
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUri)) { tr.ImageUri = "ms-appx:///Assets/music3.jpg"; }
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/music3.jpg"; }
                     var trk = new TrackViewModel()
                     {
                         TrackId = tr.TrackId,
@@ -529,7 +529,7 @@ namespace MyMusic.ViewModels
                         RandomPlays = tr.RandomPlays,
                         Plays = tr.Plays,
                         Skips = tr.Skips,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         OrderNo = tr.OrderNo,
                         FileName = tr.FileName
                     };
@@ -553,7 +553,7 @@ namespace MyMusic.ViewModels
                         TrackId = tr.TrackId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         FileName = tr.FileName
                     };
                 }
@@ -576,7 +576,7 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,                      
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin,
                         OrderNo = tr.OrderNo
@@ -602,7 +602,7 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin
                     };
@@ -744,7 +744,7 @@ namespace MyMusic.ViewModels
                         Name = tr.Name,
                         Artist = tr.Artist,
                         FileName = tr.FileName,
-                        ImageUri = tr.ImageUri
+                        ImageUri = tr.ImageUrl
                     };
                     _tracks.Add(trk);
                 }
@@ -770,7 +770,7 @@ namespace MyMusic.ViewModels
                         Name = tr.Name,
                         Artist = tr.Artist,
                         FileName = tr.FileName,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         Album = album.Name
                     };
                     _tracks.Add(trk);
@@ -798,7 +798,7 @@ namespace MyMusic.ViewModels
                         Artist = tr.Artist,
                         FileName = tr.FileName,
                         GenreId = tr.GenreId,
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         Album = albums.Where(a => a.AlbumId == tr.AlbumId).FirstOrDefault().Name
                     };
                     _tracks.Add(trk);
@@ -823,7 +823,7 @@ namespace MyMusic.ViewModels
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
                         Artist = tr.Artist,                      
-                        ImageUri = tr.ImageUri,
+                        ImageUri = tr.ImageUrl,
                         FileName = tr.FileName
                     };
                     _tracks.Add(trk);
@@ -1166,7 +1166,7 @@ namespace MyMusic.ViewModels
                                 tr.GenreId = grr.GenreId;
                             }
                         }
-                        tr.ImageUri = await getPic(tr.Artist, tr.Name);
+                        tr.ImageUrl = await getPic(tr.Artist, tr.Name);
                         db.Update(tr);
                     }
                     catch (Exception exx)

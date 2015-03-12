@@ -14,11 +14,16 @@ namespace MyMusicAPI.Models
     
     public partial class Artist
     {
+        public Artist()
+        {
+            this.Tracks = new HashSet<Track>();
+        }
+    
         public int Id { get; set; }
-        public string ArtistName { get; set; }
-        public string ArtistImage { get; set; }
         public Nullable<int> GSId { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+    
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }

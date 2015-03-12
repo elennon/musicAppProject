@@ -42,13 +42,14 @@ namespace MyMusic.Models
             }
             protected set { }
         }
+        public string ImageUrl { get; set; }
 
-        private string _imageUri = "ms-appx:///Assets/radio672.png";
-        public string ImageUri
-        {
-            get { return _imageUri; }
-            set { _imageUri = value; }
-        }
+        //private string _imageUrl = "ms-appx:///Assets/radio672.png";
+        //public string ImageUrl
+        //{
+        //    get { return _imageUrl; }
+        //    set { _imageUrl = value; }
+        //}
         
 
         public string FileName { get; set; }
@@ -65,6 +66,8 @@ namespace MyMusic.Models
 
         public bool InEditMode { get; set; }
 
+        public string GSId { get; set; }
+
         public override string ToString()
         {
             return string.Format(" Play count:  {0} ({1}) %", Plays + RandomPlays, PerCentRate);
@@ -73,5 +76,16 @@ namespace MyMusic.Models
         //[ManyToMany(typeof(PlaylistTracks))]
         //public List<Playlist> Playlists { get; set; }
         
-    }   
+    }
+
+    public class TrackDTO
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Image { get; set; }
+        public object ArtistId { get; set; }
+        public string GSSongKey { get; set; }
+        public string ArtistName { get; set; }
+        public object Artist { get; set; }
+    }
 }

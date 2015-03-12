@@ -28,5 +28,6 @@ namespace MyMusicAPI.Models
         public virtual DbSet<RadioGenre> RadioGenres { get; set; }
         public virtual DbSet<RadioStream> RadioStreams { get; set; }
         public virtual DbSet<Artist> Artists { get; set; }
+        public virtual DbSet<Track> Tracks { get; set; }
     }
 }

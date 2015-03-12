@@ -32,9 +32,10 @@ namespace MyMusic
         public const string IsBackgroundActive = "IsBackgroundActive";
         public const string BackgroundTaskStarted = "BackgroundTaskStarted";
         public const string BackgroundTaskRunning = "BackgroundTaskRunning";
+        public const string IsBackgroundCompleted = "IsBackgroundCompleted"; 
        
         public const string ForegroundAppActive = "Active";
-        public const string ForegroundAppSuspended = "Suspended";
+        public const string ForegroundAppSuspended = "Suspended";        
 
         public const string GSSessionId = "GSSessionId";
         
