@@ -263,7 +263,6 @@ namespace MyMusic.DAL
             }
         }
 
-
         public void AddRandomPlay(int id)
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -439,6 +438,36 @@ namespace MyMusic.DAL
             }
             return _tracks;
         }
+       
+        public string[] ShuffleGSListToArray(ObservableCollection<Track> gsList)
+        {
+            Random rng = new Random();
+            int n = gsList.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Track value = gsList[k];
+                gsList[k] = gsList[n];
+                gsList[n] = value;
+            }
+            string[] trkks = new string[gsList.Count];
+            for (int i = 0; i < gsList.Count; i++)
+            {
+                trkks[i] = gsList[i].Artist + "," + gsList[i].Name + "," + gsList[i].GSSessionKey + ",shuffle";
+            }
+            return trkks;
+        }
+
+        public string[] SortGSListToArray(ObservableCollection<Track> gsList)
+        {            
+            string[] trkks = new string[gsList.Count];
+            for (int i = 0; i < gsList.Count; i++)
+            {               
+                trkks[i] = gsList[i].Artist + "," + gsList[i].Name + "," + gsList[i].GSSessionKey + ",shuffle";                 
+            }
+            return trkks;
+        }
 
         public string[] shuffleThese(ObservableCollection<Track> shfThese)
         {
@@ -533,6 +562,26 @@ namespace MyMusic.DAL
                 _tracks[n] = value;
             }
             return shuffleThese(_tracks);
+        }
+
+        public string[] ShufflePlaylist(List<Track> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Track value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+            string[] trkks = new string[list.Count];
+            for (int i = 0; i < list.Count; i++)
+            {
+                trkks[i] = list[i].TrackId.ToString() + "," + list[i].FileName + "," + list[i].Artist + ",shuffle";
+            }
+            return trkks;
         }
 
 
@@ -802,7 +851,7 @@ namespace MyMusic.DAL
 
         #endregion
 
-        #region Groove shark
+        #region streaming
 
         public async Task<string> GetGSSessionId(string nme, string pword)
         {
@@ -850,7 +899,8 @@ namespace MyMusic.DAL
                 tr.Name = r.Name;
                 tr.Artist = r.ArtistName;
                 tr.ImageUrl = r.Image;
-                tr.GSId = r.GSSongKey;
+                tr.GSSongKeyUrl = r.GSSongKeyUrl;
+                tr.GSServerId = r.GSServerId;
             }
             catch (HttpRequestException ex)
             {
@@ -887,9 +937,152 @@ namespace MyMusic.DAL
             return new ObservableCollection<Track>(tracks);
         }
 
+        //public async Task<ObservableCollection<Track>> GetLastFmArtistTracks(string artist, int num)
+        //{
+        //    List<Track> tracks = new List<Track>();
+        //    client = new HttpClient();
+        //    client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    try
+        //    {
+
+        //        string url = string.Format("api/lastfm?artist={0}&num={1}", artist, num);
+        //        string resp = await client.GetStringAsync(url);
+        //        var result = JsonConvert.DeserializeObject<List<LastFmTrackDTO>>(resp);
+        //        foreach (LastFmTrackDTO t in result)
+        //        {
+        //            Track tr = new Track { Artist = t.artist.Name, Name = t.name, listeners = t.listeners, mbid = t.mbid };
+        //            tracks.Add(tr);
+        //        }
+
+        //    }
+        //    catch (HttpRequestException ex)
+        //    {
+        //        return null;
+        //    }
+        //    return new ObservableCollection<Track>(tracks);
+        //}
+
+        public async Task<ObservableCollection<Artist>> GetSimilarLastFmArtists(string artist, int top)
+        {
+            List<Artist> arts = new List<Artist>();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                string url = string.Format("api/lastfm?artist={0}&top={1}", artist, top);
+                string resp = await client.GetStringAsync(url);
+                var result = JsonConvert.DeserializeObject<List<LfmArtistDTO>>(resp);
+                foreach (LfmArtistDTO t in result)
+                {
+                    Artist ar = new Artist
+                    {
+                        Name = t.name
+                    };
+                    arts.Add(ar);
+                }
+
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }
+            return new ObservableCollection<Artist>(arts);
+        }
+
+        public async Task<ObservableCollection<Track>> GetSimilarLastFmTracks(string artist, int num, string sessionId)
+        {
+            List<Track> tracks = new List<Track>();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                
+                string url = string.Format("api/lastfm?artist={0}&num={1}", artist, num);
+                string resp = await client.GetStringAsync(url);
+                var result = JsonConvert.DeserializeObject<List<LastFmTrackDTO>>(resp);
+                foreach (LastFmTrackDTO t in result)
+                {
+                    //var gsKey = await GetGrooveSharkTrackUrl(t.artist.Name, t.name, sessionId);
+                    Track tr = new Track { 
+                        Artist = t.artist.Name, 
+                        ImageUrl = t.OneImage,
+                        Name = t.name, 
+                        listeners = t.listeners,                         
+                        mbid = t.mbid };
+                    tracks.Add(tr);
+                }
+                
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }
+            return new ObservableCollection<Track>(tracks);
+        }
+
+
         #endregion
 
         #region data base stuff
+
+        public async Task GetEchoNestInfo(string artist, string track)
+        {
+            Track tr = new Track();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            {               
+                try
+                {
+                    Track t = db.Table<Track>().Where(a => a.Artist == artist && a.Name == track).FirstOrDefault();
+                    var r = await GetAudioSummaryAsync(t.Artist, t.Name);
+                    if (r != null)
+                    {
+                        t.acousticness = r.acousticness;
+                        t.analysis_url = r.analysis_url;
+                        t.audio_md5 = r.audio_md5;
+                        t.danceability = r.danceability;
+                        t.duration = r.duration;
+                        t.energy = r.energy;
+                        t.instrumentalness = r.instrumentalness;
+                        t.liveness = r.liveness;
+                        t.loudness = r.loudness;
+                        t.mode = r.mode;
+                        t.speechiness = r.speechiness;
+                        t.tempo = r.tempo;
+                        t.time_signature = r.time_signature;
+                        t.valence = r.valence;                           
+                    }
+                    else
+                    { 
+                        t.NoSummary = true; 
+                    }
+                    db.Update(t);
+                }
+                catch (HttpRequestException ex)
+                {
+                    return;
+                }                
+            }        
+        }
+
+        private async Task<TrackDTO> GetAudioSummaryAsync(string artist, string track)
+        {
+            try
+            {
+                string url = string.Format("api/echeonestinfo?artist={0}&track={1}", artist, track);             
+                string resp = await client.GetStringAsync(url);
+                return JsonConvert.DeserializeObject<TrackDTO>(resp); 
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }            
+        }
 
         public async Task SortPics()
         {
@@ -1263,6 +1456,7 @@ namespace MyMusic.DAL
 
                     db.Update(tr);
                     db.Update(album);
+                    await GetEchoNestInfo(tr.Artist, tr.Name);
                 }
                 catch (Exception ex) { throw ex; }
             }

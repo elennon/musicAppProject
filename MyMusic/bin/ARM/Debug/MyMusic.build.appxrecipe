@@ -241,11 +241,14 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\bp.xbf">
       <PackagePath>bp.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\AddToPlaylist.xbf">
-      <PackagePath>Views\AddToPlaylist.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Playlists\AddToPlaylist.xbf">
+      <PackagePath>Views\Playlists\AddToPlaylist.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Albums.xbf">
-      <PackagePath>Views\Albums.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Collection\Albums.xbf">
+      <PackagePath>Views\Collection\Albums.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Playlists\GenerateFromCollection.xbf">
+      <PackagePath>Views\Playlists\GenerateFromCollection.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Splash.xbf">
       <PackagePath>Views\Splash.xbf</PackagePath>
@@ -259,20 +262,20 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Streaming\GSSignIn.xbf">
       <PackagePath>Views\Streaming\GSSignIn.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ViewPlaylist.xbf">
-      <PackagePath>Views\ViewPlaylist.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Playlists\ViewPlaylist.xbf">
+      <PackagePath>Views\Playlists\ViewPlaylist.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Collection.xbf">
-      <PackagePath>Views\Collection.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Collection\Collection.xbf">
+      <PackagePath>Views\Collection\Collection.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\CreatePlaylist.xbf">
-      <PackagePath>Views\CreatePlaylist.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Playlists\CreatePlaylist.xbf">
+      <PackagePath>Views\Playlists\CreatePlaylist.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\SavedPlaylists.xbf">
-      <PackagePath>Views\SavedPlaylists.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Playlists\SavedPlaylists.xbf">
+      <PackagePath>Views\Playlists\SavedPlaylists.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\ShowAllTracks.xbf">
-      <PackagePath>Views\ShowAllTracks.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\Views\Collection\ShowAllTracks.xbf">
+      <PackagePath>Views\Collection\ShowAllTracks.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Debug\UserControls\ShowByArtist.xbf">
       <PackagePath>UserControls\ShowByArtist.xbf</PackagePath>

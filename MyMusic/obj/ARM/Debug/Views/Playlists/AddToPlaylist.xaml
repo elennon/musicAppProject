@@ -1,0 +1,212 @@
+﻿<common:BindablePage  
+    x:Class="MyMusic.Views.AddToPlaylist"
+    xmlns:common="using:MyMusic.Common"  
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMusic.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:cmds="using:MyMusic.Converters"
+    DataContext="{Binding Source={StaticResource Locator}, Path=AddToPlaylistViewModel}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+
+    <Page.Resources>
+
+        <cmds:ItemClickedConverter x:Name="ItemClickedConverter" />
+
+        <DataTemplate x:Key="CheckboxTemplate">
+            <Grid Margin="10,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Height="56" Width="41" Margin="0,9.5,0,0" 
+                        Grid.Column="0" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox >
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Checked">
+                                    <core:InvokeCommandAction Command="{Binding DataContext.ItemSelectedCommand, 
+                                        ElementName=ContentRoot}" CommandParameter="{Binding}" InputConverter="{StaticResource ItemClickedConverter}" />
+                                </core:EventTriggerBehavior>
+                                <core:EventTriggerBehavior EventName="Unchecked">
+                                    <core:InvokeCommandAction Command="{Binding DataContext.ItemSelectedCommand, 
+                                        ElementName=ContentRoot}" CommandParameter="{Binding}" InputConverter="{StaticResource ItemClickedConverter}" />
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </CheckBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="7,0,0,0" Grid.Column="1" HorizontalAlignment="Left">
+                    <Image Source="{Binding ImageSource}" Stretch="UniformToFill" Height="56" Width="56"/>
+                </Border>
+
+                <StackPanel Margin="13,0,0,0" Grid.Column="2"  >
+                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Artist}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>
+                </StackPanel>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AllTracksTemplate">
+
+            <Grid Width="400" Margin="0,0,0,20" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{Binding ImageUri}" Width="76" Height="76" Grid.RowSpan="2"                          
+                           Stretch="Fill" 
+                           VerticalAlignment="Top">                   
+                </Image>
+                <Border  Margin="6,0,0,0"  Grid.Column="1"  >
+                    <TextBlock                              
+                                Text="{Binding Name}"                                   
+                                Style="{StaticResource ListViewItemTextBlockStyle}" 
+                                VerticalAlignment="Top"                             
+                                HorizontalAlignment="Left">                    
+                    </TextBlock>
+                </Border>
+                <Grid Grid.Column="1" Grid.Row="1"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding Artist}"                                     
+                                    Margin="6,0,0,0" 
+                                    Style="{StaticResource ListViewItemContentTextBlockStyle}" 
+                                    VerticalAlignment="Center" 
+                                    >
+                    </TextBlock>
+                    <Image                      
+                        Source="{Binding DataContext.EditImage, ElementName=ContentRoot}"                                                     
+                        Grid.Column="1"
+                        Margin="0,-10,55,0"
+                        Width="35" Height="35"
+                        Stretch="Uniform" 
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"                         
+                        >
+                        <i:Interaction.Behaviors>                           
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding DataContext.AddCommand, ElementName=ContentRoot}" 
+                                                          CommandParameter="{Binding}" InputConverter="{StaticResource ItemClickedConverter}" />
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Image>
+                </Grid>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="GroupHeaderTemplate">
+            <Border Background="Transparent" Padding="5">
+                <TextBlock Text="{Binding Title}" 
+                            Foreground="{StaticResource PhoneForegroundBrush}" 
+                            FontSize="48"
+                            FontWeight="SemiBold"
+                            FontFamily="MV Boli"
+                            FontStyle="Normal"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"/>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GroupsTemplate">
+            <Border Padding="5">
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Height="78" Width="78" 
+                        Background="{Binding Group.BackgroundColour}" Margin="5,3.5,3.5,3.5">
+                    <TextBlock Text="{Binding Group.Title}"                        
+                        FontSize="48"
+                        FontWeight="SemiBold"
+                        FontFamily="MV Boli"
+                        Padding="9"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"/>
+                </Border>
+            </Border>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
+                <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
+                <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled"                                   
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <SemanticZoom.ZoomedInView>
+                    <ListView Name="allLstViewDetail"   
+                                HorizontalContentAlignment="Stretch" 
+                                IsSwipeEnabled="False"                                                                                           
+                                ItemsSource="{Binding AllListViewSource.View, Mode=TwoWay}"             
+                                ItemTemplate="{StaticResource AllTracksTemplate}" 
+                                IsItemClickEnabled="True"
+                                SelectionMode="None"                             
+                                >
+                        <ListView.GroupStyle>
+                            <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <GridView x:Name="lstViewSummary" 
+                              IsSwipeEnabled="False"                                 
+                              SelectionMode="None"           
+                              HorizontalAlignment="Stretch" 
+                              ItemTemplate="{StaticResource GroupsTemplate}" 
+                              HorizontalContentAlignment="Stretch"
+                              ItemsSource="{Binding AllListViewSource.View.CollectionGroups}"
+                              />
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+        </Grid>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Done" Icon="Save" Command="{Binding DoneAddingCommand}"/>                
+            </CommandBar.PrimaryCommands>           
+        </CommandBar>
+    </Page.BottomAppBar>
+</common:BindablePage>
+
+

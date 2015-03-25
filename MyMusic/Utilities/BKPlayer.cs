@@ -36,6 +36,15 @@ namespace MyMusic.Utilities
             AddMediaPlayerEventHandlers();
         }
 
+        public void PlayThese(string listType, string[] list)
+        {
+            orders = list;
+            if (listType == "gsTracks")
+            { PlayThese("gsTrackList"); }
+            else
+            { PlayThese("genPlaylist"); }
+        }
+
         public void PlayThese(string request)
         {
             var requestType = request.Split(',')[0];
@@ -91,9 +100,14 @@ namespace MyMusic.Utilities
                     orders[0] = (request.ToString().Split(','))[1];
                     isPlayGSTrack = true;
                     break;
+                case "gsTrackList":                                       
+                    isPlayGSTrack = true;
+                    break;
                 case "playlist":
                     int playlistId = Convert.ToInt32((request.ToString().Split(','))[1]);
                     orders = repo.GetPlayListToPlay(playlistId);
+                    break;
+                case "genPlaylist":                   
                     break;
             }
             if (((App)Application.Current).IsMyBackgroundTaskRunning)
@@ -104,6 +118,12 @@ namespace MyMusic.Utilities
                     {
                         var message = new ValueSet();
                         message.Add(Constants.PlayRadio, orders);
+                        BackgroundMediaPlayer.SendMessageToBackground(message);
+                    }
+                    else if (isPlayGSTrack == true)
+                    {
+                        var message = new ValueSet();
+                        message.Add(Constants.PlayGSTrack, orders);
                         BackgroundMediaPlayer.SendMessageToBackground(message);
                     }
                     else
@@ -177,26 +197,36 @@ namespace MyMusic.Utilities
             Track tr = new Track();
             //string artist = "", title = "";
             int trackId = 0;
-            string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');     // current track will be a comma seperated string with name, artist...
+            string[] currentTrack = (e.Data.Values.FirstOrDefault().ToString()).Split(',');// current track will be a comma seperated string with name, artist...
             if (currentTrack[0] != string.Empty && currentTrack[0] != "True")
             {
                 if (currentTrack.Length > 1)
                 {
-                    trackId = Convert.ToInt32(currentTrack[0]);
-                    tr = repo.GetThisTrack(trackId);
-                    //artist = currentTrack[1];
-                    //title = currentTrack[2];
-                    if (currentTrack[3].Contains("shuffle")) //  if its a track from random shuffle
+                  
+                    bool isNumeric = int.TryParse(currentTrack[0], out trackId);
+                    if (isNumeric)
                     {
-                        repo.AddRandomPlay(tr.TrackId);
+                        trackId = Convert.ToInt32(currentTrack[0]);
+                        tr = repo.GetThisTrack(trackId);
+                        //artist = currentTrack[1];
+                        //title = currentTrack[2];
+                        if (currentTrack[3].Contains("shuffle")) //  if its a track from random shuffle
+                        {
+                            repo.AddRandomPlay(tr.TrackId);
+                        }
+                        else if (currentTrack[3].Contains("notShuffle"))
+                        {
+                            repo.AddPlay(tr.TrackId); // if it was chosen specifically
+                        }
+                        if (currentTrack.Count() > 4) //  if its got the extra word, its a skipped track
+                        {
+                            repo.AddSkip(trackId);
+                        }
                     }
-                    else if (currentTrack[3].Contains("notShuffle"))
+                    else
                     {
-                        repo.AddPlay(tr.TrackId); // if it was chosen specifically
-                    }
-                    if (currentTrack.Count() > 4) //  if its got the extra word, its a skipped track
-                    {
-                        repo.AddSkip(trackId);
+                        tr.Name = currentTrack[1];
+                        tr.Artist = currentTrack[0];
                     }
                 }
                 else
@@ -292,7 +322,7 @@ namespace MyMusic.Utilities
             BackgroundMediaPlayer.SendMessageToBackground(value);
         }
 
-        public void playClick()
+        public void playClick(string tracks2play)
         {
             if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)
             {
@@ -304,12 +334,8 @@ namespace MyMusic.Utilities
             }
             else if (MediaPlayerState.Closed == BackgroundMediaPlayer.Current.CurrentState)
             {
-                StartBackgroundAudioTask();
-            }
-
-            else
-            {
-                StartBackgroundAudioTask();
+                if(string.IsNullOrEmpty(tracks2play) == false)
+                PlayThese(tracks2play);
             }
         }
 

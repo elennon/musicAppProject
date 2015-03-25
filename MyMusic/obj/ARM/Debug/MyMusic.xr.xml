@@ -24,11 +24,28 @@
     <RootPropertyPathName Name="DefaultViewModel" />
     <RootPropertyPathName Name="AlbumId" />
     <RootPropertyPathName Name="Plays" />
-    <RootPropertyPathName Name="CreateListFromQPViewModel" />
+    <RootPropertyPathName Name="GenerateFromCollectionViewModel" />
     <RootPropertyPathName Name="ImageUrl" />
+    <RootPropertyPathName Name="Tracks4" />
+    <RootPropertyPathName Name="Tracks3" />
+    <RootPropertyPathName Name="Tracks2" />
     <RootPropertyPathName Name="Tracks" />
+    <RootPropertyPathName Name="GenerateListCommand" />
+    <RootPropertyPathName Name="Loudness" />
+    <RootPropertyPathName Name="Liveness" />
+    <RootPropertyPathName Name="LivenessMax" />
+    <RootPropertyPathName Name="Energy" />
+    <RootPropertyPathName Name="EnergyMax" />
+    <RootPropertyPathName Name="Tempo" />
+    <RootPropertyPathName Name="TempoMax" />
+    <RootPropertyPathName Name="Added" />
+    <RootPropertyPathName Name="AddedMax" />
+    <RootPropertyPathName Name="ShuffleCommand" />
+    <RootPropertyPathName Name="CreateListFromQPViewModel" />
     <RootPropertyPathName Name="Artists" />
     <RootPropertyPathName Name="QpListViewSource" />
+    <RootPropertyPathName Name="RefreshCommand" />
+    <RootPropertyPathName Name="PlayCommand" />
     <RootPropertyPathName Name="GSMainPageViewModel" />
     <RootPropertyPathName Name="ImagePath" />
     <RootPropertyPathName Name="Methods" />
@@ -62,7 +79,6 @@
     <RootPropertyPathName Name="SectionsInViewChangedCommand" />
     <RootPropertyPathName Name="AddQpCommand" />
     <RootPropertyPathName Name="EditCommand" />
-    <RootPropertyPathName Name="ShuffleCommand" />
     <RootPropertyPathName Name="ShowBinCommand" />
     <RootPropertyPathName Name="CreatePlaylistViewModel" />
     <RootPropertyPathName Name="SavePlaylistCommand" />
@@ -181,8 +197,8 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Command" />
+      <RootProperty Name="VerticalAlignment" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="MyMusic.bp" />
@@ -314,6 +330,7 @@
       <RootProperty Name="Header" />
       <RootProperty Name="Background" />
       <RootProperty Name="Sections" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="Stretch" />
@@ -339,6 +356,13 @@
       <RootMethod Name="SetExitElementContainer" />
     </RootType>
     <RootType FullName="MyMusic.Views.Albums" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Slider">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Value" />
+      <RootProperty Name="Maximum" />
+      <RootProperty Name="Minimum" />
+    </RootType>
+    <RootType FullName="MyMusic.Views.Playlists.GenerateFromCollection" />
     <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
       <RootProperty Name="Children" />
     </RootType>

@@ -18,5 +18,12 @@ namespace MyMusic.Models
         
     }
 
-    
+    public class LfmArtistDTO
+    {
+        public string name { get; set; }
+        public string mbid { get; set; }
+        public string match { get; set; }
+        public string url { get; set; }        
+        public string streamable { get; set; }
+    }
 }

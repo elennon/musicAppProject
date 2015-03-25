@@ -41,7 +41,7 @@ namespace MyMusic.Views
     {
 
         private readonly NavigationHelper navigationHelper;
-    
+
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
@@ -50,7 +50,7 @@ namespace MyMusic.Views
         public NowPlaying()
         {
             this.InitializeComponent();
-           
+
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;          
@@ -62,7 +62,7 @@ namespace MyMusic.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-           
+
         }
 
     }

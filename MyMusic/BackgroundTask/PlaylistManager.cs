@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,12 @@ using Windows.Media.Playback;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.Storage.Streams;
-using Windows.Web.Http;
+using Windows.UI.Xaml;
+//using Windows.Web.Http;
+using System.Net.Http;
+using Windows.System.Threading;
+using Newtonsoft.Json;
+using BackgroundTask.Model;
 
 namespace BackgroundTask
 {
@@ -57,7 +63,7 @@ namespace BackgroundTask
         private uint sampleSize = 800;
   
         private List<StorageFile> tracks = new List<StorageFile>();
-        private string[] playTracks;
+        private string[] playTracks;       
         int CurrentTrackId = -1;
         private MediaPlayer mediaPlayer;
         private TimeSpan startPosition = TimeSpan.FromSeconds(0);
@@ -65,6 +71,10 @@ namespace BackgroundTask
         private static string DBPath = string.Empty;
         private static readonly string _dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.sqlite");
         private bool onRadioChange = false;
+       
+        private ThreadPoolTimer timer;
+        private HttpClient client;// = new HttpClient();
+        private Track PlayingTrack = null;
 
         #endregion
 
@@ -81,11 +91,11 @@ namespace BackgroundTask
                 {
                     return String.Empty;
                 }
-                if (playMode == PlayMode.Collection)
+                if (playMode == PlayMode.Collection || playMode == PlayMode.Streams)
                 {
                     if (CurrentTrackId < playTracks.Length)
                     {
-                        tName = playTracks[CurrentTrackId].Split(',')[2];
+                        tName = playTracks[CurrentTrackId].Split(',')[1];
 
                         return tName;
                     }
@@ -128,9 +138,13 @@ namespace BackgroundTask
             mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             mediaPlayer.MediaFailed += mediaPlayer_MediaFailed;
+            mediaPlayer.CurrentStateChanged += mediaPlayer_CurrentStateChanged;
             DBPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+            //timer = new DispatcherTimer();
+            //timer.Tick += timer_Tick;
+            //timer.Interval = new TimeSpan(0, 0, 30);
         }
-
+               
         //void lookInHere()
         //{
         //    string dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
@@ -146,6 +160,19 @@ namespace BackgroundTask
         //}
        
         #region MediaPlayer Handlers
+
+        void mediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
+        {
+
+            if (sender.CurrentState == MediaPlayerState.Playing && startPosition != TimeSpan.FromSeconds(0))
+            {
+                // if the start position is other than 0, then set it now
+                sender.Position = startPosition;
+                sender.Volume = 1.0;
+                startPosition = TimeSpan.FromSeconds(0);
+                sender.PlaybackMediaMarkers.Clear();
+            }
+        }
 
         void MediaPlayer_MediaOpened(MediaPlayer sender, object args)
         {
@@ -168,6 +195,22 @@ namespace BackgroundTask
                 else
                 {
                     SkipToNext();
+                }
+            }
+            else if (playMode == PlayMode.Streams)
+            {
+                string content = string.Format("MarkFinished,{0},{1},{2},{3}",PlayingTrack.GSSongId, PlayingTrack.GSSongKey, 
+                                        PlayingTrack.GSServerId, PlayingTrack.GSSessionKey);
+                MarkFinished(content);
+                if (CurrentTrackId >= playTracks.Length - 1)
+                {
+                    //tracks.Clear();
+                    CurrentTrackId = -1;
+                    return;
+                }
+                else
+                {
+                    SkipToNextGS();
                 }
             }
             else if (playMode == PlayMode.Radio)
@@ -241,12 +284,35 @@ namespace BackgroundTask
         {
             if (CurrentTrackId < playTracks.Length - 1)
             {
-                StartTrackAt((CurrentTrackId + 1));
+                if (playMode == PlayMode.Streams)
+                {
+                    StartGSTrackAt((CurrentTrackId + 1));
+                }
+                else
+                { StartTrackAt((CurrentTrackId + 1)); }
             }
             else
             {
                 CurrentTrackId = 0;             // if we are at the end of the list, play again from the start
-                StartTrackAt(CurrentTrackId);
+                if (playMode == PlayMode.Streams)
+                {
+                    StartGSTrackAt(CurrentTrackId);
+                }
+                else
+                { StartTrackAt(CurrentTrackId); }
+            }
+        }
+
+        public void SkipToNextGS()
+        {
+            if (CurrentTrackId < playTracks.Length - 1)
+            {
+                StartGSTrackAt((CurrentTrackId + 1));
+            }
+            else
+            {
+                CurrentTrackId = 0;             // if we are at the end of the list, play again from the start
+                StartGSTrackAt(CurrentTrackId);
             }
         }
 
@@ -264,7 +330,104 @@ namespace BackgroundTask
 
         #endregion
 
-        #region Streaming
+        #region Streaming Radio and GS
+
+        private async void StartGSTrackAt(int no)
+        {
+            var jj = playTracks[no].Split(',');
+            string j = jj[0];
+            PlayingTrack = new Track();
+            PlayingTrack = await _GetGrooveSharkTrackUrl(jj[0], jj[1], jj[2]);  // 1;artist, 2;track, 3;sessionId
+           
+            CurrentTrackId = no;
+            mediaPlayer.AutoPlay = false;
+            mediaPlayer.SetUriSource(new Uri(PlayingTrack.GSSongKeyUrl));
+
+            timer = ThreadPoolTimer.CreatePeriodicTimer(Mark30Handler, TimeSpan.FromSeconds(30));
+        }
+
+        public void PlayAllGSTracks([ReadOnlyArray()]string[] trks)
+        {
+            playTracks = trks;
+            StartGSTrackAt(0);
+        }
+
+        private void Mark30Handler(ThreadPoolTimer timer)
+        {
+            string content = string.Format("Mark30,{0},{1},{2}", PlayingTrack.GSSongKey, PlayingTrack.GSServerId, PlayingTrack.GSSessionKey);
+            Mark30(content);
+        }
+ 
+        public async void Mark30(string param)
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                var values = new Dictionary<string, string>
+                {
+                   { "value", param }                  
+                };
+
+                var content = new FormUrlEncodedContent(values);
+                string url = string.Format("api/grooveshark");
+                var resp = await client.PostAsync(url, content);
+                var b = resp.IsSuccessStatusCode;
+                timer.Cancel();
+            }
+            catch (HttpRequestException ex)
+            {
+                return;
+            }
+        }
+
+        public async void MarkFinished(string param)
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                var values = new Dictionary<string, string>
+                {
+                   { "value", param }                  
+                };
+                var content = new FormUrlEncodedContent(values);
+                string url = string.Format("api/grooveshark");
+                var resp = await client.PostAsync(url, content);
+                var b = resp.IsSuccessStatusCode;               
+            }
+            catch (HttpRequestException ex)
+            {
+                return;
+            }
+        }
+
+        private IAsyncOperation<Track> _GetGrooveSharkTrackUrl(string artist, string track, string sessionId)
+        {
+            return GetGrooveSharkTrackUrl(artist, track, sessionId).AsAsyncOperation();
+        }
+
+        private async Task<Track> GetGrooveSharkTrackUrl(string artist, string track, string sessionId)
+        {
+            Track tr = new Track();
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://proj400.azurewebsites.net/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            try
+            {
+                string url = string.Format("api/grooveshark?artist={0}&track={1}&sessionId={2}", artist, track, sessionId);
+                string resp = await client.GetStringAsync(url);
+                tr = JsonConvert.DeserializeObject<Track>(resp);
+                tr.GSSessionKey = sessionId;
+            }
+            catch (HttpRequestException ex)
+            {
+                return null;
+            }
+            return tr;
+        }
 
         public void PlayRadio(string rdoUrl)
         {
@@ -284,12 +447,6 @@ namespace BackgroundTask
                 { sendNoPlayMessage(); }
             };
             
-        }
-
-        public void PlayGSTrack(string gsUrl)
-        {
-            mediaPlayer.AutoPlay = false;
-            mediaPlayer.SetUriSource(new Uri(gsUrl));
         }
 
         private void sendNoPlayMessage()

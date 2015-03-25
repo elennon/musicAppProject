@@ -66,8 +66,7 @@
 
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Favorite" Label="ring" Command="{Binding BackCommand}"/>
+            <CommandBar.PrimaryCommands>               
                 <AppBarButton Icon="Back" Label="Back" Command="{Binding BackCommand}"/>
                 <AppBarButton Icon="{Binding PlayPause}" Label="Pause" Command="{Binding PlayPauseCommand}" />
                 <AppBarButton Icon="Next" Label="Next" Command="{Binding NextCommand}" />

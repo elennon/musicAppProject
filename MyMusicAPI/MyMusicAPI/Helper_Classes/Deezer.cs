@@ -52,7 +52,7 @@ namespace MyMusicAPI.Helper_Classes
             }
             else
             {
-                if (doc.Descendants("IncomingConfig").Any())
+                if (doc.Descendants("image").Any())
                 {
                     pic = (from el in doc.Descendants("image")
                            where (string)el.Attribute("size") == "large"

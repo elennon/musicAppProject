@@ -93,12 +93,18 @@ namespace MyMusic.ViewModels.StreamingPlaylists
 
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
         public RelayCommand<Track> ItemSelectedCommand { get; set; }
+        public RelayCommand ShuffleCommand { get; set; }
+        public RelayCommand PlayCommand { get; set; }
+        public RelayCommand RefreshCommand { get; set; }
         
         public CreateListFromQPViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             this.LoadCommand = new RelayCommand<RoutedEventArgs>(OnLoadCommand);
             this.ItemSelectedCommand = new RelayCommand<Track>(OnItemSelectedCommand);
+            this.ShuffleCommand = new RelayCommand(OnShuffleCommand);   
+            this.PlayCommand = new RelayCommand(OnPlayCommand);
+            this.RefreshCommand = new RelayCommand(OnRefreshCommand);
             this.QuickTracks = repo.GetQuickPicks();
             Artists = new ObservableCollection<Artist>();
             Tracks = new ObservableCollection<Track>();
@@ -119,10 +125,30 @@ namespace MyMusic.ViewModels.StreamingPlaylists
 
         }
 
+        private void OnRefreshCommand()
+        {
+            Artists.Clear();
+            Tracks.Clear();
+        }
+
+        private void OnPlayCommand()
+        {
+            var t = repo.SortGSListToArray(Tracks);
+            ((App)Application.Current).BkPlayer.PlayThese("gsTrackList", t);
+            _navigationService.NavigateTo("NowPlaying");
+        }
+
+        private void OnShuffleCommand()
+        {
+            var t = repo.ShuffleGSListToArray(Tracks);
+            ((App)Application.Current).BkPlayer.PlayThese("gsTrackList", t);
+            _navigationService.NavigateTo("NowPlaying");
+        }
+
         private async void OnItemSelectedCommand(Track obj)
         {
             counter++;
-            if(counter > 50)
+            if(counter > 5)
             {
                 MessageDialog msgbox = new MessageDialog("Thats 5 seleted!");
                 msgbox.Commands.Clear();
@@ -131,26 +157,30 @@ namespace MyMusic.ViewModels.StreamingPlaylists
                 var res = await msgbox.ShowAsync();
                 return;
             }
-            var batch = await repo.GetSimilarArtists(Session, obj.Artist, NumberOfTracksPerArtist);            
-            foreach (var item in batch)
+            //var batch = await repo.GetSimilarArtists(Session, obj.Artist, NumberOfTracksPerArtist);    
+            var batch = await repo.GetSimilarLastFmArtists(obj.Artist, 5);
+            if (batch != null)
             {
-                if(!Artists.Contains(item))
-                Artists.Add(item);                   
+                foreach (var item in batch)
+                {
+                    if (!Artists.Contains(item))
+                        Artists.Add(item);
+                }
+                await GetTracksForTheseArtists(batch);
             }
-            await GetTracksForTheseArtists(batch);
-            
         }
 
         private async Task GetTracksForTheseArtists(ObservableCollection<Artist> batch)
-        {
-           
+        {           
             foreach (var item in batch)
             {
-                var trkBatch = await repo.GetDeezerArtistTracks(item.Name, NumberOfTracksPerArtist, Session);
+                //var trkBatch = await repo.GetDeezerArtistTracks(item.Name, NumberOfTracksPerArtist, Session);
+                var trkBatch = await repo.GetSimilarLastFmTracks(item.Name, 3, Session);
                 if (trkBatch != null)
                 {
                     foreach (var tr in trkBatch)
                     {
+                        tr.GSSessionKey = Session;
                         Tracks.Add(tr);
                     }
                 }

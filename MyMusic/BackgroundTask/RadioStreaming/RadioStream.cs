@@ -75,7 +75,7 @@ namespace BackgroundTask.RadioStreaming
             }
         }
 
-        private async Task<MediaEncodingProfile> getAudioProps()    // gets audio properties fro the stream
+        private async Task<MediaEncodingProfile> getAudioProps()    // gets audio properties for the stream
         {
             try
             {

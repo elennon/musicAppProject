@@ -55,7 +55,11 @@ namespace MyMusic.ViewModels
 
         private async void OnTestCommand()
         {
-            await repo.SortPics();
+            //await repo.GetEchoNestInfo();
+            //string rUrl = "radio,http://stream209a-he.grooveshark.com/stream.php?streamKey=d2f3c858ebfa71e7cc0d472d6307ef6ab39bfe07_55060902_de997c_17073f1_1811fc720_8_0," + "138";
+            //_navigationService.NavigateTo("NowPlaying", rUrl);
+            //await repo.SortPics();
+           // await repo.GetSimilarLastFmTracks("nofx", 5);
         }
 
         private void OnFillDbCommand()
@@ -89,8 +93,8 @@ namespace MyMusic.ViewModels
                         _navigationService.NavigateTo("GSMainPage", (string)value);
                     }
                     break;
-                case "Something":
-                    _navigationService.NavigateTo("SavedPlaylists", itemId);
+                case "ReadyMade":
+                    _navigationService.NavigateTo("GenerateFromCollection");
                     break;
                 case "SavedPlayList":
                     _navigationService.NavigateTo("SavedPlaylists", itemId);
@@ -158,8 +162,8 @@ namespace MyMusic.ViewModels
         {
             ObservableCollection<DataGroup> groups = new ObservableCollection<DataGroup>();
             groups.Add(new DataGroup("Stream", "Streaming", "music streaming and playlist generation", "ms-appx:///Assets/music.jpg"));           
-            groups.Add(new DataGroup("Something", "A Filler Thing", "music collection", "ms-appx:///Assets/music3.jpg"));
-            groups.Add(new DataGroup("SavedPlayList", "Saved PlayLists", "Playlists collection", "ms-appx:///Assets/radio.jpg"));
+            groups.Add(new DataGroup("ReadyMade", "Ready Made Playlists", "music collection", "ms-appx:///Assets/music3.jpg"));
+            groups.Add(new DataGroup("SavedPlayList", "DIY PlayLists", "Playlists collection", "ms-appx:///Assets/radio.jpg"));
             return groups;
         }
 

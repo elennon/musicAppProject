@@ -32,12 +32,15 @@ namespace MyMusic.DAL
         int DoPercent(Track tr);
         void DoAllPercent();
 
+        string[] SortGSListToArray(ObservableCollection<Track> gsList);
+        string[] ShuffleGSListToArray(ObservableCollection<Track> gsList);
         string[] shuffleThese(ObservableCollection<Track> shfThese);
         string[] shuffleAll();
         string[] ShuffleAlbum(string id);
         string[] ShuffleGenre(string id);
         string[] ShuffleTopPlays();
         string[] ShuffleQuickPicks();
+        string[] ShufflePlaylist(List<Track> list);
 
         ObservableCollection<Artist> GetArtists();
         ObservableCollection<Album> GetAlbums();
@@ -60,6 +63,10 @@ namespace MyMusic.DAL
         Task<Track> GetGrooveSharkTrackUrl(string artist, string track, string sessionId);
         Task<ObservableCollection<Track>> GetDeezerArtistTracks(string artist, int topNo, string sessionId);
 
+        Task<ObservableCollection<Artist>> GetSimilarLastFmArtists(string artist, int top);
+        Task<ObservableCollection<Track>> GetSimilarLastFmTracks(string artist, int num, string sessionId);
+
+        Task GetEchoNestInfo(string artist, string track);
         void AddToPlaylist(int playlistId, int trackId);
         void RemoveFromPlaylist(int playlistId, int trackId);
         void RemovePlaylist(Playlist pl);

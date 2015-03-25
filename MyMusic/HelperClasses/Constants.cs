@@ -40,5 +40,6 @@ namespace MyMusic
         public const string GSSessionId = "GSSessionId";
         
         public const string link = "link";
+        public const string TracksToPlay = "TracksToPlay";
     }
 }

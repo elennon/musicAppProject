@@ -100,7 +100,7 @@ namespace BackgroundTask
                 foregroundAppState = (ForegroundAppStatus)Enum.Parse(typeof(ForegroundAppStatus), value.ToString());
 
             //Add handlers for playlist trackchanged
-            BackgroundMediaPlayer.Current.CurrentStateChanged += Current_CurrentStateChanged;
+            //BackgroundMediaPlayer.Current.CurrentStateChanged += Current_CurrentStateChanged;
             Playlist.TrackChanged += playList_TrackChanged;
 
             //Initialize message channel 
@@ -231,9 +231,16 @@ namespace BackgroundTask
             }
         }
 
-        private void playGSTrack(string Url)
+        private void playGSTracks(string[] gSTrks)
         {
-         //   StreamingManager.PlayGSTrack(Url);
+            try
+            {
+                Playlist.PlayAllGSTracks(gSTrks);                                   
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
         }
 
         void playList_TrackChanged(Playlist sender, object args)
@@ -248,7 +255,7 @@ namespace BackgroundTask
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
             }
             string currentTrack = "";
-            if (PlayMode == PlayMode.Collection)
+            if (PlayMode == PlayMode.Collection || PlayMode == PlayMode.Streams)
             {
                 if (Skipped)
                 {
@@ -256,20 +263,33 @@ namespace BackgroundTask
                 }
                 else { currentTrack = trksToPlay[sender.CurrentTrackNumber]; }
             }
+            
             else if (PlayMode == PlayMode.Radio)
             {
                 currentTrack = (trksToPlay[sender.CurrentTrackNumber]).Split(',')[1];
             }
+
+            CheckFGState(ref foregroundAppState); // checking here to see if FG is active because of possible out of sync foregroundAppState setting
+
             Debug.WriteLine("in trackChanged. fg is " + foregroundAppState);            
             if (foregroundAppState == ForegroundAppStatus.Active)
             {
                 Debug.WriteLine("foregroundApp is active still ");
-                //Log("BK-- message sent");
+                //Log("BK-- message sent from track changed");
                 ValueSet message = new ValueSet();
                 message.Add(Constants.Trackchanged, currentTrack);
                 BackgroundMediaPlayer.SendMessageToForeground(message);
             }
             Skipped = false;
+        }
+        
+        private void CheckFGState(ref ForegroundAppStatus foregroundAppState)   
+        {
+            var value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.AppState);
+            if (value == null)
+                foregroundAppState = ForegroundAppStatus.Unknown;
+            else
+                foregroundAppState = (ForegroundAppStatus)Enum.Parse(typeof(ForegroundAppStatus), value.ToString());
         }
 
         private void SkipToPrevious()
@@ -287,17 +307,17 @@ namespace BackgroundTask
 
         #endregion
 
-        void Current_CurrentStateChanged(MediaPlayer sender, object args)
-        {
-            if (sender.CurrentState == MediaPlayerState.Playing)
-            {
-                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
-            }
-            else if (sender.CurrentState == MediaPlayerState.Paused)
-            {
-                systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Paused;
-            }
-        }
+        //void Current_CurrentStateChanged(MediaPlayer sender, object args)
+        //{
+        //    if (sender.CurrentState == MediaPlayerState.Playing)
+        //    {
+        //        systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Playing;
+        //    }
+        //    else if (sender.CurrentState == MediaPlayerState.Paused)
+        //    {
+        //        systemmediatransportcontrol.PlaybackStatus = MediaPlaybackStatus.Paused;
+        //    }
+        //}
 
         void BackgroundMediaPlayer_MessageReceivedFromForeground(object sender, MediaPlayerDataReceivedEventArgs e)
         {
@@ -337,7 +357,7 @@ namespace BackgroundTask
                         break;
                     case Constants.SkipNext:            // User has pressed next
                         Debug.WriteLine("Skipping to next");
-                        PlayMode = PlayMode.Collection;
+                       // PlayMode = PlayMode.Collection;
                         SkipToNext();
                         break;
                     case Constants.SkipPrevious:         // User has pressed back
@@ -345,16 +365,14 @@ namespace BackgroundTask
                         PlayMode = PlayMode.Collection;
                         SkipToPrevious();
                         break;
-                    case Constants.PlayRadio:       // radio selected
-                      
+                    case Constants.PlayRadio:       // radio selected                      
                         PlayMode = PlayMode.Radio;
                         string url = (trksToPlay[0]).Split(',')[0];
                         playRadio(url);
                         break;
                     case Constants.PlayGSTrack:       // GS stream selected
                         PlayMode = PlayMode.Streams;
-
-                        playGSTrack(trksToPlay[0]);
+                        playGSTracks(trksToPlay);
                         break; 
                 }
             }

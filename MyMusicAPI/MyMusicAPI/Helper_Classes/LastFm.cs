@@ -1,480 +1,161 @@
-﻿using System;
+﻿using MyMusicAPI.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
+using System.Xml.Linq;
 
 namespace MyMusicAPI.Helper_Classes
 {
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-    public partial class lfm
+    public static class LastFm
     {
+        private static HttpClient client = new HttpClient();
 
-        private lfmTrack trackField;
-
-        private string statusField;
-
-        /// <remarks/>
-        public lfmTrack track
+        public async static Task<List<LfmArtist>> GetSimilarArtists(string artist, int num)
         {
-            get
-            {
-                return this.trackField;
-            }
-            set
-            {
-                this.trackField = value;
-            }
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Application/json"));
+            string url = string.Format("?method=artist.getsimilar&artist={0}&api_key=6101eb7c600c8a81166ec8c5c3249dd4&format=json&limit=6", artist,num);
+            string resp = await client.GetStringAsync(url);
+            
+            var r = JsonConvert.DeserializeObject<LfmArtists>(resp);
+            return r.similarartists.artist;
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string status
+        public async static Task<List<TpTrack>> GetArtistsTop(string artist, int top)
         {
-            get
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Application/json"));
+            string url = string.Format("?method=artist.gettoptracks&artist={0}&limit={1}&api_key=6101eb7c600c8a81166ec8c5c3249dd4&format=json", artist, top);
+            string resp = await client.GetStringAsync(url);
+            var r = JsonConvert.DeserializeObject<RootObjectToptracks>(resp);
+            foreach (var item in r.toptracks.track)
             {
-                return this.statusField;
+                item.OneImage = await getPic(item.artist.name, item.name);
             }
-            set
-            {
-                this.statusField = value;
-            }
+            return r.toptracks.track;
         }
+
+        public async static Task<string> getPic(string artist, string title)
+        {
+            string pic = "";
+            client = new HttpClient();
+            client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+            string url = string.Format("?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+            string xmlString = await client.GetStringAsync(url);
+            XDocument doc = XDocument.Parse(xmlString);
+
+            if (doc.Root.FirstAttribute.Value == "failed")
+            {
+                pic = "ms-appx:///Assets/radio672.png";
+            }
+            else
+            {
+                if (doc.Descendants("image").Any())
+                {
+                    pic = (from el in doc.Descendants("image")
+                           where (string)el.Attribute("size") == "large"
+                           select el).First().Value;
+                }
+            }
+            return pic;
+        }
+
+    }
+    public class Image
+    {
+        public string text { get; set; }
+        public string size { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrack
+    public class LfmArtist
     {
-
-        private uint idField;
-
-        private string nameField;
-
-        private string mbidField;
-
-        private string urlField;
-
-        private uint durationField;
-
-        private lfmTrackStreamable streamableField;
-
-        private uint listenersField;
-
-        private uint playcountField;
-
-        private lfmTrackArtist artistField;
-
-        private lfmTrackAlbum albumField;
-
-        private lfmTrackTag[] toptagsField;
-
-        /// <remarks/>
-        public uint id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string mbid
-        {
-            get
-            {
-                return this.mbidField;
-            }
-            set
-            {
-                this.mbidField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
-
-        /// <remarks/>
-        public uint duration
-        {
-            get
-            {
-                return this.durationField;
-            }
-            set
-            {
-                this.durationField = value;
-            }
-        }
-
-        /// <remarks/>
-        public lfmTrackStreamable streamable
-        {
-            get
-            {
-                return this.streamableField;
-            }
-            set
-            {
-                this.streamableField = value;
-            }
-        }
-
-        /// <remarks/>
-        public uint listeners
-        {
-            get
-            {
-                return this.listenersField;
-            }
-            set
-            {
-                this.listenersField = value;
-            }
-        }
-
-        /// <remarks/>
-        public uint playcount
-        {
-            get
-            {
-                return this.playcountField;
-            }
-            set
-            {
-                this.playcountField = value;
-            }
-        }
-
-        /// <remarks/>
-        public lfmTrackArtist artist
-        {
-            get
-            {
-                return this.artistField;
-            }
-            set
-            {
-                this.artistField = value;
-            }
-        }
-
-        /// <remarks/>
-        public lfmTrackAlbum album
-        {
-            get
-            {
-                return this.albumField;
-            }
-            set
-            {
-                this.albumField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("tag", IsNullable = false)]
-        public lfmTrackTag[] toptags
-        {
-            get
-            {
-                return this.toptagsField;
-            }
-            set
-            {
-                this.toptagsField = value;
-            }
-        }
+        public string name { get; set; }
+        public string mbid { get; set; }
+        public string match { get; set; }
+        public string url { get; set; }
+        public List<Image> image { get; set; }
+        public string streamable { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrackStreamable
+    public class Attr
     {
-
-        private byte fulltrackField;
-
-        private byte valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte fulltrack
-        {
-            get
-            {
-                return this.fulltrackField;
-            }
-            set
-            {
-                this.fulltrackField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public byte Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        public string artist { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrackArtist
+    public class Similarartists
     {
-
-        private string nameField;
-
-        private string mbidField;
-
-        private string urlField;
-
-        /// <remarks/>
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string mbid
-        {
-            get
-            {
-                return this.mbidField;
-            }
-            set
-            {
-                this.mbidField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
+        public List<LfmArtist> artist { get; set; }
+        //   public Attr __invalid_name__@attr { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrackAlbum
+    public class LfmArtists
     {
-
-        private string artistField;
-
-        private string titleField;
-
-        private string mbidField;
-
-        private string urlField;
-
-        private lfmTrackAlbumImage[] imageField;
-
-        private byte positionField;
-
-        /// <remarks/>
-        public string artist
-        {
-            get
-            {
-                return this.artistField;
-            }
-            set
-            {
-                this.artistField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string title
-        {
-            get
-            {
-                return this.titleField;
-            }
-            set
-            {
-                this.titleField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string mbid
-        {
-            get
-            {
-                return this.mbidField;
-            }
-            set
-            {
-                this.mbidField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("image")]
-        public lfmTrackAlbumImage[] image
-        {
-            get
-            {
-                return this.imageField;
-            }
-            set
-            {
-                this.imageField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte position
-        {
-            get
-            {
-                return this.positionField;
-            }
-            set
-            {
-                this.positionField = value;
-            }
-        }
+        public Similarartists similarartists { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrackAlbumImage
+
+
+   
+    public class TpArtist
     {
-
-        private string sizeField;
-
-        private string valueField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string size
-        {
-            get
-            {
-                return this.sizeField;
-            }
-            set
-            {
-                this.sizeField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        public string name { get; set; }
+        public string mbid { get; set; }
+        public string url { get; set; }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class lfmTrackTag
+    public class TpImage
     {
-
-        private string nameField;
-
-        private string urlField;
-
-        /// <remarks/>
-        public string name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string url
-        {
-            get
-            {
-                return this.urlField;
-            }
-            set
-            {
-                this.urlField = value;
-            }
-        }
+        public string text { get; set; }
+        public string size { get; set; }
     }
 
+    public class TpAttr
+    {
+        public string rank { get; set; }
+    }
+
+    public class TpTrack
+    {
+        public string name { get; set; }
+        public string duration { get; set; }
+        public string playcount { get; set; }
+        public string listeners { get; set; }
+        public string mbid { get; set; }
+        public string url { get; set; }       
+        public TpArtist artist { get; set; }
+        public List<TpImage> image { get; set; }
+        public string OneImage { get; set; }
+        public TpAttr attr { get; set; }
+    }
+
+    public class TpAttr2
+    {
+        public string artist { get; set; }
+        public string page { get; set; }
+        public string perPage { get; set; }
+        public string totalPages { get; set; }
+        public string total { get; set; }
+    }
+
+    public class Toptracks
+    {
+        public List<TpTrack> track { get; set; }
+        public TpAttr2 attr { get; set; }
+    }
+
+    public class RootObjectToptracks
+    {
+        public Toptracks toptracks { get; set; }
+    }
 }
+
+
+

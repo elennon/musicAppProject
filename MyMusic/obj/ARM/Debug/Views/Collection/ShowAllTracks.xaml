@@ -1,0 +1,144 @@
+﻿<Page
+    x:Class="MyMusic.Views.ShowAllTracks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMusic.Views"
+    
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+
+        <DataTemplate x:Key="ListViewItemTemplate">
+            
+                <Grid Width="400" Margin="0,0,0,-20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition  />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="{Binding ImageUri}" Width="76" Height="120" Grid.RowSpan="2"
+                       x:Name="imgSongPic"
+                       Stretch="Uniform" 
+                       VerticalAlignment="Top"/>
+                    <Border  Margin="6,0,0,0"  Grid.Column="1"  >
+                        <TextBlock x:Name="txtName"                              
+                            Text="{Binding Name}"   
+                            Tag="{Binding OrderNo}"
+                            Style="{StaticResource ListViewItemTextBlockStyle}" 
+                            VerticalAlignment="Top"                             
+                            HorizontalAlignment="Left"/>
+                    </Border>
+                    <Grid Grid.Column="1" Grid.Row="1"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{Binding Artist}"                                    
+                                x:Name="txtArtist" 
+                                Margin="6,-5,0,0" 
+                                Style="{StaticResource ListViewItemSubheaderTextBlockStyle}" 
+                                VerticalAlignment="Top" 
+                                />
+
+                    </Grid>
+                </Grid>
+            
+        </DataTemplate>
+
+        <DataTemplate x:Key="StandardDoubleLineItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,0" Grid.Column="0" HorizontalAlignment="Left">
+                    <Image Source="{Binding ImageUri}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="79" Width="79"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="14.5,0,0,0">
+                    <TextBlock Text="{Binding Name}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Artist}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ThreeLineItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,0" Grid.Column="0" HorizontalAlignment="Left">
+                    <Image Source="{Binding ImageUri}" Stretch="UniformToFill" Height="110" Width="110"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="14.5,0,0,0">
+                    <TextBlock Text="{Binding Name}" Margin="5" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Artist}" Margin="5" Style="{ThemeResource ListViewItemContentTextBlockStyle}" Foreground="{ThemeResource PhoneMidBrush}" />
+                    <TextBlock Text="{Binding Album}" Margin="5" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+    <Grid x:Name="LayoutRoot"  >
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
+                <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
+                <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+            </StackPanel>
+        </StackPanel>
+        
+        
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+
+            <ListView x:ConnectionId='1'  Name="lstTracksByGenre"
+                        HorizontalContentAlignment="Stretch" 
+                        IsSwipeEnabled="False"
+                        ScrollViewer.HorizontalScrollMode="Disabled" 
+                        ScrollViewer.IsHorizontalScrollChainingEnabled="True"
+                        ScrollViewer.IsVerticalScrollChainingEnabled="True"
+                        ScrollViewer.IsVerticalRailEnabled="True"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"                                                               
+                        ItemsSource="{Binding}"             
+                        ItemTemplate="{StaticResource ThreeLineItemTemplate}" 
+                        IsItemClickEnabled="True"
+                        SelectionMode="None"
+                                                   
+                        >
+            </ListView>
+        </Grid>
+       
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:ConnectionId='2'  Icon="Shuffle" Label="Shuffle"                             />                
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                             
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
+

@@ -164,7 +164,7 @@ namespace MyMusicAPI.Helper_Classes
             return Convert.ToInt32(artistId);
         }
 
-        public static string getTrack(string artist, string track, string sessionId)
+        public static Track getTrack(string artist, string track, string sessionId)
         {
             sessionId = GetSessionId("kilmaced", "Rhiabit1");
             //var t = getSimilarArtists(artist, sessionId);
@@ -190,7 +190,7 @@ namespace MyMusicAPI.Helper_Classes
             var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
             request.RequestFormat = RestSharp.DataFormat.Json;
             request.AddBody(requestParameters);
-
+            
             RestResponse response = (RestResponse)client.Execute(request);
             ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
 
@@ -199,19 +199,34 @@ namespace MyMusicAPI.Helper_Classes
 
             string songId = "";
             System.Collections.ArrayList tf = (System.Collections.ArrayList)we[0];      // pull out the first song id
-            foreach (Dictionary<string, Object> item in tf)
-            {
-                var sId = item.ToString();
-                songId = item["SongID"].ToString();
-            }
+            Dictionary<string, Object> firstSong = (Dictionary<string, Object>)tf[0];
+            songId = firstSong["SongID"].ToString();
+            track = firstSong["SongName"].ToString();
+            //foreach (Dictionary<string, Object> item in tf)
+            //{
+            //    //var sId = item.ToString();
+            //    songId = item["SongID"].ToString();
+            //    track = item["SongName"].ToString();
+            //}
             //Stream st = getSongStream(songId, country, sessionId);
             //return st;
-            string url = getSongStream(songId, country, sessionId);
-            Track tr = new Track { Name = track, ArtistName = artist, GSSongKey = url };
-            return url;
+            Dictionary<string, Object> url = getSongStream(songId, country, sessionId);
+            var servId = url["StreamServerID"].ToString();
+            var urel = url["url"].ToString();
+            var streamKey = url["StreamKey"].ToString();
+            var secs = url["uSecs"].ToString();
+            Track tr = new Track { 
+                Name = track, 
+                ArtistName = artist, 
+                GSSongKey = streamKey,
+                GSServerId = servId,
+                GSSongKeyUrl = urel,
+                GSSongId = songId
+            };
+            return tr;
         }
 
-        private static string getSongStream(string songId, object country, string sessionId)
+        private static Dictionary<string, Object> getSongStream(string songId, object country, string sessionId)
         {
             RequestParameters requestParameters = new RequestParameters();
             requestParameters.method = "getSubscriberStreamKey";
@@ -240,13 +255,68 @@ namespace MyMusicAPI.Helper_Classes
             ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
 
             Dictionary<string, Object> gh = responseParameters.result;
-            var servId = gh["StreamServerID"].ToString();
-            var urel = gh["url"].ToString();
-            var streamKey = gh["StreamKey"].ToString();
-            var secs = gh["uSecs"].ToString();
+ 
+            return gh;
+        }
 
-            //return HttpGet(urel);
-            return urel;
+        public static void Mark30Seconds(string streamKey, string streamServerID, string sessionId)
+        {           
+            object country = getCountry(sessionId);
+            RequestParameters requestParameters = new RequestParameters();
+            requestParameters.method = "markStreamKeyOver30Secs";
+            requestParameters.parameters.Add("streamKey", streamKey);
+            requestParameters.parameters.Add("streamServerID", streamServerID);
+           
+            requestParameters.header.Add("wsKey", key);
+            requestParameters.header.Add("sessionID", sessionId);
+
+            var jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(requestParameters);
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
+            if (useHttps)
+            {
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
+            }
+            var client = new RestClient(serviceUrl);
+            var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddBody(requestParameters);
+
+            RestResponse response = (RestResponse)client.Execute(request);
+            ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
+
+        }
+
+        public static void MarkFinished(string songId, string streamKey, string streamServerID, string sessionId)
+        {
+            sessionId = GetSessionId("kilmaced", "Rhiabit1");
+            object country = getCountry(sessionId);
+            RequestParameters requestParameters = new RequestParameters();
+            requestParameters.method = "markSongComplete";
+            requestParameters.parameters.Add("streamKey", streamKey);
+            requestParameters.parameters.Add("streamServerID", streamServerID);
+            requestParameters.parameters.Add("songID", songId);
+
+            requestParameters.header.Add("wsKey", key);
+            requestParameters.header.Add("sessionID", sessionId);
+
+            var jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(requestParameters);
+            string encryptedJson = Encryptor.Md5Encrypt(json, secret);
+            string serviceUrl = baseServiceUrl;
+            if (useHttps)
+            {
+                serviceUrl = baseServiceUrl.Replace("http://", "https://");
+            }
+            var client = new RestClient(serviceUrl);
+            var request = new RestRequest(String.Format("/ws3.php?sig={0}", encryptedJson.ToLower()), Method.POST);
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddBody(requestParameters);
+
+            RestResponse response = (RestResponse)client.Execute(request);
+            ResponseParameters responseParameters = jsonSerializer.Deserialize<ResponseParameters>(response.Content);
+
         }
 
         static Stream HttpGet(string url)

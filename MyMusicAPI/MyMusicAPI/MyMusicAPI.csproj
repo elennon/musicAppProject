@@ -190,6 +190,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DeezerController.cs" />
+    <Compile Include="Controllers\EcheoNestInfoController.cs" />
+    <Compile Include="Controllers\LastFmController.cs" />
     <Compile Include="Controllers\RadioGenreController.cs" />
     <Compile Include="Controllers\GrooveSharkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -201,6 +203,7 @@
     </Compile>
     <Compile Include="Helper_Classes\Deezer.cs" />
     <Compile Include="Helper_Classes\DirbleRadioSt.cs" />
+    <Compile Include="Helper_Classes\EcheoNest.cs" />
     <Compile Include="Helper_Classes\FilterStations.cs" />
     <Compile Include="Helper_Classes\GrooveShark.cs" />
     <Compile Include="Helper_Classes\DownloadedStations.cs" />

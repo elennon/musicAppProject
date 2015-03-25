@@ -114,7 +114,6 @@
     <Compile Include="HelperClasses\Constants.cs" />
     <Compile Include="HelperClasses\Logger.cs" />
     <Compile Include="HelperClasses\ParseXml.cs" />
-    <Compile Include="HelperClasses\RndAccessStream.cs" />
     <Compile Include="HelperClasses\SQLite.cs" />
     <Compile Include="HelperClasses\SQLiteAsync.cs" />
     <Compile Include="HelperClasses\Helpers.cs" />
@@ -132,25 +131,29 @@
     <Compile Include="UserControls\ArtistViewModel.cs" />
     <Compile Include="UserControls\GenreViewModel.cs" />
     <Compile Include="Utilities\BKPlayer.cs" />
-    <Compile Include="ViewModels\AddToPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlists\AddToPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlists\GenerateFromCollectionViewModel.cs" />
     <Compile Include="ViewModels\StreamingPlaylists\CreateListFromQPViewModel.cs" />
     <Compile Include="ViewModels\StreamingPlaylists\GSMainPageViewModel.cs" />
     <Compile Include="ViewModels\StreamingPlaylists\GSSignInViewModel.cs" />
-    <Compile Include="ViewModels\ViewPlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlists\ViewPlaylistViewModel.cs" />
     <Compile Include="ViewModels\CollectionViewModel.cs" />
-    <Compile Include="ViewModels\CreatePlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Playlists\CreatePlaylistViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="UserControls\RadioStreamViewModel.cs" />
     <Compile Include="ViewModels\NowPlayingViewModel.cs" />
     <Compile Include="ViewModels\RadioViewModel.cs" />
-    <Compile Include="ViewModels\SavedPlaylistsViewModel.cs" />
+    <Compile Include="ViewModels\Playlists\SavedPlaylistsViewModel.cs" />
     <Compile Include="ViewModels\testViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\AddToPlaylist.xaml.cs">
+    <Compile Include="Views\Playlists\AddToPlaylist.xaml.cs">
       <DependentUpon>AddToPlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Albums.xaml.cs">
+    <Compile Include="Views\Collection\Albums.xaml.cs">
       <DependentUpon>Albums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Playlists\GenerateFromCollection.xaml.cs">
+      <DependentUpon>GenerateFromCollection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
@@ -164,19 +167,19 @@
     <Compile Include="Views\Streaming\GSSignIn.xaml.cs">
       <DependentUpon>GSSignIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewPlaylist.xaml.cs">
+    <Compile Include="Views\Playlists\ViewPlaylist.xaml.cs">
       <DependentUpon>ViewPlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Collection.xaml.cs">
+    <Compile Include="Views\Collection\Collection.xaml.cs">
       <DependentUpon>Collection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreatePlaylist.xaml.cs">
+    <Compile Include="Views\Playlists\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SavedPlaylists.xaml.cs">
+    <Compile Include="Views\Playlists\SavedPlaylists.xaml.cs">
       <DependentUpon>SavedPlaylists.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ShowAllTracks.xaml.cs">
+    <Compile Include="Views\Collection\ShowAllTracks.xaml.cs">
       <DependentUpon>ShowAllTracks.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ShowByArtist.xaml.cs">
@@ -278,11 +281,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddToPlaylist.xaml">
+    <Page Include="Views\Playlists\AddToPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Albums.xaml">
+    <Page Include="Views\Collection\Albums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Playlists\GenerateFromCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,23 +309,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ViewPlaylist.xaml">
+    <Page Include="Views\Playlists\ViewPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Collection.xaml">
+    <Page Include="Views\Collection\Collection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CreatePlaylist.xaml">
+    <Page Include="Views\Playlists\CreatePlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SavedPlaylists.xaml">
+    <Page Include="Views\Playlists\SavedPlaylists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ShowAllTracks.xaml">
+    <Page Include="Views\Collection\ShowAllTracks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

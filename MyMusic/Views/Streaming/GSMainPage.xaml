@@ -79,18 +79,6 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection Name="secondSection" Header="second section"  HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">                                               
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </HubSection>
-
-            <HubSection x:Name="thirdSection" Header="3rd section"
-                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </HubSection>
         </Hub>
 
     </Grid>

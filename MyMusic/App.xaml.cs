@@ -89,6 +89,7 @@ namespace MyMusic
             this.UnhandledException += App_UnhandledException;
             this.Resuming += App_Resuming;
             this.BkPlayer = new BKPlayer();
+            //HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 
         void App_Resuming(object sender, object e)
@@ -96,8 +97,21 @@ namespace MyMusic
             ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);
             BkPlayer.AddMediaPlayerEventHandlers();
             Debug.WriteLine("in FG Current_Resuming");
-            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");            
-        }        
+            //     Logger.GetLogger().logChannel.LogMessage("In FG Current_Resuming");  
+            isResumingFromTermination = true;
+        }
+
+        //not using for now...NavigationHelper is doing back press
+        void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame != null && rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
@@ -128,9 +142,8 @@ namespace MyMusic
                     BkPlayer.AddMediaPlayerEventHandlers();
                     ApplicationSettingsHelper.SaveSettingsValue(Constants.IsBackgroundCompleted, false);
                 }
-            }
-            
-            if (!IsMyBackgroundTaskRunning)
+            }         
+            if (this.BkPlayer == null)
             {
                 this.BkPlayer = new BKPlayer();
                 //BkPlayer.AddMediaPlayerEventHandlers();
@@ -141,6 +154,7 @@ namespace MyMusic
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.AppState, Constants.ForegroundAppActive);     // set to active to let background task know to send messages
 
+                isResumingFromTermination = false;
                 rootFrame.CacheSize = 1;
                 if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

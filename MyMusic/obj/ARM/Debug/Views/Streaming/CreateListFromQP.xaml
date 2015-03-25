@@ -215,7 +215,9 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
-                
+                <AppBarButton Icon="Shuffle" Label="Shuffle" Command="{Binding ShuffleCommand}"  />
+                <AppBarButton Icon="Play" Label="Shuffle" Command="{Binding PlayCommand}"  />
+                <AppBarButton Icon="Refresh" Label="Refresh" Command="{Binding RefreshCommand}"  />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

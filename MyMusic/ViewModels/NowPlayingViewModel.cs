@@ -76,36 +76,83 @@ namespace MyMusic.ViewModels
         }
 
         private void OnLoadCommand(RoutedEventArgs obj)
-        {           
-            if (string.IsNullOrEmpty(NavigateParam) == false && ((App)Application.Current).isResumingFromTermination == false)   // condition 1: normal state + tracks sent here to play
+        {
+            if (((App)Application.Current).isResumingFromTermination == false)  // this if in normal mode (not resuming after termination/suspention)
             {
-                SortPlayList(NavigateParam);
-            }
-            else if (((App)Application.Current).IsMyBackgroundTaskRunning && BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing) //// condition 2: normal state + no tracks to play(either user navigated here or resuming from termination)
-            {
-                string pic = "";
-                object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
-                if (value1 == null)
+                //   condition 1: nothing currently playing + there is tracks to play
+                if (BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Playing && string.IsNullOrEmpty(NavigateParam) == false)
                 {
-                    TrackName = "current Track null ( in NP nav to(condition 2) )";
+                    SortPlayList(NavigateParam);
                 }
-                if (value1 != null)
+                //   condition 2: nothing currently playing + there wasn't any tracks selected to play
+                else if (BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Playing && string.IsNullOrEmpty(NavigateParam) == true)
                 {
-                    TrackName = (string)value1 + "( in Np (condition 2) )";
+                    TrackName = "nothing playing";
                 }
+                //   condition 3: BK currently playing + there is tracks to play
+                else if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing && string.IsNullOrEmpty(NavigateParam) == false)
+                {
+                    SortPlayList(NavigateParam);
+                }
+                //   condition 4: BK currently playing + there wasn't any tracks selected to play
+                else if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing && string.IsNullOrEmpty(NavigateParam) == true)
+                {
+                    string pic = "";
+                    object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                    if (value1 == null)
+                    {
+                        TrackName = "current Track null ( in NP nav to(condition 2) )";
+                    }
+                    if (value1 != null)
+                    {
+                        TrackName = (string)value1 + "( in Np (condition 2) )";
+                    }
 
-                object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
-                else
+                    object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    else
+                    {
+                        int trackId = (int)value2;
+                        pic = (repo.GetThisTrack(trackId)).ImageUrl;
+                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        TrImage = pic;
+                    }
+                }
+                NavigateParam = "";
+            }
+            else           // this if resuming after termination/suspention. just need to show track if playing or show nothing playing)
+            {
+                if (BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Playing )
                 {
-                    int trackId = (int)value2;
-                    pic = (repo.GetThisTrack(trackId)).ImageUrl;
-                    if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
-                    TrImage = pic;
+                    PlayPause = new SymbolIcon(Symbol.Play);
+                    
+                    TrackName = "nothing playing";
+                }                
+                else if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
+                {
+                    PlayPause = new SymbolIcon(Symbol.Pause);
+                    string pic = "";
+                    object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+                    if (value1 == null)
+                    {
+                        TrackName = "current Track null ( in NP nav to(condition 2) )";
+                    }
+                    if (value1 != null)
+                    {
+                        TrackName = (string)value1 + "( in Np (condition 2) )";
+                    }
+
+                    object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    else
+                    {
+                        int trackId = (int)value2;
+                        pic = (repo.GetThisTrack(trackId)).ImageUrl;
+                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        TrImage = pic;
+                    }
                 }
             }
-            else
-                TrackName = "nothing playing";      /// condition 3: nothing playing
         }
 
         private void SortPlayList(string NavigateParameter)
@@ -134,7 +181,8 @@ namespace MyMusic.ViewModels
         {
             if (playSwitch) { PlayPause = new SymbolIcon(Symbol.Play); }
             else { PlayPause = new SymbolIcon(Symbol.Pause); }
-            ((App)Application.Current).BkPlayer.playClick();
+
+            ((App)Application.Current).BkPlayer.playClick(NavigateParam);
             playSwitch = !playSwitch;
         }
 
@@ -197,7 +245,8 @@ namespace MyMusic.ViewModels
 
         public void Deactivate(object parameter)
         {
-
+           
+            NavigateParam = "";
         }
 
         #region INotifyPropertyChanged 
@@ -236,3 +285,36 @@ namespace MyMusic.ViewModels
        
     }
 }
+
+
+
+  //// condition 1: normal state + tracks sent here to play // && ((App)Application.Current).isResumingFromTermination == false
+  //          if (string.IsNullOrEmpty(NavigateParam) == false && BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Closed)   
+  //          {
+  //              SortPlayList(NavigateParam);
+  //          }
+  //          else if (((App)Application.Current).IsMyBackgroundTaskRunning && BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing) //// condition 2: normal state + no tracks to play(either user navigated here or resuming from termination)
+  //          {
+  //              string pic = "";
+  //              object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
+  //              if (value1 == null)
+  //              {
+  //                  TrackName = "current Track null ( in NP nav to(condition 2) )";
+  //              }
+  //              if (value1 != null)
+  //              {
+  //                  TrackName = (string)value1 + "( in Np (condition 2) )";
+  //              }
+
+  //              object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
+  //              if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+  //              else
+  //              {
+  //                  int trackId = (int)value2;
+  //                  pic = (repo.GetThisTrack(trackId)).ImageUrl;
+  //                  if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+  //                  TrImage = pic;
+  //              }
+  //          }
+  //          else
+  //              TrackName = "nothing playing";      /// condition 3: nothing playing

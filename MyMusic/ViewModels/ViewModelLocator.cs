@@ -2,8 +2,10 @@
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using MyMusic.Common;
+using MyMusic.ViewModels.Playlists;
 using MyMusic.ViewModels.StreamingPlaylists;
 using MyMusic.Views;
+using MyMusic.Views.Playlists;
 using MyMusic.Views.Streaming;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,7 @@ namespace MyMusic.ViewModels
             SimpleIoc.Default.Register<GSSignInViewModel>();
             SimpleIoc.Default.Register<GSMainPageViewModel>();
             SimpleIoc.Default.Register<CreateListFromQPViewModel>();
+            SimpleIoc.Default.Register<GenerateFromCollectionViewModel>();
 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default); 
            
@@ -59,6 +62,7 @@ namespace MyMusic.ViewModels
             navigationService.Configure("GSSignIn", typeof(GSSignIn));
             navigationService.Configure("GSMainPage", typeof(GSMainPage));
             navigationService.Configure("CreateListFromQP", typeof(CreateListFromQP));
+            navigationService.Configure("GenerateFromCollection", typeof(GenerateFromCollection));
             navigationService.Configure("test", typeof(Views.test));
             
             return navigationService;
@@ -146,6 +150,13 @@ namespace MyMusic.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<CreateListFromQPViewModel>();
+            }
+        }
+        public GenerateFromCollectionViewModel GenerateFromCollectionViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GenerateFromCollectionViewModel>();
             }
         }
     }
