@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using MyMusic.Views;
@@ -237,12 +238,6 @@ namespace MyMusic.ViewModels
         #endregion
 
         
-    }
-
-    public interface INavigable
-    {
-        void Activate(object parameter);
-        void Deactivate(object parameter);
     }
 
     public class SectionList : INotifyPropertyChanged

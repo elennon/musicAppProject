@@ -50,6 +50,16 @@
       <End Role="Artist" EntitySet="Artists" />
       <End Role="Track" EntitySet="Tracks" />
     </AssociationSet>
+    <EntitySet Name="Users" EntityType="MusicCentralDBModel.User" />
+    <EntitySet Name="UserTracks" EntityType="MusicCentralDBModel.UserTrack" />
+    <AssociationSet Name="FK_UserTrack_ToTable" Association="MusicCentralDBModel.FK_UserTrack_ToTable">
+      <End Role="Track" EntitySet="Tracks" />
+      <End Role="UserTrack" EntitySet="UserTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTrack_ToTable_1" Association="MusicCentralDBModel.FK_UserTrack_ToTable_1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserTrack" EntitySet="UserTracks" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Artist">
     <Key>
@@ -72,6 +82,25 @@
     <NavigationProperty Name="Artist" Relationship="MusicCentralDBModel.FK_Track_ToTable" FromRole="Track" ToRole="Artist" />
     <Property Name="GSSongKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserTracks" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable" FromRole="Track" ToRole="UserTrack" />
+    <Property Name="GSSongKeyUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GSServerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GSSongId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="key" Type="Int32" />
+    <Property Name="analysis_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="energy" Type="Double" />
+    <Property Name="liveness" Type="Double" />
+    <Property Name="tempo" Type="Double" />
+    <Property Name="speechiness" Type="Double" />
+    <Property Name="acousticness" Type="Double" />
+    <Property Name="instrumentalness" Type="Double" />
+    <Property Name="mode" Type="Int32" />
+    <Property Name="time_signature" Type="Int32" />
+    <Property Name="duration" Type="Double" />
+    <Property Name="loudness" Type="Double" />
+    <Property Name="audio_md5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="valence" Type="Double" />
+    <Property Name="danceability" Type="Double" />
   </EntityType>
   <Association Name="FK_Track_ToTable">
     <End Type="MusicCentralDBModel.Artist" Role="Artist" Multiplicity="0..1" />
@@ -82,6 +111,48 @@
       </Principal>
       <Dependent Role="Track">
         <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserTracks" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable_1" FromRole="User" ToRole="UserTrack" />
+  </EntityType>
+  <EntityType Name="UserTrack">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrackId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Track" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable" FromRole="UserTrack" ToRole="Track" />
+    <NavigationProperty Name="User" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable_1" FromRole="UserTrack" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserTrack_ToTable">
+    <End Type="MusicCentralDBModel.Track" Role="Track" Multiplicity="1" />
+    <End Type="MusicCentralDBModel.UserTrack" Role="UserTrack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Track">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTrack">
+        <PropertyRef Name="TrackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTrack_ToTable_1">
+    <End Type="MusicCentralDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="MusicCentralDBModel.UserTrack" Role="UserTrack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTrack">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

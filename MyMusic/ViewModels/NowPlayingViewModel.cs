@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using MyMusic.Utilities;
@@ -41,6 +42,20 @@ namespace MyMusic.ViewModels
             get { return _image; }
             set { _image = value; NotifyPropertyChanged("TrImage"); }
         }
+       
+        private double _duration = 200;
+        public double duration
+        {
+            get { return _duration; }
+            set { _duration = value; NotifyPropertyChanged("duration"); }
+        }
+
+        private double _trackProgress = 0;
+        public double TrackProgress
+        {
+            get { return _trackProgress; }
+            set { _trackProgress = value; NotifyPropertyChanged("TrackProgress"); }
+        }
 
         private bool _isVisible = false;
         public bool IsVisible
@@ -63,6 +78,8 @@ namespace MyMusic.ViewModels
         public RelayCommand PlayPauseCommand { get; set; }
         public RelayCommand NextCommand { get; set; }
         public RelayCommand BackCommand { get; set; }
+        public RelayCommand LikeCommand { get; set; }
+        public RelayCommand DislikeCommand { get; set; }
 
         public NowPlayingViewModel(INavigationService navigationService)
         {
@@ -71,8 +88,22 @@ namespace MyMusic.ViewModels
             this.PlayPauseCommand = new RelayCommand(OnPlayPauseCommand);
             this.NextCommand = new RelayCommand(OnNextCommand);
             this.BackCommand = new RelayCommand(OnBackCommand);
+            this.LikeCommand = new RelayCommand(OnLikeCommand);
+            this.DislikeCommand = new RelayCommand(OnDislikeCommand);
             ((App)Application.Current).BkPlayer.npi = this;
             //NowPlayingInst = this;
+        }
+
+        private void OnLikeCommand()
+        {
+            var trac = ((App)Application.Current).BkPlayer.CurrentTrack.TrackId;
+            repo.AddLike(trac, true);
+        }
+
+        private void OnDislikeCommand()
+        {
+            var trac = ((App)Application.Current).BkPlayer.CurrentTrack.TrackId;
+            repo.AddLike(trac, false);
         }
 
         private void OnLoadCommand(RoutedEventArgs obj)
@@ -124,8 +155,7 @@ namespace MyMusic.ViewModels
             {
                 if (BackgroundMediaPlayer.Current.CurrentState != MediaPlayerState.Playing )
                 {
-                    PlayPause = new SymbolIcon(Symbol.Play);
-                    
+                    PlayPause = new SymbolIcon(Symbol.Play);                    
                     TrackName = "nothing playing";
                 }                
                 else if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing)
@@ -165,6 +195,7 @@ namespace MyMusic.ViewModels
 
         private void OnBackCommand()
         {
+            ((App)Application.Current).BkPlayer.okStarted = false;
             var value = new ValueSet();
             value.Add(Constants.SkipPrevious, "");
             ((App)Application.Current).BkPlayer.SendMessageToBK(value);
@@ -172,6 +203,7 @@ namespace MyMusic.ViewModels
 
         private void OnNextCommand()
         {
+            ((App)Application.Current).BkPlayer.okStarted = false;
             var value = new ValueSet();
             value.Add(Constants.SkipNext, "");
             ((App)Application.Current).BkPlayer.SendMessageToBK(value);
@@ -197,7 +229,7 @@ namespace MyMusic.ViewModels
 
             for (int i = 0; i < trks.Count; i++)
             {
-                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
+                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].ArtistName + ",notShuffle";
             }
             return trkArray;
         }
@@ -212,7 +244,7 @@ namespace MyMusic.ViewModels
                 if (item.TrackId == trackId) { yes = true; }
                 if (yes)
                 {
-                    tracks.Add(item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle");
+                    tracks.Add(item.TrackId.ToString() + "," + item.FileName + "," + item.ArtistName + ",notShuffle");
                 }
             }
 
@@ -230,7 +262,7 @@ namespace MyMusic.ViewModels
             string[] trks = new string[tracks.Count];
             for (int i = 0; i < tracks.Count; i++)
             {
-                trks[i] = tracks[i].TrackId.ToString() + "," + tracks[i].FileName + "," + tracks[i].Artist + ",notshuffle";
+                trks[i] = tracks[i].TrackId.ToString() + "," + tracks[i].FileName + "," + tracks[i].ArtistName + ",notshuffle";
             }
             return trks;
         }

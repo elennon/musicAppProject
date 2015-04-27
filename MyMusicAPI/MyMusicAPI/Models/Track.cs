@@ -15,34 +15,41 @@ namespace MyMusicAPI.Models
     
     public partial class Track
     {
+        public Track()
+        {
+            this.UserTracks = new HashSet<UserTrack>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public string Genre { get; set; }
         public Nullable<int> ArtistId { get; set; }
         public string GSSongKey { get; set; }
+        public string ArtistName { get; set; }
         public string GSSongKeyUrl { get; set; }
         public string GSServerId { get; set; }
         public string GSSongId { get; set; }
-
-        public string ArtistName { get; set; }
-
-        public int key { get; set; }
+        public Nullable<int> key { get; set; }
         public string analysis_url { get; set; }
-        public double energy { get; set; }
-        public double liveness { get; set; }
-        public double tempo { get; set; }
-        public double speechiness { get; set; }
-        public double acousticness { get; set; }
-        public double instrumentalness { get; set; }
-        public int mode { get; set; }
-        public int time_signature { get; set; }
-        public double duration { get; set; }
-        public double loudness { get; set; }
+        public Nullable<double> energy { get; set; }
+        public Nullable<double> liveness { get; set; }
+        public Nullable<double> tempo { get; set; }
+        public Nullable<double> speechiness { get; set; }
+        public Nullable<double> acousticness { get; set; }
+        public Nullable<double> instrumentalness { get; set; }
+        public Nullable<int> mode { get; set; }
+        public Nullable<int> time_signature { get; set; }
+        public Nullable<double> duration { get; set; }
+        public Nullable<double> loudness { get; set; }
         public string audio_md5 { get; set; }
-        public double valence { get; set; }
-        public double danceability { get; set; }
+        public Nullable<double> valence { get; set; }
+        public Nullable<double> danceability { get; set; }
+        public DateTime DateAdded { get; set; }
 
         [IgnoreDataMember]
         public virtual Artist Artist { get; set; }
+        [IgnoreDataMember]
+        public virtual ICollection<UserTrack> UserTracks { get; set; }
     }
 }

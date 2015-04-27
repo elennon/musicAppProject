@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using System;
 using System.Collections.Generic;

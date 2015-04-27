@@ -152,6 +152,7 @@ namespace MyMusic.ViewModels
             _albums = new ObservableCollection<AlbumViewModel>();
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
+                var h = db.Table<Album>().ToList();
                 var albs = db.Table<Album>().Where(a => a.ArtistId == _id);
                 foreach (var item in albs)
                 {
@@ -163,7 +164,7 @@ namespace MyMusic.ViewModels
                         ArtistId = item.ArtistId,
                         AlbumId = item.AlbumId,
                         //Songs = ts,
-                        ArtistName = tracks.Select(a => a.Artist).FirstOrDefault() //artNme.Name
+                        ArtistName = tracks.Select(a => a.ArtistName).FirstOrDefault() //artNme.Name
                     };
                     _albums.Add(al);
                 }

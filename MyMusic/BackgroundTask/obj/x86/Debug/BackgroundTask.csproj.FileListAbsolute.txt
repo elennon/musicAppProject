@@ -2,14 +2,8 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Backgr
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\BackgroundTask.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\BackgroundTask.pdb
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\BackgroundTask.pri
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\MyPlaylistManager.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\MyToolkit.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\SQLiteBase.dll
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\MyPlaylistManager.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\MyPlaylistManager.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\MyToolkit.xml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\SQLiteBase.pdb
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\SQLiteBase.pri
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\BackgroundTask.csprojResolveAssemblyReference.cache
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\BackgroundTask.winmd
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\BackgroundTask.pdb
@@ -26,3 +20,5 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Backgr
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\qualifiers.txt
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\qualifiers.txt.intermediate
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\Newtonsoft.Json.dll
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\bin\x86\Debug\Newtonsoft.Json.xml

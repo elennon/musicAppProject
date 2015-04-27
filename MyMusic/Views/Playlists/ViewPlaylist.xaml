@@ -71,7 +71,7 @@
                     <ColumnDefinition  />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding ImageUri}" Width="76" Height="76" Grid.RowSpan="2"                          
+                <Image Source="{Binding ImageUrl}" Width="76" Height="76" Grid.RowSpan="2"                          
                            Stretch="Fill" 
                            VerticalAlignment="Top">
                 </Image>
@@ -180,6 +180,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Add" Label="Add Songs" Command="{Binding AddCommand}"/>
                 <AppBarButton Icon="Delete" Label="Edit Playlist" Command="{Binding DeleteCommand}"/>
+                <AppBarButton Icon="Play" Label="Play" Command="{Binding PlayCommand}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

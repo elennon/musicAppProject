@@ -13,8 +13,10 @@ namespace MyMusic.DAL
         ObservableCollection<Track> GetAllTracks();
         ObservableCollection<Track> GetTracks();
         Track GetThisTrack(int id);
+        Track GetThisTrack(string artist, string name);
         ObservableCollection<Track> GetTracksLessQpicks();
         ObservableCollection<Track> GetQuickPicks();
+        ObservableCollection<Track> GetQuickPicksWithTempo();
         ObservableCollection<Track> GetTopTracks();
         ObservableCollection<Track> GetBinnedTracks();
         ObservableCollection<Track> GetTracksByArtist(int id);
@@ -29,6 +31,7 @@ namespace MyMusic.DAL
         void OutFromQuickPick(int trackId);
         void BinThis(int trackId);
         void BackIn(int trackId);
+        void AddLike(int trackId, bool ifLiked);
         int DoPercent(Track tr);
         void DoAllPercent();
 
@@ -41,6 +44,7 @@ namespace MyMusic.DAL
         string[] ShuffleTopPlays();
         string[] ShuffleQuickPicks();
         string[] ShufflePlaylist(List<Track> list);
+        string[] TracksToArray(List<Track> trks);
 
         ObservableCollection<Artist> GetArtists();
         ObservableCollection<Album> GetAlbums();
@@ -56,6 +60,7 @@ namespace MyMusic.DAL
         ObservableCollection<Track> GetPlaylistTracks(Playlist pl);
         ObservableCollection<Track> GetTracksLessThisPlaylist(Playlist pl);
         string[] GetPlayListToPlay(int id);
+        Task<List<Track>> GetPrologList();
 
         ///     api calls
         Task<string> GetGSSessionId(string nme, string pword);
@@ -71,9 +76,16 @@ namespace MyMusic.DAL
         void RemoveFromPlaylist(int playlistId, int trackId);
         void RemovePlaylist(Playlist pl);
 
-        void BackUpDb();
-        void GetApiFillDB();
-        void fillDB();
+        //void BackUpDb();
+        Task FillRadioDB();
+        
+        Task fillDB3();
+        Task fillDB4();
+        Task fillDbFromXml();
+        
         Task SortPics();
+        Task AddArtistName();
+        Task SyncWithApi();     
+        Task SyncDB();
     }
 }

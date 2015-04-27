@@ -7,10 +7,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace MyMusic.Models
 {
+    
     public class Track
     {
         private IRepository repo = new Repository();
@@ -18,7 +20,7 @@ namespace MyMusic.Models
         [PrimaryKey, AutoIncrement]
         public int TrackId { get; set; }
         public string Name { get; set; }
-        public string Artist { get; set; }
+        public string ArtistName { get; set; }
 
         [ForeignKey(typeof(Artist))]
         public int ArtistId { get; set; }
@@ -28,24 +30,40 @@ namespace MyMusic.Models
 
         [ForeignKey(typeof(Genre))]
         public int GenreId { get; set; }
+        public string Genre { get; set; }
 
         public int OrderNo { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }
-        
+
+        private int _perCentRate;
+
         public int PerCentRate
         {
-            get
+            get 
             {
-                return repo.DoPercent(this);
+                _perCentRate = repo.DoPercent(this);
+                return _perCentRate; 
             }
-            protected set { }
+            set { _perCentRate = value; }
         }
+        
+        //public int PerCentRate
+        //{
+        //    get
+        //    {
+        //        return repo.DoPercent(this);
+        //    }
+        //    //protected set { }
+        //    public set { }
+        //}
+
         public string ImageUrl { get; set; }
 
         public string FileName { get; set; }
         public DateTime DateAdded { get; set; }
+        public DateTime DateAddedToQuickPick { get; set; }
 
         private bool inTheBin = false;
         public bool InTheBin
@@ -53,6 +71,8 @@ namespace MyMusic.Models
             get { return inTheBin; }
             set { inTheBin = value; }
         }
+        public bool Liked { get; set; }
+        public bool DisLiked { get; set; }
 
         public bool InQuickPick { get; set; }
 
@@ -67,27 +87,11 @@ namespace MyMusic.Models
         public override string ToString()
         {
             //return string.Format("e: {0}, t:{1}, e+t:{2} ({3})%", energy, tempo, all,  PerCentRate);
-            return string.Format("rated: {0} ({1})%",Rating, PerCentRate);
+            return string.Format("rated: {0}", PerCentRate);
         }
-
-        //public Rating Rating
-        //{
-        //    get
-        //    {
-        //        return Rating.(this.energy, this.liveness, this.loudness, this.tempo, this.added);
-        //    }
-        //    protected set { }
-        //}
-        public double Rating
-        {
-            get
-            {
-                return energy + tempo + liveness + loudness;
-            }
-            protected set { }
-        }
-        
-        public bool NoSummary { get; set; }
+       
+        public bool Summary { get; set; }
+        public bool PicGot { get; set; }
         public int key { get; set; }
         public string analysis_url { get; set; }
         public double energy { get; set; }
@@ -110,14 +114,15 @@ namespace MyMusic.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public object ArtistId { get; set; }
+        public DateTime DateAdded { get; set; }
+        public double Rating { get; set; }
+
         public string GSSongKey { get; set; }
         public string GSSongKeyUrl { get; set; }
         public string GSServerId { get; set; }
 
         public string ArtistName { get; set; }
-        public object Artist { get; set; }
-        
+
         public int key { get; set; }
         public string analysis_url { get; set; }
         public double energy { get; set; }

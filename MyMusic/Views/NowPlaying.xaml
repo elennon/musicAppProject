@@ -27,39 +27,58 @@
 
     <Grid x:Name="LayoutRoot">
 
-        <Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >
-                <Image Width="50" Height="50" Name="imgNote"  Source="/Assets/Picture1.png" Stretch="Fill"></Image>
-                <TextBlock Text="MY MUSIC" Style="{StaticResource BaseTextBlockStyle}" Margin="12,0"/>
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,18" >            
+                <TextBlock Text="Now Playing" FontSize="28" Margin="12,0"/>
             </StackPanel>
-        </StackPanel>
-       
-        <Grid x:Name="Playing" Grid.Row="1" Margin="12,0,12,0">
-            <!--<ProgressRing x:Name="LoadingBar" IsActive="{Binding DataContext.IsVisible}" Height="4" HorizontalAlignment="Stretch"
-                          Visibility="{Binding DataContext.IsVisible, ElementName=LayoutRoot, 
-                        Converter={StaticResource BooleanToVisibilityConverter}}"/>-->
-            
-            <StackPanel>
-                
-                <Image Source="{Binding TrImage}" ></Image>
-                <TextBlock Text="{Binding TrackName}" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" ></TextBlock>
-                <ProgressRing Visibility="{Binding IsVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+            <ProgressRing Visibility="{Binding IsVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
                         IsActive ="True"                        
                         MinHeight="70"
                         MinWidth="70">
-                </ProgressRing>
+            </ProgressRing>
+        </StackPanel>
+       
+        <Grid x:Name="Playing" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>               
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" >                
+                <Image Source="{Binding TrImage}" Width="260" Height="260" Stretch="Fill" Margin="15,0,8,0" ></Image>                
+                
+                <StackPanel Orientation="Vertical" Margin="0,50,0,0"  >
+                    <Image Source="/Assets/fav.png" Width="58" Height="58" Stretch="Fill" >
+                        <i:Interaction.Behaviors>                           
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding DataContext.LikedCommand, ElementName=Playing}" />                                                          
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Image>
+                    <Image Source="/Assets/td2.png" Margin="0,50,0,0" Width="46" Height="46" Stretch="Fill" >
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <core:InvokeCommandAction Command="{Binding DataContext.DislikeCommand, ElementName=Playing}" />                                                           
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Image>
+                </StackPanel>               
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="12,0,0,0">
+                <Slider Value="{Binding TrackProgress, Mode=TwoWay}" Height="40"
+                         Background="LightGray" Foreground="SlateGray"
+                        Minimum="0" Maximum="{Binding duration, Mode=TwoWay}"
+                        HorizontalAlignment="Left" Width="280"></Slider>
+
+                <TextBlock Text="{Binding TrackName}" HorizontalAlignment="Left" 
+                       Style="{StaticResource TitleTextBlockStyle}" ></TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

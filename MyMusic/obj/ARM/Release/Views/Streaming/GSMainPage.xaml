@@ -1,0 +1,95 @@
+﻿<common:BindablePage  
+    x:Class="MyMusic.Views.Streaming.GSMainPage"
+    xmlns:common="using:MyMusic.Common" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMusic.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:cmds="using:MyMusic.Converters"
+    DataContext="{Binding Source={StaticResource Locator}, Path=GSMainPageViewModel}"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource TextStyleLargeFontSize}"
+    Foreground="{StaticResource PhoneForegroundBrush}"    
+    >
+    <i:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </core:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    <Page.Resources>
+
+        <cmds:ItemClickedConverter x:Name="ItemClickedConverter" />
+
+        <DataTemplate x:Key="HubSectionHeaderTemplate">
+            <TextBlock Margin="0,0,0,-9.5" FontSize="34" Text="{Binding}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TwoLineItemTemplate">
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,0" Grid.Column="0" HorizontalAlignment="Left">
+                    <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="79" Width="79"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="14.5,0,0,0">
+                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Hub x:Name="Hub" Header="Music central"  >
+            <Hub.Background>
+                <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/rnr.jpg"></ImageBrush>
+            </Hub.Background>
+
+            <HubSection Name="firstSection" Header="Create Playlist" Width="Auto" 
+                        HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+                <DataTemplate>
+                    <ListView
+                        ItemsSource="{Binding Methods}"
+                        IsItemClickEnabled="True"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True"
+                        >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,27.5">
+                                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="ItemClick">
+                                <core:InvokeCommandAction Command="{Binding MethodSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </ListView>
+                </DataTemplate>
+            </HubSection>
+
+        </Hub>
+
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar">
+            <CommandBar.PrimaryCommands>
+                
+            </CommandBar.PrimaryCommands>           
+        </CommandBar>
+    </Page.BottomAppBar>
+
+</common:BindablePage>  
+

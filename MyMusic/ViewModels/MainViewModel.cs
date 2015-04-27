@@ -1,38 +1,66 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
+using MyMusic.HelperClasses;
 //using MyMusic.HelperClasses;
 using MyMusic.Models;
 using MyMusic.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace MyMusic.ViewModels
 {
-    public class MainViewModel : ViewModelBase, INavigable
+    public class MainViewModel : ViewModelBase, INavigable, INotifyPropertyChanged
     {
         private Repository repo =new Repository();
         private INavigationService _navigationService;
-        public ObservableCollection<RadioGenre> Genres { get; set; }
+
+        private ObservableCollection<RadioGenre> _genres;
+        public ObservableCollection<RadioGenre> Genres
+        {
+            get
+            {
+                return _genres;
+            }
+            set
+            {
+                if (_genres != value)
+                {
+                    _genres = value;
+                    NotifyPropertyChanged("Genres");
+                }
+            }
+        } 
+        
         public ObservableCollection<DataGroup> Collections { get; set; }
         public ObservableCollection<DataGroup> Streams { get; set; }
+
+        private bool _isVisible = false;
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set { _isVisible = value; NotifyPropertyChanged("IsVisible"); }
+        }
 
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
         public RelayCommand<RadioGenre> RadioItemSelectedCommand { get; set; }
         public RelayCommand<DataGroup> CollectionItemSelectedCommand { get; set; }
         public RelayCommand<DataGroup> PlaylistItemSelectedCommand { get; set; }
-        public RelayCommand NowPlayingCommand { get; set; }
-        public RelayCommand BackUpCommand { get; set; }
-        public RelayCommand FillDbCommand { get; set; }
-        public RelayCommand TestCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand NowPlayingCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand BackUpCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand FillDbCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand TestCommand { get; set; }
 
         public MainViewModel(INavigationService navigationService)
         {
@@ -44,32 +72,35 @@ namespace MyMusic.ViewModels
             this.RadioItemSelectedCommand = new RelayCommand<RadioGenre>(OnRadioItemSelectedCommand);
             this.CollectionItemSelectedCommand = new RelayCommand<DataGroup>(OnCollectionItemSelectedCommand);
             this.PlaylistItemSelectedCommand = new RelayCommand<DataGroup>(OnPlaylistItemSelectedCommand);
-            this.NowPlayingCommand = new RelayCommand(OnNowPlayingCommand);
-            this.BackUpCommand = new RelayCommand(OnBackUpCommand);
-            this.FillDbCommand = new RelayCommand(OnFillDbCommand);
-            this.TestCommand = new RelayCommand(OnTestCommand);
-            
+            this.NowPlayingCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnNowPlayingCommand);
+            this.BackUpCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnBackUpCommand);
+            this.FillDbCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnFillDbCommand);
+            this.TestCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnTestCommand);            
         }
 
         #region Commands
 
         private async void OnTestCommand()
         {
-            //await repo.GetEchoNestInfo();
+            //await repo.AddDuration();
             //string rUrl = "radio,http://stream209a-he.grooveshark.com/stream.php?streamKey=d2f3c858ebfa71e7cc0d472d6307ef6ab39bfe07_55060902_de997c_17073f1_1811fc720_8_0," + "138";
             //_navigationService.NavigateTo("NowPlaying", rUrl);
             //await repo.SortPics();
            // await repo.GetSimilarLastFmTracks("nofx", 5);
         }
 
-        private void OnFillDbCommand()
+        private async void OnFillDbCommand()
         {
-            repo.fillDB();
+          //  repo.fillDB();
+            await Task.Run(async delegate()
+            {
+                await repo.SortPics();
+            });
         }
 
         private void OnBackUpCommand()
         {
-            repo.BackUpDb();
+            //repo.BackUpDb();
         }
 
         private void OnNowPlayingCommand()
@@ -116,34 +147,70 @@ namespace MyMusic.ViewModels
         }
 
         private async void OnLoadCommand(RoutedEventArgs obj)
-        {
-           // await trkView.SyncDB();
-            await Task.Run(async delegate()
+        {           
+            //repo.BackUpDb();
+            //await repo.GetPrologList();
+            //await repo.SyncWithApi();          
+            Stopwatch sw = Stopwatch.StartNew();
+            var firstBitDone = false;
+            object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.DbFirstHalf);
+            if (value != null)
             {
-                await repo.SyncDB();
-            });
-
-            //Log.GetLog().Write("Main page nav tooooollooooooo");
-            //Logger.GetLogger().logChannel.LogMessage("Main page nav to");
-            //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
-            //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
-            // foreach (var item in lf)
-            // {
-            //     var ty = item.OpenReadAsync();
-            //     string text = await Windows.Storage.FileIO.ReadTextAsync(item);               
-            // }
+                firstBitDone = (bool)value;
+            }          
+            var isFirst = ((App)Application.Current).IsAppFirstStart;
+            if (isFirst == true)
+            {
+                IsVisible = true;
+                if (!firstBitDone)
+                {
+                    //await repo.fillDbFromXml();
+                    await repo.fillDB3();
+                    await repo.FillRadioDB();
+                    await repo.SortPics();
+                    ApplicationSettingsHelper.SaveSettingsValue(Constants.DbFirstHalf, true);
+                }                
+                Genres = repo.GetRadioGenres();
+                Collections = LoadCollectionList();
+                Streams = LoadStreamingList();
+                var time = (double)sw.ElapsedMilliseconds / 1000;
+                IsVisible = false;
+                await Task.Run(async delegate()
+                {                    
+                    await repo.SyncWithApi();
+       //             await repo.SyncDB();
+                    time = (double)sw.ElapsedMilliseconds / 1000;
+                    ApplicationSettingsHelper.SaveSettingsValue(Constants.IsFirstTime, false);
+                });            
+            }
+            else
+            {               
+                await Task.Run(async delegate()
+                {
+                    await repo.SyncDB();                
+                });
+            }
+            
+            Logger.GetLogger().logChannel.LogMessage("Main page loading" + DateTime.Now.ToString());
+            var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
+            foreach (var item in lf)
+            {
+                var ty = item.OpenReadAsync();
+                string text = await Windows.Storage.FileIO.ReadTextAsync(item);
+            }
         }
 
         #endregion
 
         public void Activate(object parameter)
         {
-            string hu = "22";
+            
         }
 
         public void Deactivate(object parameter)
         {
-            string hu = "22";
+            
         }
 
         public ObservableCollection<DataGroup> LoadCollectionList()
@@ -166,6 +233,20 @@ namespace MyMusic.ViewModels
             groups.Add(new DataGroup("SavedPlayList", "DIY PlayLists", "Playlists collection", "ms-appx:///Assets/radio.jpg"));
             return groups;
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
 
     }
 

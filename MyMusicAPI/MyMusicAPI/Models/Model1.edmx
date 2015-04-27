@@ -47,6 +47,39 @@
           <Property Name="GSSongKey" Type="varchar(max)" />
           <Property Name="ArtistName" Type="varchar(max)" />
           <Property Name="ArtistId" Type="int" />
+          <Property Name="GSSongKeyUrl" Type="varchar(max)" />
+          <Property Name="GSServerId" Type="varchar(max)" />
+          <Property Name="GSSongId" Type="varchar(max)" />
+          <Property Name="key" Type="int" />
+          <Property Name="analysis_url" Type="varchar(max)" />
+          <Property Name="energy" Type="float" />
+          <Property Name="liveness" Type="float" />
+          <Property Name="tempo" Type="float" />
+          <Property Name="speechiness" Type="float" />
+          <Property Name="acousticness" Type="float" />
+          <Property Name="instrumentalness" Type="float" />
+          <Property Name="mode" Type="int" />
+          <Property Name="time_signature" Type="int" />
+          <Property Name="duration" Type="float" />
+          <Property Name="loudness" Type="float" />
+          <Property Name="audio_md5" Type="varchar(max)" />
+          <Property Name="valence" Type="float" />
+          <Property Name="danceability" Type="float" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTrack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrackId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_RadioStream_ToTable">
           <End Role="RadioGenre" Type="Self.RadioGenre" Multiplicity="0..1" />
@@ -72,11 +105,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserTrack_ToTable">
+          <End Role="Track" Type="Self.Track" Multiplicity="1" />
+          <End Role="UserTrack" Type="Self.UserTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Track">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrack">
+              <PropertyRef Name="TrackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTrack_ToTable_1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserTrack" Type="Self.UserTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrack">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MusicCentralDBModelStoreContainer">
           <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RadioGenre" EntityType="Self.RadioGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RadioStream" EntityType="Self.RadioStream" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Track" EntityType="Self.Track" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTrack" EntityType="Self.UserTrack" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_RadioStream_ToTable" Association="Self.FK_RadioStream_ToTable">
             <End Role="RadioGenre" EntitySet="RadioGenre" />
             <End Role="RadioStream" EntitySet="RadioStream" />
@@ -84,6 +143,14 @@
           <AssociationSet Name="FK_Track_ToTable" Association="Self.FK_Track_ToTable">
             <End Role="Artist" EntitySet="Artist" />
             <End Role="Track" EntitySet="Track" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTrack_ToTable" Association="Self.FK_UserTrack_ToTable">
+            <End Role="Track" EntitySet="Track" />
+            <End Role="UserTrack" EntitySet="UserTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTrack_ToTable_1" Association="Self.FK_UserTrack_ToTable_1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserTrack" EntitySet="UserTrack" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -140,6 +207,16 @@
             <End Role="Artist" EntitySet="Artists" />
             <End Role="Track" EntitySet="Tracks" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="MusicCentralDBModel.User" />
+          <EntitySet Name="UserTracks" EntityType="MusicCentralDBModel.UserTrack" />
+          <AssociationSet Name="FK_UserTrack_ToTable" Association="MusicCentralDBModel.FK_UserTrack_ToTable">
+            <End Role="Track" EntitySet="Tracks" />
+            <End Role="UserTrack" EntitySet="UserTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTrack_ToTable_1" Association="MusicCentralDBModel.FK_UserTrack_ToTable_1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserTrack" EntitySet="UserTracks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Artist">
           <Key>
@@ -162,6 +239,25 @@
           <NavigationProperty Name="Artist" Relationship="MusicCentralDBModel.FK_Track_ToTable" FromRole="Track" ToRole="Artist" />
           <Property Name="GSSongKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserTracks" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable" FromRole="Track" ToRole="UserTrack" />
+          <Property Name="GSSongKeyUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GSServerId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GSSongId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="key" Type="Int32" />
+          <Property Name="analysis_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="energy" Type="Double" />
+          <Property Name="liveness" Type="Double" />
+          <Property Name="tempo" Type="Double" />
+          <Property Name="speechiness" Type="Double" />
+          <Property Name="acousticness" Type="Double" />
+          <Property Name="instrumentalness" Type="Double" />
+          <Property Name="mode" Type="Int32" />
+          <Property Name="time_signature" Type="Int32" />
+          <Property Name="duration" Type="Double" />
+          <Property Name="loudness" Type="Double" />
+          <Property Name="audio_md5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="valence" Type="Double" />
+          <Property Name="danceability" Type="Double" />
         </EntityType>
         <Association Name="FK_Track_ToTable">
           <End Type="MusicCentralDBModel.Artist" Role="Artist" Multiplicity="0..1" />
@@ -172,6 +268,48 @@
             </Principal>
             <Dependent Role="Track">
               <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserTracks" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable_1" FromRole="User" ToRole="UserTrack" />
+        </EntityType>
+        <EntityType Name="UserTrack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrackId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Track" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable" FromRole="UserTrack" ToRole="Track" />
+          <NavigationProperty Name="User" Relationship="MusicCentralDBModel.FK_UserTrack_ToTable_1" FromRole="UserTrack" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserTrack_ToTable">
+          <End Type="MusicCentralDBModel.Track" Role="Track" Multiplicity="1" />
+          <End Type="MusicCentralDBModel.UserTrack" Role="UserTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Track">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrack">
+              <PropertyRef Name="TrackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTrack_ToTable_1">
+          <End Type="MusicCentralDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="MusicCentralDBModel.UserTrack" Role="UserTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrack">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,11 +357,46 @@
           <EntitySetMapping Name="Tracks">
             <EntityTypeMapping TypeName="MusicCentralDBModel.Track">
               <MappingFragment StoreEntitySet="Track">
+                <ScalarProperty Name="danceability" ColumnName="danceability" />
+                <ScalarProperty Name="valence" ColumnName="valence" />
+                <ScalarProperty Name="audio_md5" ColumnName="audio_md5" />
+                <ScalarProperty Name="loudness" ColumnName="loudness" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="time_signature" ColumnName="time_signature" />
+                <ScalarProperty Name="mode" ColumnName="mode" />
+                <ScalarProperty Name="instrumentalness" ColumnName="instrumentalness" />
+                <ScalarProperty Name="acousticness" ColumnName="acousticness" />
+                <ScalarProperty Name="speechiness" ColumnName="speechiness" />
+                <ScalarProperty Name="tempo" ColumnName="tempo" />
+                <ScalarProperty Name="liveness" ColumnName="liveness" />
+                <ScalarProperty Name="energy" ColumnName="energy" />
+                <ScalarProperty Name="analysis_url" ColumnName="analysis_url" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="GSSongId" ColumnName="GSSongId" />
+                <ScalarProperty Name="GSServerId" ColumnName="GSServerId" />
+                <ScalarProperty Name="GSSongKeyUrl" ColumnName="GSSongKeyUrl" />
                 <ScalarProperty Name="ArtistName" ColumnName="ArtistName" />
                 <ScalarProperty Name="GSSongKey" ColumnName="GSSongKey" />
                 <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MusicCentralDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTracks">
+            <EntityTypeMapping TypeName="MusicCentralDBModel.UserTrack">
+              <MappingFragment StoreEntitySet="UserTrack">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TrackId" ColumnName="TrackId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

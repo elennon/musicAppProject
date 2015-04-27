@@ -67,7 +67,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="{Binding Artist}"                                    
+                    <TextBlock Text="{Binding ArtistName}"                                    
                                     x:Name="txtArtist" 
                                     Margin="6,0,0,0" 
                                     Style="{StaticResource ListViewItemContentTextBlockStyle}" 
@@ -361,7 +361,7 @@
                 <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/concert2.jpg"></ImageBrush>
             </Hub.Background>
 
-            <HubSection x:Uid="_allTracks" Name="AllTracksSection" Header="All Tracks" Width="Auto"
+            <HubSection Name="AllTracksSection" Header="All Tracks" Width="Auto"
                          HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <SemanticZoom x:Name="semanticZoom" ScrollViewer.HorizontalScrollMode="Disabled"                                   
@@ -375,6 +375,13 @@
                                 IsItemClickEnabled="True"
                                 SelectionMode="None"                             
                                 >
+                                <i:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="ItemClick">
+                                        <core:InvokeCommandAction Command="{Binding ItemSelectedCommand}" 
+                                                        
+                                                          InputConverter="{StaticResource ItemClickedConverter}" />
+                                    </core:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
                                 <ListView.GroupStyle>
                                     <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
                                 </ListView.GroupStyle>

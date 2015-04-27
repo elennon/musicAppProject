@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using System;
@@ -77,8 +78,52 @@ namespace MyMusic.ViewModels.StreamingPlaylists
                     ((App)Application.Current).BkPlayer.PlayThese("gsTrackList", t);
                     _navigationService.NavigateTo("NowPlaying");
                     break;
+                case "Method3":
+                    var sw = await GetSineWave();
+                    var tt = repo.SortGSListToArray(new ObservableCollection<Track>(sw));
+                    ((App)Application.Current).BkPlayer.PlayThese("gsTrackList", tt);
+                    _navigationService.NavigateTo("NowPlaying");
+                    break;
+                case "Method4":
+                    _navigationService.NavigateTo("ViewPlaylist", "ProList");                   
+                    break;
             }
             
+        }
+
+        private async Task<ObservableCollection<Track>> GetSineWave()
+        {
+            var take50 = repo.GetQuickPicksWithTempo().Take(50).ToList();     // first get top 50 played
+            List<Track> take30 = (Mix(take50)).Take(30).ToList();   // take random 30
+            List<Track> getSimilar = new List<Track>();
+            foreach (var item in take50.Take(5))                // for the 5 top, get 2 similar artists
+            {
+                var arts = await repo.GetSimilarLastFmArtists(item.ArtistName, 2);  // then 2 tracks for each
+                if (arts != null)
+                {
+                    foreach (var art in arts)
+                    {
+                        var trs = await repo.GetSimilarLastFmTracks(art.Name, 2, Session);
+                        if (trs != null)
+                        { getSimilar.AddRange(trs); }
+                    }
+                }
+            }
+            take30.AddRange(getSimilar);
+            var half1 = new List<Track>();
+            var half2 = new List<Track>();
+            for (int i = 0; i < take30.Count; i++)
+            {
+                if (i < take30.Count / 2)
+                { half1.Add(take30[i]); }
+                else
+                { half2.Add(take30[i]); }
+                
+            }
+            half1 = half1.OrderByDescending(a => a.tempo).ToList();
+            half2 = half2.OrderByDescending(a => a.tempo).ToList();
+            half1.AddRange(half2);
+            return new ObservableCollection<Track>(half1);
         }
 
         private async Task<ObservableCollection<Track>> GetThe6040()
@@ -88,7 +133,7 @@ namespace MyMusic.ViewModels.StreamingPlaylists
             List<Track> getSimilar = new List<Track>();
             foreach (var item in take50.Take(5))                // for the 5 top, get 2 similar artists
             {
-                var arts = await repo.GetSimilarLastFmArtists(item.Artist, 2);  // then 2 tracks for each
+                var arts = await repo.GetSimilarLastFmArtists(item.ArtistName, 2);  // then 2 tracks for each
                 if (arts != null)
                 {
                     foreach (var art in arts)
@@ -125,6 +170,7 @@ namespace MyMusic.ViewModels.StreamingPlaylists
             groups.Add(new DataGroup { Title = "Relatives ", UniqueId = "Method1", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "40 / 60 Split", UniqueId = "Method2", ImagePath = "ms-appx:///Assets/music3.jpg" });
             groups.Add(new DataGroup { Title = "the Sine Wave", UniqueId = "Method3", ImagePath = "ms-appx:///Assets/music3.jpg" });
+            groups.Add(new DataGroup { Title = "I'll have what they have", UniqueId = "Method4", ImagePath = "ms-appx:///Assets/music3.jpg" });
             return groups;
         }
 

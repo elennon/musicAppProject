@@ -14,15 +14,20 @@ namespace MyMusicAPI.Controllers
     {
         // GET api/echeonestinfo
         public async Task<Track> Get(string artist, string track)
-        {
-            
+        {            
             return await EcheoNest.GetAudioSummary(artist, track);
         }
 
         // GET api/echeonestinfo/5
-        public string Get(int id)
+        public async Task<string> Get(string info)
         {
-            return "value";
+            string lfm = await LastFm.getPic(info.Split(',')[0], info.Split(',')[1]);
+            //if (!string.IsNullOrEmpty(lfm))
+            //{
+            //    tr.Image = lfm.Split(',')[0];
+            //    tr.Genre = lfm.Split(',')[1];
+            //}
+            return lfm;
         }
 
         public string Post([FromBody]string value)

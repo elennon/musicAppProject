@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using MyMusic.Views;
@@ -498,7 +499,7 @@ namespace MyMusic.ViewModels
 
         #endregion
 
-        #region methods for adding to contact groups for semantic zoom
+        #region methods for adding to groups for semantic zoom
 
         private ObservableCollection<ContactGroup> GetContactGroups(ObservableCollection<Track> collection)    // method to group all tracks alphabetically
         {

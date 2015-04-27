@@ -497,7 +497,7 @@ namespace MyMusic.ViewModels
                     {
                         TrackId = tr.TrackId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         RandomPlays = tr.RandomPlays,                
                         Plays = tr.Plays,
                         Skips = tr.Skips,
@@ -525,7 +525,7 @@ namespace MyMusic.ViewModels
                     {
                         TrackId = tr.TrackId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         RandomPlays = tr.RandomPlays,
                         Plays = tr.Plays,
                         Skips = tr.Skips,
@@ -552,7 +552,7 @@ namespace MyMusic.ViewModels
                     {
                         TrackId = tr.TrackId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         ImageUri = tr.ImageUrl,
                         FileName = tr.FileName
                     };
@@ -575,7 +575,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,                      
+                        Artist = tr.ArtistName,                      
                         ImageUri = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin,
@@ -601,7 +601,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         ImageUri = tr.ImageUrl,
                         FileName = tr.FileName,
                         InTheBin = tr.InTheBin
@@ -624,7 +624,7 @@ namespace MyMusic.ViewModels
                     {
                         TrackId = tr.TrackId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         FileName = tr.FileName
                     };
                     _tracks.Add(trk);
@@ -742,7 +742,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         FileName = tr.FileName,
                         ImageUri = tr.ImageUrl
                     };
@@ -768,7 +768,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         FileName = tr.FileName,
                         ImageUri = tr.ImageUrl,
                         Album = album.Name
@@ -795,7 +795,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,
+                        Artist = tr.ArtistName,
                         FileName = tr.FileName,
                         GenreId = tr.GenreId,
                         ImageUri = tr.ImageUrl,
@@ -822,7 +822,7 @@ namespace MyMusic.ViewModels
                         ArtistId = tr.ArtistId,
                         AlbumId = tr.AlbumId,
                         Name = tr.Name,
-                        Artist = tr.Artist,                      
+                        Artist = tr.ArtistName,                      
                         ImageUri = tr.ImageUrl,
                         FileName = tr.FileName
                     };
@@ -841,7 +841,7 @@ namespace MyMusic.ViewModels
                 int counter = 0;
                 foreach (var item in trks)
                 {
-                    trkArray[counter] = item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle";
+                    trkArray[counter] = item.TrackId.ToString() + "," + item.FileName + "," + item.ArtistName + ",notShuffle";
                     counter++;
                 }               
                 return trkArray;
@@ -988,17 +988,17 @@ namespace MyMusic.ViewModels
                     Track tr = new Track();
                     if (song.Artist.Contains("{") || song.Artist == string.Empty )
                     {
-                        if (song.AlbumArtist != string.Empty) { tr.Artist = song.AlbumArtist; tr.Name = song.Title; }
+                        if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
                         else
                         {
                             string[] splitter = song.Title.Split('-');
                             tr.Name = splitter[splitter.Count() - 1];
-                            tr.Artist = splitter[0];  
+                            tr.ArtistName = splitter[0];  
                         }
                                                  
                     }
                     else
-                    { tr = new Track { Name = song.Title, Artist = song.Artist, Plays = 0, Skips = 0, FileName = item.Name }; }
+                    { tr = new Track { Name = song.Title, ArtistName = song.Artist, Plays = 0, Skips = 0, FileName = item.Name }; }
 
          //           MyMusic.HelperClasses.Track getPicAndGenre = await getPic(song.Artist, song.Title);
         //            tr.ImageUri = getPicAndGenre.ImageUri;
@@ -1144,7 +1144,7 @@ namespace MyMusic.ViewModels
                 {
                     try
                     {
-                        lfm tt = await getGenre(tr.Artist, tr.Name);
+                        lfm tt = await getGenre(tr.ArtistName, tr.Name);
                         if (tt != null)
                         {                            
                             if (tt.track.toptags.FirstOrDefault() != null)
@@ -1166,7 +1166,7 @@ namespace MyMusic.ViewModels
                                 tr.GenreId = grr.GenreId;
                             }
                         }
-                        tr.ImageUrl = await getPic(tr.Artist, tr.Name);
+                        tr.ImageUrl = await getPic(tr.ArtistName, tr.Name);
                         db.Update(tr);
                     }
                     catch (Exception exx)

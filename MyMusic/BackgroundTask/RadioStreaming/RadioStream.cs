@@ -46,7 +46,7 @@ namespace BackgroundTask.RadioStreaming
             SetUpStream(uri);            
         }
       
-        private async void SetUpStream(string Url)      // gets an iinput stream from url, reads a chunk to get audio properties, then feeds into a buffer stream
+        private async void SetUpStream(string Url)      // gets an input stream from url, reads a chunk to get audio properties, then feeds into a buffer stream
         {
             bufferStream = new InMemoryRandomAccessStream();
             httpClient = new HttpClient();

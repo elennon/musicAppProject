@@ -1,4 +1,5 @@
-﻿using MyMusicAPI.Models;
+﻿using MyMusicAPI.Controllers;
+using MyMusicAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,16 @@ namespace MyMusicAPI.DAL
 {
     public interface IMusicCentralRepo
     {
+        void AddUser(string userId);
+        bool CheckIfNewUser(string userId);
+        void CheckUserTracks(string userId, List<Track> trks);
+
+        //void FillPrologDb();
+        List<Track> GetSameTaste(string id);
+        List<Track> getTracks();
+        List<Track> getTracks(string id);
+        int getTrackCount(string userId);
+
         //string test();
         IEnumerable<RadioStream> GetAllStations();
         IEnumerable<RadioGenre> GetAllStationGenres();
@@ -20,6 +31,8 @@ namespace MyMusicAPI.DAL
         void insertGenre(RadioGenre gn);
         void insertRadioStation(RadioStream rs);
         void UpdateStation(RadioStream st, bool isOk);
+        void SeedDb();
+        //void SeedDb();
         void DropDb();
     }
 }

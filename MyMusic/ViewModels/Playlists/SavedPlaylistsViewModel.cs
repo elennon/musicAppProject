@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using System;
@@ -60,7 +61,6 @@ namespace MyMusic.ViewModels
                 _navigationService.NavigateTo("NowPlaying", playThese);
             }            
         }
-
 
         private void OnItemSelectedCommand(Playlist obj)
         {

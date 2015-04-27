@@ -2,12 +2,17 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.Serialization;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using Xml2CSharp;
 
 namespace MyMusicAPI.Helper_Classes
 {
@@ -44,28 +49,47 @@ namespace MyMusicAPI.Helper_Classes
 
         public async static Task<string> getPic(string artist, string title)
         {
-            string pic = "";
+            string picNGenre = "";
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
-            string url = string.Format("?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
-            string xmlString = await client.GetStringAsync(url);
-            XDocument doc = XDocument.Parse(xmlString);
+            try
+            {          
+                client.BaseAddress = new Uri("http://ws.audioscrobbler.com/2.0/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+                string url = string.Format("?method=track.getInfo&api_key=6101eb7c600c8a81166ec8c5c3249dd4&artist={0}&track={1}", artist, title);
+                string xmlString = await client.GetStringAsync(url);
+                XDocument doc = XDocument.Parse(xmlString);
+                XmlSerializer serializer = new XmlSerializer(typeof(lfm));
+         
+                MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlString));
+                lfm result = (lfm)serializer.Deserialize(memStream);
 
-            if (doc.Root.FirstAttribute.Value == "failed")
-            {
-                pic = "ms-appx:///Assets/radio672.png";
-            }
-            else
-            {
-                if (doc.Descendants("image").Any())
+                if (doc.Root.FirstAttribute.Value == "failed")
                 {
-                    pic = (from el in doc.Descendants("image")
-                           where (string)el.Attribute("size") == "large"
-                           select el).First().Value;
+                    picNGenre = "ms-appx:///Assets/radio672.png";
+                }
+                else
+                {
+                    picNGenre = result.Track.Album.Image.Where(a => a.Size == "large").FirstOrDefault().Text;
+                    picNGenre = picNGenre + "," + result.Track.Toptags.Tag.FirstOrDefault().Name;
                 }
             }
-            return pic;
+            catch (Exception)
+            {
+                throw;
+            }
+            return picNGenre;
+        }
+
+        public static object Deserialize(string xml, Type toType)
+        {
+            using (Stream stream = new MemoryStream())
+            {
+                byte[] data = System.Text.Encoding.UTF8.GetBytes(xml);
+                stream.Write(data, 0, data.Length);
+                stream.Position = 0;
+                DataContractSerializer deserializer = new DataContractSerializer(toType);
+                return deserializer.ReadObject(stream);
+            }
         }
 
     }
@@ -155,7 +179,107 @@ namespace MyMusicAPI.Helper_Classes
     {
         public Toptracks toptracks { get; set; }
     }
+
 }
+
+
+    
+namespace Xml2CSharp
+{
+//	[XmlRoot(ElementName="streamable")]
+	public class Streamable {
+		[XmlAttribute(AttributeName="fulltrack")]
+		public string Fulltrack { get; set; }
+		[XmlText]
+		public string Text { get; set; }
+	}
+
+//	[XmlRoot(ElementName="artist")]
+	public class Artist {
+		[XmlElement(ElementName="name")]
+		public string Name { get; set; }
+		[XmlElement(ElementName="mbid")]
+		public string Mbid { get; set; }
+		[XmlElement(ElementName="url")]
+		public string Url { get; set; }
+	}
+
+//	[XmlRoot(ElementName="image")]
+	public class Image {
+		[XmlAttribute(AttributeName="size")]
+		public string Size { get; set; }
+		[XmlText]
+		public string Text { get; set; }
+	}
+
+//	[XmlRoot(ElementName="album")]
+	public class Album {
+		[XmlElement(ElementName="artist")]
+		public string Artist { get; set; }
+		[XmlElement(ElementName="title")]
+		public string Title { get; set; }
+		[XmlElement(ElementName="mbid")]
+		public string Mbid { get; set; }
+		[XmlElement(ElementName="url")]
+		public string Url { get; set; }
+		[XmlElement(ElementName="image")]
+		public List<Image> Image { get; set; }
+		[XmlAttribute(AttributeName="position")]
+		public string Position { get; set; }
+	}
+
+//	[XmlRoot(ElementName="tag")]
+	public class Tag {
+		[XmlElement(ElementName="name")]
+		public string Name { get; set; }
+		[XmlElement(ElementName="url")]
+		public string Url { get; set; }
+	}
+
+//	[XmlRoot(ElementName="toptags")]
+	public class Toptags {
+		[XmlElement(ElementName="tag")]
+		public List<Tag> Tag { get; set; }
+	}
+
+//	[XmlRoot(ElementName="track")]
+	public class Track {
+		[XmlElement(ElementName="id")]
+		public string Id { get; set; }
+		[XmlElement(ElementName="name")]
+		public string Name { get; set; }
+		[XmlElement(ElementName="mbid")]
+		public string Mbid { get; set; }
+		[XmlElement(ElementName="url")]
+		public string Url { get; set; }
+		[XmlElement(ElementName="duration")]
+		public string Duration { get; set; }
+		[XmlElement(ElementName="streamable")]
+		public Streamable Streamable { get; set; }
+		[XmlElement(ElementName="listeners")]
+		public string Listeners { get; set; }
+		[XmlElement(ElementName="playcount")]
+		public string Playcount { get; set; }
+		[XmlElement(ElementName="artist")]
+		public Artist Artist { get; set; }
+		[XmlElement(ElementName="album")]
+		public Album Album { get; set; }
+		[XmlElement(ElementName="toptags")]
+		public Toptags Toptags { get; set; }
+	}
+
+    [Serializable()]
+    [XmlRoot(ElementName="lfm")]
+	public class lfm {
+		[XmlElement(ElementName="track")]
+		public Track Track { get; set; }
+		[XmlAttribute(AttributeName="status")]
+		public string Status { get; set; }
+	}
+
+}
+
+
 
 
 

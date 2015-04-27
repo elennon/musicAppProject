@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using System;
@@ -136,7 +137,7 @@ namespace MyMusic.ViewModels.Playlists
         {
             _navigationService = navigationService;
 
-            var trs = repo.GetTracks().OrderByDescending(a => a.Rating).ToList();
+            var trs = repo.GetTracks().OrderByDescending(a => a.PerCentRate).ToList();
             //Tracks = new ObservableCollection<Track>(trs);
 
             var trs2 = repo.GetTracks().OrderByDescending(a => a.energy).ToList();
@@ -147,9 +148,6 @@ namespace MyMusic.ViewModels.Playlists
 
             var trs4 = repo.GetTracks().OrderByDescending(a => a.tempo).ToList();
             Tracks4 = new ObservableCollection<Track>(trs4);
-
-            Added = trs.Average(a => a.Rating);
-            AddedMax = trs.OrderByDescending(a => a.Rating).Select(b => b.Rating).Take(1).First();
 
             Energy = (trs.Average(a => a.energy)) * 10;
             EnergyMax = (trs.OrderByDescending(a => a.energy).Select(b => b.energy).Take(1).First()) * 10;
@@ -200,8 +198,6 @@ namespace MyMusic.ViewModels.Playlists
 
             return trs;
         }
-
-
 
         private void OnItemSelectedCommand(Track obj)
         {

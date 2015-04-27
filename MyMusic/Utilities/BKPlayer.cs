@@ -26,23 +26,49 @@ namespace MyMusic.Utilities
         private AutoResetEvent SererInitialized;
 
         public NowPlayingViewModel npi { get; set; }
+        public bool okStarted = false;
+        public Track CurrentTrack { get; set; }
         
         public string[] orders;
         private bool isPlayRadio = false, isPlayGSTrack = false;
+        DispatcherTimer playTimer;
 
         public BKPlayer()
         {
             SererInitialized = new AutoResetEvent(false);
-            AddMediaPlayerEventHandlers();
+            AddMediaPlayerEventHandlers();           
+            playTimer = new DispatcherTimer();
+            playTimer.Interval = TimeSpan.FromMilliseconds(1000); //one second
+            playTimer.Tick += playTimer_Tick;
+            playTimer.Start();
+        }
+
+        void playTimer_Tick(object sender, object e)
+        {
+            if (okStarted)
+            {
+                if (BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Playing ||
+                     BackgroundMediaPlayer.Current.CurrentState == MediaPlayerState.Paused )
+                {
+                    npi.TrackProgress = BackgroundMediaPlayer.Current.Position.TotalSeconds;
+                    if ((Convert.ToDouble((BackgroundMediaPlayer.Current.NaturalDuration).TotalSeconds)) - BackgroundMediaPlayer.Current.Position.TotalSeconds < 10)
+                        okStarted = false;
+                }
+            }
         }
 
         public void PlayThese(string listType, string[] list)
         {
             orders = list;
-            if (listType == "gsTracks")
-            { PlayThese("gsTrackList"); }
-            else
-            { PlayThese("genPlaylist"); }
+            switch (listType)
+            {        
+                case "gsTrackList":
+                    PlayThese("gsTrackList");
+                    break;
+                case "playList":
+                    PlayThese("genPlaylist");
+                    break;
+            }
         }
 
         public void PlayThese(string request)
@@ -149,7 +175,7 @@ namespace MyMusic.Utilities
 
             for (int i = 0; i < trks.Count; i++)
             {
-                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].Artist + ",notShuffle";
+                trkArray[i] = trks[i].TrackId.ToString() + "," + trks[i].FileName + "," + trks[i].ArtistName + ",notShuffle";
             }
             return trkArray;
         }
@@ -164,7 +190,7 @@ namespace MyMusic.Utilities
                 if (item.TrackId == trackId) { yes = true; }
                 if (yes)
                 {
-                    tracks.Add(item.TrackId.ToString() + "," + item.FileName + "," + item.Artist + ",notShuffle");
+                    tracks.Add(item.TrackId.ToString() + "," + item.FileName + "," + item.ArtistName + ",notShuffle");
                 }
             }
 
@@ -182,7 +208,7 @@ namespace MyMusic.Utilities
             string[] trks = new string[tracks.Count];
             for (int i = 0; i < tracks.Count; i++)
             {
-                trks[i] = tracks[i].TrackId.ToString() + "," + tracks[i].FileName + "," + tracks[i].Artist + ",notshuffle";
+                trks[i] = tracks[i].TrackId.ToString() + "," + tracks[i].FileName + "," + tracks[i].ArtistName + ",notshuffle";
             }
             return trks;
         }
@@ -201,8 +227,7 @@ namespace MyMusic.Utilities
             if (currentTrack[0] != string.Empty && currentTrack[0] != "True")
             {
                 if (currentTrack.Length > 1)
-                {
-                  
+                {                  
                     bool isNumeric = int.TryParse(currentTrack[0], out trackId);
                     if (isNumeric)
                     {
@@ -226,12 +251,12 @@ namespace MyMusic.Utilities
                     else
                     {
                         tr.Name = currentTrack[1];
-                        tr.Artist = currentTrack[0];
+                        tr.ArtistName = currentTrack[0];
                     }
                 }
                 else
                 {
-                    tr.Artist = "Radio :";
+                    tr.ArtistName = "Radio :";
                     tr.Name = currentTrack[0];
                     //tbkSongName.Text = currentTrack[0];   // this is a radio station
                 }
@@ -245,7 +270,11 @@ namespace MyMusic.Utilities
                         string pic = tr.ImageUrl;
                         if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/radio672.png"; }
                         npi.TrImage = pic;    // the image for this song
-                        npi.TrackName = tr.Artist + "-" + tr.Name;                                                                   
+                        npi.TrackName = tr.ArtistName + "-" + tr.Name;
+                        
+                        npi.duration = Convert.ToDouble((BackgroundMediaPlayer.Current.NaturalDuration).TotalSeconds);
+                        okStarted = true;
+                        CurrentTrack = repo.GetThisTrack(tr.ArtistName, tr.Name);
                         break;
                     case Constants.BackgroundTaskStarted:
                         SererInitialized.Set();

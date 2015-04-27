@@ -1,0 +1,6 @@
+﻿[ResourceMetadata]
+"ResourceId"			"split.language-ru"
+"ResourceDimensions"		"language-ru"
+
+[Files]
+"C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\split.language-ru.pri"			"resources.pri"

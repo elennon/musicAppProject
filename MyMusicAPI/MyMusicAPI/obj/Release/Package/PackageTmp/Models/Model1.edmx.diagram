@@ -8,9 +8,13 @@
         <EntityTypeShape EntityType="MusicCentralDBModel.RadioGenre" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicCentralDBModel.RadioStream" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="MusicCentralDBModel.FK_RadioStream_ToTable" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.Artist" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.Artist" Width="1.5" PointX="3" PointY="6.5" />
         <EntityTypeShape EntityType="MusicCentralDBModel.Track" Width="1.5" PointX="5.625" PointY="4.875" />
         <AssociationConnector Association="MusicCentralDBModel.FK_Track_ToTable" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.User" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.UserTrack" Width="1.5" PointX="3.125" PointY="4.25" />
+        <AssociationConnector Association="MusicCentralDBModel.FK_UserTrack_ToTable" />
+        <AssociationConnector Association="MusicCentralDBModel.FK_UserTrack_ToTable_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

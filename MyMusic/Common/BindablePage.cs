@@ -11,6 +11,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MyMusic.Common
 {
+
+    public interface INavigable
+    {
+        void Activate(object parameter);
+        void Deactivate(object parameter);
+    }
+
     public class BindablePage : Page
     {
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -26,7 +33,7 @@ namespace MyMusic.Common
         {
             base.OnNavigatedFrom(e);
 
-            ((App)Application.Current).isResumingFromTermination = false;       // set this here because its past the point of dealing with resuming from termination or resuming
+            ((App)Application.Current).isResumingFromTermination = false;  // set this here because its past the point of dealing with resuming from termination or resuming
 
             var navigableViewModel = this.DataContext as INavigable;
             if (navigableViewModel != null)

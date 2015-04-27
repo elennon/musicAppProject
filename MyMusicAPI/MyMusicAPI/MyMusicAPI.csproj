@@ -43,12 +43,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="2p, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\2p.exe</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.0.5449.1, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Documents\Prolog\New folder\examples\Prolog from .NET\tic tac toe\main\bin\Debug\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
@@ -59,6 +67,18 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="OOLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Documents\Prolog\New folder\examples\Prolog from .NET\tic tac toe\main\bin\Debug\OOLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Prolog.dll</HintPath>
+    </Reference>
+    <Reference Include="Prolog.Compiler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Prolog.Compiler.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
@@ -196,18 +216,22 @@
     <Compile Include="Controllers\GrooveSharkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OnLineRadioController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\IMusicCentralRepo.cs" />
     <Compile Include="DAL\MusicCentralRepo.cs" />
+    <Compile Include="DTO\TrackDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper_Classes\Deezer.cs" />
     <Compile Include="Helper_Classes\DirbleRadioSt.cs" />
+    <Compile Include="Helper_Classes\DtoConverter.cs" />
     <Compile Include="Helper_Classes\EcheoNest.cs" />
     <Compile Include="Helper_Classes\FilterStations.cs" />
     <Compile Include="Helper_Classes\GrooveShark.cs" />
     <Compile Include="Helper_Classes\DownloadedStations.cs" />
     <Compile Include="Helper_Classes\LastFm.cs" />
+    <Compile Include="Helper_Classes\PrologDotNet.cs" />
     <Compile Include="Models\Artist.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -236,12 +260,70 @@
     <Compile Include="Models\Track.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserTrack.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\loadProlog.txt" />
+    <Content Include="App_Data\message.txt" />
+    <Content Include="App_Data\seed.xml" />
     <Content Include="App_Data\Stations.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\SWI\bin\archive4pl.dll" />
+    <Content Include="App_Data\SWI\bin\cgi.dll" />
+    <Content Include="App_Data\SWI\bin\crypt.dll" />
+    <Content Include="App_Data\SWI\bin\dlltest.dll" />
+    <Content Include="App_Data\SWI\bin\double_metaphone.dll" />
+    <Content Include="App_Data\SWI\bin\files.dll" />
+    <Content Include="App_Data\SWI\bin\http_stream.dll" />
+    <Content Include="App_Data\SWI\bin\isub.dll" />
+    <Content Include="App_Data\SWI\bin\jpl.dll" />
+    <Content Include="App_Data\SWI\bin\json.dll" />
+    <Content Include="App_Data\SWI\bin\libarchive-13.dll" />
+    <Content Include="App_Data\SWI\bin\libeay32.dll" />
+    <Content Include="App_Data\SWI\bin\libgmp-10.dll" />
+    <Content Include="App_Data\SWI\bin\libjpeg-8.dll" />
+    <Content Include="App_Data\SWI\bin\libswipl.dll" />
+    <Content Include="App_Data\SWI\bin\memfile.dll" />
+    <Content Include="App_Data\SWI\bin\mime.dll" />
+    <Content Include="App_Data\SWI\bin\ntriples.dll" />
+    <Content Include="App_Data\SWI\bin\odbc4pl.dll" />
+    <Content Include="App_Data\SWI\bin\pdt_console.dll" />
+    <Content Include="App_Data\SWI\bin\pl2xpce.dll" />
+    <Content Include="App_Data\SWI\bin\plregtry.dll" />
+    <Content Include="App_Data\SWI\bin\plterm.dll" />
+    <Content Include="App_Data\SWI\bin\porter_stem.dll" />
+    <Content Include="App_Data\SWI\bin\process.dll" />
+    <Content Include="App_Data\SWI\bin\protobufs.dll" />
+    <Content Include="App_Data\SWI\bin\pthreadGC2.dll" />
+    <Content Include="App_Data\SWI\bin\rdf_db.dll" />
+    <Content Include="App_Data\SWI\bin\readutil.dll" />
+    <Content Include="App_Data\SWI\bin\sgml2pl.dll" />
+    <Content Include="App_Data\SWI\bin\sha4pl.dll" />
+    <Content Include="App_Data\SWI\bin\snowball.dll" />
+    <Content Include="App_Data\SWI\bin\socket.dll" />
+    <Content Include="App_Data\SWI\bin\ssl4pl.dll" />
+    <Content Include="App_Data\SWI\bin\ssleay32.dll" />
+    <Content Include="App_Data\SWI\bin\streaminfo.dll" />
+    <Content Include="App_Data\SWI\bin\swipl-ld.exe" />
+    <Content Include="App_Data\SWI\bin\swipl-rc.exe" />
+    <Content Include="App_Data\SWI\bin\swipl-win.exe" />
+    <Content Include="App_Data\SWI\bin\swipl.exe" />
+    <Content Include="App_Data\SWI\bin\table.dll" />
+    <Content Include="App_Data\SWI\bin\time.dll" />
+    <Content Include="App_Data\SWI\bin\turtle.dll" />
+    <Content Include="App_Data\SWI\bin\unicode4pl.dll" />
+    <Content Include="App_Data\SWI\bin\uri.dll" />
+    <Content Include="App_Data\SWI\bin\uuid.dll" />
+    <Content Include="App_Data\SWI\bin\xpce-stub.exe" />
+    <Content Include="App_Data\SWI\bin\zlib1.dll" />
+    <Content Include="App_Data\SWI\bin\zlib4pl.dll" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -327,6 +409,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="App_Data\sameTaste.pl" />
+    <Content Include="App_Data\SWI\bin\mkboot.bat" />
     <None Include="Properties\PublishProfiles\brinksterHosting.pubxml" />
     <None Include="Properties\PublishProfiles\host.pubxml" />
     <None Include="Properties\PublishProfiles\proj400.pubxml" />
@@ -383,6 +467,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="55082kilmaced.dmusic" version="1.0" primary="true">
+		<Qualifiers>
+			<Language>EN, EN-US</Language>
+			<Scale>240</Scale>
+		</Qualifiers>
+		<ResourceMapSubtree name="Files">
+			<NamedResource name="App.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/App.xbf">
+				<Candidate type="Path">
+					<Value>App.xbf</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="bp.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/bp.xbf">
+				<Candidate type="Path">
+					<Value>bp.xbf</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MyMusic.xr.xml" uri="ms-resource://55082kilmaced.dmusic/Files/MyMusic.xr.xml">
+				<Candidate type="Path">
+					<Value>MyMusic.xr.xml</Value>
+				</Candidate>
+			</NamedResource>
+			<ResourceMapSubtree name="Assets">
+				<NamedResource name="back.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/back.png">
+					<Candidate type="Path">
+						<Value>Assets\back.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="BadgeLogo.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/BadgeLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\BadgeLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="bin.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/bin.png">
+					<Candidate type="Path">
+						<Value>Assets\bin.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="classical.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/classical.jpg">
+					<Candidate type="Path">
+						<Value>Assets\classical.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="comedy.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/comedy.jpg">
+					<Candidate type="Path">
+						<Value>Assets\comedy.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="concert2.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/concert2.jpg">
+					<Candidate type="Path">
+						<Value>Assets\concert2.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="concert3.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/concert3.jpg">
+					<Candidate type="Path">
+						<Value>Assets\concert3.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="country2.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/country2.jpg">
+					<Candidate type="Path">
+						<Value>Assets\country2.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="dance.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/dance.jpg">
+					<Candidate type="Path">
+						<Value>Assets\dance.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="dance2.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/dance2.jpg">
+					<Candidate type="Path">
+						<Value>Assets\dance2.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="decades.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/decades.jpg">
+					<Candidate type="Path">
+						<Value>Assets\decades.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="delete.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/delete.png">
+					<Candidate type="Path">
+						<Value>Assets\delete.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="edit2.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/edit2.png">
+					<Candidate type="Path">
+						<Value>Assets\edit2.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="fav.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/fav.png">
+					<Candidate type="Path">
+						<Value>Assets\fav.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="floyd.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/floyd.jpg">
+					<Candidate type="Path">
+						<Value>Assets\floyd.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="folk.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/folk.jpg">
+					<Candidate type="Path">
+						<Value>Assets\folk.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="inter.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/inter.jpg">
+					<Candidate type="Path">
+						<Value>Assets\inter.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="jazz.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/jazz.jpg">
+					<Candidate type="Path">
+						<Value>Assets\jazz.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="jazz2.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/jazz2.jpg">
+					<Candidate type="Path">
+						<Value>Assets\jazz2.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Logo.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/Logo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\Logo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="misc.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/misc.png">
+					<Candidate type="Path">
+						<Value>Assets\misc.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="music.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/music.jpg">
+					<Candidate type="Path">
+						<Value>Assets\music.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="music2.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/music2.jpg">
+					<Candidate type="Path">
+						<Value>Assets\music2.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="music3.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/music3.jpg">
+					<Candidate type="Path">
+						<Value>Assets\music3.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="next.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/next.png">
+					<Candidate type="Path">
+						<Value>Assets\next.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="paddy.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/paddy.jpg">
+					<Candidate type="Path">
+						<Value>Assets\paddy.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="plaay.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/plaay.png">
+					<Candidate type="Path">
+						<Value>Assets\plaay.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="play3.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/play3.png">
+					<Candidate type="Path">
+						<Value>Assets\play3.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="play4.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/play4.png">
+					<Candidate type="Path">
+						<Value>Assets\play4.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="plus.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/plus.png">
+					<Candidate type="Path">
+						<Value>Assets\plus.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="pop.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/pop.jpg">
+					<Candidate type="Path">
+						<Value>Assets\pop.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="r&amp;b.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/r%26b.jpg">
+					<Candidate type="Path">
+						<Value>Assets\r&amp;b.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="radio.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/radio.jpg">
+					<Candidate type="Path">
+						<Value>Assets\radio.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="radio672.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/radio672.png">
+					<Candidate type="Path">
+						<Value>Assets\radio672.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="rap.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/rap.jpg">
+					<Candidate type="Path">
+						<Value>Assets\rap.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="rec.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/rec.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\rec.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="rec2.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/rec2.png">
+					<Candidate type="Path">
+						<Value>Assets\rec2.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="reggae.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/reggae.jpg">
+					<Candidate type="Path">
+						<Value>Assets\reggae.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="rnr.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/rnr.jpg">
+					<Candidate type="Path">
+						<Value>Assets\rnr.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="rock.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/rock.jpg">
+					<Candidate type="Path">
+						<Value>Assets\rock.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="settings.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/settings.png">
+					<Candidate type="Path">
+						<Value>Assets\settings.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Shuffle.76.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/Shuffle.76.png">
+					<Candidate type="Path">
+						<Value>Assets\Shuffle.76.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="SmallLogo.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/SmallLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\SmallLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="splash.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/splash.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\splash.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="StoreLogo.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/StoreLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\StoreLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="td2.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/td2.png">
+					<Candidate type="Path">
+						<Value>Assets\td2.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="tickk.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/tickk.png">
+					<Candidate type="Path">
+						<Value>Assets\tickk.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="tpp2.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/tpp2.png">
+					<Candidate type="Path">
+						<Value>Assets\tpp2.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="try3.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/try3.jpg">
+					<Candidate type="Path">
+						<Value>Assets\try3.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="try4.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/try4.jpg">
+					<Candidate type="Path">
+						<Value>Assets\try4.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="try5.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/try5.jpg">
+					<Candidate type="Path">
+						<Value>Assets\try5.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="try7.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/try7.jpg">
+					<Candidate type="Path">
+						<Value>Assets\try7.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="undo3.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/undo3.png">
+					<Candidate type="Path">
+						<Value>Assets\undo3.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="vintageBikes.jpg" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/vintageBikes.jpg">
+					<Candidate type="Path">
+						<Value>Assets\vintageBikes.jpg</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="WideLogo.png" uri="ms-resource://55082kilmaced.dmusic/Files/Assets/WideLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\WideLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Data">
+				<NamedResource name="debugFile.txt" uri="ms-resource://55082kilmaced.dmusic/Files/Data/debugFile.txt">
+					<Candidate type="Path">
+						<Value>Data\debugFile.txt</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Stations.xml" uri="ms-resource://55082kilmaced.dmusic/Files/Data/Stations.xml">
+					<Candidate type="Path">
+						<Value>Data\Stations.xml</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="tester.xml" uri="ms-resource://55082kilmaced.dmusic/Files/Data/tester.xml">
+					<Candidate type="Path">
+						<Value>Data\tester.xml</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="QKit">
+				<NamedResource name="QKit.xr.xml" uri="ms-resource://55082kilmaced.dmusic/Files/QKit/QKit.xr.xml">
+					<Candidate type="Path">
+						<Value>QKit\QKit.xr.xml</Value>
+					</Candidate>
+				</NamedResource>
+				<ResourceMapSubtree name="Themes">
+					<NamedResource name="Generic.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/QKit/Themes/Generic.xbf">
+						<Candidate type="Path">
+							<Value>QKit\Themes\Generic.xbf</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="UserControls">
+				<NamedResource name="ShowByArtist.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/UserControls/ShowByArtist.xbf">
+					<Candidate type="Path">
+						<Value>UserControls\ShowByArtist.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="TopPlayed.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/UserControls/TopPlayed.xbf">
+					<Candidate type="Path">
+						<Value>UserControls\TopPlayed.xbf</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Views">
+				<NamedResource name="MainPage.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/MainPage.xbf">
+					<Candidate type="Path">
+						<Value>Views\MainPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="NowPlaying.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/NowPlaying.xbf">
+					<Candidate type="Path">
+						<Value>Views\NowPlaying.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="RadioStreams.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/RadioStreams.xbf">
+					<Candidate type="Path">
+						<Value>Views\RadioStreams.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Splash.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Splash.xbf">
+					<Candidate type="Path">
+						<Value>Views\Splash.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="test.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/test.xbf">
+					<Candidate type="Path">
+						<Value>Views\test.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<ResourceMapSubtree name="Collection">
+					<NamedResource name="Albums.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Collection/Albums.xbf">
+						<Candidate type="Path">
+							<Value>Views\Collection\Albums.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="Collection.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Collection/Collection.xbf">
+						<Candidate type="Path">
+							<Value>Views\Collection\Collection.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="ShowAllTracks.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Collection/ShowAllTracks.xbf">
+						<Candidate type="Path">
+							<Value>Views\Collection\ShowAllTracks.xbf</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+				<ResourceMapSubtree name="Playlists">
+					<NamedResource name="AddToPlaylist.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Playlists/AddToPlaylist.xbf">
+						<Candidate type="Path">
+							<Value>Views\Playlists\AddToPlaylist.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="CreatePlaylist.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Playlists/CreatePlaylist.xbf">
+						<Candidate type="Path">
+							<Value>Views\Playlists\CreatePlaylist.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="GenerateFromCollection.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Playlists/GenerateFromCollection.xbf">
+						<Candidate type="Path">
+							<Value>Views\Playlists\GenerateFromCollection.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="SavedPlaylists.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Playlists/SavedPlaylists.xbf">
+						<Candidate type="Path">
+							<Value>Views\Playlists\SavedPlaylists.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="ViewPlaylist.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Playlists/ViewPlaylist.xbf">
+						<Candidate type="Path">
+							<Value>Views\Playlists\ViewPlaylist.xbf</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+				<ResourceMapSubtree name="Streaming">
+					<NamedResource name="CreateListFromQP.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Streaming/CreateListFromQP.xbf">
+						<Candidate type="Path">
+							<Value>Views\Streaming\CreateListFromQP.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="GSMainPage.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Streaming/GSMainPage.xbf">
+						<Candidate type="Path">
+							<Value>Views\Streaming\GSMainPage.xbf</Value>
+						</Candidate>
+					</NamedResource>
+					<NamedResource name="GSSignIn.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/Views/Streaming/GSSignIn.xbf">
+						<Candidate type="Path">
+							<Value>Views\Streaming\GSSignIn.xbf</Value>
+						</Candidate>
+					</NamedResource>
+				</ResourceMapSubtree>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="Microsoft.Practices.ServiceLocation.Properties.Resources">
+			<NamedResource name="ActivateAllExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.ServiceLocation.Properties.Resources/ActivateAllExceptionMessage">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Activation error occurred while trying to get all instances of type {0}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ActivationExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.ServiceLocation.Properties.Resources/ActivationExceptionMessage">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Activation error occurred while trying to get instance of type {0}, key "{1}"</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ServiceLocationProviderNotSetMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.ServiceLocation.Properties.Resources/ServiceLocationProviderNotSetMessage">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>ServiceLocationProvider must be set.</Value>
+				</Candidate>
+			</NamedResource>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="Microsoft.Practices.Unity.Properties.Resources">
+			<NamedResource name="AmbiguousInjectionConstructor" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/AmbiguousInjectionConstructor">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} has multiple constructors of length {1}. Unable to disambiguate.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentMustNotBeEmpty" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ArgumentMustNotBeEmpty">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The provided string argument must not be empty.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="BuildFailedException" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/BuildFailedException">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The current build operation (build key {2}) failed: {3} (Strategy type {0}, index {1})</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotConstructAbstractClass" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotConstructAbstractClass">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The current type, {0}, is an abstract class and cannot be constructed. Are you missing a type mapping?</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotConstructDelegate" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotConstructDelegate">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The current type, {0}, is delegate and cannot be constructed. Unity only supports resolving Func&lt;T&gt; and Func&lt;IEnumerable&lt;T&gt;&gt; by default.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotConstructInterface" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotConstructInterface">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The current type, {0}, is an interface and cannot be constructed. Are you missing a type mapping?</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotExtractTypeFromBuildKey" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotExtractTypeFromBuildKey">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Cannot extract type from build key {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectGenericMethod" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectGenericMethod">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {0}.{1}({2}) is an open generic method. Open generic methods cannot be injected.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectIndexer" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectIndexer">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The property {0} on type {1} is an indexer. Indexed properties cannot be injected.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectMethodWithOutParam" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectMethodWithOutParam">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {1} on type {0} has an out parameter. Injection cannot be performed.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectMethodWithOutParams" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectMethodWithOutParams">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {0}.{1}({2}) has at least one out parameter. Methods with out parameters cannot be injected.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectMethodWithRefParams" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectMethodWithRefParams">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {0}.{1}({2}) has at least one ref parameter.Methods with ref parameters cannot be injected.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectOpenGenericMethod" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectOpenGenericMethod">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {1} on type {0} is marked for injection, but it is an open generic method. Injection cannot be performed.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotInjectStaticMethod" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotInjectStaticMethod">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The method {0}.{1}({2}) is static. Static methods cannot be injected.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotResolveOpenGenericType" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/CannotResolveOpenGenericType">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} is an open generic type. An open generic type cannot be resolved.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ConstructorArgumentResolveOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ConstructorArgumentResolveOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolving parameter "{0}" of constructor {1}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ConstructorParameterResolutionFailed" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ConstructorParameterResolutionFailed">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The parameter {0} could not be resolved when attempting to call constructor {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ExceptionNullParameterValue" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ExceptionNullParameterValue">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Parameter type inference does not work for null values. Indicate the parameter type explicitly using a properly configured instance of the InjectionParameter or InjectionParameter&lt;T&gt; classes.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="InvokingConstructorOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/InvokingConstructorOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Calling constructor {0}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="InvokingMethodOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/InvokingMethodOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Calling method {0}.{1}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="KeyAlreadyPresent" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/KeyAlreadyPresent">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>An item with the given key is already present in the dictionary.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="LifetimeManagerInUse" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/LifetimeManagerInUse">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The lifetime manager is already registered. Lifetime managers cannot be reused, please create a new one.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MarkerBuildPlanInvoked" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MarkerBuildPlanInvoked">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The override marker build plan policy has been invoked. This should never happen, looks like a bug in the container.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MethodArgumentResolveOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MethodArgumentResolveOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolving parameter "{0}" of method {1}.{2}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MethodParameterResolutionFailed" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MethodParameterResolutionFailed">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The value for parameter "{1}" of method {0} could not be resolved. </Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MissingDependency" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MissingDependency">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Could not resolve dependency for build key {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MultipleInjectionConstructors" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MultipleInjectionConstructors">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} has multiple constructors marked with the InjectionConstructor attribute. Unable to disambiguate.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MustHaveOpenGenericType" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MustHaveOpenGenericType">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The supplied type {0} must be an open generic type.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MustHaveSameNumberOfGenericArguments" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/MustHaveSameNumberOfGenericArguments">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The supplied type {0} does not have the same number of generic arguments as the target type {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoConstructorFound" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoConstructorFound">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} does not have an accessible constructor.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoMatchingGenericArgument" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoMatchingGenericArgument">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} does not have a generic argument named "{1}"</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoOperationExceptionReason" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoOperationExceptionReason">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>while resolving</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoSuchConstructor" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoSuchConstructor">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} does not have a constructor that takes the parameters ({1}).</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoSuchMethod" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoSuchMethod">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} does not have a public method named {1} that takes the parameters ({2}).</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoSuchProperty" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NoSuchProperty">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} does not contain an instance property named {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NotAGenericType" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NotAGenericType">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} is not a generic type, and you are attempting to inject a generic parameter named "{1}".</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NotAnArrayTypeWithRankOne" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/NotAnArrayTypeWithRankOne">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} is not an array type with rank 1, and you are attempting to use a [DependencyArray] attribute on a parameter or property with this type.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="OptionalDependenciesMustBeReferenceTypes" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/OptionalDependenciesMustBeReferenceTypes">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Optional dependencies must be reference types. The type {0} is a value type.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="PropertyNotSettable" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/PropertyNotSettable">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The property {0} on type {1} is not settable.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="PropertyTypeMismatch" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/PropertyTypeMismatch">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The property {0} on type {1} is of type {2}, and cannot be injected with a value of type {3}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="PropertyValueResolutionFailed" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/PropertyValueResolutionFailed">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The value for the property "{0}" could not be resolved.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ProvidedStringArgMustNotBeEmpty" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ProvidedStringArgMustNotBeEmpty">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The provided string argument must not be empty.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ResolutionFailed" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ResolutionFailed">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolution of the dependency failed, type = "{0}", name = "{1}".
+Exception occurred while: {2}.
+Exception is: {3} - {4}
+-----------------------------------------------
+At the time of the exception, the container was:
+</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ResolutionTraceDetail" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ResolutionTraceDetail">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolving {0},{1}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ResolutionWithMappingTraceDetail" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ResolutionWithMappingTraceDetail">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolving {0},{1} (mapped from {2}, {3})</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ResolvingPropertyValueOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/ResolvingPropertyValueOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Resolving value for property {0}.{1}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="SelectedConstructorHasRefParameters" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/SelectedConstructorHasRefParameters">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The constructor {1} selected for type {0} has ref or out parameters. Such parameters are not supported for constructor injection.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="SettingPropertyOperation" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/SettingPropertyOperation">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>Setting value for property {0}.{1}</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="TypeIsNotConstructable" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/TypeIsNotConstructable">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {0} cannot be constructed. You must configure the container to supply this value.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="TypesAreNotAssignable" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/TypesAreNotAssignable">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>The type {1} cannot be assigned to variables of type {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="UnknownType" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Practices.Unity.Properties.Resources/UnknownType">
+				<Candidate qualifiers="Language-EN" isDefault="true" type="String">
+					<Value>&lt;unknown&gt;</Value>
+				</Candidate>
+			</NamedResource>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="Microsoft.Xaml.Interactions">
+			<ResourceMapSubtree name="Strings">
+				<NamedResource name="CallMethodActionValidMethodNotFoundExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/CallMethodActionValidMethodNotFoundExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot find method named {0} on object of type {1} that matches the expected signature.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="CannotAttachBehaviorMultipleTimesExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/CannotAttachBehaviorMultipleTimesExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>An instance of a behavior cannot be attached to more than one object at a time.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="CannotFindEventNameExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/CannotFindEventNameExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot find an event named {0} on type {1}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="ChangePropertyActionCannotFindPropertyNameExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/ChangePropertyActionCannotFindPropertyNameExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot find a property named {0} on type {1}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="ChangePropertyActionCannotSetValueExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/ChangePropertyActionCannotSetValueExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot assign value of type {0} to property {1} of type {2}. The {1} property can be assigned only values of type {2}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="ChangePropertyActionPropertyIsReadOnlyExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/ChangePropertyActionPropertyIsReadOnlyExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Property {0} defined by type {1} does not expose a set method and therefore cannot be modified.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="EventNotSupportedExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/EventNotSupportedExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Event {0} is not supported. Consider implementing a custom IBehavior to respond to this event.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="GoToStateActionTargetHasNoStateGroups" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/GoToStateActionTargetHasNoStateGroups">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Target {0} does not define any VisualStateGroups.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="InvalidLeftOperand" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/InvalidLeftOperand">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Binding property of type {0} cannot be used with operator {1}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="InvalidOperands" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/InvalidOperands">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Binding property of type {0} and Value property of type {1} cannot be used with operator {2}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="InvalidRightOperand" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactions/Strings/InvalidRightOperand">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Value property of type {0} cannot be used with operator {1}.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="Microsoft.Xaml.Interactivity">
+			<ResourceMapSubtree name="Strings">
+				<NamedResource name="CannotAttachBehaviorMultipleTimesExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactivity/Strings/CannotAttachBehaviorMultipleTimesExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>An instance of a behavior cannot be attached to more than one object at a time.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="DuplicateBehaviorInCollectionExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactivity/Strings/DuplicateBehaviorInCollectionExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cannot add an instance of a behavior to a BehaviorCollection more than once.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="NonActionAddedToActionCollectionExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactivity/Strings/NonActionAddedToActionCollectionExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Only IAction types are supported in an ActionCollection.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="NonBehaviorAddedToBehaviorCollectionExceptionMessage" uri="ms-resource://55082kilmaced.dmusic/Microsoft.Xaml.Interactivity/Strings/NonBehaviorAddedToBehaviorCollectionExceptionMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Only IBehavior types are supported in a BehaviorCollection.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="System.Net.Http.Properties.CommonWebApiResources">
+			<NamedResource name="ArgumentInvalidAbsoluteUri" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentInvalidAbsoluteUri">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Relative URI values are not supported: '{0}'. The URI must be absolute.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentInvalidHttpUriScheme" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentInvalidHttpUriScheme">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Unsupported URI scheme: '{0}'. The URI scheme must be either '{1}' or '{2}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentMustBeGreaterThanOrEqualTo" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentMustBeGreaterThanOrEqualTo">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Value must be greater than or equal to {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentMustBeLessThanOrEqualTo" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentMustBeLessThanOrEqualTo">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Value must be less than or equal to {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentNullOrEmpty" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentNullOrEmpty">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The argument '{0}' is null or empty.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ArgumentUriHasQueryOrFragment" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/ArgumentUriHasQueryOrFragment">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>URI must not contain a query component or a fragment identifier.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="InvalidEnumArgument" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.CommonWebApiResources/InvalidEnumArgument">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</Value>
+				</Candidate>
+			</NamedResource>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="System.Net.Http.Properties.Resources">
+			<NamedResource name="AsyncResult_CallbackThrewException" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/AsyncResult_CallbackThrewException">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Async Callback threw an exception.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="AsyncResult_MultipleCompletes" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/AsyncResult_MultipleCompletes">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The IAsyncResult implementation '{0}' tried to complete a single operation multiple times. This could be caused by an incorrect application IAsyncResult implementation or other extensibility code, such as an IAsyncResult that returns incorrect CompletedSynchronously values or invokes the AsyncCallback multiple times.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="AsyncResult_MultipleEnds" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/AsyncResult_MultipleEnds">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>End cannot be called twice on an AsyncResult.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="AsyncResult_ResultMismatch" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/AsyncResult_ResultMismatch">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>An incorrect IAsyncResult was provided to an 'End' method. The IAsyncResult object passed to 'End' must be the one returned from the matching 'Begin' or passed to the callback provided to 'Begin'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamContentNoRanges" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamContentNoRanges">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Found zero byte ranges. There must be at least one byte range provided.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamContentNotBytesRange" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamContentNotBytesRange">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The range unit '{0}' is not valid. The range must have a unit of '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamEmpty" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamEmpty">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The stream over which '{0}' provides a range view must have a length greater than or equal to 1.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamInvalidFrom" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamInvalidFrom">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The 'From' value of the range must be less than or equal to {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamNoneOverlap" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamNoneOverlap">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>None of the requested ranges ({0}) overlap with the current extent of the selected resource.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamNoOverlap" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamNoOverlap">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The requested range ({0}) does not overlap with the current extent of the selected resource.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamNotSeekable" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamNotSeekable">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The stream over which '{0}' provides a range view must be seekable.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ByteRangeStreamReadOnly" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ByteRangeStreamReadOnly">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>This is a read-only stream.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotHaveNullInList" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/CannotHaveNullInList">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>A null '{0}' is not valid.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotUseMediaRangeForSupportedMediaType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/CannotUseMediaRangeForSupportedMediaType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' of '{1}' cannot be used as a supported media type because it is a media range.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CannotUseNullValueType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/CannotUseNullValueType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' type cannot accept a null value for the value type '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CookieInvalidName" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/CookieInvalidName">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The specified value is not a valid cookie name.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="CookieNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/CookieNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Cookie cannot be null.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="DelegatingHandlerArrayContainsNullItem" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/DelegatingHandlerArrayContainsNullItem">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' list is invalid because it contains one or more null items.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="DelegatingHandlerArrayHasNonNullInnerHandler" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/DelegatingHandlerArrayHasNonNullInnerHandler">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' list is invalid because the property '{1}' of '{2}' is not null.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ErrorReadingFormUrlEncodedStream" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ErrorReadingFormUrlEncodedStream">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error reading HTML form URL-encoded data stream.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="FormUrlEncodedMismatchingTypes" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/FormUrlEncodedMismatchingTypes">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Mismatched types at node '{0}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="FormUrlEncodedParseError" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/FormUrlEncodedParseError">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing HTML form URL-encoded data, byte {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpInvalidStatusCode" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpInvalidStatusCode">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid HTTP status code: '{0}'. The status code must be between {1} and {2}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpInvalidVersion" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpInvalidVersion">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid HTTP version: '{0}'. The version must start with the characters '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageContentAlreadyRead" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageContentAlreadyRead">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' of the '{1}' has already been read.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageContentStreamMustBeSeekable" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageContentStreamMustBeSeekable">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' must be seekable in order to create an '{1}' instance containing an entity body.  </Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageErrorReading" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageErrorReading">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error reading HTTP message.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageInvalidMediaType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageInvalidMediaType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid '{0}' instance provided. It does not have a content type header with a value of '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageParserEmptyUri" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageParserEmptyUri">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>HTTP Request URI cannot be an empty string.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageParserError" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageParserError">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing HTTP message header byte {0} of message {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageParserInvalidHostCount" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageParserInvalidHostCount">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>An invalid number of '{0}' header fields were present in the HTTP Request. It must contain exactly one '{0}' header field but found {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="HttpMessageParserInvalidUriScheme" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/HttpMessageParserInvalidUriScheme">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid URI scheme: '{0}'. The URI scheme must be a valid '{1}' scheme.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="InvalidArrayInsert" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/InvalidArrayInsert">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid array at node '{0}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="JQuery13CompatModeNotSupportNestedJson" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/JQuery13CompatModeNotSupportNestedJson">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Traditional style array without '[]' is not supported with nested object at location {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="JsonSerializerFactoryReturnedNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/JsonSerializerFactoryReturnedNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' method returned null. It must return a JSON serializer instance.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="JsonSerializerFactoryThrew" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/JsonSerializerFactoryThrew">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' method threw an exception when attempting to create a JSON serializer.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MaxDepthExceeded" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MaxDepthExceeded">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The maximum read depth ({0}) has been exceeded because the form url-encoded data being read has more levels of nesting than is allowed.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MaxHttpCollectionKeyLimitReached" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MaxHttpCollectionKeyLimitReached">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The number of keys in a NameValueCollection has exceeded the limit of '{0}'. You can adjust it by modifying the MaxHttpCollectionKeys property on the '{1}' class.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatterCannotRead" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatterCannotRead">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The media type formatter of type '{0}' does not support reading because it does not implement the ReadFromStreamAsync method.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatterCannotReadSync" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatterCannotReadSync">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The media type formatter of type '{0}' does not support reading because it does not implement the ReadFromStream method.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatterCannotWrite" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatterCannotWrite">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The media type formatter of type '{0}' does not support writing because it does not implement the WriteToStreamAsync method.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatterCannotWriteSync" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatterCannotWriteSync">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The media type formatter of type '{0}' does not support writing because it does not implement the WriteToStream method.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatterNoEncoding" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatterNoEncoding">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>No encoding found for media type formatter '{0}'. There must be at least one supported encoding registered in order for the media type formatter to read or write content.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatter_BsonParseError_MissingData" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatter_BsonParseError_MissingData">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing BSON data; unable to read content as a {0}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatter_BsonParseError_UnexpectedData" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatter_BsonParseError_UnexpectedData">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing BSON data; unexpected dictionary content: {0} entries, first key '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatter_JsonReaderFactoryReturnedNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatter_JsonReaderFactoryReturnedNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' method returned null. It must return a JSON reader instance.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MediaTypeFormatter_JsonWriterFactoryReturnedNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MediaTypeFormatter_JsonWriterFactoryReturnedNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' method returned null. It must return a JSON writer instance.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MimeMultipartParserBadBoundary" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MimeMultipartParserBadBoundary">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>MIME multipart boundary cannot end with an empty space.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MultipartFormDataStreamProviderNoContentDisposition" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MultipartFormDataStreamProviderNoContentDisposition">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Did not find required '{0}' header field in MIME multipart body part.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="MultipartStreamProviderInvalidLocalFileName" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/MultipartStreamProviderInvalidLocalFileName">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Could not determine a valid local file name for the multipart body part.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NestedBracketNotValid" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/NestedBracketNotValid">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Nested bracket is not valid for '{0}' data at position {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NonNullUriRequiredForMediaTypeMapping" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/NonNullUriRequiredForMediaTypeMapping">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>A non-null request URI must be provided to determine if a '{0}' matches a given request or response message.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NoReadSerializerAvailable" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/NoReadSerializerAvailable">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>No MediaTypeFormatter is available to read an object of type '{0}' from content with media type '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ObjectAndTypeDisagree" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ObjectAndTypeDisagree">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>An object of type '{0}' cannot be used with a type parameter of '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ObjectContent_FormatterCannotWriteType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ObjectContent_FormatterCannotWriteType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The configured formatter '{0}' cannot write an object of type '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="QueryStringNameShouldNotNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/QueryStringNameShouldNotNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Query string name cannot be null.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsHttpMessageUnexpectedTermination" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsHttpMessageUnexpectedTermination">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Unexpected end of HTTP message stream. HTTP message is not complete.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartArgumentNoBoundary" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartArgumentNoBoundary">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid '{0}' instance provided. It does not have a '{1}' content-type header with a '{2}' parameter.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartArgumentNoContentType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartArgumentNoContentType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid '{0}' instance provided. It does not have a content-type header value. '{0}' instances must have a content-type header starting with '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartArgumentNoMultipart" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartArgumentNoMultipart">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Invalid '{0}' instance provided. It does not have a content type header starting with '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartErrorReading" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartErrorReading">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error reading MIME multipart body part.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartErrorWriting" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartErrorWriting">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error writing MIME multipart body part to output stream.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartHeaderParseError" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartHeaderParseError">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing MIME multipart body part header byte {0} of data segment {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartParseError" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartParseError">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Error parsing MIME multipart message byte {0} of data segment {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartStreamProviderException" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartStreamProviderException">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The stream provider of type '{0}' threw an exception.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartStreamProviderNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartStreamProviderNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The stream provider of type '{0}' returned null. It must return a writable '{1}' instance.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartStreamProviderReadOnly" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartStreamProviderReadOnly">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The stream provider of type '{0}' returned a read-only stream. It must return a writable '{1}' instance.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ReadAsMimeMultipartUnexpectedTermination" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/ReadAsMimeMultipartUnexpectedTermination">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Unexpected end of MIME multipart stream. MIME multipart message is not complete.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="RemoteStreamInfoCannotBeNull" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/RemoteStreamInfoCannotBeNull">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' method in '{1}' returned null. It must return a RemoteStreamResult instance containing a writable stream and a valid URL.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="SerializerCannotSerializeType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/SerializerCannotSerializeType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The '{0}' serializer cannot serialize the type '{1}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="UnMatchedBracketNotValid" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/UnMatchedBracketNotValid">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>There is an unmatched opened bracket for the '{0}' at position {1}.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="UnsupportedIndent" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/UnsupportedIndent">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Indentation is not supported by '{0}'.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="XmlMediaTypeFormatter_InvalidSerializerType" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/XmlMediaTypeFormatter_InvalidSerializerType">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The object of type '{0}' returned by {1} must be an instance of either XmlObjectSerializer or XmlSerializer.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="XmlMediaTypeFormatter_NullReturnedSerializer" uri="ms-resource://55082kilmaced.dmusic/System.Net.Http.Properties.Resources/XmlMediaTypeFormatter_NullReturnedSerializer">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>The object returned by {0} must not be a null value.</Value>
+				</Candidate>
+			</NamedResource>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>

@@ -38,8 +38,6 @@
     <RootPropertyPathName Name="EnergyMax" />
     <RootPropertyPathName Name="Tempo" />
     <RootPropertyPathName Name="TempoMax" />
-    <RootPropertyPathName Name="Added" />
-    <RootPropertyPathName Name="AddedMax" />
     <RootPropertyPathName Name="ShuffleCommand" />
     <RootPropertyPathName Name="CreateListFromQPViewModel" />
     <RootPropertyPathName Name="Artists" />
@@ -71,6 +69,7 @@
     <RootPropertyPathName Name="EditPic" />
     <RootPropertyPathName Name="IsVisible" />
     <RootPropertyPathName Name="DeleteSelectedCommand" />
+    <RootPropertyPathName Name="ArtistName" />
     <RootPropertyPathName Name="QpTracks" />
     <RootPropertyPathName Name="Genres" />
     <RootPropertyPathName Name="AlbumListViewSource" />
@@ -98,12 +97,14 @@
     <RootPropertyPathName Name="Collections" />
     <RootPropertyPathName Name="CollectionItemSelectedCommand" />
     <RootPropertyPathName Name="RadioItemSelectedCommand" />
-    <RootPropertyPathName Name="TestCommand" />
+    <RootPropertyPathName Name="Count" />
     <RootPropertyPathName Name="NowPlayingCommand" />
-    <RootPropertyPathName Name="BackUpCommand" />
-    <RootPropertyPathName Name="FillDbCommand" />
     <RootPropertyPathName Name="NowPlayingViewModel" />
     <RootPropertyPathName Name="TrackName" />
+    <RootPropertyPathName Name="TrackProgress" />
+    <RootPropertyPathName Name="duration" />
+    <RootPropertyPathName Name="DislikeCommand" />
+    <RootPropertyPathName Name="LikedCommand" />
     <RootPropertyPathName Name="TrImage" />
     <RootPropertyPathName Name="NextCommand" />
     <RootPropertyPathName Name="PlayPause" />
@@ -194,6 +195,7 @@
       <RootProperty Name="Tag" />
       <RootProperty Name="Inlines" />
       <RootProperty Name="CharacterSpacing" />
+      <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
@@ -361,6 +363,11 @@
       <RootProperty Name="Value" />
       <RootProperty Name="Maximum" />
       <RootProperty Name="Minimum" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="MyMusic.Views.Playlists.GenerateFromCollection" />
     <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
@@ -422,6 +429,7 @@
     <RootType FullName="MyMusic.Views.ShowAllTracks" />
     <RootType FullName="MyMusic.Views.ShowByArtist" />
     <RootType FullName="MyMusic.ViewModels.TopPlayed" />
+    <RootType FullName="MyMusic.Converters.EmptyListLabelConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
       <RootProperty Name="Template" />
     </RootType>
@@ -429,13 +437,14 @@
       <RootProperty Name="MaximumRowsOrColumns" />
       <RootProperty Name="Orientation" />
     </RootType>
-    <RootType FullName="MyMusic.Views.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Visibility" />
+      <RootProperty Name="Background" />
       <RootProperty Name="IsActive" />
       <RootProperty Name="MinHeight" />
       <RootProperty Name="MinWidth" />
     </RootType>
+    <RootType FullName="MyMusic.Views.MainPage" />
     <RootType FullName="MyMusic.Views.NowPlaying" />
     <RootType FullName="MyMusic.Views.RadioStreams" />
     <RootType FullName="MyMusic.Views.test" />

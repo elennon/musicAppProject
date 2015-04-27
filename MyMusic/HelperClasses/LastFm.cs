@@ -52,40 +52,17 @@ namespace MyMusic.HelperClasses
         public partial class lfmTrack
         {
 
-            private uint idField;
-
             private string nameField;
 
             private string mbidField;
 
             private string urlField;
 
-            private uint durationField;
-
-            private lfmTrackStreamable streamableField;
-
-            private uint listenersField;
-
-            private uint playcountField;
-
             private lfmTrackArtist artistField;
 
             private lfmTrackAlbum albumField;
 
             private lfmTrackTag[] toptagsField;
-
-            /// <remarks/>
-            public uint id
-            {
-                get
-                {
-                    return this.idField;
-                }
-                set
-                {
-                    this.idField = value;
-                }
-            }
 
             /// <remarks/>
             public string name
@@ -126,59 +103,6 @@ namespace MyMusic.HelperClasses
                 }
             }
 
-            /// <remarks/>
-            public uint duration
-            {
-                get
-                {
-                    return this.durationField;
-                }
-                set
-                {
-                    this.durationField = value;
-                }
-            }
-
-            /// <remarks/>
-            public lfmTrackStreamable streamable
-            {
-                get
-                {
-                    return this.streamableField;
-                }
-                set
-                {
-                    this.streamableField = value;
-                }
-            }
-
-            /// <remarks/>
-            public uint listeners
-            {
-                get
-                {
-                    return this.listenersField;
-                }
-                set
-                {
-                    this.listenersField = value;
-                }
-            }
-
-            /// <remarks/>
-            public uint playcount
-            {
-                get
-                {
-                    return this.playcountField;
-                }
-                set
-                {
-                    this.playcountField = value;
-                }
-            }
-
-            /// <remarks/>
             public lfmTrackArtist artist
             {
                 get
@@ -219,45 +143,6 @@ namespace MyMusic.HelperClasses
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class lfmTrackStreamable
-        {
-
-            private byte fulltrackField;
-
-            private byte valueField;
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public byte fulltrack
-            {
-                get
-                {
-                    return this.fulltrackField;
-                }
-                set
-                {
-                    this.fulltrackField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlTextAttribute()]
-            public byte Value
-            {
-                get
-                {
-                    return this.valueField;
-                }
-                set
-                {
-                    this.valueField = value;
-                }
-            }
-        }
-
-        /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         public partial class lfmTrackArtist
         {

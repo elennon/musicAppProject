@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using System;
@@ -38,13 +39,13 @@ namespace MyMusic.ViewModels
                 }
             }
         }
-
         
         public RelayCommand<RoutedEventArgs> LoadCommand { get; set; }
         public RelayCommand<Object> ItemSelectedCommand { get; set; }
 
         public GalaSoft.MvvmLight.Command.RelayCommand AddCommand { get; set; }
         public GalaSoft.MvvmLight.Command.RelayCommand DeleteCommand { get; set; }
+        public GalaSoft.MvvmLight.Command.RelayCommand PlayCommand { get; set; }
 
         public ViewPlaylistViewModel(INavigationService navigationService)
         {
@@ -53,6 +54,14 @@ namespace MyMusic.ViewModels
             this.ItemSelectedCommand = new RelayCommand<object>(OnItemSelectedCommand);
             this.AddCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnAddCommand);
             this.DeleteCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnDeleteCommand);
+            this.PlayCommand = new GalaSoft.MvvmLight.Command.RelayCommand(OnPlayCommand);
+        }
+
+        private void OnPlayCommand()
+        {            
+            var arrayLst = repo.TracksToArray(PlaylistTracks.ToList());
+            ((App)Application.Current).BkPlayer.PlayThese("playList", arrayLst);
+            _navigationService.NavigateTo("NowPlaying");
         }
 
         private void OnAddCommand()
@@ -91,13 +100,22 @@ namespace MyMusic.ViewModels
 
         #endregion
 
-        public void Activate(object parameter)
+        public async void Activate(object parameter)
         {
             if(parameter != null)
             {
-                var playlistId = (int)parameter;         
-                thisPlaylist = repo.GetThisPlaylist(playlistId);
-                PlaylistTracks = repo.GetPlaylistTracks(thisPlaylist);
+                if(parameter == "ProList")
+                {
+                    var trs = await repo.GetPrologList();
+                    PlaylistTracks = new ObservableCollection<Track>(trs);
+                }
+                else
+                {
+                    var playlistId = (int)parameter;
+                    thisPlaylist = repo.GetThisPlaylist(playlistId);
+                    PlaylistTracks = repo.GetPlaylistTracks(thisPlaylist);
+                }
+               
             }            
         }
 

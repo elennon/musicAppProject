@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using MyMusic.Common;
 using MyMusic.DAL;
 using MyMusic.Models;
 using System;
@@ -158,7 +159,7 @@ namespace MyMusic.ViewModels.StreamingPlaylists
                 return;
             }
             //var batch = await repo.GetSimilarArtists(Session, obj.Artist, NumberOfTracksPerArtist);    
-            var batch = await repo.GetSimilarLastFmArtists(obj.Artist, 5);
+            var batch = await repo.GetSimilarLastFmArtists(obj.ArtistName, 5);
             if (batch != null)
             {
                 foreach (var item in batch)

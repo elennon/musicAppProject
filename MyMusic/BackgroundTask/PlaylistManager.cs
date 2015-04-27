@@ -91,7 +91,7 @@ namespace BackgroundTask
                 {
                     return String.Empty;
                 }
-                if (playMode == PlayMode.Collection || playMode == PlayMode.Streams)
+                if (playMode == PlayMode.Collection || playMode == PlayMode.Streams )
                 {
                     if (CurrentTrackId < playTracks.Length)
                     {
@@ -144,21 +144,7 @@ namespace BackgroundTask
             //timer.Tick += timer_Tick;
             //timer.Interval = new TimeSpan(0, 0, 30);
         }
-               
-        //void lookInHere()
-        //{
-        //    string dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
-        //    string nme = "";
-        //    using (var db = new SQLiteConnection(dbPath))
-        //    {
-        //        db.RunInTransaction(() =>
-        //        {
-        //            var tr = db.Table<Track>().FirstOrDefault();
-        //            nme = tr.Name;
-        //        });
-        //    }
-        //}
-       
+         
         #region MediaPlayer Handlers
 
         void mediaPlayer_CurrentStateChanged(MediaPlayer sender, object args)
@@ -197,7 +183,7 @@ namespace BackgroundTask
                     SkipToNext();
                 }
             }
-            else if (playMode == PlayMode.Streams)
+            else if (playMode == PlayMode.Streams )
             {
                 string content = string.Format("MarkFinished,{0},{1},{2},{3}",PlayingTrack.GSSongId, PlayingTrack.GSSongKey, 
                                         PlayingTrack.GSServerId, PlayingTrack.GSSessionKey);
@@ -316,6 +302,20 @@ namespace BackgroundTask
             }
         }
 
+        //void lookInHere()
+        //{
+        //    string dbPath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "tracks.s3db");
+        //    string nme = "";
+        //    using (var db = new SQLiteConnection(dbPath))
+        //    {
+        //        db.RunInTransaction(() =>
+        //        {
+        //            var tr = db.Table<Track>().FirstOrDefault();
+        //            nme = tr.Name;
+        //        });
+        //    }
+        //}
+       
         public void SkipToPrevious()
         {
             if (CurrentTrackId == 0)
@@ -343,7 +343,7 @@ namespace BackgroundTask
             mediaPlayer.AutoPlay = false;
             mediaPlayer.SetUriSource(new Uri(PlayingTrack.GSSongKeyUrl));
 
-            timer = ThreadPoolTimer.CreatePeriodicTimer(Mark30Handler, TimeSpan.FromSeconds(30));
+            timer = ThreadPoolTimer.CreatePeriodicTimer(Mark30Handler, TimeSpan.FromSeconds(30));   // GrooveShark requirment to mark track as played > 30 seconds
         }
 
         public void PlayAllGSTracks([ReadOnlyArray()]string[] trks)
@@ -380,7 +380,7 @@ namespace BackgroundTask
             {
                 return;
             }
-        }
+        }           // have to mark track played > 30 secs for GS
 
         public async void MarkFinished(string param)
         {
@@ -402,7 +402,7 @@ namespace BackgroundTask
             {
                 return;
             }
-        }
+        }       // have to mark track fully played for GS
 
         private IAsyncOperation<Track> _GetGrooveSharkTrackUrl(string artist, string track, string sessionId)
         {

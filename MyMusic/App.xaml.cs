@@ -19,6 +19,8 @@ using Windows.Foundation.Collections;
 using Windows.Media.Playback;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.System.Profile;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -40,6 +42,32 @@ namespace MyMusic
         private TransitionCollection transitions;
 
         private TracksViewModel trkView = new TracksViewModel();
+
+        private string _userId;
+        public string UserId
+        {
+            get
+            {
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.UserId);
+                if (value == null)
+                {
+                    HardwareToken myToken = HardwareIdentification.GetPackageSpecificToken(null);
+                    IBuffer hardwareId = myToken.Id;
+                    string hd = hardwareId.GetHashCode().ToString();
+                    ApplicationSettingsHelper.SaveSettingsValue(Constants.UserId, hd);
+                    return _userId = hd;
+                }
+                else
+                {
+                    _userId = (string)value;
+                    return _userId;
+                }
+            }
+            set
+            {
+                _userId = value;
+            }
+        }
         
         private BKPlayer bkPlayer;
         public BKPlayer BkPlayer
@@ -78,6 +106,24 @@ namespace MyMusic
                 {
                     isMyBackgroundTaskRunning = (bool)value;  // ((String)value).Equals(Constants.BackgroundTaskRunning);
                     return isMyBackgroundTaskRunning;
+                }
+            }
+        }
+
+        private bool isAppFirstStart = false;
+        public bool IsAppFirstStart
+        {
+            get
+            {                
+                object value = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.IsFirstTime);
+                if (value == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    isAppFirstStart = (bool)value;  
+                    return isAppFirstStart;
                 }
             }
         }
@@ -121,16 +167,18 @@ namespace MyMusic
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            
+            
             bool test = IsMyBackgroundTaskRunning;
             //if (Log.CheckIfNull() == true)
             //{
             //    Log.GetLog().InitiateLog();
             //}
-            //if (Logger.CheckIfNull() == true)
-            //{
-            //    Logger.GetLogger().InitiateLogger();
-            //    Logger.GetLogger().Deletefile();
-            //}
+            if (Logger.CheckIfNull() == true)
+            {
+                Logger.GetLogger().InitiateLogger();
+                //Logger.GetLogger().Deletefile();
+            }
 
             //InitializeIocBindings();
             Frame rootFrame = Window.Current.Content as Frame;  // where another app takes over the UVC, bk needs to be restarted

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="d3d38c8c-5248-49ad-941b-667a7960e75f" Publisher="CN=ed" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="d3d38c8c-5248-49ad-941b-667a7960e75f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="55082kilmaced.dmusic" Publisher="CN=ECD8EF8E-3045-48FE-9EA8-1993C0944C53" Version="1.1.0.7" />
+  <mp:PhoneIdentity PhoneProductId="e90a6c57-711e-48a8-a7c3-470a0e7a9a3d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>MyMusic</DisplayName>
-    <PublisherDisplayName>ed</PublisherDisplayName>
+    <DisplayName>dmusic</DisplayName>
+    <PublisherDisplayName>kilmaced</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MyMusic.App">
-      <m3:VisualElements DisplayName="MyMusic" Square150x150Logo="Assets\rec.png" Square44x44Logo="Assets\SmallLogo.png" Description="MyMusic" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="dmusic" Square150x150Logo="Assets\rec.png" Square44x44Logo="Assets\SmallLogo.png" Description="MyMusic" ForegroundText="light" BackgroundColor="transparent">
         <m3:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Logo.png">
           <m3:ShowNameOnTiles>

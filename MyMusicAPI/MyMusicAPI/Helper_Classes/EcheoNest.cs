@@ -16,6 +16,7 @@ namespace MyMusicAPI.Helper_Classes
 
         public async static Task<Track> GetAudioSummary(string artist, string track)
         {
+            Track tr = new Track();            
             try
             {            
                 client = new HttpClient();
@@ -27,7 +28,7 @@ namespace MyMusicAPI.Helper_Classes
                 if (res.response.songs.Count > 0)
                 {
                     var r = res.response.songs.FirstOrDefault().audio_summary;
-                    Track tr = new Track
+                    tr = new Track
                     {
                         Name = track,
                         acousticness = r.acousticness,
@@ -45,10 +46,12 @@ namespace MyMusicAPI.Helper_Classes
                         tempo = r.tempo,
                         time_signature = r.time_signature,
                         valence = r.valence
-                    };
+                    };   
+                    
                     return tr;
                 }
                 else
+                    
                     return null;
             }
             catch (Exception)

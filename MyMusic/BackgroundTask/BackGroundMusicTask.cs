@@ -27,10 +27,11 @@ namespace BackgroundTask
        Collection,
        Radio,
        Streams,
+       
        Unknown
    }
 
-   public sealed class BackGroundMusicTask  :IBackgroundTask,  INotifyPropertyChanged
+   public sealed class BackGroundMusicTask  : IBackgroundTask,  INotifyPropertyChanged
     {
         #region properties
 
@@ -255,7 +256,7 @@ namespace BackgroundTask
                 ApplicationSettingsHelper.SaveSettingsValue(Constants.TrackIdNo, trkId);            // save no. for app to get image
             }
             string currentTrack = "";
-            if (PlayMode == PlayMode.Collection || PlayMode == PlayMode.Streams)
+            if (PlayMode == PlayMode.Collection || PlayMode == PlayMode.Streams )
             {
                 if (Skipped)
                 {
@@ -373,7 +374,11 @@ namespace BackgroundTask
                     case Constants.PlayGSTrack:       // GS stream selected
                         PlayMode = PlayMode.Streams;
                         playGSTracks(trksToPlay);
-                        break; 
+                        break;
+                    //case Constants.GSSineWave:       // GS stream selected
+                    //    PlayMode = PlayMode.SineWave;
+                    //    playGSTracks(trksToPlay);
+                    //    break; 
                 }
             }
         }
@@ -385,7 +390,7 @@ namespace BackgroundTask
         // Used to notify the page that a data context property changed
         private void NotifyPropertyChanged(string propertyName)
         {
-            Playlist.playMode = PlayMode;
+            Playlist.playMode = PlayMode;       // when ever play mode is set or changed here, its reflected in the playlist manager class
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

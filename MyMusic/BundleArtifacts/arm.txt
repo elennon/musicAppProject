@@ -1,0 +1,4 @@
+MainPackage=C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\MyMusic_1.1.0.7_Bundle\MyMusic_1.1.0.7_ARM.appx
+SymbolPackage=C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\AppPackages\MyMusic_1.1.0.7_Test\MyMusic_1.1.0.7_ARM.appxsym
+ResourcePack=C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\MyMusic_1.1.0.7_Bundle\MyMusic_1.1.0.7_scale-100.appx
+ResourcePack=C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\MyMusic_1.1.0.7_Bundle\MyMusic_1.1.0.7_scale-140.appx

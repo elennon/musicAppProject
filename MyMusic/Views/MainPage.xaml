@@ -24,6 +24,8 @@
     <Page.Resources>
         
         <cmds:ItemClickedConverter x:Name="ItemClickedConverter" />
+        <cmds:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter" />
+        <cmds:EmptyListLabelConverter x:Name="EmptyListLabelConverter" />
         
         <DataTemplate x:Key="HubSectionHeaderTemplate">
             <TextBlock Margin="0,0,0,-9.5" FontSize="34" Text="{Binding}"/>
@@ -57,32 +59,56 @@
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>            
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
-        <Hub x:Name="Hub" x:Uid="Hub" Header="Music central"  >
+        <Hub x:Name="Hub" x:Uid="Hub" Header="Music central" Grid.Row="1" >
             <Hub.Background>
                 <ImageBrush x:Name="bkImage" Stretch="UniformToFill" Opacity="0.3" ImageSource="/Assets/rnr.jpg"></ImageBrush>
             </Hub.Background>            
             <HubSection x:Uid="OnlineRadio" Name="RadioSection" Header="Online Radio" Width="Auto"
                           HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <GridView
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,12,0,0" Orientation="Vertical" Width="300">
+                            <TextBlock Text="Adding your tracks. Large collections may take a couple of mins! " 
+                                       Margin="0,0,0,6.5" FontSize="26" TextWrapping="Wrap"
+                                        Visibility="{Binding Genres.Count, 
+                                        Converter={StaticResource EmptyListLabelConverter}}" />
+                            
+                            <ProgressRing Visibility="{Binding IsVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        Background="Transparent"
+                                        IsActive ="True"                        
+                                        MinHeight="70"
+                                        MinWidth="70">
+                            </ProgressRing>
+                        </StackPanel>
+                        <GridView Grid.Row="1"
                         Margin="0,9.5,0,0"
                         ItemsSource="{Binding Genres}"
                         ItemTemplate="{StaticResource RadioItemTemplate}"
                         SelectionMode="None"
                         IsItemClickEnabled="True"                        
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>                                
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                        <i:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction Command="{Binding RadioItemSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
-                            </core:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                    </GridView>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction Command="{Binding RadioItemSelectedCommand}" InputConverter="{StaticResource ItemClickedConverter}" />
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </GridView>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
 
@@ -136,14 +162,14 @@
         <CommandBar IsSticky="True" x:Name="appBar">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Now Playing" Icon="Audio" Command="{Binding NowPlayingCommand}"/>
-                <AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
-                <AppBarButton Label="tester" Icon="AddFriend" Command="{Binding TestCommand}" />
+                <!--<AppBarButton Label="Short Cut" Icon="Directions" Command="{Binding TestCommand}"  />
+                <AppBarButton Label="tester" Icon="AddFriend" Command="{Binding TestCommand}" />-->
             </CommandBar.PrimaryCommands>
-            <CommandBar.SecondaryCommands>
+            <!--<CommandBar.SecondaryCommands>
                 <AppBarButton Label="Fill DataBase" Icon="Admin" Command="{Binding FillDbCommand}" />
                 <AppBarButton Label="Update DataBase" Icon="Add" Command="{Binding FillDbCommand}" /> 
                 <AppBarButton Label="BackUp DataBase" Icon="Add" Command="{Binding BackUpCommand}" />
-            </CommandBar.SecondaryCommands>
+            </CommandBar.SecondaryCommands>-->
         </CommandBar>
     </Page.BottomAppBar>
     

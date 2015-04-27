@@ -78,8 +78,6 @@ namespace MyMusic.HelperClasses
 
                     logSaveTast.Wait();
                 }
-
-
                 // throw;
             }
         }
@@ -90,21 +88,17 @@ namespace MyMusic.HelperClasses
             {
 
                 var logFiles = await logUploadFolder.GetFilesAsync();
-
                 foreach (var logFile in logFiles)
                 {
                     if ((DateTime.Now - logFile.DateCreated).Days > DAYS_TO_DELETE)
                     {
                         await logFile.DeleteAsync();
                     }
-
-
                 }
             }
             catch (Exception ex)
             {
                 logChannel.LogMessage(ex.Message);
-
             }
         }
 

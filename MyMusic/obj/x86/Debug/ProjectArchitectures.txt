@@ -1,3 +1,2 @@
+C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\BackgroundTask\BackgroundTask.csproj;x86
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\MyMusic.csproj;x86
-C:\Users\ed\Downloads\4thYearProject-master\MyPlaylistManager\MyPlaylistManager.csproj;x86
-C:\Users\ed\Downloads\4thYearProject-master\SampleBackgroundAudioTask\SampleBackgroundAudioTask.csproj;x86

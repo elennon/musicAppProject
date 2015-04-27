@@ -13,6 +13,7 @@ namespace MyMusic
     {
         public const string PlayRadio = "playradio";
         public const string PlayGSTrack = "playgstrack";
+        public const string GSSineWave = "gssinewave";
         public const string PlayRadioFailed = "PlayRadioFailed";
 
         public const string TrackIdNo = "trackidno";
@@ -41,5 +42,8 @@ namespace MyMusic
         
         public const string link = "link";
         public const string TracksToPlay = "TracksToPlay";
+        public const string UserId = "UserId";
+        public const string IsFirstTime = "IsFirstTime";
+        public const string DbFirstHalf = "DbFirstHalf";
     }
 }
