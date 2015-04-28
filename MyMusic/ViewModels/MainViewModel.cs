@@ -147,7 +147,8 @@ namespace MyMusic.ViewModels
         }
 
         private async void OnLoadCommand(RoutedEventArgs obj)
-        {           
+        {
+            //await repo.fillDB3();
             //repo.BackUpDb();
             //await repo.GetPrologList();
             //await repo.SyncWithApi();          
@@ -167,7 +168,8 @@ namespace MyMusic.ViewModels
                     //await repo.fillDbFromXml();
                     await repo.fillDB3();
                     await repo.FillRadioDB();
-                    await repo.SortPics();
+                   // await repo.SortPics();
+                    await repo.OrderTracks();
                     ApplicationSettingsHelper.SaveSettingsValue(Constants.DbFirstHalf, true);
                 }                
                 Genres = repo.GetRadioGenres();
@@ -191,14 +193,14 @@ namespace MyMusic.ViewModels
                 });
             }
             
-            Logger.GetLogger().logChannel.LogMessage("Main page loading" + DateTime.Now.ToString());
-            var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
-            IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
-            foreach (var item in lf)
-            {
-                var ty = item.OpenReadAsync();
-                string text = await Windows.Storage.FileIO.ReadTextAsync(item);
-            }
+            //Logger.GetLogger().logChannel.LogMessage("Main page loading" + DateTime.Now.ToString());
+            //var ts = await ApplicationData.Current.LocalFolder.GetFolderAsync("MyLogFile");
+            //IReadOnlyList<StorageFile> lf = await ts.GetFilesAsync();
+            //foreach (var item in lf)
+            //{
+            //    var ty = item.OpenReadAsync();
+            //    string text = await Windows.Storage.FileIO.ReadTextAsync(item);
+            //}
         }
 
         #endregion

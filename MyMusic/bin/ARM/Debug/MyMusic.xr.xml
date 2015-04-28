@@ -75,6 +75,7 @@
     <RootPropertyPathName Name="AlbumListViewSource" />
     <RootPropertyPathName Name="ArtistListViewSource" />
     <RootPropertyPathName Name="TopTracks" />
+    <RootPropertyPathName Name="Count" />
     <RootPropertyPathName Name="SectionsInViewChangedCommand" />
     <RootPropertyPathName Name="AddQpCommand" />
     <RootPropertyPathName Name="EditCommand" />
@@ -97,7 +98,6 @@
     <RootPropertyPathName Name="Collections" />
     <RootPropertyPathName Name="CollectionItemSelectedCommand" />
     <RootPropertyPathName Name="RadioItemSelectedCommand" />
-    <RootPropertyPathName Name="Count" />
     <RootPropertyPathName Name="NowPlayingCommand" />
     <RootPropertyPathName Name="NowPlayingViewModel" />
     <RootPropertyPathName Name="TrackName" />
@@ -417,6 +417,7 @@
     </RootType>
     <RootType FullName="MyMusic.Views.GSSignIn" />
     <RootType FullName="MyMusic.Views.ViewPlaylist" />
+    <RootType FullName="MyMusic.Converters.EmptyListLabelConverter" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />
     </RootType>
@@ -429,7 +430,6 @@
     <RootType FullName="MyMusic.Views.ShowAllTracks" />
     <RootType FullName="MyMusic.Views.ShowByArtist" />
     <RootType FullName="MyMusic.ViewModels.TopPlayed" />
-    <RootType FullName="MyMusic.Converters.EmptyListLabelConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
       <RootProperty Name="Template" />
     </RootType>

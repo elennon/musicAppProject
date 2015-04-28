@@ -82,7 +82,7 @@
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\packages\SQLite.WinRT.wpa81.3.8.8.3\build\wpa81\..\..\lib\wpa81-hidden\ARM\Sqlite.WP81.winmd">
       <PackagePath>Sqlite.WP81.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\SQLite.WP81\3.8.8.1\Redist\Debug\ARM\sqlite3.dll">
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\WindowsPhoneApp\v8.1\ExtensionSDKs\SQLite.WP81\3.8.9\Redist\Debug\ARM\sqlite3.dll">
       <PackagePath>sqlite3.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\Assets\back.png">

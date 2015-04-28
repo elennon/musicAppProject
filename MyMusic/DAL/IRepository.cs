@@ -80,7 +80,7 @@ namespace MyMusic.DAL
         Task FillRadioDB();
         
         Task fillDB3();
-        Task fillDB4();
+        Task OrderTracks();
         Task fillDbFromXml();
         
         Task SortPics();

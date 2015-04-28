@@ -23,6 +23,7 @@
         
         <cmds:ItemClickedConverter x:Name="ItemClickedConverter" />
         <cmds:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter" />
+        <cmds:EmptyListLabelConverter x:Name="EmptyListLabelConverter" />
 
         <CollectionViewSource x:Key="src" Source="{Binding QpTracks}"/>
 
@@ -404,7 +405,21 @@
             <HubSection x:Name="TopPlaySection" Header="Top Played"
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView  
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0,12,0,0" Orientation="Vertical" Width="300">
+                            <TextBlock Text="You're most selected tracks will go here" 
+                                       Margin="0,0,0,6.5" FontSize="26" TextWrapping="Wrap"
+                                        Visibility="{Binding TopTracks.Count, 
+                                        Converter={StaticResource EmptyListLabelConverter}}" />
+
+                        </StackPanel>
+
+                        <ListView  Grid.Row="1"
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
                                 ScrollViewer.HorizontalScrollMode="Disabled" 
@@ -417,7 +432,8 @@
                                 IsItemClickEnabled="True"
                                 SelectionMode="None"                                     
                                 >
-                    </ListView>
+                        </ListView>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
 
@@ -532,11 +548,13 @@
 
             <HubSection x:Name="QuickPickSection" Header="Quick Picks"
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
-                <DataTemplate>
+                <DataTemplate>      
+                    
                     <SemanticZoom x:Name="qpSemanticZoom" 
                                     ScrollViewer.HorizontalScrollMode="Disabled"                                   
                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                         <SemanticZoom.ZoomedInView>
+                            
                             <ListView Name="lstViewDetail"   
                                 HorizontalContentAlignment="Stretch" 
                                 IsSwipeEnabled="False"
@@ -548,8 +566,7 @@
                                 ItemsSource="{Binding QpListViewSource.View, Mode=TwoWay}"             
                                 ItemTemplate="{StaticResource QuickPickTracksTemplate }"
                                 IsItemClickEnabled="True"
-                                SelectionMode="None"
-      
+                                SelectionMode="None"    
                                 >
                                 <ListView.GroupStyle>
                                     <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource GroupHeaderTemplate}" />
@@ -560,6 +577,7 @@
                                     </core:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
                             </ListView>
+                            
                         </SemanticZoom.ZoomedInView>
                         <SemanticZoom.ZoomedOutView>
                             <GridView x:Name="lstViewSummary" 
@@ -572,6 +590,7 @@
                               />
                         </SemanticZoom.ZoomedOutView>
                     </SemanticZoom>
+                    
                 </DataTemplate>
             </HubSection>
 

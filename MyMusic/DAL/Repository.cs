@@ -3,8 +3,11 @@ using MyMusic.Models;
 using MyMusic.Utilities;
 //using MyMusic.Utilities;
 using Newtonsoft.Json;
+using Sqlite.WP81;
+using SQLite;
 //using Sqlite.WP81;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -1226,14 +1229,11 @@ namespace MyMusic.DAL
                     else
                     {
                         tr.GenreId = checkGenre.FirstOrDefault().GenreId;
-                    }
-                    
+                    }                    
                     db.Update(tr);
-
                 }                   
              }
-            var time = (double)sw.ElapsedMilliseconds / 1000;
-            var countfnnf = sngs.Count;  
+            var time = (double)sw.ElapsedMilliseconds / 1000;           
         }
 
         public async Task AddArtistName()
@@ -1423,377 +1423,7 @@ namespace MyMusic.DAL
                 serializer.Serialize(stream, objectToSave);
             }
         }
-        
-        public List<Track> sngs = new List<Track>();
-        public async Task fillDB4()
-        {
-            DropDB();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                Stopwatch sw = Stopwatch.StartNew();
-                List<Track> songs = new List<Track>();
-                var cnt = db.Table<Track>().ToList();
-                try
-                {
-                    List<StorageFile> sf = new List<StorageFile>();
-                    StorageFolder folder = KnownFolders.MusicLibrary;
-                    IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
-                    int quarter = lf.Count / 8;
-                    Task m1Task = q1(0, quarter, lf);
-                    Task m2Task = q2(0, quarter, lf);
-                    Task m3Task = q3(0, quarter, lf);
-                    Task m4Task = q4(0, quarter, lf);
-                    Task m5Task = q5(0, quarter, lf);
-                    Task m6Task = q6(0, quarter, lf);
-                    Task m7Task = q7(0, quarter, lf);
-                    Task m8Task = q8(0, quarter, lf);
-                    Task all = Task.WhenAll(m1Task, m2Task, m3Task, m4Task, m5Task, m6Task, m7Task, m8Task);
-                    await all;
-
-                    var time = (double)sw.ElapsedMilliseconds / 1000;
-                    var countfnnf = sngs.Count;                    
-                }    
-                catch (Exception)
-                {                    
-                    throw;
-                }
-            }
-        }
-   
-        #region eights
-        private async Task q1(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            List<Track> songs = new List<Track>();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = start; i < quarter; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q2(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter; i < quarter * 2; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q3(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter * 2; i < quarter * 3; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q4(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter * 3; i < quarter * 4; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q5(int start, int eight, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = eight * 4; i < eight * 5; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q6(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter * 5; i < quarter * 6; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q7(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter * 6; i < quarter * 7; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        private async Task q8(int start, int quarter, IReadOnlyList<StorageFile> lf)
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                for (int i = quarter * 7; i < lf.Count; i++)
-                {
-                    try
-                    {
-
-                        var song = await lf[i].Properties.GetMusicPropertiesAsync();
-                        Track tr = new Track();
-                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                        {
-                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                            else
-                            {
-                                string[] splitter = song.Title.Split('-');
-                                tr.Name = splitter[splitter.Count() - 1];
-                                tr.ArtistName = splitter[0];
-                            }
-
-                        }
-                        else
-                        {
-                            tr = new Track
-                            {
-                                Name = song.Title,
-                                ArtistName = song.Artist,
-                                Plays = 0,
-                                Skips = 0,
-                                FileName = lf[i].Name
-                            };
-                        }
-                        tr.DateAdded = DateTime.Now;
-                        db.Insert(tr);
-                        sngs.Add(tr);
-                    }
-                    catch (Exception ex) { throw ex; }
-                }
-            }
-        }
-        #endregion
-
+               
         private async Task<List<Track>> GetSampleTracks()
         {
             client = new HttpClient();
@@ -1885,145 +1515,220 @@ namespace MyMusic.DAL
             }
         }
 
-        public async Task fillDB3()
-        {
-            DropDB();
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var cnt = db.Table<Track>().ToList();
-                try
-                {
-                    Stopwatch sw = Stopwatch.StartNew();
-                    List<StorageFile> sf = new List<StorageFile>();
-                    StorageFolder folder = KnownFolders.MusicLibrary;
-                    IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);                    
-                    //var tasks = lf.Select(async item =>
-                    //{
-                    foreach (var item in lf)
-                    {
+        //public async Task fillDB3()
+        //{
+        //    //DropDB();
+        //    using (var db = new SQLite.SQLiteConnection(App.DBPath))
+        //    {
+        //        var cnt = db.Table<Track>().ToList();
+        //        try
+        //        {
+        //            Stopwatch sw = Stopwatch.StartNew();
+        //            List<object> updtens = new List<object>();
+        //            var trkvvs = db.Table<Track>().OrderBy(a => a.Name).ToList();
+        //            for (int i = 0; i < trkvvs.Count(); i++)
+        //            {
+        //                trkvvs[i].OrderNo = i;
+        //                db.Update(trkvvs[i]);
+        //                //updtens.Add(trkvvs[i]);
+        //            }
+        //            // db.UpdateAll(updtens);
+        //            cnt = db.Table<Track>().ToList();
+        //            var hhtime = (double)sw.ElapsedMilliseconds / 1000;
 
+        //            List<StorageFile> sf = new List<StorageFile>();
+        //            StorageFolder folder = KnownFolders.MusicLibrary;
+        //            IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+        //            //var tasks = lf.Select(async item =>
+        //            //{
+        //            foreach (var item in lf)
+        //            {
+        //                try
+        //                {
+        //                    List<object> updates = new List<object>();
+        //                    List<int> artists = new List<int>();
+        //                    List<int> albums = new List<int>();
+        //                    var song = await item.Properties.GetMusicPropertiesAsync();
+        //                    Track tr = new Track();
+        //                    if (song.Artist.Contains("{") || song.Artist == string.Empty)
+        //                    {
+        //                        if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
+        //                        else
+        //                        {
+        //                            string[] splitter = song.Title.Split('-');
+        //                            tr.Name = splitter[splitter.Count() - 1];
+        //                            tr.ArtistName = splitter[0];
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        tr = new Track
+        //                        {
+        //                            Name = song.Title,
+        //                            ArtistName = song.Artist,
+        //                            Plays = 0,
+        //                            Skips = 0,
+        //                            FileName = item.Name
+        //                        };
+        //                    }
+        //                    tr.DateAdded = DateTime.Now;
+        //                    Artist ar = new Artist { Name = song.Artist };
+        //                    Album al = new Album { Name = song.Album };
+        //                    var f = await getPic(tr.ArtistName, tr.Name);
 
-                        try
-                        {
-                            List<object> updates = new List<object>();
-                            List<int> artists = new List<int>();
-                            List<int> albums = new List<int>();
-                            var song = await item.Properties.GetMusicPropertiesAsync();
-                            Track tr = new Track();
-                            if (song.Artist.Contains("{") || song.Artist == string.Empty)
-                            {
-                                if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-                                else
-                                {
-                                    string[] splitter = song.Title.Split('-');
-                                    tr.Name = splitter[splitter.Count() - 1];
-                                    tr.ArtistName = splitter[0];
-                                }
-                            }
-                            else
-                            {
-                                tr = new Track
-                                {
-                                    Name = song.Title,
-                                    ArtistName = song.Artist,
-                                    Plays = 0,
-                                    Skips = 0,
-                                    FileName = item.Name
-                                };
-                            }
-                            tr.DateAdded = DateTime.Now;
-                            Artist ar = new Artist { Name = song.Artist };
-                            Album al = new Album { Name = song.Album };
+        //                    if (string.IsNullOrEmpty(f))
+        //                    {
+        //                        tr.PicGot = true;
+        //                    }
+        //                    else
+        //                    {
+        //                        tr.ImageUrl = f.Split(',')[0];
+        //                        tr.Genre = f.Split(',')[1];
+        //                        tr.PicGot = true;
+        //                    }
+        //                    Genre gr = new Genre { Name = tr.Genre };
+        //                    var checkGenre = (from a in db.Table<Genre>()
+        //                                      where a.Name == gr.Name
+        //                                      select a).ToList();
+        //                    if (checkGenre.Count < 1)
+        //                    {
+        //                        db.Insert(gr);
+        //                        tr.GenreId = gr.GenreId;
+        //                    }
+        //                    else
+        //                    {
+        //                        tr.GenreId = checkGenre.FirstOrDefault().GenreId;
+        //                    }
+        //                    tr.FileName = item.Name;
+        //                    db.Insert(tr);
 
-                            tr.FileName = item.Name;
-                            db.Insert(tr);
+        //                    var checkArtist = (from a in db.Table<Artist>()
+        //                                       where a.Name == ar.Name
+        //                                       select a).ToList();
 
-                            var checkArtist = (from a in db.Table<Artist>()
-                                               where a.Name == ar.Name
-                                               select a).ToList();
+        //                    if (checkArtist.Count < 1)
+        //                    {
+        //                        db.Insert(ar);
+        //                        tr.ArtistId = ar.ArtistId;
+        //                    }
+        //                    else
+        //                    { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }
+        //                    updates.Add(ar);
 
-                            if (checkArtist.Count < 1)
-                            {
-                                db.Insert(ar);
-                                tr.ArtistId = ar.ArtistId;
-                            }
-                            else
-                            { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }
-                            updates.Add(ar);
+        //                    var checkAlb = (from a in db.Table<Album>()
+        //                                    where a.Name == al.Name
+        //                                    select a).ToList();
+        //                    if (checkAlb.Count < 1)
+        //                    {
+        //                        al.ArtistId = tr.ArtistId;
+        //                        db.Insert(al);
+        //                        tr.AlbumId = al.AlbumId;
+        //                    }
+        //                    else
+        //                    { tr.AlbumId = checkAlb.FirstOrDefault().AlbumId; }
 
-                            var checkAlb = (from a in db.Table<Album>()
-                                            where a.Name == al.Name
-                                            select a).ToList();
-                            if (checkAlb.Count < 1)
-                            {
-                                al.ArtistId = tr.ArtistId;
-                                db.Insert(al);
-                                tr.AlbumId = al.AlbumId;
-                            }
-                            else
-                            { tr.AlbumId = checkAlb.FirstOrDefault().AlbumId; }
+        //                    updates.Add(al);
+        //                    updates.Add(tr);
+        //                    db.UpdateAll(updates);
+        //                    updates.Clear();
+        //                }
 
-                            updates.Add(al);
-                            updates.Add(tr);
-                            db.UpdateAll(updates);
-                            updates.Clear();
-                        }
+        //                catch (Exception ex) { throw ex; }
+        //            }
+        //            //});
+        //            //await Task.WhenAll(tasks);       
+        //            //Parallel.ForEach(lf, async currentElement =>                    
+        //            //{                                          
+        //            //});
+        //            var time = (double)sw.ElapsedMilliseconds / 1000;
+        //            List<object> updtes = new List<object>();
+        //            var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
+        //            for (int i = 0; i < trks.Count(); i++)
+        //            {
+        //                trks[i].OrderNo = i;
+        //                //db.Update(trks[i]);
+        //                updtes.Add(trks[i]);
+        //            }
 
-                        catch (Exception ex) { throw ex; }
-                    }
-                    //});
-                    //await Task.WhenAll(tasks);       
-                    //Parallel.ForEach(lf, async currentElement =>                    
-                    //{                                          
-                    //});
-                    var time = (double)sw.ElapsedMilliseconds / 1000;
-                    List<object> updtes = new List<object>();
-                    var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                    for (int i = 0; i < trks.Count(); i++)
-                    {
-                        trks[i].OrderNo = i;
-                        //db.Update(trks[i]);
-                        updtes.Add(trks[i]);
-                    }                    
-                    db.UpdateAll(updtes); 
-                    cnt = db.Table<Track>().ToList();
-                    time = (double)sw.ElapsedMilliseconds / 1000;                   
-                }
-	            catch (Exception)
-	            {		
-		            throw;
-	            }
-            }
-        }
+        //            db.UpdateAll(updtes);
+        //            cnt = db.Table<Track>().ToList();
+        //            time = (double)sw.ElapsedMilliseconds / 1000;
+        //        }
+        //        catch (Exception)
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //}
+
+        //public async Task fillDB3()
+        //{            
+        //    try
+        //    {
+        //        Stopwatch sw = Stopwatch.StartNew();
+        //        var db = new SQLiteAsyncConnection(App.DBPath);
+        //        var cnt = await db.Table<Track>().ToListAsync();
+        //        List<object> updtens = new List<object>();
+        //        List<Track> ts = await db.Table<Track>().OrderBy(a => a.Name).ToListAsync();
+        //        for (int i = 0; i < ts.Count(); i++)
+        //        {
+        //            ts[i].OrderNo = i+7;
+        //            //db.Update(ts[i]);
+        //            updtens.Add(ts[i]);
+        //        }
+        //        //await db.RunInTransactionAsync ( ( SQLiteAsyncConnection tran ) => 
+        //        //{ 
+        //        //    tran.UpdateAllAsync(updtens);
+        //        //}
+        //        string bvh = "22";
+        //        db.RunInTransactionAsync(async tran =>
+        //        {
+        //            // database calls inside the transaction
+        //            await tran.UpdateAllAsync(updtens);
+                    
+        //        });
+        //        cnt = await db.Table<Track>().ToListAsync();
+        //        var hhtime = (double)sw.ElapsedMilliseconds / 1000;
+        //        string bh = hhtime.ToString();
+                
+        //        //using (var db = new SQLiteConnection(App.DBPath))
+        //        //{
+        //        //    var cnt = db.Table<Track>().ToList();
+        //        //    List<object> updtens = new List<object>();
+        //        //    var ts = db.Table<Track>().OrderBy(a => a.Name).ToList();
+        //        //    for (int i = 0; i < ts.Count(); i++)
+        //        //    {
+        //        //        ts[i].OrderNo = i;
+        //        //        //db.Update(ts[i]);
+        //        //        updtens.Add(ts[i]);
+        //        //    }
+                    
+        //        //    // db.UpdateAll(updtens);
+        //        //    db.RunInTransaction(() =>
+        //        //    {
+        //        //        db.UpdateAll(updtens);
+        //        //    });  
+        //        //    cnt = db.Table<Track>().ToList();
+        //        //    var hhtime = (double)sw.ElapsedMilliseconds / 1000;
+        //        //    string bh = hhtime.ToString();
+                    
+        //        //}
+                
+        //    }
+        //    catch (Exception)
+        //    {
+                
+        //        throw;
+        //    }
+                    
+            
+        //}
         
         private void DropDB()
         {
             try
             {
-                //StorageFolder folder = Windows.Storage.ApplicationData.Current.LocalFolder;
-                //StorageFile dbFile = await folder.GetFileAsync("tracks.s3db");
-
-
-                // SQLiteConnection connection = new SQLite.SQLiteConnection(App.DBPath);
-                //  connection.Dispose();
-                //  connection.Close();
-                //        SQLiteCommand.Dispose();
-                //GC.Collect();
-                //GC.WaitForPendingFinalizers();
-
-                //await dbFile.DeleteAsync();
-
-                //using (var db = new SQLite.SQLiteConnection(App.DBPath))
-                //{
-                //    db.CreateTable<Track>();
-                //    db.CreateTable<Album>();
-                //    db.CreateTable<Artist>();
-                //    db.CreateTable<Genre>();
-                //    db.CreateTable<RadioStream>();
-                //    db.CreateTable<RadioGenre>();
-                //}
-                //File.Delete(filename);
-
+                
                 using (var db = new SQLite.SQLiteConnection(App.DBPath))
                 {
                     db.DeleteAll<Track>();
@@ -2041,6 +1746,131 @@ namespace MyMusic.DAL
             }
         }
 
+        public async Task fillDB3()
+        {            
+            DropDB();
+            var db = new SQLiteAsyncConnection(App.DBPath);
+            var cnt = await db.Table<Track>().ToListAsync();
+            try
+            {
+                Stopwatch sw = Stopwatch.StartNew();                
+                List<StorageFile> sf = new List<StorageFile>();
+                StorageFolder folder = KnownFolders.MusicLibrary;
+                IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
+                foreach (var item in lf)
+                {
+                    try
+                    {
+                        List<object> updates = new List<object>();
+                        List<int> artists = new List<int>();
+                        List<int> albums = new List<int>();
+                        var song = await item.Properties.GetMusicPropertiesAsync();
+                        Track tr = new Track();
+                        if (song.Artist.Contains("{") || song.Artist == string.Empty)
+                        {
+                            if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
+                            else
+                            {
+                                string[] splitter = song.Title.Split('-');
+                                tr.Name = splitter[splitter.Count() - 1];
+                                tr.ArtistName = splitter[0];
+                            }
+                        }
+                        else
+                        {
+                            tr = new Track
+                            {
+                                Name = song.Title,
+                                ArtistName = song.Artist,
+                                Plays = 0,
+                                Skips = 0,
+                                FileName = item.Name
+                            };
+                        }
+                        tr.DateAdded = DateTime.Now;
+                        Artist ar = new Artist { Name = song.Artist };
+                        Album al = new Album { Name = song.Album };
+                        updates.Clear();
+                        var f = await getPic(tr.ArtistName, tr.Name);
+
+                        if (string.IsNullOrEmpty(f))
+                        {
+                            tr.PicGot = true;
+                        }
+                        else
+                        {
+                            tr.ImageUrl = f.Split(',')[0];
+                            tr.Genre = f.Split(',')[1];
+                            tr.PicGot = true;
+                        }
+                        Genre gr = new Genre { Name = tr.Genre };
+                        List<Genre> checkGenre = await db.Table<Genre>().Where(a => a.Name == gr.Name).ToListAsync();
+                        if (checkGenre.Count < 1)
+                        {
+                            updates.Add(gr);
+                            tr.GenreId = gr.GenreId;
+                        }
+                        else
+                        {
+                            tr.GenreId = checkGenre.FirstOrDefault().GenreId;
+                        }
+                        tr.FileName = item.Name;
+ 
+                        var checkArtist = await db.Table<Artist>().Where(a => a.Name == ar.Name).ToListAsync();                           
+                        if (checkArtist.Count < 1)
+                        {
+                            updates.Add(ar);
+                            tr.ArtistId = ar.ArtistId;
+                        }
+                        else
+                        { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }                       
+
+                        var checkAlb = await db.Table<Album>().Where(a => a.Name == al.Name).ToListAsync();              
+                        if (checkAlb.Count < 1)
+                        {
+                            al.ArtistId = tr.ArtistId;
+                            updates.Add(al);
+                            tr.AlbumId = al.AlbumId;
+                        }
+                        else
+                        { tr.AlbumId = checkAlb.FirstOrDefault().AlbumId; }
+                        
+                                               
+                        updates.Add(tr);
+                        //await InsertAllAsync(updates);
+                        db.RunInTransactionAsync(async tran =>
+                        {
+                            // database calls inside the transaction
+                            await tran.InsertAllAsync(updates);
+                        });
+                    }
+                    catch (Exception ex) { throw ex; }
+                }
+                
+                var time = (double)sw.ElapsedMilliseconds / 1000;             
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task OrderTracks()
+        {
+            var db = new SQLiteAsyncConnection(App.DBPath);
+            List<object> updtes = new List<object>();
+            List<Track> trks = await db.Table<Track>().OrderBy(a => a.Name).ToListAsync();
+            for (int i = 0; i < trks.Count(); i++)
+            {
+                trks[i].OrderNo = i;
+                updtes.Add(trks[i]);
+            }           
+            db.RunInTransactionAsync(async tran =>
+            {
+                await tran.UpdateAllAsync(updtes);
+            });
+        }
+        
         public async Task SyncDB()
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
