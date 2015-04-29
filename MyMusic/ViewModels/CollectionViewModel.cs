@@ -122,7 +122,6 @@ namespace MyMusic.ViewModels
             set { _editPic = value; NotifyPropertyChanged("EditPic"); }
         }
         
-
         private ObservableCollection<ContactGroup> _cGroups;
         public ObservableCollection<ContactGroup> CGroups
         {
@@ -414,7 +413,8 @@ namespace MyMusic.ViewModels
         {
             if (!IsVisible && !qpIsVisible)     // if in edit mode let it go to delete command, not play
             {
-                var itemId = tr.OrderNo;
+
+                var itemId = tr.TrackId;
                 string playThese = "allTracks," + itemId.ToString();
                 _navigationService.NavigateTo("NowPlaying", playThese);
             }

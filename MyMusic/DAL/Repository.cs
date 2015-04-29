@@ -45,7 +45,7 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }                    
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/misc.png"; }                    
                     _tracks.Add(tr);
                 }
             }
@@ -62,7 +62,7 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().Where(a => a.InTheBin == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }                  
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/misc.png"; }                  
                     _tracks.Add(tr);
                 }
             }
@@ -105,7 +105,7 @@ namespace MyMusic.DAL
                 var query = db.Table<Track>().Where(a => a.InTheBin == false && a.InQuickPick == false).OrderBy(c => c.Name);     //  .Where(a => a.InTheBin == false)
                 foreach (var tr in query)
                 {
-                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/radio672.png"; }
+                    if (string.IsNullOrEmpty(tr.ImageUrl)) { tr.ImageUrl = "ms-appx:///Assets/misc.png"; }
                     var trk = new Track()
                     {
                         TrackId = tr.TrackId,
@@ -115,8 +115,7 @@ namespace MyMusic.DAL
                         ArtistName = tr.ArtistName,
                         ImageUrl = tr.ImageUrl,
                         FileName = tr.FileName,
-                        InTheBin = tr.InTheBin,
-                        OrderNo = tr.OrderNo
+                        InTheBin = tr.InTheBin                       
                         //InEditMode = false
                     };
                     _tracks.Add(trk);
@@ -143,7 +142,6 @@ namespace MyMusic.DAL
                         Plays = tr.Plays,
                         Skips = tr.Skips,
                         ImageUrl = tr.ImageUrl,
-                        OrderNo = tr.OrderNo,
                         FileName = tr.FileName
                     };
                     _tracks.Add(trk);
@@ -288,11 +286,13 @@ namespace MyMusic.DAL
             return _tracks;
         }
 
-        public string[] GetListToPlay(int startPos) // orders all songs that come after selected song (+ selected) into a string[]
+        public string[] GetListToPlay(int trId) // orders all songs that come after selected song (+ selected) into a string[]
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
             {
-                var trks = db.Table<Track>().Where(a => a.InTheBin == false && a.OrderNo >= startPos).OrderBy(a => a.Name).ToList();
+                List<Track> tts = db.Table<Track>().OrderBy(a => a.Name).ToList();
+                var f = tts.IndexOf(tts.Where(a => a.TrackId == trId).First());
+                var trks = tts.Where(a => a.InTheBin == false && tts.IndexOf(a) >= f).ToList();                
                 string[] trkArray = new string[trks.Count];
                 int counter = 0;
                 foreach (var item in trks)
@@ -1487,26 +1487,8 @@ namespace MyMusic.DAL
                         updates.Add(tr);
                         db.UpdateAll(updates);
                         updates.Clear();
-                    }
-                    //Parallel.ForEach(trs, item =>
-                    //{
-                    //    db.Insert(item);
-                    //    updates.Add(item);
-                    //});
-                    //db.UpdateAll(updates);
+                    }                  
                     var time = (double)sw.ElapsedMilliseconds / 1000;
-                    List<object> updtes = new List<object>();
-                    var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                    for (int i = 0; i < trks.Count(); i++)
-                    {
-                        trks[i].OrderNo = i;
-                        //db.Update(trks[i]);
-                        updtes.Add(trks[i]);
-                    }
-                    db.UpdateAll(updtes);
-                    cnt = db.Table<Track>().ToList();
-                    time = (double)sw.ElapsedMilliseconds / 1000;
-
                 }
                 catch (Exception)
                 {
@@ -1515,215 +1497,6 @@ namespace MyMusic.DAL
             }
         }
 
-        //public async Task fillDB3()
-        //{
-        //    //DropDB();
-        //    using (var db = new SQLite.SQLiteConnection(App.DBPath))
-        //    {
-        //        var cnt = db.Table<Track>().ToList();
-        //        try
-        //        {
-        //            Stopwatch sw = Stopwatch.StartNew();
-        //            List<object> updtens = new List<object>();
-        //            var trkvvs = db.Table<Track>().OrderBy(a => a.Name).ToList();
-        //            for (int i = 0; i < trkvvs.Count(); i++)
-        //            {
-        //                trkvvs[i].OrderNo = i;
-        //                db.Update(trkvvs[i]);
-        //                //updtens.Add(trkvvs[i]);
-        //            }
-        //            // db.UpdateAll(updtens);
-        //            cnt = db.Table<Track>().ToList();
-        //            var hhtime = (double)sw.ElapsedMilliseconds / 1000;
-
-        //            List<StorageFile> sf = new List<StorageFile>();
-        //            StorageFolder folder = KnownFolders.MusicLibrary;
-        //            IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
-        //            //var tasks = lf.Select(async item =>
-        //            //{
-        //            foreach (var item in lf)
-        //            {
-        //                try
-        //                {
-        //                    List<object> updates = new List<object>();
-        //                    List<int> artists = new List<int>();
-        //                    List<int> albums = new List<int>();
-        //                    var song = await item.Properties.GetMusicPropertiesAsync();
-        //                    Track tr = new Track();
-        //                    if (song.Artist.Contains("{") || song.Artist == string.Empty)
-        //                    {
-        //                        if (song.AlbumArtist != string.Empty) { tr.ArtistName = song.AlbumArtist; tr.Name = song.Title; }
-        //                        else
-        //                        {
-        //                            string[] splitter = song.Title.Split('-');
-        //                            tr.Name = splitter[splitter.Count() - 1];
-        //                            tr.ArtistName = splitter[0];
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        tr = new Track
-        //                        {
-        //                            Name = song.Title,
-        //                            ArtistName = song.Artist,
-        //                            Plays = 0,
-        //                            Skips = 0,
-        //                            FileName = item.Name
-        //                        };
-        //                    }
-        //                    tr.DateAdded = DateTime.Now;
-        //                    Artist ar = new Artist { Name = song.Artist };
-        //                    Album al = new Album { Name = song.Album };
-        //                    var f = await getPic(tr.ArtistName, tr.Name);
-
-        //                    if (string.IsNullOrEmpty(f))
-        //                    {
-        //                        tr.PicGot = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        tr.ImageUrl = f.Split(',')[0];
-        //                        tr.Genre = f.Split(',')[1];
-        //                        tr.PicGot = true;
-        //                    }
-        //                    Genre gr = new Genre { Name = tr.Genre };
-        //                    var checkGenre = (from a in db.Table<Genre>()
-        //                                      where a.Name == gr.Name
-        //                                      select a).ToList();
-        //                    if (checkGenre.Count < 1)
-        //                    {
-        //                        db.Insert(gr);
-        //                        tr.GenreId = gr.GenreId;
-        //                    }
-        //                    else
-        //                    {
-        //                        tr.GenreId = checkGenre.FirstOrDefault().GenreId;
-        //                    }
-        //                    tr.FileName = item.Name;
-        //                    db.Insert(tr);
-
-        //                    var checkArtist = (from a in db.Table<Artist>()
-        //                                       where a.Name == ar.Name
-        //                                       select a).ToList();
-
-        //                    if (checkArtist.Count < 1)
-        //                    {
-        //                        db.Insert(ar);
-        //                        tr.ArtistId = ar.ArtistId;
-        //                    }
-        //                    else
-        //                    { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }
-        //                    updates.Add(ar);
-
-        //                    var checkAlb = (from a in db.Table<Album>()
-        //                                    where a.Name == al.Name
-        //                                    select a).ToList();
-        //                    if (checkAlb.Count < 1)
-        //                    {
-        //                        al.ArtistId = tr.ArtistId;
-        //                        db.Insert(al);
-        //                        tr.AlbumId = al.AlbumId;
-        //                    }
-        //                    else
-        //                    { tr.AlbumId = checkAlb.FirstOrDefault().AlbumId; }
-
-        //                    updates.Add(al);
-        //                    updates.Add(tr);
-        //                    db.UpdateAll(updates);
-        //                    updates.Clear();
-        //                }
-
-        //                catch (Exception ex) { throw ex; }
-        //            }
-        //            //});
-        //            //await Task.WhenAll(tasks);       
-        //            //Parallel.ForEach(lf, async currentElement =>                    
-        //            //{                                          
-        //            //});
-        //            var time = (double)sw.ElapsedMilliseconds / 1000;
-        //            List<object> updtes = new List<object>();
-        //            var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-        //            for (int i = 0; i < trks.Count(); i++)
-        //            {
-        //                trks[i].OrderNo = i;
-        //                //db.Update(trks[i]);
-        //                updtes.Add(trks[i]);
-        //            }
-
-        //            db.UpdateAll(updtes);
-        //            cnt = db.Table<Track>().ToList();
-        //            time = (double)sw.ElapsedMilliseconds / 1000;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
-
-        //public async Task fillDB3()
-        //{            
-        //    try
-        //    {
-        //        Stopwatch sw = Stopwatch.StartNew();
-        //        var db = new SQLiteAsyncConnection(App.DBPath);
-        //        var cnt = await db.Table<Track>().ToListAsync();
-        //        List<object> updtens = new List<object>();
-        //        List<Track> ts = await db.Table<Track>().OrderBy(a => a.Name).ToListAsync();
-        //        for (int i = 0; i < ts.Count(); i++)
-        //        {
-        //            ts[i].OrderNo = i+7;
-        //            //db.Update(ts[i]);
-        //            updtens.Add(ts[i]);
-        //        }
-        //        //await db.RunInTransactionAsync ( ( SQLiteAsyncConnection tran ) => 
-        //        //{ 
-        //        //    tran.UpdateAllAsync(updtens);
-        //        //}
-        //        string bvh = "22";
-        //        db.RunInTransactionAsync(async tran =>
-        //        {
-        //            // database calls inside the transaction
-        //            await tran.UpdateAllAsync(updtens);
-                    
-        //        });
-        //        cnt = await db.Table<Track>().ToListAsync();
-        //        var hhtime = (double)sw.ElapsedMilliseconds / 1000;
-        //        string bh = hhtime.ToString();
-                
-        //        //using (var db = new SQLiteConnection(App.DBPath))
-        //        //{
-        //        //    var cnt = db.Table<Track>().ToList();
-        //        //    List<object> updtens = new List<object>();
-        //        //    var ts = db.Table<Track>().OrderBy(a => a.Name).ToList();
-        //        //    for (int i = 0; i < ts.Count(); i++)
-        //        //    {
-        //        //        ts[i].OrderNo = i;
-        //        //        //db.Update(ts[i]);
-        //        //        updtens.Add(ts[i]);
-        //        //    }
-                    
-        //        //    // db.UpdateAll(updtens);
-        //        //    db.RunInTransaction(() =>
-        //        //    {
-        //        //        db.UpdateAll(updtens);
-        //        //    });  
-        //        //    cnt = db.Table<Track>().ToList();
-        //        //    var hhtime = (double)sw.ElapsedMilliseconds / 1000;
-        //        //    string bh = hhtime.ToString();
-                    
-        //        //}
-                
-        //    }
-        //    catch (Exception)
-        //    {
-                
-        //        throw;
-        //    }
-                    
-            
-        //}
-        
         private void DropDB()
         {
             try
@@ -1747,13 +1520,13 @@ namespace MyMusic.DAL
         }
 
         public async Task fillDB3()
-        {            
+        {
             DropDB();
             var db = new SQLiteAsyncConnection(App.DBPath);
             var cnt = await db.Table<Track>().ToListAsync();
             try
             {
-                Stopwatch sw = Stopwatch.StartNew();                
+                Stopwatch sw = Stopwatch.StartNew();
                 List<StorageFile> sf = new List<StorageFile>();
                 StorageFolder folder = KnownFolders.MusicLibrary;
                 IReadOnlyList<StorageFile> lf = await folder.GetFilesAsync(CommonFileQuery.OrderByName);
@@ -1803,6 +1576,7 @@ namespace MyMusic.DAL
                             tr.Genre = f.Split(',')[1];
                             tr.PicGot = true;
                         }
+
                         Genre gr = new Genre { Name = tr.Genre };
                         List<Genre> checkGenre = await db.Table<Genre>().Where(a => a.Name == gr.Name).ToListAsync();
                         if (checkGenre.Count < 1)
@@ -1815,17 +1589,17 @@ namespace MyMusic.DAL
                             tr.GenreId = checkGenre.FirstOrDefault().GenreId;
                         }
                         tr.FileName = item.Name;
- 
-                        var checkArtist = await db.Table<Artist>().Where(a => a.Name == ar.Name).ToListAsync();                           
+
+                        var checkArtist = await db.Table<Artist>().Where(a => a.Name == ar.Name).ToListAsync();
                         if (checkArtist.Count < 1)
                         {
                             updates.Add(ar);
                             tr.ArtistId = ar.ArtistId;
                         }
                         else
-                        { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }                       
+                        { tr.ArtistId = checkArtist.FirstOrDefault().ArtistId; }
 
-                        var checkAlb = await db.Table<Album>().Where(a => a.Name == al.Name).ToListAsync();              
+                        var checkAlb = await db.Table<Album>().Where(a => a.Name == al.Name).ToListAsync();
                         if (checkAlb.Count < 1)
                         {
                             al.ArtistId = tr.ArtistId;
@@ -1834,20 +1608,20 @@ namespace MyMusic.DAL
                         }
                         else
                         { tr.AlbumId = checkAlb.FirstOrDefault().AlbumId; }
-                        
-                                               
+
                         updates.Add(tr);
-                        //await InsertAllAsync(updates);
-                        db.RunInTransactionAsync(async tran =>
+                        await db.RunInTransactionAsync(async tran =>
                         {
-                            // database calls inside the transaction
                             await tran.InsertAllAsync(updates);
                         });
                     }
-                    catch (Exception ex) { throw ex; }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
-                
-                var time = (double)sw.ElapsedMilliseconds / 1000;             
+                var time = (double)sw.ElapsedMilliseconds / 1000;
+                var bf = GetTracks();
             }
             catch (Exception)
             {
@@ -1855,22 +1629,6 @@ namespace MyMusic.DAL
             }
         }
 
-        public async Task OrderTracks()
-        {
-            var db = new SQLiteAsyncConnection(App.DBPath);
-            List<object> updtes = new List<object>();
-            List<Track> trks = await db.Table<Track>().OrderBy(a => a.Name).ToListAsync();
-            for (int i = 0; i < trks.Count(); i++)
-            {
-                trks[i].OrderNo = i;
-                updtes.Add(trks[i]);
-            }           
-            db.RunInTransactionAsync(async tran =>
-            {
-                await tran.UpdateAllAsync(updtes);
-            });
-        }
-        
         public async Task SyncDB()
         {
             using (var db = new SQLite.SQLiteConnection(App.DBPath))
@@ -1903,7 +1661,7 @@ namespace MyMusic.DAL
                     }
                     var updates = (dbTracks).Where(a => a.Summary != true).ToList();
                     if (updates.Count > 0)
-                        DoUpdates(updates);
+                        await DoUpdates(updates);
                 }
                 catch (Exception ex) 
                 { 
@@ -1913,36 +1671,41 @@ namespace MyMusic.DAL
             }
         }
 
-        private async void DoUpdates(List<Track> updates)
+        private async Task DoUpdates(List<Track> updates)
         {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
+            Stopwatch sw = Stopwatch.StartNew();
+            var db = new SQLiteAsyncConnection(App.DBPath);
+            //List<object> updates = new List<object>();
+            foreach (var tr in updates)
             {
-                foreach (var tr in updates)
+                Track t = await GetAudioSummaryAsync(tr.ArtistName, tr.Name);
+                if (t != null)
                 {
-                    Track t = await GetAudioSummaryAsync(tr.ArtistName, tr.Name);
-                    if (t != null)
-                    {
-                        tr.acousticness = t.acousticness;
-                        tr.analysis_url = t.analysis_url;
-                        tr.audio_md5 = t.audio_md5;
-                        tr.danceability = tr.danceability;
-                        tr.duration = t.duration;
-                        tr.energy = t.energy;
-                        tr.ImageUrl = t.ImageUrl;
-                        tr.instrumentalness = t.instrumentalness;
-                        tr.key = t.key;
-                        tr.liveness = t.liveness;
-                        tr.loudness = t.loudness;
-                        tr.mbid = t.mbid;
-                        tr.tempo = t.tempo;
-                        //tr.ImageUrl = t.ImageUrl;
-                        //tr.Genre = t.Genre;
-                    }
-                    else
-                    { tr.Summary = true; }
-                    db.Update(tr);
+                    tr.acousticness = t.acousticness;
+                    tr.analysis_url = t.analysis_url;
+                    tr.audio_md5 = t.audio_md5;
+                    tr.danceability = tr.danceability;
+                    tr.duration = t.duration;
+                    tr.energy = t.energy;
+                    tr.ImageUrl = t.ImageUrl;
+                    tr.instrumentalness = t.instrumentalness;
+                    tr.key = t.key;
+                    tr.liveness = t.liveness;
+                    tr.loudness = t.loudness;
+                    tr.mbid = t.mbid;
+                    tr.tempo = t.tempo;
+                    tr.Summary = true;
+                    //tr.ImageUrl = t.ImageUrl;
+                    //tr.Genre = t.Genre;
                 }
+                else
+                { tr.Summary = true; }                
             }
+            db.RunInTransactionAsync(async tran =>
+            {
+                await tran.UpdateAllAsync(updates);
+            });
+            var time = (double)sw.ElapsedMilliseconds / 1000;
         }
 
         public static object Deserialize(string xml, Type toType)

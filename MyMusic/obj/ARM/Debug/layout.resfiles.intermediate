@@ -71,7 +71,6 @@ App.xbf
 bp.xbf
 MyMusic.xr.xml
 UserControls\ShowByArtist.xbf
-UserControls\TopPlayed.xbf
 Views\Collection\Albums.xbf
 Views\Collection\Collection.xbf
 Views\Collection\ShowAllTracks.xbf

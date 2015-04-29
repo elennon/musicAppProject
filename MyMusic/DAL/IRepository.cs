@@ -79,8 +79,7 @@ namespace MyMusic.DAL
         //void BackUpDb();
         Task FillRadioDB();
         
-        Task fillDB3();
-        Task OrderTracks();
+        Task fillDB3();       
         Task fillDbFromXml();
         
         Task SortPics();

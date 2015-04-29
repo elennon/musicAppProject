@@ -11,7 +11,6 @@ namespace MyMusicAPI.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
     public partial class Track
     {
@@ -23,7 +22,6 @@ namespace MyMusicAPI.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public string Genre { get; set; }
         public Nullable<int> ArtistId { get; set; }
         public string GSSongKey { get; set; }
         public string ArtistName { get; set; }
@@ -45,11 +43,8 @@ namespace MyMusicAPI.Models
         public string audio_md5 { get; set; }
         public Nullable<double> valence { get; set; }
         public Nullable<double> danceability { get; set; }
-        public DateTime DateAdded { get; set; }
-
-        [IgnoreDataMember]
+    
         public virtual Artist Artist { get; set; }
-        [IgnoreDataMember]
         public virtual ICollection<UserTrack> UserTracks { get; set; }
     }
 }

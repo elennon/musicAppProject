@@ -88,13 +88,13 @@ namespace MyMusic.ViewModels.Playlists
             }
         }
 
-        public double AddedMax { get; set; }
-        private double _added;
-        public double Added
-        {
-            get { return _added; }
-            set { _added = value; NotifyPropertyChanged("Added"); }
-        }
+        //public double AddedMax { get; set; }
+        //private double _added;
+        //public double Added
+        //{
+        //    get { return _added; }
+        //    set { _added = value; NotifyPropertyChanged("Added"); }
+        //}
 
         public double EnergyMax { get; set; }
         private double _energy;
@@ -176,12 +176,11 @@ namespace MyMusic.ViewModels.Playlists
 
         private void OnGenerateListCommand()
         {
-            double d = Added;
-            List<Track> trks = GetBestFit(Added, Energy, Liveness, Loudness, Tempo);
+            List<Track> trks = GetBestFit(Energy, Liveness, Loudness, Tempo);
             Tracks = new ObservableCollection<Track>(trks);
         }
 
-        private List<Track> GetBestFit(double Added, double Energy, double Liveness, double Loudness, double Tempo)
+        private List<Track> GetBestFit(double Energy, double Liveness, double Loudness, double Tempo)
         {
             List<Track> trs = new List<Track>();
             var trks = repo.GetAllTracks();

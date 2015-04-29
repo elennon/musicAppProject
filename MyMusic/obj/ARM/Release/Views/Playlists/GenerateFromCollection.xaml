@@ -74,31 +74,26 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>                               
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="1" Margin="40,0,40,0" VerticalAlignment="Center" >
-                                <Slider Header="Added up" Value="{Binding Added, Mode=TwoWay}" Maximum="{Binding AddedMax}"
-                                        Minimum="0"></Slider>
-                            </StackPanel>
-                            <StackPanel Grid.Row="2" Margin="40,0,40,0" VerticalAlignment="Center" >
                                 <Slider Header="Tempo" Value="{Binding Tempo, Mode=TwoWay}" Maximum="{Binding TempoMax}"
                                         Minimum="0" ></Slider>
                             </StackPanel>
-                            <StackPanel Grid.Row="3" Margin="40,0,40,0" VerticalAlignment="Center" >
+                            <StackPanel Grid.Row="2" Margin="40,0,40,0" VerticalAlignment="Center" >
                                 <Slider Header="Energy" Value="{Binding Energy, Mode=TwoWay}" Maximum="{Binding EnergyMax}"
                                         Minimum="0" ></Slider>
                             </StackPanel>
-                            <StackPanel Grid.Row="4" Margin="40,0,40,0" VerticalAlignment="Center" >
+                            <StackPanel Grid.Row="3" Margin="40,0,40,0" VerticalAlignment="Center" >
                                 <Slider Header="Liveness" Value="{Binding Liveness, Mode=TwoWay}" Maximum="{Binding LivenessMax}"
                                         Minimum="0" ></Slider>
                             </StackPanel>
-                            <StackPanel Grid.Row="5" Margin="40,0,40,0" VerticalAlignment="Center" >
+                            <StackPanel Grid.Row="4" Margin="40,0,40,0" VerticalAlignment="Center" >
                                 <Slider Header="Loudness" Value="{Binding Loudness, Mode=TwoWay}" Maximum="100"
                                         Minimum="0" ></Slider>
                             </StackPanel>
-                            <StackPanel Grid.Row="6" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <StackPanel Grid.Row="5" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >
                                 <Button Content="Generate List" Command="{Binding GenerateListCommand}"></Button>
                             </StackPanel>
                             

@@ -268,7 +268,7 @@ namespace MyMusic.Utilities
                     case Constants.Trackchanged:
                         npi.IsVisible = false;
                         string pic = tr.ImageUrl;
-                        if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/radio672.png"; }
+                        if (string.IsNullOrEmpty(pic)) { pic = "ms-appx:///Assets/misc.png"; }
                         npi.TrImage = pic;    // the image for this song
                         npi.TrackName = tr.ArtistName + "-" + tr.Name;
                         
@@ -285,6 +285,11 @@ namespace MyMusic.Utilities
                         break;
                 }
             }
+        }
+
+        public void SendMessageToBK(ValueSet value)
+        {
+            BackgroundMediaPlayer.SendMessageToBackground(value);
         }
 
         #endregion
@@ -345,12 +350,7 @@ namespace MyMusic.Utilities
         }
 
         #endregion
-
-        public void SendMessageToBK(ValueSet value)
-        {           
-            BackgroundMediaPlayer.SendMessageToBackground(value);
-        }
-
+       
         public void playClick(string tracks2play)
         {
             if (MediaPlayerState.Playing == BackgroundMediaPlayer.Current.CurrentState)

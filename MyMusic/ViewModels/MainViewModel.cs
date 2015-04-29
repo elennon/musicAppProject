@@ -148,6 +148,7 @@ namespace MyMusic.ViewModels
 
         private async void OnLoadCommand(RoutedEventArgs obj)
         {
+            //await repo.SyncDB();     
             //await repo.fillDB3();
             //repo.BackUpDb();
             //await repo.GetPrologList();
@@ -168,8 +169,6 @@ namespace MyMusic.ViewModels
                     //await repo.fillDbFromXml();
                     await repo.fillDB3();
                     await repo.FillRadioDB();
-                   // await repo.SortPics();
-                    await repo.OrderTracks();
                     ApplicationSettingsHelper.SaveSettingsValue(Constants.DbFirstHalf, true);
                 }                
                 Genres = repo.GetRadioGenres();
@@ -180,7 +179,6 @@ namespace MyMusic.ViewModels
                 await Task.Run(async delegate()
                 {                    
                     await repo.SyncWithApi();
-       //             await repo.SyncDB();
                     time = (double)sw.ElapsedMilliseconds / 1000;
                     ApplicationSettingsHelper.SaveSettingsValue(Constants.IsFirstTime, false);
                 });            

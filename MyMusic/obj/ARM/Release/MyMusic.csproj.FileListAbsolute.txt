@@ -18,7 +18,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\Views\Playlists\SavedPlaylists.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\Views\Collection\ShowAllTracks.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\UserControls\ShowByArtist.xbf
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\UserControls\TopPlayed.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\Views\MainPage.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\Views\NowPlaying.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\bin\ARM\Release\Views\RadioStreams.xbf
@@ -92,8 +91,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\Collection\ShowAllTracks.g.cs
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\ShowByArtist.g.i.cs
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\ShowByArtist.g.cs
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\TopPlayed.g.i.cs
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\TopPlayed.g.cs
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\MainPage.g.i.cs
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\MainPage.g.cs
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\NowPlaying.g.i.cs
@@ -118,7 +115,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\Playlists\SavedPlaylists.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\Collection\ShowAllTracks.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\ShowByArtist.xaml
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\TopPlayed.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\MainPage.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\NowPlaying.xaml
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\RadioStreams.xaml
@@ -138,7 +134,6 @@ C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\AR
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\Playlists\SavedPlaylists.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\Collection\ShowAllTracks.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\ShowByArtist.xbf
-C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\UserControls\TopPlayed.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\MainPage.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\NowPlaying.xbf
 C:\Users\ed\Downloads\4thYearProject-master\4thYearProject-master\MyMusic\obj\ARM\Release\Views\RadioStreams.xbf

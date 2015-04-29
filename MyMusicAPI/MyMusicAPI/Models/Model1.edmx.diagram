@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="68ad2c38b7424ff7a8eb5c4e6dff7436" Name="Diagram1">
-        <EntityTypeShape EntityType="MusicCentralDBModel.RadioGenre" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.RadioStream" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="68ad2c38b7424ff7a8eb5c4e6dff7436" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="MusicCentralDBModel.RadioGenre" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.RadioStream" Width="1.5" PointX="2.5" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="MusicCentralDBModel.FK_RadioStream_ToTable" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.Artist" Width="1.5" PointX="3" PointY="6.5" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.Track" Width="1.5" PointX="5.625" PointY="4.875" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.Artist" Width="1.5" PointX="4.625" PointY="3" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.Track" Width="1.5" PointX="8.75" PointY="0.5" />
         <AssociationConnector Association="MusicCentralDBModel.FK_Track_ToTable" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.User" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="MusicCentralDBModel.UserTrack" Width="1.5" PointX="3.125" PointY="4.25" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.User" Width="1.5" PointX="4.375" PointY="0.875" />
+        <EntityTypeShape EntityType="MusicCentralDBModel.UserTrack" Width="1.5" PointX="6.5" PointY="0.75" />
         <AssociationConnector Association="MusicCentralDBModel.FK_UserTrack_ToTable" />
         <AssociationConnector Association="MusicCentralDBModel.FK_UserTrack_ToTable_1" />
       </Diagram>

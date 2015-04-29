@@ -31,8 +31,7 @@ namespace MyMusic.Models
         [ForeignKey(typeof(Genre))]
         public int GenreId { get; set; }
         public string Genre { get; set; }
-
-        public int OrderNo { get; set; }
+        
         public int Plays { get; set; }
         public int Skips { get; set; }
         public int RandomPlays { get; set; }

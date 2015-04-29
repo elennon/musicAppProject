@@ -18,7 +18,6 @@ namespace MyMusicAPI.Models
         public MusicCentralDBEntities()
             : base("name=MusicCentralDBEntities")
         {
-            base.Configuration.ProxyCreationEnabled = false;     
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

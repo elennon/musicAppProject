@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type='text/xsl' href='C:\ProgramData\Windows App Certification Kit\wp-results.xsl'?>
-<REPORT OVERALL_RESULT="PASS" VERSION="3.3" LATEST_VERSION="FALSE" UPDATE_DOWNLOAD_URL="http://go.microsoft.com/fwlink/?LinkID=246599&amp;amp;clcid=0x409" TOOLSET_ARCHITECTURE="X64" SecureBoot="FALSE" APP_TYPE="WindowsPhone" PUBLISHER_DISPLAY_NAME="kilmaced" APP_NAME="55082kilmaced.dmusic" APP_VERSION="1.1.0.7" OSVERSION="6.3.9600.0" OS="Microsoft Windows Embedded 8.1 Industry Pro" PER_USER_APPLICATION="" PARTIAL_RUN="FALSE" LCID="6153" VALIDATION_TYPE="UI" ReportGenerationTime="23/04/2015 02:01:28" ID="ac861360897fe51e9c622ca480a468ab">
+<REPORT OVERALL_RESULT="PASS" VERSION="3.3" LATEST_VERSION="FALSE" UPDATE_DOWNLOAD_URL="http://go.microsoft.com/fwlink/?LinkID=246599&amp;amp;clcid=0x409" TOOLSET_ARCHITECTURE="X64" SecureBoot="FALSE" APP_TYPE="WindowsPhone" PUBLISHER_DISPLAY_NAME="kilmaced" APP_NAME="55082kilmaced.dmusic" APP_VERSION="1.1.0.9" OSVERSION="6.3.9600.0" OS="Microsoft Windows Embedded 8.1 Industry Pro" PER_USER_APPLICATION="" PARTIAL_RUN="FALSE" LCID="6153" VALIDATION_TYPE="UI" ReportGenerationTime="29/04/2015 01:36:33" ID="2cad85a55865011644733af576a96cf8">
   <REQUIREMENTS>
     <REQUIREMENT NUMBER="1" TITLE="Clean reversible install test" RATIONALE="A clean, reversible, installation allows users to successfully manage (deploy, and remove) applications on their system." />
     <REQUIREMENT NUMBER="2" TITLE="Install to the correct folders test" RATIONALE="Windows provides specific locations in the file system to store programs and software components, shared application data, and application data specific to a user." />
@@ -14,70 +14,70 @@
     <REQUIREMENT NUMBER="10" TITLE="Crashes and hangs test" RATIONALE="Application failures such as crashes and hangs are a major disruption to users and cause frustration. Eliminating such failures improves application stability and reliability, and overall, provides users with a better application experience." />
     <REQUIREMENT NUMBER="11" TITLE="Compatibility and resiliency test" RATIONALE="When Windows detects that an application has operated in an incompatible manner, it applies a compatibility fix that causes the application to behave correctly, ensuring a positive user experience. Applications should not rely on this behavior since it is only provided to allow legacy applications to work correctly on Windows." />
     <REQUIREMENT NUMBER="12" TITLE="Package compliance test" RATIONALE="The package manifest was missing one or more required attributes.">
-      <TEST INDEX="77" NAME="Application count" DESCRIPTION="One package should not define more than one app in the manifest." EXECUTIONTIME="00h:00m:01s.87ms">
+      <TEST INDEX="77" NAME="Application count" DESCRIPTION="One package should not define more than one app in the manifest." EXECUTIONTIME="00h:00m:01s.45ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="31" NAME="App manifest" DESCRIPTION="App manifest must include valid entries for all required fields." EXECUTIONTIME="00h:00m:07s.26ms">
+      <TEST INDEX="31" NAME="App manifest" DESCRIPTION="App manifest must include valid entries for all required fields." EXECUTIONTIME="00h:00m:06s.54ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="74" NAME="Bundle manifest" DESCRIPTION="Bundle manifest must include valid entries for all required fields." EXECUTIONTIME="00h:00m:05s.73ms">
+      <TEST INDEX="74" NAME="Bundle manifest" DESCRIPTION="Bundle manifest must include valid entries for all required fields." EXECUTIONTIME="00h:00m:04s.11ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="75" NAME="Package size" DESCRIPTION="Package file size should not be greater than 4 gigabytes." EXECUTIONTIME="00h:00m:02s.90ms">
+      <TEST INDEX="75" NAME="Package size" DESCRIPTION="Package file size should not be greater than 4 gigabytes." EXECUTIONTIME="00h:00m:02s.99ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="13" TITLE="Windows security best practices test" RATIONALE="An application should not change the default Windows security settings." />
     <REQUIREMENT NUMBER="14" TITLE="Windows security features test" RATIONALE="Applications must opt-into Windows security features.">
-      <TEST INDEX="33" NAME="Binary analyzer" DESCRIPTION="Analysis of security features enabled on binaries" EXECUTIONTIME="00h:00m:06s.16ms">
+      <TEST INDEX="33" NAME="Binary analyzer" DESCRIPTION="Analysis of security features enabled on binaries" EXECUTIONTIME="00h:00m:05s.39ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="70" NAME="Banned file analyzer" DESCRIPTION="Analysis of application to detect known insecure files" EXECUTIONTIME="00h:00m:03s.01ms">
+      <TEST INDEX="70" NAME="Banned file analyzer" DESCRIPTION="Analysis of application to detect known insecure files" EXECUTIONTIME="00h:00m:02s.21ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="62" NAME="Private code signing" DESCRIPTION="App should not package private code signing key files." EXECUTIONTIME="00h:00m:02s.98ms">
+      <TEST INDEX="62" NAME="Private code signing" DESCRIPTION="App should not package private code signing key files." EXECUTIONTIME="00h:00m:02s.43ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="15" TITLE="Supported API test" RATIONALE="The application should only refer to the APIs allowed by the Windows SDK for Windows Store Apps.">
-      <TEST INDEX="72" NAME="Supported APIs" DESCRIPTION="Windows Phone App must only use supported platform APIs." EXECUTIONTIME="00h:00m:08s.37ms">
+      <TEST INDEX="72" NAME="Supported APIs" DESCRIPTION="Windows Phone App must only use supported platform APIs." EXECUTIONTIME="00h:00m:09s.07ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="17" TITLE="Performance test" RATIONALE="The application should have a fast and responsive launch and suspend experience while consuming a reasonable amount of system resources (CPU, File IO, Memory etc.) to enable fast switching and multitasking between previously unopened applications." />
     <REQUIREMENT NUMBER="19" TITLE="App manifest resources test" RATIONALE="The App Package Manifest should have valid resources defined in the resources.pri file, as per the App Packaging Specification and App Manifest Schema.">
-      <TEST INDEX="45" NAME="App resources validation" DESCRIPTION="The package should have valid resources defined in the resources.pri file." EXECUTIONTIME="00h:00m:00s.85ms">
+      <TEST INDEX="45" NAME="App resources validation" DESCRIPTION="The package should have valid resources defined in the resources.pri file." EXECUTIONTIME="00h:00m:01s.02ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="61" NAME="Branding validation" DESCRIPTION="App should not use the default images packed by windows SDK samples or Visual Studio." EXECUTIONTIME="00h:00m:09s.97ms">
+      <TEST INDEX="61" NAME="Branding validation" DESCRIPTION="App should not use the default images packed by windows SDK samples or Visual Studio." EXECUTIONTIME="00h:00m:09s.45ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="20" TITLE="Debug configuration test" RATIONALE="The App should not install any debug binaries.">
-      <TEST INDEX="46" NAME="Debug configuration" DESCRIPTION="The App should not install any debug binaries." EXECUTIONTIME="00h:00m:05s.65ms">
+      <TEST INDEX="46" NAME="Debug configuration" DESCRIPTION="The App should not install any debug binaries." EXECUTIONTIME="00h:00m:04s.57ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="21" TITLE="File encoding test" RATIONALE="Packages containing an HTML5 Windows Store app must have correct file encoding.">
-      <TEST INDEX="49" NAME="UTF-8 file encoding" DESCRIPTION="Packages containing an HTML5 Windows Store app must have correct file encoding." EXECUTIONTIME="00h:00m:05s.13ms">
+      <TEST INDEX="49" NAME="UTF-8 file encoding" DESCRIPTION="Packages containing an HTML5 Windows Store app must have correct file encoding." EXECUTIONTIME="00h:00m:02s.85ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="22" TITLE="Direct3D Feature Test" RATIONALE="App should use the Direct3D capability correctly." />
     <REQUIREMENT NUMBER="23" TITLE="App Capabilities test" RATIONALE="Packages declaring special-use capabilities will have to provide justifications during the onboarding process.">
-      <TEST INDEX="52" NAME="Special use capabilities" DESCRIPTION="Packages declaring special-use capabilities will have to provide justifications during the onboarding process." EXECUTIONTIME="00h:00m:01s.93ms">
+      <TEST INDEX="52" NAME="Special use capabilities" DESCRIPTION="Packages declaring special-use capabilities will have to provide justifications during the onboarding process." EXECUTIONTIME="00h:00m:01s.79ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
@@ -87,36 +87,36 @@
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="57" NAME="Type location test" DESCRIPTION="Types must be defined in the metadata file with the longest matching namespace." EXECUTIONTIME="00h:00m:00s.63ms">
+      <TEST INDEX="57" NAME="Type location test" DESCRIPTION="Types must be defined in the metadata file with the longest matching namespace." EXECUTIONTIME="00h:00m:00s.70ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="55" NAME="Type name case-sensitivity test" DESCRIPTION="Namespace and type names must not vary only by casing." EXECUTIONTIME="00h:00m:00s.62ms">
+      <TEST INDEX="55" NAME="Type name case-sensitivity test" DESCRIPTION="Namespace and type names must not vary only by casing." EXECUTIONTIME="00h:00m:00s.71ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="54" NAME="Type name correctness test" DESCRIPTION="Only system types can be in the Windows namespace and no types can be in the global namespace." EXECUTIONTIME="00h:00m:00s.64ms">
+      <TEST INDEX="54" NAME="Type name correctness test" DESCRIPTION="Only system types can be in the Windows namespace and no types can be in the global namespace." EXECUTIONTIME="00h:00m:00s.72ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="58" NAME="General metadata correctness test" DESCRIPTION="Metadata files must meet various requirements in order to be valid and correct." EXECUTIONTIME="00h:00m:02s.70ms">
+      <TEST INDEX="58" NAME="General metadata correctness test" DESCRIPTION="Metadata files must meet various requirements in order to be valid and correct." EXECUTIONTIME="00h:00m:02s.18ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
-      <TEST INDEX="53" NAME="Properties test" DESCRIPTION="Write-only and indexer properties may not be used. Corresponding getter and setter methods must match in type." EXECUTIONTIME="00h:00m:00s.67ms">
+      <TEST INDEX="53" NAME="Properties test" DESCRIPTION="Write-only and indexer properties may not be used. Corresponding getter and setter methods must match in type." EXECUTIONTIME="00h:00m:00s.74ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="25" TITLE="Package sanity test" RATIONALE="Validation of the app package contents to ensure correctness.">
-      <TEST INDEX="63" NAME="Platform appropriate files" DESCRIPTION="App should not install files that do not match the target processor architecture." EXECUTIONTIME="00h:00m:04s.78ms">
+      <TEST INDEX="63" NAME="Platform appropriate files" DESCRIPTION="App should not install files that do not match the target processor architecture." EXECUTIONTIME="00h:00m:03s.48ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
     </REQUIREMENT>
     <REQUIREMENT NUMBER="26" TITLE="High-DPI support" RATIONALE="The application needs to set DPI-aware to make the UI look consistently good across a wide variety of high-DPI display settings." />
     <REQUIREMENT NUMBER="27" TITLE="Resource Usage Test" RATIONALE="WinJS background tasks need to call close() to free resource.">
-      <TEST INDEX="68" NAME="WinJS background task test" DESCRIPTION="WinJS background tasks need to call close() to free resource." EXECUTIONTIME="00h:00m:08s.28ms">
+      <TEST INDEX="68" NAME="WinJS background task test" DESCRIPTION="WinJS background tasks need to call close() to free resource." EXECUTIONTIME="00h:00m:03s.80ms">
         <RESULT><![CDATA[PASS]]></RESULT>
         <MESSAGES />
       </TEST>
@@ -1680,7 +1680,7 @@
           <AitFeature Name="Windows.UI.Xaml.VisualStateManager.GoToState" />
         </AitCategory>
       </AitFile>
-      <AitFile ErrorCode="0" Name="MyMusic.exe" Id="00000abb53a8b1874b46b4e52c5630689af062be8a15">
+      <AitFile ErrorCode="0" Name="MyMusic.exe" Id="0000658bead9736674b25e018eb2c467ec5560e706e2">
         <AitCategory Id="DotNet">
           <AitFeature Name="System.Action" />
           <AitFeature Name="System.Action..ctor" />
@@ -1805,6 +1805,7 @@
           <AitFeature Name="System.IO.SeekOrigin" />
           <AitFeature Name="System.IO.Stream" />
           <AitFeature Name="System.IO.Stream.CopyToAsync" />
+          <AitFeature Name="System.IO.Stream.Dispose" />
           <AitFeature Name="System.IO.Stream.Seek" />
           <AitFeature Name="System.IO.Stream.Write" />
           <AitFeature Name="System.IO.Stream.set_Position" />
@@ -1814,7 +1815,6 @@
           <AitFeature Name="System.IO.StreamWriter..ctor" />
           <AitFeature Name="System.IO.TextReader" />
           <AitFeature Name="System.IO.TextReader.ReadToEnd" />
-          <AitFeature Name="System.IO.TextReader.ReadToEndAsync" />
           <AitFeature Name="System.IO.TextWriter" />
           <AitFeature Name="System.IO.TextWriter.Flush" />
           <AitFeature Name="System.IO.TextWriter.Write" />
@@ -1865,7 +1865,6 @@
           <AitFeature Name="System.Linq.Expressions.Expression.Equal" />
           <AitFeature Name="System.Linq.Expressions.Expression.Field" />
           <AitFeature Name="System.Linq.Expressions.Expression.GreaterThan" />
-          <AitFeature Name="System.Linq.Expressions.Expression.GreaterThanOrEqual" />
           <AitFeature Name="System.Linq.Expressions.Expression.Lambda" />
           <AitFeature Name="System.Linq.Expressions.Expression.NotEqual" />
           <AitFeature Name="System.Linq.Expressions.Expression.Parameter" />
@@ -2106,7 +2105,6 @@
           <AitFeature Name="System.Threading.Tasks.Task.GetAwaiter" />
           <AitFeature Name="System.Threading.Tasks.Task.Run" />
           <AitFeature Name="System.Threading.Tasks.Task.Wait" />
-          <AitFeature Name="System.Threading.Tasks.Task.WhenAll" />
           <AitFeature Name="System.Threading.Tasks.Task.get_Factory" />
           <AitFeature Name="System.Threading.Tasks.TaskFactory" />
           <AitFeature Name="System.Threading.Tasks.TaskFactory.StartNew" />
@@ -2169,6 +2167,7 @@
           <AitFeature Name="System.Xml.Serialization.XmlSerializer" />
           <AitFeature Name="System.Xml.Serialization.XmlSerializer..ctor" />
           <AitFeature Name="System.Xml.Serialization.XmlSerializer.Deserialize" />
+          <AitFeature Name="System.Xml.Serialization.XmlSerializer.Serialize" />
           <AitFeature Name="System.Xml.Serialization.XmlTextAttribute" />
           <AitFeature Name="System.Xml.Serialization.XmlTextAttribute..ctor" />
           <AitFeature Name="System.Xml.Serialization.XmlTypeAttribute" />
@@ -2248,8 +2247,6 @@
           <AitFeature Name="Windows.Storage.ApplicationDataContainer" />
           <AitFeature Name="Windows.Storage.ApplicationDataContainer.get_Values" />
           <AitFeature Name="Windows.Storage.CreationCollisionOption" />
-          <AitFeature Name="Windows.Storage.FileIO" />
-          <AitFeature Name="Windows.Storage.FileIO.ReadTextAsync" />
           <AitFeature Name="Windows.Storage.FileProperties.MusicProperties" />
           <AitFeature Name="Windows.Storage.FileProperties.MusicProperties.get_Album" />
           <AitFeature Name="Windows.Storage.FileProperties.MusicProperties.get_AlbumArtist" />
@@ -2266,7 +2263,6 @@
           <AitFeature Name="Windows.Storage.StorageFile" />
           <AitFeature Name="Windows.Storage.StorageFile.DeleteAsync" />
           <AitFeature Name="Windows.Storage.StorageFile.GetFileFromApplicationUriAsync" />
-          <AitFeature Name="Windows.Storage.StorageFile.OpenReadAsync" />
           <AitFeature Name="Windows.Storage.StorageFile.OpenSequentialReadAsync" />
           <AitFeature Name="Windows.Storage.StorageFile.get_DateCreated" />
           <AitFeature Name="Windows.Storage.StorageFile.get_Name" />
@@ -2276,11 +2272,9 @@
           <AitFeature Name="Windows.Storage.StorageFolder.CreateFolderAsync" />
           <AitFeature Name="Windows.Storage.StorageFolder.GetFileAsync" />
           <AitFeature Name="Windows.Storage.StorageFolder.GetFilesAsync" />
-          <AitFeature Name="Windows.Storage.StorageFolder.GetFolderAsync" />
           <AitFeature Name="Windows.Storage.StorageFolder.get_Path" />
           <AitFeature Name="Windows.Storage.Streams.IBuffer" />
           <AitFeature Name="Windows.Storage.Streams.IInputStream" />
-          <AitFeature Name="Windows.Storage.Streams.IRandomAccessStreamWithContentType" />
           <AitFeature Name="Windows.System.Profile.HardwareIdentification" />
           <AitFeature Name="Windows.System.Profile.HardwareIdentification.GetPackageSpecificToken" />
           <AitFeature Name="Windows.System.Profile.HardwareToken" />
@@ -2357,8 +2351,6 @@
           <AitFeature Name="Windows.UI.Xaml.Controls.ItemClickEventArgs.get_ClickedItem" />
           <AitFeature Name="Windows.UI.Xaml.Controls.ItemClickEventHandler" />
           <AitFeature Name="Windows.UI.Xaml.Controls.ItemClickEventHandler..ctor" />
-          <AitFeature Name="Windows.UI.Xaml.Controls.ItemsControl" />
-          <AitFeature Name="Windows.UI.Xaml.Controls.ItemsControl.put_ItemsSource" />
           <AitFeature Name="Windows.UI.Xaml.Controls.ListView" />
           <AitFeature Name="Windows.UI.Xaml.Controls.ListViewBase" />
           <AitFeature Name="Windows.UI.Xaml.Controls.ListViewBase.add_ItemClick" />
@@ -2376,9 +2368,7 @@
           <AitFeature Name="Windows.UI.Xaml.Controls.Primitives.Popup" />
           <AitFeature Name="Windows.UI.Xaml.Controls.Primitives.Popup.get_IsOpen" />
           <AitFeature Name="Windows.UI.Xaml.Controls.Primitives.Popup.put_IsOpen" />
-          <AitFeature Name="Windows.UI.Xaml.Controls.ScrollViewer" />
           <AitFeature Name="Windows.UI.Xaml.Controls.SectionsInViewChangedEventArgs" />
-          <AitFeature Name="Windows.UI.Xaml.Controls.SelectionChangedEventArgs" />
           <AitFeature Name="Windows.UI.Xaml.Controls.SemanticZoom" />
           <AitFeature Name="Windows.UI.Xaml.Controls.StackPanel" />
           <AitFeature Name="Windows.UI.Xaml.Controls.Symbol" />
@@ -4852,7 +4842,7 @@
           <AitFeature Name="Windows.Foundation.Metadata.VersionAttribute..ctor" />
         </AitCategory>
       </AitFile>
-      <AitFile ErrorCode="0" Name="sqlite3.dll" Id="0000ef42a00983665c3a451aa1b5a23cdab41e46f9b3">
+      <AitFile ErrorCode="0" Name="sqlite3.dll" Id="0000f8f68a8d14f911911f05ef8f6455a1249d755bec">
         <AitCategory Id="ApiStatic">
           <AitFeature Name="api-ms-win-core-handle-l1-1-0.dll!CloseHandle" />
           <AitFeature Name="api-ms-win-core-profile-l1-1-0.dll!QueryPerformanceCounter" />
@@ -4896,6 +4886,7 @@
           <AitFeature Name="api-ms-win-core-processthreads-l1-1-2.dll!GetCurrentProcessId" />
           <AitFeature Name="api-ms-win-core-processthreads-l1-1-2.dll!GetCurrentThreadId" />
           <AitFeature Name="api-ms-win-core-memory-l1-1-2.dll!CreateFileMappingFromApp" />
+          <AitFeature Name="api-ms-win-core-memory-l1-1-2.dll!FlushViewOfFile" />
           <AitFeature Name="api-ms-win-core-memory-l1-1-2.dll!MapViewOfFileFromApp" />
           <AitFeature Name="api-ms-win-core-memory-l1-1-2.dll!UnmapViewOfFile" />
           <AitFeature Name="msvcr120_app.dll!__C_specific_handler" />

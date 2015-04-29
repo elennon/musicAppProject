@@ -71,7 +71,6 @@ App.xbf
 bp.xbf
 MyMusic.xr.xml
 UserControls\ShowByArtist.xbf
-UserControls\TopPlayed.xbf
 Views\Collection\Albums.xbf
 Views\Collection\Collection.xbf
 Views\Collection\ShowAllTracks.xbf
@@ -88,6 +87,6 @@ Views\Streaming\CreateListFromQP.xbf
 Views\Streaming\GSMainPage.xbf
 Views\Streaming\GSSignIn.xbf
 Views\test.xbf
+Data\bkXml.xml
 Data\debugFile.txt
 Data\Stations.xml
-Data\tester.xml

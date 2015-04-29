@@ -78,7 +78,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Margin="0,12,0,0" Orientation="Vertical" Width="300">
-                            <TextBlock Text="Adding your tracks. Large collections may take a couple of mins! " 
+                            <TextBlock Text="Adding your tracks. Large collections may take a few mins! " 
                                        Margin="0,0,0,6.5" FontSize="26" TextWrapping="Wrap"
                                         Visibility="{Binding Genres.Count, 
                                         Converter={StaticResource EmptyListLabelConverter}}" />

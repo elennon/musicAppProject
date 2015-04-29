@@ -502,7 +502,6 @@ namespace MyMusic.ViewModels
                         Plays = tr.Plays,
                         Skips = tr.Skips,
                         ImageUri = tr.ImageUrl,
-                        OrderNo = tr.OrderNo,
                         FileName = tr.FileName,
                         PerCentRate = tr.PerCentRate
                     };
@@ -530,7 +529,6 @@ namespace MyMusic.ViewModels
                         Plays = tr.Plays,
                         Skips = tr.Skips,
                         ImageUri = tr.ImageUrl,
-                        OrderNo = tr.OrderNo,
                         FileName = tr.FileName
                     };
                     _tracks.Add(trk);
@@ -578,8 +576,7 @@ namespace MyMusic.ViewModels
                         Artist = tr.ArtistName,                      
                         ImageUri = tr.ImageUrl,
                         FileName = tr.FileName,
-                        InTheBin = tr.InTheBin,
-                        OrderNo = tr.OrderNo
+                        InTheBin = tr.InTheBin
                     };
                     _tracks.Add(trk);
                 }
@@ -832,22 +829,6 @@ namespace MyMusic.ViewModels
             return _tracks;
         }   // temp
 
-        public string[] GetListToPlay(int startPos) // orders all songs that come after selected song (+ selected) into a string[]
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var trks = db.Table<Track>().Where(a => a.InTheBin == false && a.OrderNo >= startPos).OrderBy(a => a.Name).ToList();
-                string[] trkArray = new string[trks.Count];
-                int counter = 0;
-                foreach (var item in trks)
-                {
-                    trkArray[counter] = item.TrackId.ToString() + "," + item.FileName + "," + item.ArtistName + ",notShuffle";
-                    counter++;
-                }               
-                return trkArray;
-            }                 
-        }
-
         private string[] shuffleThese(ObservableCollection<TrackViewModel> shfThese)
         {
             string[] trkks = new string[shfThese.Count];
@@ -1059,21 +1040,6 @@ namespace MyMusic.ViewModels
             }
         }
 
-        public void sortOrderNum()
-        {
-            using (var db = new SQLite.SQLiteConnection(App.DBPath))
-            {
-                var tcnt = db.Table<Track>().ToList();
-                var trks = db.Table<Track>().OrderBy(a => a.Name).ToList();
-                for (int i = 0; i < trks.Count(); i++)
-                {
-                    trks[i].OrderNo = i;
-                    db.Update(trks[i]);
-                }
-                var tccnt = db.Table<Track>().ToList();
-            }
-        }
-
         public async Task<string> getPic(string artist, string title)
         {
             Uri resourceUri;
@@ -1092,7 +1058,7 @@ namespace MyMusic.ViewModels
 
                 if (doc.Root.FirstAttribute.Value == "failed")
                 {
-                    picc = "ms-appx:///Assets/radio672.png";
+                    picc = "ms-appx:///Assets/misc.png";
                 }
                 else
                 {

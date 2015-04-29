@@ -299,6 +299,11 @@
 				</NamedResource>
 			</ResourceMapSubtree>
 			<ResourceMapSubtree name="Data">
+				<NamedResource name="bkXml.xml" uri="ms-resource://55082kilmaced.dmusic/Files/Data/bkXml.xml">
+					<Candidate type="Path">
+						<Value>Data\bkXml.xml</Value>
+					</Candidate>
+				</NamedResource>
 				<NamedResource name="debugFile.txt" uri="ms-resource://55082kilmaced.dmusic/Files/Data/debugFile.txt">
 					<Candidate type="Path">
 						<Value>Data\debugFile.txt</Value>
@@ -307,11 +312,6 @@
 				<NamedResource name="Stations.xml" uri="ms-resource://55082kilmaced.dmusic/Files/Data/Stations.xml">
 					<Candidate type="Path">
 						<Value>Data\Stations.xml</Value>
-					</Candidate>
-				</NamedResource>
-				<NamedResource name="tester.xml" uri="ms-resource://55082kilmaced.dmusic/Files/Data/tester.xml">
-					<Candidate type="Path">
-						<Value>Data\tester.xml</Value>
 					</Candidate>
 				</NamedResource>
 			</ResourceMapSubtree>
@@ -333,11 +333,6 @@
 				<NamedResource name="ShowByArtist.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/UserControls/ShowByArtist.xbf">
 					<Candidate type="Path">
 						<Value>UserControls\ShowByArtist.xbf</Value>
-					</Candidate>
-				</NamedResource>
-				<NamedResource name="TopPlayed.xbf" uri="ms-resource://55082kilmaced.dmusic/Files/UserControls/TopPlayed.xbf">
-					<Candidate type="Path">
-						<Value>UserControls\TopPlayed.xbf</Value>
 					</Candidate>
 				</NamedResource>
 			</ResourceMapSubtree>

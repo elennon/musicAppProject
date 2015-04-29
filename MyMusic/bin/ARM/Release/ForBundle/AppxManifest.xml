@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="55082kilmaced.dmusic" Publisher="CN=ECD8EF8E-3045-48FE-9EA8-1993C0944C53" Version="1.1.0.7" ProcessorArchitecture="arm" />
+  <Identity Name="55082kilmaced.dmusic" Publisher="CN=ECD8EF8E-3045-48FE-9EA8-1993C0944C53" Version="1.1.0.9" ProcessorArchitecture="arm" />
   <mp:PhoneIdentity PhoneProductId="e90a6c57-711e-48a8-a7c3-470a0e7a9a3d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>dmusic</DisplayName>
@@ -88,7 +88,7 @@
     <build:Item Name="ProjectGUID" Value="{12D8BE58-4ACB-412B-9275-A45C57B2A53F}" />
     <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="12.0.30501.0" />
     <build:Item Name="BehaviorsXamlSDKManaged" Version="12.0" />
-    <build:Item Name="SQLite.WP81" Version="3.8.8.1" />
+    <build:Item Name="SQLite.WP81" Version="3.8.9" />
     <build:Item Name="MakePri.exe" Version="6.3.9600.17298 (winblue.141024-1500)" />
   </build:Metadata>
 </Package>

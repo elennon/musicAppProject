@@ -132,20 +132,20 @@ namespace MyMusic.ViewModels
                     object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
                     if (value1 == null)
                     {
-                        TrackName = "current Track null ( in NP nav to(condition 2) )";
+                        TrackName = "";
                     }
                     if (value1 != null)
                     {
-                        TrackName = (string)value1 + "( in Np (condition 2) )";
+                        TrackName = (string)value1;
                     }
 
                     object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    if (value2 == null) { pic = "ms-appx:///Assets/misc.png"; }
                     else
                     {
                         int trackId = (int)value2;
                         pic = (repo.GetThisTrack(trackId)).ImageUrl;
-                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        if (pic == "") { pic = "ms-appx:///Assets/misc.png"; }
                         TrImage = pic;
                     }
                 }
@@ -165,20 +165,20 @@ namespace MyMusic.ViewModels
                     object value1 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.CurrentTrack);
                     if (value1 == null)
                     {
-                        TrackName = "current Track null ( in NP nav to(condition 2) )";
+                        TrackName = "";
                     }
                     if (value1 != null)
                     {
-                        TrackName = (string)value1 + "( in Np (condition 2) )";
+                        TrackName = (string)value1;
                     }
 
                     object value2 = ApplicationSettingsHelper.ReadResetSettingsValue(Constants.TrackIdNo);
-                    if (value2 == null) { pic = "ms-appx:///Assets/radio672.png"; }
+                    if (value2 == null) { pic = "ms-appx:///Assets/misc.png"; }
                     else
                     {
                         int trackId = (int)value2;
                         pic = (repo.GetThisTrack(trackId)).ImageUrl;
-                        if (pic == "") { pic = "ms-appx:///Assets/radio672.png"; }
+                        if (pic == "") { pic = "ms-appx:///Assets/misc.png"; }
                         TrImage = pic;
                     }
                 }

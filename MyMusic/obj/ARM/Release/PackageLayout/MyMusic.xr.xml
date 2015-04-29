@@ -38,8 +38,6 @@
     <RootPropertyPathName Name="EnergyMax" />
     <RootPropertyPathName Name="Tempo" />
     <RootPropertyPathName Name="TempoMax" />
-    <RootPropertyPathName Name="Added" />
-    <RootPropertyPathName Name="AddedMax" />
     <RootPropertyPathName Name="ShuffleCommand" />
     <RootPropertyPathName Name="CreateListFromQPViewModel" />
     <RootPropertyPathName Name="Artists" />
@@ -71,11 +69,13 @@
     <RootPropertyPathName Name="EditPic" />
     <RootPropertyPathName Name="IsVisible" />
     <RootPropertyPathName Name="DeleteSelectedCommand" />
+    <RootPropertyPathName Name="ArtistName" />
     <RootPropertyPathName Name="QpTracks" />
     <RootPropertyPathName Name="Genres" />
     <RootPropertyPathName Name="AlbumListViewSource" />
     <RootPropertyPathName Name="ArtistListViewSource" />
     <RootPropertyPathName Name="TopTracks" />
+    <RootPropertyPathName Name="Count" />
     <RootPropertyPathName Name="SectionsInViewChangedCommand" />
     <RootPropertyPathName Name="AddQpCommand" />
     <RootPropertyPathName Name="EditCommand" />
@@ -98,7 +98,6 @@
     <RootPropertyPathName Name="Collections" />
     <RootPropertyPathName Name="CollectionItemSelectedCommand" />
     <RootPropertyPathName Name="RadioItemSelectedCommand" />
-    <RootPropertyPathName Name="Count" />
     <RootPropertyPathName Name="NowPlayingCommand" />
     <RootPropertyPathName Name="NowPlayingViewModel" />
     <RootPropertyPathName Name="TrackName" />
@@ -159,7 +158,6 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="Orientation" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Primitives.Popup">
       <RootProperty Name="VerticalOffset" />
@@ -269,15 +267,6 @@
       <RootProperty Name="ZoomedOutView" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="VerticalScrollBarVisibility" />
-      <RootProperty Name="HorizontalScrollBarVisibility" />
-      <RootProperty Name="ZoomMode" />
-      <RootProperty Name="MinZoomFactor" />
-      <RootProperty Name="Content" />
       <RootMethod Name="GetHorizontalScrollMode" />
       <RootMethod Name="SetHorizontalScrollMode" />
       <RootMethod Name="GetIsHorizontalScrollChainingEnabled" />
@@ -418,6 +407,7 @@
     </RootType>
     <RootType FullName="MyMusic.Views.GSSignIn" />
     <RootType FullName="MyMusic.Views.ViewPlaylist" />
+    <RootType FullName="MyMusic.Converters.EmptyListLabelConverter" />
     <RootType FullName="Windows.UI.Xaml.Data.CollectionViewSource">
       <RootProperty Name="Source" />
     </RootType>
@@ -429,8 +419,6 @@
     <RootType FullName="MyMusic.Views.SavedPlaylists" />
     <RootType FullName="MyMusic.Views.ShowAllTracks" />
     <RootType FullName="MyMusic.Views.ShowByArtist" />
-    <RootType FullName="MyMusic.ViewModels.TopPlayed" />
-    <RootType FullName="MyMusic.Converters.EmptyListLabelConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ItemsPanelTemplate">
       <RootProperty Name="Template" />
     </RootType>

@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="55082kilmaced.dmusic" Publisher="CN=ECD8EF8E-3045-48FE-9EA8-1993C0944C53" Version="1.1.0.7" ProcessorArchitecture="arm" />
+  <Identity Name="55082kilmaced.dmusic" Publisher="CN=ECD8EF8E-3045-48FE-9EA8-1993C0944C53" Version="1.1.0.8" ProcessorArchitecture="arm" />
   <mp:PhoneIdentity PhoneProductId="e90a6c57-711e-48a8-a7c3-470a0e7a9a3d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>dmusic</DisplayName>

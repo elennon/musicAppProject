@@ -134,6 +134,7 @@
     <Compile Include="UserControls\AlbumViewModel.cs" />
     <Compile Include="UserControls\ArtistViewModel.cs" />
     <Compile Include="UserControls\GenreViewModel.cs" />
+    <Compile Include="UserControls\TrackViewModel.cs" />
     <Compile Include="Utilities\BKPlayer.cs" />
     <Compile Include="Utilities\LfmXml.cs" />
     <Compile Include="Utilities\XmlSerializer.cs" />
@@ -191,10 +192,6 @@
     <Compile Include="UserControls\ShowByArtist.xaml.cs">
       <DependentUpon>ShowByArtist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\TopPlayed.xaml.cs">
-      <DependentUpon>TopPlayed.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\TrackViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -487,10 +484,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ShowByArtist.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\TopPlayed.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
